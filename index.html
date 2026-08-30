@@ -251,7 +251,16 @@
     font-family: inherit; }
   #lvSearch::placeholder { color: var(--muted); }
   #lvSearch:focus { outline: none; border-color: var(--accent); }
-  .lv-active { color: var(--muted); font-size: 12px; margin: 10px 0 0; }
+  /* The sidebar filters sit behind this view, so the list carries its own set —
+     on a phone that is the only way to filter without leaving the list. */
+  .lv-filters { display: flex; gap: 7px; overflow-x: auto; margin: 12px auto 0;
+    padding-bottom: 2px; scrollbar-width: none; }
+  .lv-filters::-webkit-scrollbar { display: none; }
+  .lv-chip { flex: 0 0 auto; background: var(--panel-2); border: 1px solid var(--border);
+    border-radius: 999px; padding: 7px 13px; font: 600 12px inherit; font-family: inherit;
+    cursor: pointer; letter-spacing: 0.02em; }
+  .lv-chip .filter-dot { width: 7px; height: 7px; }
+  .lv-active { color: var(--muted); font-size: 12px; margin: 10px auto 0; }
   .lv-active button { background: none; border: 0; color: var(--accent); font: 600 12px inherit;
     font-family: inherit; cursor: pointer; padding: 0; text-decoration: underline;
     text-underline-offset: 3px; }
@@ -259,9 +268,10 @@
     padding-bottom: max(60px, env(safe-area-inset-bottom)); }
   /* One centred column — 322 entries across a wide screen read badly, and the
      links would end up an arm's length from the name they belong to. */
-  .lv-top, #lvSearch, .lv-active, .lv-body > * {
+  .lv-top, #lvSearch, .lv-filters, .lv-active, .lv-body > * {
     display: block; max-width: 900px; margin-left: auto; margin-right: auto; }
   .lv-top { display: flex; }
+  .lv-filters { display: flex; }
   .lv-group { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
     color: var(--muted); margin: 26px auto 4px; padding-top: 10px;
     border-top: 1px solid var(--border); }
@@ -399,6 +409,7 @@
         <button class="lv-close" id="lvClose" type="button">Map</button>
       </div>
       <input id="lvSearch" type="search" placeholder="Search name, note or category" autocomplete="off">
+      <div class="lv-filters" id="lvFilters"></div>
       <p class="lv-active" id="lvActive"></p>
     </div>
     <div class="lv-body" id="lvBody"></div>
@@ -934,6 +945,8 @@
       document.getElementById('lvCount').textContent =
         hits.length + (hits.length === 1 ? ' place' : ' places');
 
+      renderListFilters();
+
       const active = document.getElementById('lvActive');
       const bits = [];
       if (activeHood) bits.push(hoodLabel(activeHood));
@@ -990,6 +1003,45 @@
         });
         lvBody.appendChild(item);
       }
+    }
+
+    function renderListFilters() {
+      const wrap = document.getElementById('lvFilters');
+      if (!wrap) return;
+      wrap.innerHTML = '';
+      GROUP_ORDER.forEach((group) => {
+        const n = groupCount(group);
+        if (!n && !isGroupActive(group)) return;
+        const active = isGroupActive(group);
+        const color = groupColor(group);
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'lv-chip';
+        btn.setAttribute('aria-pressed', String(active));
+        btn.style.color = active ? '#0a0c10' : color;
+        btn.style.borderColor = color;
+        btn.style.background = active ? color : 'var(--panel-2)';
+        if (group !== 'All') {
+          const dot = document.createElement('span');
+          dot.className = 'filter-dot';
+          dot.style.background = active ? '#0a0c10' : color;
+          btn.appendChild(dot);
+        }
+        btn.appendChild(document.createTextNode(group + ' (' + n + ')'));
+        btn.addEventListener('click', () => {
+          if (group === 'All') activeGroups.clear();
+          else if (activeGroups.has(group)) activeGroups.delete(group);
+          else activeGroups.add(group);
+          applyFilters();
+          document.getElementById('lvBody').scrollTop = 0;
+        });
+        wrap.appendChild(btn);
+        // On a phone the row is wider than the screen — keep the chip you just
+        // tapped in sight instead of leaving it scrolled off to the right.
+        if (active && group !== 'All') {
+          requestAnimationFrame(() => btn.scrollIntoView({ inline: 'center', block: 'nearest' }));
+        }
+      });
     }
 
     function openListView() {
