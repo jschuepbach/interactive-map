@@ -25,6 +25,10 @@ def parse_hoods():
         hoods.append((hid, label, set(re.findall(r"'([^']*)'", codes))))
     return hoods
 
+def word(hay, kw):
+    """Same whole-word rule as matchesWord() in index.html (plural s allowed)."""
+    return re.search(r"(?<![0-9a-z\u00e0-\u00ff])" + re.escape(kw) + r"s?(?![0-9a-z\u00e0-\u00ff])", hay) is not None
+
 RULES, HOODS = parse_rules(), parse_hoods()
 COLORS = dict(re.findall(r"--c-([a-z]+):\s*(#[0-9a-f]{6})", SRC))
 
@@ -35,42 +39,34 @@ rows = []
 for p in places:
     base = p.get("group") or p.get("category") or "Restaurant"
     hay = ((p.get("name") or "") + " " + (p.get("note") or "")).lower()
-    matches = [(k, kw) for k, kws in RULES for kw in kws if kw in hay]
+    matches = [(k, kw) for k, kws in RULES for kw in kws if word(hay, kw)]
     group, why = base, "group field"
     if base == "Restaurant":
         for k, kws in RULES:
-            hit = next((kw for kw in kws if kw in hay), None)
+            hit = next((kw for kw in kws if word(hay, kw)), None)
             if hit:
                 group, why = k, 'keyword "%s"' % hit
                 break
     # a rule that lost only because another one came first
     losers = sorted({k for k, _ in matches if k != group}) if base == "Restaurant" else []
-    # keyword matched inside a longer word ("pie" in "Doppietta") — often wrong
-    partial = ""
-    if why.startswith("keyword"):
-        kw = why.split('"')[1]
-        if not re.search(r"(?<![a-z\u00e0-\u00ff])" + re.escape(kw) + r"(?![a-z\u00e0-\u00ff])", hay):
-            partial = kw
 
     m = re.search(r"\b(08\d{3})\b", p.get("note") or "")
     hood = next((label for _, label, codes in HOODS if m and m.group(1) in codes), None)
 
     rows.append({
         "name": p.get("name", ""), "group": group, "why": why, "losers": losers,
-        "partial": partial,
         "cat": p.get("category", ""), "note": p.get("note", ""),
         "hood": hood or "(by proximity)", "url": p.get("url", ""),
         "lat": p.get("lat"), "lng": p.get("lng"),
     })
 
 ORDER = ["Coffee", "Brunch", "Sushi", "Asian", "Tapas", "Vegan", "Bakery",
-         "Pizza", "Burger", "Bar", "Restaurant"]
+         "Pizza", "Burger", "Bar", "Wine", "Restaurant"]
 rows.sort(key=lambda r: (ORDER.index(r["group"]) if r["group"] in ORDER else 99,
                          r["name"].lower()))
 counts = collections.Counter(r["group"] for r in rows)
 derived = [r for r in rows if r["why"] != "group field"]
 ambiguous = [r for r in rows if r["losers"]]
-partials = [r for r in rows if r["partial"]]
 
 def color(g):
     return COLORS.get(g.lower(), "#ff7a59")
@@ -81,8 +77,6 @@ def esc(s):
 trs = []
 for r in rows:
     flag = ""
-    if r["partial"]:
-        flag += '<span class="flag warn" title="Keyword matched inside a longer word">"%s" im Wort</span>' % esc(r["partial"])
     if r["losers"]:
         flag += '<span class="flag" title="Other rules also matched">auch %s</span>' % esc(", ".join(r["losers"]))
     maps = "https://www.google.com/maps/search/?api=1&query=%s,%s" % (r["lat"], r["lng"])
@@ -146,9 +140,8 @@ tr:hover td{background:var(--panel)}
 <h1>Alle Orte mit Kategorie</h1>
 <p class="lede">__TOTAL__ Orte. Kategorie ist die, die die App anzeigt. Spalte "Quelle" sagt, woher sie kommt:
 "group field" steht so in <code>data.json</code>, ein Keyword bedeutet, die Regel in <code>index.html</code> hat
-sie aus Name und Note geraten. __DERIVED__ Orte sind geraten. __FLAGGED__ davon sind markiert und wollen einen Blick:
-"im Wort" heisst, das Keyword steckt in einem längeren Wort (<code>pie</code> in <code>Doppietta</code>),
-"auch X" heisst, eine zweite Regel hätte ebenfalls gepasst, die erste gewinnt.</p>
+sie aus Name und Note geraten. __DERIVED__ Orte sind geraten. __FLAGGED__ davon sind markiert: "auch X" heisst, eine zweite Regel hätte ebenfalls gepasst,
+die erste in der Reihenfolge gewinnt. Gematcht wird auf ganze Wörter, ein Plural-s zählt mit.</p>
 <div class="bar">
   <div class="chips"><button class="chip on" data-f="">Alle (__TOTAL__)</button>__CHIPS__
     <button class="chip" data-f="__flag__">Nur markierte (__FLAGGED__)</button></div>
@@ -174,9 +167,9 @@ apply();
 
 page = (page.replace("__ROWS__", "\n".join(trs)).replace("__CHIPS__", chips)
             .replace("__TOTAL__", str(len(rows))).replace("__DERIVED__", str(len(derived)))
-            .replace("__FLAGGED__", str(len({id(r) for r in ambiguous + partials}))))
+            .replace("__FLAGGED__", str(len(ambiguous))))
 out = ROOT / "docs" / "places-review.html"
 out.write_text(page)
 print("wrote", out, "|", len(rows), "places,", len(derived), "derived,",
-      len(ambiguous), "ambiguous,", len(partials), "substring")
+      len(ambiguous), "ambiguous")
 print(dict(counts))

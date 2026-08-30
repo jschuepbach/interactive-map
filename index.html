@@ -28,6 +28,7 @@
     --c-pizza: #d97347;
     --c-burger: #8a5a3c;
     --c-bar: #8f7fd6;
+    --c-wine: #b4536e;
     --c-restaurant: #ff7a59;
   }
 
@@ -392,12 +393,12 @@
     // multiple — same set, so the two can never drift apart.
     const activeGroups = new Set();
     let activeHood = null;   // neighbourhood collection, combines with the group filter
-    const GROUP_ORDER = ['All', 'Coffee', 'Brunch', 'Sushi', 'Asian', 'Tapas', 'Vegan', 'Bakery', 'Pizza', 'Burger', 'Bar', 'Restaurant'];
+    const GROUP_ORDER = ['All', 'Coffee', 'Brunch', 'Sushi', 'Asian', 'Tapas', 'Vegan', 'Bakery', 'Pizza', 'Burger', 'Bar', 'Wine', 'Restaurant'];
     const GROUP_COLORS = {
       Coffee: 'var(--c-coffee)', Brunch: 'var(--c-brunch)', Sushi: 'var(--c-sushi)',
       Asian: 'var(--c-asian)', Tapas: 'var(--c-tapas)', Vegan: 'var(--c-vegan)',
       Bakery: 'var(--c-bakery)', Pizza: 'var(--c-pizza)', Burger: 'var(--c-burger)',
-      Bar: 'var(--c-bar)', Restaurant: 'var(--c-restaurant)'
+      Bar: 'var(--c-bar)', Wine: 'var(--c-wine)', Restaurant: 'var(--c-restaurant)'
     };
     function groupColor(group) { return GROUP_COLORS[group] || 'var(--accent)'; }
 
@@ -405,7 +406,7 @@
     const CHIP_BANDS = [
       { label: 'Coffee & sweet', groups: ['Coffee', 'Brunch', 'Bakery'] },
       { label: 'Food',           groups: ['Sushi', 'Asian', 'Tapas', 'Vegan', 'Pizza', 'Burger', 'Restaurant'] },
-      { label: 'Drinks',         groups: ['Bar'] }
+      { label: 'Drinks',         groups: ['Bar', 'Wine'] }
     ];
 
     // ----- Neighbourhoods -----
@@ -460,21 +461,37 @@
     // Runs only on places already bucketed as "Restaurant" — Coffee/Brunch are
     // already precise. First matching rule wins (exclusive, like the top-level groups).
     const CATEGORY_RULES = [
-      { key: 'Sushi',  keywords: ['sushi', 'ramen', 'izakaya', 'yakitori', 'sashimi', 'nigiri', 'hotpot', 'tonkotsu', 'japon', 'japanese'] },
-      { key: 'Asian',  keywords: ['thai', 'vietnam', 'pho', 'korean', 'corea', 'coreà', 'bbq', 'wok', 'dumpling', 'bao', 'chinese', 'sichuan', 'tofu', 'indian', 'india'] },
-      { key: 'Tapas',  keywords: ['tapas', 'vins', 'wine', 'vermut', 'cava', 'bodega'] },
-      { key: 'Vegan',  keywords: ['vegan', 'vegetarian', 'bowl', 'healthy', 'salad', 'poke'] },
-      { key: 'Bakery', keywords: ['pastisseria', 'bakery', 'pastry', 'pie', 'cake', 'granja', 'gelato'] },
-      { key: 'Pizza',  keywords: ['pizza', 'pasta', 'italian', 'trattoria'] },
-      { key: 'Burger', keywords: ['burger'] },
-      { key: 'Bar',    keywords: ['cocktail', 'bar de', 'beer', 'cerveza', 'brewery', 'vermouth'] },
+      { key: 'Burger', keywords: ['burger', 'hamburgueseria'] },
+      { key: 'Pizza',  keywords: ['pizza', 'pizzeria', 'pasta', 'italian', 'italiana', 'trattoria'] },
+      { key: 'Sushi',  keywords: ['sushi', 'ramen', 'izakaya', 'yakitori', 'sashimi', 'nigiri', 'omakase', 'tonkotsu', 'hotpot', 'japon', 'japonès', 'japonés', 'japones', 'japanese', 'nikkei'] },
+      { key: 'Asian',  keywords: ['thai', 'thailandes', 'thailandès', 'tailandes', 'vietnam', 'vietnamita', 'pho', 'korea', 'korean', 'coreà', 'coreana', 'coreano', 'seoul', 'wok', 'dumpling', 'bao', 'chinese', 'chino', 'china', 'sichuan', 'indian', 'india', 'asian', 'asiatic', 'asiàtic'] },
+      { key: 'Vegan',  keywords: ['vegan', 'vegana', 'vegetarian', 'vegetariano', 'vegetariana', 'healthy', 'salad', 'poke'] },
+      { key: 'Bakery', keywords: ['pastisseria', 'bakery', 'pastry', 'pie', 'cake', 'granja', 'gelato', 'croissant', 'forn'] },
+      { key: 'Wine',   keywords: ['vins', 'vinos', 'vino', 'wine', 'vinoteca', 'enoteca', 'celler'] },
+      { key: 'Bar',    keywords: ['cocktail', 'coctel', 'beer', 'cerveza', 'cerveseria', 'brewery', 'vermouth', 'vermut', 'copas', 'bar de', 'bar del'] },
+      { key: 'Tapas',  keywords: ['tapas', 'tapes', 'bodega', 'pintxos'] },
     ];
     function detectSubCategory(p) {
       const haystack = ((p.name || '') + ' ' + (p.note || '')).toLowerCase();
       for (const rule of CATEGORY_RULES) {
-        if (rule.keywords.some((kw) => haystack.includes(kw))) return rule.key;
+        if (rule.keywords.some((kw) => matchesWord(haystack, kw))) return rule.key;
       }
       return null;
+    }
+
+    // Whole-word match (an optional plural "s" still counts). Substring matching
+    // put "Doppietta" into Bakery via "pie" and "La Mar Salada" into Vegan via
+    // "salad"; accented letters count as word characters so "Japonès" still hits.
+    const WORD = '0-9a-z\u00e0-\u00ff';
+    const wordRe = new Map();
+    function matchesWord(haystack, kw) {
+      let re = wordRe.get(kw);
+      if (!re) {
+        re = new RegExp('(?<![' + WORD + '])' + kw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') +
+          's?(?![' + WORD + '])');
+        wordRe.set(kw, re);
+      }
+      return re.test(haystack);
     }
 
     // ----- Theme: recolor every layer to dark monochrome + hide POI labels -----
