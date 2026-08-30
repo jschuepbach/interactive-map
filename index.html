@@ -129,6 +129,72 @@
   .popup-link { color: var(--accent); font-size: 11px; text-decoration: none; font-weight: 600; }
   .popup-link:hover { text-decoration: underline; }
 
+  /* ---------- Intro overlay (landing) ----------
+     Sits on top of the live map: the map keeps rendering underneath, dimmed,
+     so choosing a craving here visibly changes what's behind the panel. */
+  #intro {
+    position: fixed; inset: 0; z-index: 50;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 40px 24px 32px;
+    padding-left: max(24px, env(safe-area-inset-left));
+    padding-right: max(24px, env(safe-area-inset-right));
+    background: linear-gradient(180deg,
+      rgba(10,12,16,0.96) 0%, rgba(10,12,16,0.9) 50%, rgba(10,12,16,0.74) 100%);
+    overflow-y: auto;
+    transition: opacity 0.28s ease, visibility 0.28s ease;
+  }
+  #intro.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+  .intro-inner { width: 100%; max-width: 560px; margin: auto; }
+  .intro-eyebrow { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--muted); margin: 0 0 14px; }
+  #intro h2 { font-size: clamp(26px, 5.6vw, 40px); line-height: 1.12; letter-spacing: -0.02em;
+    margin: 0 0 12px; font-weight: 650; }
+  .intro-sub { color: var(--muted); font-size: 15px; line-height: 1.55; margin: 0 0 28px;
+    max-width: 44ch; }
+  .intro-q { font-size: 12px; font-weight: 600; letter-spacing: 0.04em; margin: 0 0 12px; }
+  .intro-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 28px; }
+  .intro-chip {
+    background: var(--panel-2); border: 1px solid var(--border); color: var(--muted);
+    padding: 9px 15px; font-size: 13px; font-weight: 600; border-radius: 999px;
+    cursor: pointer; font-family: inherit; letter-spacing: 0.01em;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+  }
+  .intro-chip:hover { color: var(--text); }
+  .intro-chip .filter-dot { width: 8px; height: 8px; }
+  .intro-actions { display: flex; align-items: center; gap: 18px; flex-wrap: wrap;
+    margin-bottom: 22px; }
+  .intro-cta {
+    background: var(--accent); color: #0a0c10; border: 1px solid var(--accent);
+    padding: 13px 22px; font-size: 14px; font-weight: 700; border-radius: 10px;
+    cursor: pointer; font-family: inherit; letter-spacing: 0.01em;
+  }
+  .intro-cta:hover { filter: brightness(1.08); }
+  .intro-skip { background: none; border: 0; color: var(--muted); font: inherit; font-size: 13px;
+    cursor: pointer; padding: 4px 0; text-decoration: underline; text-underline-offset: 3px; }
+  .intro-skip:hover { color: var(--text); }
+  .intro-stats { color: var(--muted); font-size: 12px; letter-spacing: 0.02em; margin: 0; }
+  #intro :focus-visible, .btn:focus-visible, .filter-btn:focus-visible {
+    outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  @media (max-width: 767px) {
+    #intro { justify-content: flex-start; padding-top: max(44px, env(safe-area-inset-top));
+      padding-bottom: 0; }
+    /* Sticky CTA last in the column, stats above it — the bottom sheet behind
+       would otherwise read through the action bar. */
+    .intro-inner { display: flex; flex-direction: column; }
+    .intro-stats { margin-bottom: 10px; }
+    .intro-actions { order: 1; position: sticky; bottom: 0; margin: 0 -24px; padding: 16px 24px;
+      padding-bottom: max(16px, env(safe-area-inset-bottom));
+      background: var(--bg); border-top: 1px solid var(--border); }
+    .intro-cta { flex: 1; }
+    /* Hide the bottom sheet while the landing is up */
+    body.intro-open #sidebar { visibility: hidden; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #intro { transition: none; }
+  }
+
   /* ---------- Loader ---------- */
   #loader {
     position: fixed; inset: 0; background: var(--bg); z-index: 100;
@@ -212,6 +278,25 @@
 <body>
   <div id="loader"><div class="spinner"></div></div>
 
+  <div id="intro" class="hidden" role="dialog" aria-modal="true" aria-labelledby="introTitle">
+    <div class="intro-inner">
+      <p class="intro-eyebrow">Barcelona</p>
+      <h2 id="introTitle" tabindex="-1"><span id="introTotal">0</span> places I actually eat at.</h2>
+      <p class="intro-sub">Coffee, brunch and restaurants, picked by hand. No ratings, no crowd,
+        just the spots I send to friends when they land.</p>
+
+      <p class="intro-q">What are you in the mood for?</p>
+      <div class="intro-chips" id="introChips"></div>
+
+      <div class="intro-actions">
+        <button id="introCta" class="intro-cta" type="button">Show all places</button>
+        <button id="introSkip" class="intro-skip" type="button">Skip to the map</button>
+      </div>
+
+      <p class="intro-stats" id="introStats"></p>
+    </div>
+  </div>
+
   <div id="app">
     <aside id="sidebar">
       <div class="sheet-handle" id="sheetHandle" aria-hidden="true"></div>
@@ -226,6 +311,7 @@
     <div id="map-wrap">
       <div class="controls">
         <button id="toggle3d" class="btn" type="button">3D</button>
+        <button id="introBtn" class="btn" type="button" title="About this map">About</button>
       </div>
       <div id="map"></div>
       <footer>
@@ -267,7 +353,10 @@
     let activeIdx = -1;
     let currentPopup = null;
     let is3D = false;
-    let activeGroup = 'All';
+    // Shared filter state for BOTH the sidebar filters and the intro chips.
+    // Empty set = "All". Sidebar buttons write a single group, intro chips toggle
+    // multiple — same set, so the two can never drift apart.
+    const activeGroups = new Set();
     const GROUP_ORDER = ['All', 'Coffee', 'Brunch', 'Sushi', 'Asian', 'Tapas', 'Vegan', 'Bakery', 'Pizza', 'Burger', 'Bar', 'Restaurant'];
     const GROUP_COLORS = {
       Coffee: 'var(--c-coffee)', Brunch: 'var(--c-brunch)', Sushi: 'var(--c-sushi)',
@@ -539,16 +628,25 @@
     }
 
     // ----- Filters -----
+    function isGroupActive(group) {
+      return group === 'All' ? activeGroups.size === 0 : activeGroups.has(group);
+    }
+
+    function groupCount(group) {
+      return group === 'All' ? ALL_DATA.length : ALL_DATA.filter((p) => p.group === group).length;
+    }
+
     function renderFilters() {
       const wrap = document.getElementById('filters');
       wrap.innerHTML = '';
       GROUP_ORDER.forEach((group) => {
         const btn = document.createElement('button');
         btn.type = 'button';
-        btn.className = 'filter-btn' + (group === activeGroup ? ' active' : '');
-        const n = group === 'All' ? ALL_DATA.length : ALL_DATA.filter((p) => p.group === group).length;
+        const active = isGroupActive(group);
+        btn.className = 'filter-btn' + (active ? ' active' : '');
+        btn.setAttribute('aria-pressed', String(active));
+        const n = groupCount(group);
         const color = groupColor(group);
-        const active = group === activeGroup;
         btn.style.color = active ? '#0a0c10' : color;
         btn.style.borderColor = color;
         btn.style.background = active ? color : 'var(--panel-2)';
@@ -564,17 +662,146 @@
       });
     }
 
+    // Sidebar filters stay single-select: picking one replaces the selection.
     function setFilter(group) {
-      activeGroup = group;
-      DATA = group === 'All' ? ALL_DATA.slice() : ALL_DATA.filter((p) => p.group === group);
+      activeGroups.clear();
+      if (group !== 'All') activeGroups.add(group);
+      applyFilters();
+    }
+
+    function matchesFilter(p) {
+      return activeGroups.size === 0 || activeGroups.has(p.group);
+    }
+
+    function filteredCount() {
+      return activeGroups.size === 0 ? ALL_DATA.length : ALL_DATA.filter(matchesFilter).length;
+    }
+
+    function applyFilters() {
+      DATA = ALL_DATA.filter(matchesFilter);
       activeIdx = -1;
       if (currentPopup) { currentPopup.remove(); currentPopup = null; }
       renderFilters();
+      renderIntroChips();
       renderSidebar();
       clearMarkers();
       addMarkers();
       measurePeek();
+      syncUrl();
     }
+
+    // ----- Intro overlay -----
+    // The landing is a layer over the running map, not a separate page: chips
+    // write into activeGroups, so what you pick here is already applied when
+    // the overlay fades out. Nothing reloads.
+    const introEl = document.getElementById('intro');
+    const introChipsEl = document.getElementById('introChips');
+    const introCta = document.getElementById('introCta');
+    const SEEN_KEY = 'bcn-map-intro-seen';
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function storage(fn, fallback) {
+      try { return fn(); } catch (_) { return fallback; } // Safari private mode
+    }
+
+    function renderIntroChips() {
+      if (!introChipsEl) return;
+      introChipsEl.innerHTML = '';
+      GROUP_ORDER.filter((g) => g !== 'All').forEach((group) => {
+        const n = groupCount(group);
+        if (!n) return;
+        const active = activeGroups.has(group);
+        const color = groupColor(group);
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'intro-chip';
+        btn.setAttribute('aria-pressed', String(active));
+        btn.style.color = active ? '#0a0c10' : color;
+        btn.style.borderColor = color;
+        btn.style.background = active ? color : 'var(--panel-2)';
+        const dot = document.createElement('span');
+        dot.className = 'filter-dot';
+        dot.style.background = active ? '#0a0c10' : color;
+        btn.appendChild(dot);
+        btn.appendChild(document.createTextNode(group + ' (' + n + ')'));
+        btn.addEventListener('click', () => {
+          if (activeGroups.has(group)) activeGroups.delete(group);
+          else activeGroups.add(group);
+          applyFilters();
+        });
+        introChipsEl.appendChild(btn);
+      });
+      updateIntroCta();
+    }
+
+    function updateIntroCta() {
+      if (!introCta) return;
+      const n = filteredCount();
+      introCta.textContent = activeGroups.size === 0
+        ? 'Show all ' + n + ' places'
+        : 'Show ' + n + ' place' + (n === 1 ? '' : 's');
+      introCta.disabled = n === 0;
+    }
+
+    function renderIntroStats() {
+      const el = document.getElementById('introStats');
+      if (!el) return;
+      const coffee = ALL_DATA.filter((p) => p.group === 'Coffee').length;
+      const brunch = ALL_DATA.filter((p) => p.group === 'Brunch').length;
+      const food = ALL_DATA.length - coffee - brunch;
+      el.textContent = coffee + ' coffee · ' + brunch + ' brunch · ' + food + ' restaurants';
+      document.getElementById('introTotal').textContent = String(ALL_DATA.length);
+    }
+
+    // Shareable state: ?c=sushi,vegan opens straight into that filter.
+    function syncUrl() {
+      const params = new URLSearchParams(window.location.search);
+      if (activeGroups.size === 0) params.delete('c');
+      else params.set('c', Array.from(activeGroups).join(',').toLowerCase());
+      const qs = params.toString();
+      history.replaceState(null, '', window.location.pathname + (qs ? '?' + qs : ''));
+    }
+
+    function readUrlFilters() {
+      const raw = new URLSearchParams(window.location.search).get('c');
+      if (!raw) return false;
+      const valid = new Map(GROUP_ORDER.map((g) => [g.toLowerCase(), g]));
+      let hit = false;
+      raw.split(',').forEach((token) => {
+        const group = valid.get(token.trim().toLowerCase());
+        if (group && group !== 'All') { activeGroups.add(group); hit = true; }
+      });
+      return hit;
+    }
+
+    function openIntro() {
+      introEl.classList.remove('hidden');
+      document.body.classList.add('intro-open');
+      renderIntroChips();
+      document.getElementById('introTitle').focus();
+      if (!reducedMotion) {
+        map.easeTo({ zoom: 12.9, bearing: -14, pitch: 30, duration: 9000, easing: (t) => t });
+      }
+    }
+
+    function closeIntro() {
+      if (introEl.classList.contains('hidden')) return;
+      introEl.classList.add('hidden');
+      document.body.classList.remove('intro-open');
+      storage(() => localStorage.setItem(SEEN_KEY, '1'));
+      if (!reducedMotion && !is3D) {
+        map.easeTo({ zoom: 13, bearing: 0, pitch: 0, duration: 800 });
+      }
+      const firstFilter = document.querySelector('.filter-btn');
+      if (firstFilter) firstFilter.focus();
+    }
+
+    introCta.addEventListener('click', closeIntro);
+    document.getElementById('introSkip').addEventListener('click', closeIntro);
+    document.getElementById('introBtn').addEventListener('click', openIntro);
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !introEl.classList.contains('hidden')) closeIntro();
+    });
 
     // ----- Markers -----
     function clearMarkers() {
@@ -643,9 +870,16 @@
         }
         ALL_DATA = filtered;
 
-        setFilter('All');
+        const fromUrl = readUrlFilters();
+        applyFilters();
+        renderIntroStats();
 
         document.getElementById('loader').classList.add('hidden');
+
+        // Skip the landing for shared filter links and for anyone who has
+        // already been through it — it's a first-look screen, not a gate.
+        const seen = storage(() => localStorage.getItem(SEEN_KEY), null);
+        if (!fromUrl && !seen) openIntro();
       } catch (e) {
         console.error('Failed to load data.json:', e);
         document.getElementById('loader').innerHTML =
