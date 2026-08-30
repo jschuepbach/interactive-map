@@ -376,7 +376,7 @@ Einträge aus <code>overrides.json</code> schlagen die Regeln.</p>
 <script>
 var rows=[].slice.call(document.querySelectorAll('#tb tr')),f='',q='';
 function apply(){var n=0;rows.forEach(function(r){
-  var okF = !f || (f==='__flag__' ? !!r.querySelector('.flag') : r.dataset.cat===f);
+  var okF = !f || (f==='__flag__' ? !!r.querySelector('.flag') : r.dataset.cat.split('|').indexOf(f)>-1);
   var okQ = !q || r.dataset.text.indexOf(q)>-1;
   r.classList.toggle('hide',!(okF&&okQ)); if(okF&&okQ)n++;});
   document.getElementById('meta').textContent=n+' von '+rows.length+' Orten';}
