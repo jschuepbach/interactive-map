@@ -483,6 +483,7 @@
     const activeGroups = new Set();
     let activeHood = null;   // neighbourhood collection, combines with the group filter
     const OVERRIDES = {};    // lowercased place name -> manual category list
+    const NOTES = {};        // lowercased place name -> own note from notes.md
     const GROUP_ORDER = ['All', 'Coffee', 'Brunch', 'Sushi', 'Asian', 'Tapas', 'Vegan', 'Bakery', 'Pizza', 'Burger', 'Bar', 'Wine', 'Restaurant'];
     const GROUP_COLORS = {
       Coffee: 'var(--c-coffee)', Brunch: 'var(--c-brunch)', Sushi: 'var(--c-sushi)',
@@ -729,6 +730,25 @@
 
     window.addEventListener('resize', measurePeek);
 
+    // ----- notes.md -----
+    // "## Name" starts a place, everything until the next heading is its note.
+    // HTML comments are scaffolding hints, blank sections mean "not written yet".
+    function parseNotes(text) {
+      let name = null, buf = [];
+      const flush = () => {
+        if (!name) return;
+        const body = buf.join('\n').replace(/<!--[\s\S]*?-->/g, '').trim();
+        if (body) NOTES[name.toLowerCase()] = body;
+        buf = [];
+      };
+      for (const line of text.split(/\r?\n/)) {
+        const head = /^##\s+(.+?)\s*$/.exec(line);
+        if (head) { flush(); name = head[1]; }
+        else buf.push(line);
+      }
+      flush();
+    }
+
     // ----- Coordinate guard -----
     function inBox(p) {
       return typeof p.lat === 'number' && typeof p.lng === 'number'
@@ -924,6 +944,7 @@
     const listEl = document.getElementById('listview');
     const lvBody = document.getElementById('lvBody');
     let lvQuery = '';
+    let lvMissingOnly = false;   // "which ones still need writing?" 
 
     function renderListView() {
       if (!listEl || listEl.classList.contains('hidden')) return;
@@ -931,6 +952,7 @@
       const q = lvQuery.trim().toLowerCase();
       const hits = [];
       DATA.forEach((p, i) => {
+        if (lvMissingOnly && hasOwnNote(p)) return;
         if (!q) { hits.push([p, i]); return; }
         const hay = (p.name + ' ' + (p.note || '') + ' ' + (p.groups || [p.group]).join(' ')).toLowerCase();
         if (hay.indexOf(q) > -1) hits.push([p, i]);
@@ -951,12 +973,21 @@
       const bits = [];
       if (activeHood) bits.push(hoodLabel(activeHood));
       if (activeGroups.size) bits.push(Array.from(activeGroups).join(', '));
-      active.innerHTML = bits.length
-        ? 'Filtered by ' + escapeHtml(bits.join(' · ')) + ' <button type="button" id="lvClear">show everything</button>'
-        : '';
+      const missing = DATA.filter((p) => !hasOwnNote(p)).length;
+      active.innerHTML =
+        (bits.length ? 'Filtered by ' + escapeHtml(bits.join(' · ')) +
+          ' <button type="button" id="lvClear">show everything</button> · ' : '') +
+        '<button type="button" id="lvMissing">' +
+          (lvMissingOnly ? 'show all, written or not' : 'without a note (' + missing + ')') +
+        '</button>';
       const clear = document.getElementById('lvClear');
       if (clear) clear.addEventListener('click', () => {
         activeGroups.clear(); activeHood = null; applyFilters();
+      });
+      document.getElementById('lvMissing').addEventListener('click', () => {
+        lvMissingOnly = !lvMissingOnly;
+        renderListView();
+        document.getElementById('lvBody').scrollTop = 0;
       });
 
       lvBody.innerHTML = '';
@@ -1283,6 +1314,9 @@
       if (/\b08\d{3}\b/.test(n)) return true;                      // postcode
       return /,\s*(barcelona|spain|espanya)\.?$/i.test(n);
     }
+    function hasOwnNote(p) {
+      return !!(p.note && !isAddressNote(p.note));
+    }
     function noteHtml(p, cls) {
       return isAddressNote(p.note) ? '' :
         '<p class="' + cls + '">' + escapeHtml(p.note) + '</p>';
@@ -1338,12 +1372,25 @@
           console.warn('overrides.json not loaded:', e);
         }
 
+        // Personal notes live in notes.md, not in data.json: a re-scrape
+        // rewrites data.json, and nobody wants to lose their own writing to
+        // that. Plain markdown, one "## Place name" heading per place.
+        try {
+          const md = await fetch('notes.md', { cache: 'no-store' });
+          if (md.ok) parseNotes(await md.text());
+        } catch (e) {
+          console.warn('notes.md not loaded:', e);
+        }
+
         const filtered = [];
         for (const p of raw) {
           if (!inBox(p)) {
             console.warn('[coord-guard] Skipping "' + (p.name || '?') + '" — outside region (' + p.lat + ', ' + p.lng + ')');
             continue;
           }
+          const own = NOTES[(p.name || '').toLowerCase()];
+          if (own) p.note = own;
+
           const base = p.group || p.category || 'Restaurant';
           const manual = OVERRIDES[(p.name || '').toLowerCase()];
           if (manual && manual.length) {
