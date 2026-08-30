@@ -61,6 +61,14 @@
   .filter-dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%;
     margin-right: 5px; vertical-align: middle; background: currentColor; }
 
+  /* Active neighbourhood, shown outside the intro so the filter is never invisible */
+  .hood-pill { flex-basis: 100%; display: flex; align-items: center; gap: 8px;
+    background: none; border: 0; padding: 0 0 2px; margin: 0; cursor: pointer;
+    font-family: inherit; font-size: 11px; font-weight: 600; color: var(--accent);
+    letter-spacing: 0.02em; }
+  .hood-pill span.x { color: var(--muted); font-weight: 400; }
+  .hood-pill:hover span.x { color: var(--text); }
+
   .list { flex: 1; overflow-y: auto; padding-top: 12px; }
   .row { padding: 12px 18px 14px; border-bottom: 1px solid var(--border);
     cursor: pointer; transition: background 0.15s; border-left: 3px solid transparent; }
@@ -152,7 +160,13 @@
   .intro-sub { color: var(--muted); font-size: 15px; line-height: 1.55; margin: 0 0 28px;
     max-width: 44ch; }
   .intro-q { font-size: 12px; font-weight: 600; letter-spacing: 0.04em; margin: 0 0 12px; }
-  .intro-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 28px; }
+  .intro-chips { margin: 0 0 26px; }
+  /* Chips are split into named bands so 11 categories don't read as one wall. */
+  .chip-band { margin-bottom: 14px; }
+  .chip-band:last-child { margin-bottom: 0; }
+  .chip-band-label { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--muted); margin: 0 0 8px; }
+  .chip-row { display: flex; flex-wrap: wrap; gap: 8px; }
   .intro-chip {
     background: var(--panel-2); border: 1px solid var(--border); color: var(--muted);
     padding: 9px 15px; font-size: 13px; font-weight: 600; border-radius: 999px;
@@ -161,6 +175,22 @@
   }
   .intro-chip:hover { color: var(--text); }
   .intro-chip .filter-dot { width: 8px; height: 8px; }
+  /* Neighbourhood tiles: one horizontal band, snap-scrolled on touch. */
+  .intro-hoods { display: flex; gap: 10px; overflow-x: auto; margin: 0 -24px 28px;
+    padding: 2px 24px 8px; scroll-snap-type: x proximity; scrollbar-width: none; }
+  .intro-hoods::-webkit-scrollbar { display: none; }
+  .hood-tile {
+    flex: 0 0 auto; scroll-snap-align: start; text-align: left;
+    background: var(--panel); border: 1px solid var(--border); border-radius: 12px;
+    padding: 14px 16px; min-width: 150px; cursor: pointer; font-family: inherit; color: var(--text);
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .hood-tile:hover { border-color: var(--muted); }
+  .hood-tile.active { border-color: var(--accent); background: var(--panel-2); }
+  .hood-tile .hood-name { display: block; font-size: 14px; font-weight: 600; margin-bottom: 3px; }
+  .hood-tile .hood-count { display: block; font-size: 11px; color: var(--muted); letter-spacing: 0.02em; }
+  .hood-tile.active .hood-count { color: var(--accent); }
+
   .intro-actions { display: flex; align-items: center; gap: 18px; flex-wrap: wrap;
     margin-bottom: 22px; }
   .intro-cta {
@@ -288,6 +318,9 @@
       <p class="intro-q">What are you in the mood for?</p>
       <div class="intro-chips" id="introChips"></div>
 
+      <p class="intro-q">Or start from a neighbourhood</p>
+      <div class="intro-hoods" id="introHoods"></div>
+
       <div class="intro-actions">
         <button id="introCta" class="intro-cta" type="button">Show all places</button>
         <button id="introSkip" class="intro-skip" type="button">Skip to the map</button>
@@ -357,6 +390,7 @@
     // Empty set = "All". Sidebar buttons write a single group, intro chips toggle
     // multiple — same set, so the two can never drift apart.
     const activeGroups = new Set();
+    let activeHood = null;   // neighbourhood collection, combines with the group filter
     const GROUP_ORDER = ['All', 'Coffee', 'Brunch', 'Sushi', 'Asian', 'Tapas', 'Vegan', 'Bakery', 'Pizza', 'Burger', 'Bar', 'Restaurant'];
     const GROUP_COLORS = {
       Coffee: 'var(--c-coffee)', Brunch: 'var(--c-brunch)', Sushi: 'var(--c-sushi)',
@@ -365,6 +399,61 @@
       Bar: 'var(--c-bar)', Restaurant: 'var(--c-restaurant)'
     };
     function groupColor(group) { return GROUP_COLORS[group] || 'var(--accent)'; }
+
+    // Chip bands — presentation only, the filter state stays flat.
+    const CHIP_BANDS = [
+      { label: 'Coffee & sweet', groups: ['Coffee', 'Brunch', 'Bakery'] },
+      { label: 'Food',           groups: ['Sushi', 'Asian', 'Tapas', 'Vegan', 'Pizza', 'Burger', 'Restaurant'] },
+      { label: 'Drinks',         groups: ['Bar'] }
+    ];
+
+    // ----- Neighbourhoods -----
+    // Derived from the postcode in the note (305 of 322 carry one); the rest are
+    // assigned to the nearest neighbourhood centroid, so every spot gets a home.
+    const HOODS = [
+      { id: 'ciutat-vella', label: 'Ciutat Vella',    codes: ['08001', '08002', '08003', '08039'] },
+      { id: 'eixample',     label: 'Eixample',        codes: ['08007', '08008', '08009', '08010', '08011', '08013', '08036', '08037'] },
+      { id: 'gracia',       label: 'Gràcia',          codes: ['08006', '08012', '08023', '08024', '08025'] },
+      { id: 'sant-antoni',  label: 'Sant Antoni & Poble-sec', codes: ['08004', '08015', '08038'] },
+      { id: 'poblenou',     label: 'Poblenou & beach', codes: ['08005', '08018', '08019', '08020'] },
+      { id: 'sants',        label: 'Sants & uptown',  codes: ['08014', '08028', '08029', '08017', '08021', '08022', '08034'] }
+    ];
+    function hoodLabel(id) {
+      const h = HOODS.find((x) => x.id === id);
+      return h ? h.label : '';
+    }
+
+    function assignHoods(points) {
+      const byCode = new Map();
+      HOODS.forEach((h) => h.codes.forEach((c) => byCode.set(c, h.id)));
+
+      const pending = [];
+      for (const p of points) {
+        const m = /\b(08\d{3})\b/.exec(p.note || '');
+        const id = m ? byCode.get(m[1]) : undefined;
+        if (id) p.hood = id; else pending.push(p);
+      }
+
+      // Centroid per neighbourhood from the points we could place by postcode
+      const sums = new Map();
+      for (const p of points) {
+        if (!p.hood) continue;
+        const s = sums.get(p.hood) || { lat: 0, lng: 0, n: 0 };
+        s.lat += p.lat; s.lng += p.lng; s.n++;
+        sums.set(p.hood, s);
+      }
+      const centroids = Array.from(sums.entries())
+        .map(([id, s]) => ({ id: id, lat: s.lat / s.n, lng: s.lng / s.n }));
+
+      for (const p of pending) {
+        let best = null, bestD = Infinity;
+        for (const c of centroids) {
+          const d = (p.lat - c.lat) * (p.lat - c.lat) + (p.lng - c.lng) * (p.lng - c.lng);
+          if (d < bestD) { bestD = d; best = c.id; }
+        }
+        p.hood = best;
+      }
+    }
 
     // ----- Sub-category detection (keyword match against name + note) -----
     // Runs only on places already bucketed as "Restaurant" — Coffee/Brunch are
@@ -632,13 +721,33 @@
       return group === 'All' ? activeGroups.size === 0 : activeGroups.has(group);
     }
 
+    // Counts always reflect the other axis of the filter: with a neighbourhood
+    // picked, "Sushi (14)" becomes "Sushi (3)" — no chip that leads to nothing.
     function groupCount(group) {
-      return group === 'All' ? ALL_DATA.length : ALL_DATA.filter((p) => p.group === group).length;
+      const pool = activeHood ? ALL_DATA.filter((p) => p.hood === activeHood) : ALL_DATA;
+      return group === 'All' ? pool.length : pool.filter((p) => p.group === group).length;
+    }
+
+    function hoodCount(id) {
+      return ALL_DATA.filter((p) => p.hood === id &&
+        (activeGroups.size === 0 || activeGroups.has(p.group))).length;
     }
 
     function renderFilters() {
       const wrap = document.getElementById('filters');
       wrap.innerHTML = '';
+
+      // Neighbourhood is set in the intro, so it needs a visible, clearable
+      // representation in the sidebar too.
+      if (activeHood) {
+        const pill = document.createElement('button');
+        pill.type = 'button';
+        pill.className = 'hood-pill';
+        pill.innerHTML = escapeHtml(hoodLabel(activeHood)) + ' <span class="x">clear ×</span>';
+        pill.addEventListener('click', () => { activeHood = null; applyFilters(); });
+        wrap.appendChild(pill);
+      }
+
       GROUP_ORDER.forEach((group) => {
         const btn = document.createElement('button');
         btn.type = 'button';
@@ -670,11 +779,12 @@
     }
 
     function matchesFilter(p) {
+      if (activeHood && p.hood !== activeHood) return false;
       return activeGroups.size === 0 || activeGroups.has(p.group);
     }
 
     function filteredCount() {
-      return activeGroups.size === 0 ? ALL_DATA.length : ALL_DATA.filter(matchesFilter).length;
+      return ALL_DATA.filter(matchesFilter).length;
     }
 
     function applyFilters() {
@@ -704,42 +814,85 @@
       try { return fn(); } catch (_) { return fallback; } // Safari private mode
     }
 
+    function makeChip(group) {
+      const n = groupCount(group);
+      const active = activeGroups.has(group);
+      const color = groupColor(group);
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'intro-chip';
+      btn.setAttribute('aria-pressed', String(active));
+      btn.style.color = active ? '#0a0c10' : color;
+      btn.style.borderColor = color;
+      btn.style.background = active ? color : 'var(--panel-2)';
+      const dot = document.createElement('span');
+      dot.className = 'filter-dot';
+      dot.style.background = active ? '#0a0c10' : color;
+      btn.appendChild(dot);
+      btn.appendChild(document.createTextNode(group + ' (' + n + ')'));
+      btn.addEventListener('click', () => {
+        if (activeGroups.has(group)) activeGroups.delete(group);
+        else activeGroups.add(group);
+        applyFilters();
+      });
+      return btn;
+    }
+
     function renderIntroChips() {
       if (!introChipsEl) return;
       introChipsEl.innerHTML = '';
-      GROUP_ORDER.filter((g) => g !== 'All').forEach((group) => {
-        const n = groupCount(group);
-        if (!n) return;
-        const active = activeGroups.has(group);
-        const color = groupColor(group);
-        const btn = document.createElement('button');
-        btn.type = 'button';
-        btn.className = 'intro-chip';
-        btn.setAttribute('aria-pressed', String(active));
-        btn.style.color = active ? '#0a0c10' : color;
-        btn.style.borderColor = color;
-        btn.style.background = active ? color : 'var(--panel-2)';
-        const dot = document.createElement('span');
-        dot.className = 'filter-dot';
-        dot.style.background = active ? '#0a0c10' : color;
-        btn.appendChild(dot);
-        btn.appendChild(document.createTextNode(group + ' (' + n + ')'));
-        btn.addEventListener('click', () => {
-          if (activeGroups.has(group)) activeGroups.delete(group);
-          else activeGroups.add(group);
+      CHIP_BANDS.forEach((band) => {
+        // A band whose groups are all empty in the current neighbourhood is dropped,
+        // but a selected chip always stays visible so it can be switched off again.
+        const groups = band.groups.filter((g) => groupCount(g) > 0 || activeGroups.has(g));
+        if (!groups.length) return;
+        const wrap = document.createElement('div');
+        wrap.className = 'chip-band';
+        const label = document.createElement('p');
+        label.className = 'chip-band-label';
+        label.textContent = band.label;
+        wrap.appendChild(label);
+        const row = document.createElement('div');
+        row.className = 'chip-row';
+        groups.forEach((g) => row.appendChild(makeChip(g)));
+        wrap.appendChild(row);
+        introChipsEl.appendChild(wrap);
+      });
+      renderHoodTiles();
+      updateIntroCta();
+    }
+
+    function renderHoodTiles() {
+      const wrap = document.getElementById('introHoods');
+      if (!wrap) return;
+      wrap.innerHTML = '';
+      HOODS.forEach((h) => {
+        const n = hoodCount(h.id);
+        if (!n && activeHood !== h.id) return;
+        const active = activeHood === h.id;
+        const tile = document.createElement('button');
+        tile.type = 'button';
+        tile.className = 'hood-tile' + (active ? ' active' : '');
+        tile.setAttribute('aria-pressed', String(active));
+        tile.innerHTML =
+          '<span class="hood-name">' + escapeHtml(h.label) + '</span>' +
+          '<span class="hood-count">' + n + ' place' + (n === 1 ? '' : 's') + '</span>';
+        tile.addEventListener('click', () => {
+          activeHood = active ? null : h.id;
           applyFilters();
         });
-        introChipsEl.appendChild(btn);
+        wrap.appendChild(tile);
       });
-      updateIntroCta();
     }
 
     function updateIntroCta() {
       if (!introCta) return;
       const n = filteredCount();
-      introCta.textContent = activeGroups.size === 0
+      const untouched = activeGroups.size === 0 && !activeHood;
+      introCta.textContent = untouched
         ? 'Show all ' + n + ' places'
-        : 'Show ' + n + ' place' + (n === 1 ? '' : 's');
+        : 'Show ' + n + ' place' + (n === 1 ? '' : 's') +
+          (activeHood ? ' in ' + hoodLabel(activeHood) : '');
       introCta.disabled = n === 0;
     }
 
@@ -758,19 +911,27 @@
       const params = new URLSearchParams(window.location.search);
       if (activeGroups.size === 0) params.delete('c');
       else params.set('c', Array.from(activeGroups).join(',').toLowerCase());
+      if (activeHood) params.set('n', activeHood); else params.delete('n');
       const qs = params.toString();
       history.replaceState(null, '', window.location.pathname + (qs ? '?' + qs : ''));
     }
 
     function readUrlFilters() {
-      const raw = new URLSearchParams(window.location.search).get('c');
-      if (!raw) return false;
-      const valid = new Map(GROUP_ORDER.map((g) => [g.toLowerCase(), g]));
+      const params = new URLSearchParams(window.location.search);
       let hit = false;
-      raw.split(',').forEach((token) => {
-        const group = valid.get(token.trim().toLowerCase());
-        if (group && group !== 'All') { activeGroups.add(group); hit = true; }
-      });
+
+      const raw = params.get('c');
+      if (raw) {
+        const valid = new Map(GROUP_ORDER.map((g) => [g.toLowerCase(), g]));
+        raw.split(',').forEach((token) => {
+          const group = valid.get(token.trim().toLowerCase());
+          if (group && group !== 'All') { activeGroups.add(group); hit = true; }
+        });
+      }
+
+      const hood = (params.get('n') || '').trim().toLowerCase();
+      if (hood && HOODS.some((h) => h.id === hood)) { activeHood = hood; hit = true; }
+
       return hit;
     }
 
@@ -869,6 +1030,7 @@
           filtered.push(p);
         }
         ALL_DATA = filtered;
+        assignHoods(ALL_DATA);
 
         const fromUrl = readUrlFilters();
         applyFilters();

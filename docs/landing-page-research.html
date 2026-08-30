@@ -147,7 +147,8 @@
         <div class="why"><strong>Warum ausgewählt</strong>
           Das nächstliegende Produkt zu unserem: eine persönliche Karte, die man teilt. Entscheidend ist, wie Spots in benannte Sektionen gruppiert werden ("late night snacking spots") statt in generische Kategorien. Jede Sektion hat eine kurze Beschreibung. Genau das macht unsere <code>note</code>-Felder wertvoll.</div>
         <div class="take"><strong>Was wir übernehmen</strong>
-          Kuratierte Sammlungen als Einstiegspunkte statt reiner Kategorien. Beispiel: "Espresso ohne Laptop", "Sonntag Brunch", "Spät noch offen" statt nur "Coffee".</div>
+          Benannte Sammlungen als zweiter Einstieg neben den Kategorien. Umgesetzt als Quartiere (Ciutat Vella, Eixample, Gràcia, Sant Antoni und Poble-sec, Poblenou, Sants und uptown), weil das die einzige Sammlung ist, die die Daten wirklich hergeben.</div>
+        <p class="drop"><b>Datencheck:</b> Stimmungs-Sammlungen wie "Espresso ohne Laptop" oder "Spät noch offen" waren der ursprüngliche Vorschlag, sind aber nicht belegbar: 283 von 322 <code>note</code>-Feldern sind reine Adressen, die Keywords treffen 0 bis 2 Orte. Quartiere dagegen sind aus der Postleitzahl in der Adresse ableitbar (305 von 322), der Rest über den nächsten Quartiers-Schwerpunkt. Wenn die Notes später redaktionell werden, kommen die Stimmungs-Sammlungen oben drauf.</p>
         <p class="drop"><b>Nicht übernehmen:</b> Emoji-Pins und Editor-Chrome. Unsere Marker bleiben farbcodierte Punkte.</p>
       </div>
     </div>
@@ -323,6 +324,27 @@
       <tr><td>URL-Parameter und localStorage</td><td>ca. 25 Zeilen JS</td></tr>
       <tr><td>Fly-Over und Reduced-Motion</td><td>ca. 15 Zeilen JS, optional</td></tr>
     </table>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Status: umgesetzt</h2>
+    <p>Alles auf Branch <code>feature/landing-page</code>, komplett in <code>index.html</code>, kein Build-Schritt.</p>
+    <table>
+      <tr><th>Element</th><th>Referenz</th><th>Stand</th></tr>
+      <tr><td>Overlay über der laufenden Karte, gedimmt, langsamer Fly-Over</td><td>Flighty, Mindtrip</td><td>Fertig</td></tr>
+      <tr><td>Headline, eine Subline, ein CTA, Zähler-Zeile</td><td>Flighty, Tripadvisor, Mindtrip</td><td>Fertig</td></tr>
+      <tr><td>Craving-Chips im Flow-Wrap, Mehrfachauswahl, Kategorie-Farben</td><td>Alma</td><td>Fertig</td></tr>
+      <tr><td>Chips in Bändern: Coffee &amp; sweet, Food, Drinks</td><td>Deepstash</td><td>Fertig</td></tr>
+      <tr><td>Quartiers-Kacheln als horizontales Band mit Snap-Scroll</td><td>Cosmos, PamPam</td><td>Fertig</td></tr>
+      <tr><td>Gleichwertiger Bypass "Skip to the map", Esc schliesst</td><td>Kitchen Stories</td><td>Fertig</td></tr>
+      <tr><td>Sticky CTA auf Mobile, Bottom-Sheet ausgeblendet</td><td>Deepstash</td><td>Fertig</td></tr>
+    </table>
+
+    <h4>Wie die beiden Achsen zusammenspielen</h4>
+    <p>Chips und Quartier kombinieren sich statt sich zu überschreiben: Gràcia plus Sushi ergibt drei Orte. Beide Zählungen laufen kreuzweise mit, ein Chip ohne Treffer im gewählten Quartier verschwindet, ein leeres Band fällt weg. Damit gibt es keinen Klick, der auf eine leere Liste führt.</p>
+    <p>Das aktive Quartier bleibt auch nach dem Schliessen sichtbar: als anklickbare Zeile über den Sidebar-Filtern, die es wieder aufhebt. Der Zustand steht zusätzlich in der URL (<code>?n=gracia&amp;c=sushi</code>), so ein Link öffnet direkt gefiltert und überspringt die Startseite.</p>
   </div>
 </section>
 
