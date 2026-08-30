@@ -771,7 +771,7 @@
         row.innerHTML =
           '<div class="cat">' + catLabelHtml(p) + '</div>' +
           '<div class="name">' + escapeHtml(p.name) + '</div>' +
-          '<div class="note">' + escapeHtml(p.note) + '</div>' +
+          noteHtml(p, 'note') +
           '<div class="links">' + linksHtml(p, '') + '</div>';
         row.addEventListener('click', (e) => {
           if (e.target && e.target.tagName === 'A') return;
@@ -986,7 +986,7 @@
             (extra.length ? '<p class="lv-tags">also ' + extra.map((g) =>
               '<span style="color:' + groupColor(g) + '">' + escapeHtml(g) + '</span>').join(', ') + '</p>' : '') +
             '<p class="lv-name">' + escapeHtml(p.name) + '</p>' +
-            '<p class="lv-note">' + escapeHtml(p.note) + '</p>' +
+            noteHtml(p, 'lv-note') +
           '</div>' +
           '<div class="lv-meta">' +
             '<span class="lv-hood">' + escapeHtml(hoodLabel(p.hood)) + '</span>' +
@@ -1273,6 +1273,20 @@
       }[c]));
     }
     function escapeAttr(s) { return escapeHtml(s); }
+
+    // Most notes are the Google Maps address the data was scraped from, which
+    // the neighbourhood line and the maps link already cover. Only the
+    // hand-written ones say anything, so the rest is dropped from the lists.
+    function isAddressNote(note) {
+      const n = (note || '').trim();
+      if (n.length < 15) return true;                              // "Barcelona"
+      if (/\b08\d{3}\b/.test(n)) return true;                      // postcode
+      return /,\s*(barcelona|spain|espanya)\.?$/i.test(n);
+    }
+    function noteHtml(p, cls) {
+      return isAddressNote(p.note) ? '' :
+        '<p class="' + cls + '">' + escapeHtml(p.note) + '</p>';
+    }
 
     // "WINE · TAPAS" — primary in its colour, the rest muted, so a place that
     // belongs to two categories says so instead of picking one silently.
