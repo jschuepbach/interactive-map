@@ -20,6 +20,14 @@
     /* Category colors — used for markers, sidebar labels, popups, filters. */
     --c-coffee: #c68a4e;
     --c-brunch: #e8c15a;
+    --c-sushi: #3fb6c9;
+    --c-asian: #d6598f;
+    --c-tapas: #a8455c;
+    --c-vegan: #6cae5b;
+    --c-bakery: #e39bc0;
+    --c-pizza: #d97347;
+    --c-burger: #8a5a3c;
+    --c-bar: #8f7fd6;
     --c-restaurant: #ff7a59;
   }
 
@@ -214,9 +222,35 @@
     let currentPopup = null;
     let is3D = false;
     let activeGroup = 'All';
-    const GROUP_ORDER = ['All', 'Coffee', 'Brunch', 'Restaurant'];
-    const GROUP_COLORS = { Coffee: 'var(--c-coffee)', Brunch: 'var(--c-brunch)', Restaurant: 'var(--c-restaurant)' };
+    const GROUP_ORDER = ['All', 'Coffee', 'Brunch', 'Sushi', 'Asian', 'Tapas', 'Vegan', 'Bakery', 'Pizza', 'Burger', 'Bar', 'Restaurant'];
+    const GROUP_COLORS = {
+      Coffee: 'var(--c-coffee)', Brunch: 'var(--c-brunch)', Sushi: 'var(--c-sushi)',
+      Asian: 'var(--c-asian)', Tapas: 'var(--c-tapas)', Vegan: 'var(--c-vegan)',
+      Bakery: 'var(--c-bakery)', Pizza: 'var(--c-pizza)', Burger: 'var(--c-burger)',
+      Bar: 'var(--c-bar)', Restaurant: 'var(--c-restaurant)'
+    };
     function groupColor(group) { return GROUP_COLORS[group] || 'var(--accent)'; }
+
+    // ----- Sub-category detection (keyword match against name + note) -----
+    // Runs only on places already bucketed as "Restaurant" — Coffee/Brunch are
+    // already precise. First matching rule wins (exclusive, like the top-level groups).
+    const CATEGORY_RULES = [
+      { key: 'Sushi',  keywords: ['sushi', 'ramen', 'izakaya', 'yakitori', 'sashimi', 'nigiri', 'hotpot', 'tonkotsu', 'japon', 'japanese'] },
+      { key: 'Asian',  keywords: ['thai', 'vietnam', 'pho', 'korean', 'corea', 'coreà', 'bbq', 'wok', 'dumpling', 'bao', 'chinese', 'sichuan', 'tofu', 'indian', 'india'] },
+      { key: 'Tapas',  keywords: ['tapas', 'vins', 'wine', 'vermut', 'cava', 'bodega'] },
+      { key: 'Vegan',  keywords: ['vegan', 'vegetarian', 'bowl', 'healthy', 'salad', 'poke'] },
+      { key: 'Bakery', keywords: ['pastisseria', 'bakery', 'pastry', 'pie', 'cake', 'granja', 'gelato'] },
+      { key: 'Pizza',  keywords: ['pizza', 'pasta', 'italian', 'trattoria'] },
+      { key: 'Burger', keywords: ['burger'] },
+      { key: 'Bar',    keywords: ['cocktail', 'bar de', 'beer', 'cerveza', 'brewery', 'vermouth'] },
+    ];
+    function detectSubCategory(p) {
+      const haystack = ((p.name || '') + ' ' + (p.note || '')).toLowerCase();
+      for (const rule of CATEGORY_RULES) {
+        if (rule.keywords.some((kw) => haystack.includes(kw))) return rule.key;
+      }
+      return null;
+    }
 
     // ----- Theme: recolor every layer to dark monochrome + hide POI labels -----
     function applyTheme() {
@@ -521,6 +555,10 @@
             continue;
           }
           if (!p.group) p.group = p.category || 'Restaurant';
+          if (p.group === 'Restaurant') {
+            const sub = detectSubCategory(p);
+            if (sub) p.group = sub;
+          }
           filtered.push(p);
         }
         ALL_DATA = filtered;
