@@ -75,6 +75,7 @@
     cursor: pointer; transition: background 0.15s; border-left: 3px solid transparent; }
   .row:hover { background: var(--panel-2); }
   .row.active { background: var(--panel-2); border-left-color: var(--accent); }
+  .cat-sep { color: var(--border); }
   .row .cat { font-size: 10px; color: var(--marker-color, var(--accent)); text-transform: uppercase;
     letter-spacing: 0.08em; margin: 0 0 4px; font-weight: 600; }
   .row .name { font-size: 14px; font-weight: 600; margin: 0 0 4px; }
@@ -314,8 +315,8 @@
     <div class="intro-inner">
       <p class="intro-eyebrow">Barcelona</p>
       <h2 id="introTitle" tabindex="-1"><span id="introTotal">0</span> places I recommend to my friends.</h2>
-      <p class="intro-sub">Coffee, brunch and restaurants, picked by hand. No ratings, no crowd,
-        just the spots I send to friends when they land.</p>
+      <p class="intro-sub">Coffee, brunch and restaurants, picked by hand.
+        No ratings, no compromises.</p>
 
       <p class="intro-q">What are you in the mood for?</p>
       <div class="intro-chips" id="introChips"></div>
@@ -393,6 +394,7 @@
     // multiple — same set, so the two can never drift apart.
     const activeGroups = new Set();
     let activeHood = null;   // neighbourhood collection, combines with the group filter
+    const OVERRIDES = {};    // lowercased place name -> manual category list
     const GROUP_ORDER = ['All', 'Coffee', 'Brunch', 'Sushi', 'Asian', 'Tapas', 'Vegan', 'Bakery', 'Pizza', 'Burger', 'Bar', 'Wine', 'Restaurant'];
     const GROUP_COLORS = {
       Coffee: 'var(--c-coffee)', Brunch: 'var(--c-brunch)', Sushi: 'var(--c-sushi)',
@@ -471,12 +473,13 @@
       { key: 'Bar',    keywords: ['cocktail', 'coctel', 'beer', 'cerveza', 'cerveseria', 'brewery', 'vermouth', 'vermut', 'copas', 'bar de', 'bar del'] },
       { key: 'Tapas',  keywords: ['tapas', 'tapes', 'bodega', 'pintxos'] },
     ];
-    function detectSubCategory(p) {
+    // Every matching rule, in rule order — a wine bar that also does tapas is
+    // both. The first one is the primary: it colours the pin and labels the row.
+    function detectCategories(p) {
       const haystack = ((p.name || '') + ' ' + (p.note || '')).toLowerCase();
-      for (const rule of CATEGORY_RULES) {
-        if (rule.keywords.some((kw) => matchesWord(haystack, kw))) return rule.key;
-      }
-      return null;
+      return CATEGORY_RULES
+        .filter((rule) => rule.keywords.some((kw) => matchesWord(haystack, kw)))
+        .map((rule) => rule.key);
     }
 
     // Whole-word match (an optional plural "s" still counts). Substring matching
@@ -678,7 +681,7 @@
         row.className = 'row';
         row.dataset.idx = String(i);
         row.innerHTML =
-          '<div class="cat" style="--marker-color:' + groupColor(p.group) + '">' + escapeHtml(p.category) + '</div>' +
+          '<div class="cat">' + catLabelHtml(p) + '</div>' +
           '<div class="name">' + escapeHtml(p.name) + '</div>' +
           '<div class="note">' + escapeHtml(p.note) + '</div>' +
           '<div class="links">' + linksHtml(p, '') + '</div>';
@@ -710,7 +713,7 @@
       const p = DATA[i];
       if (currentPopup) currentPopup.remove();
       const html =
-        '<div class="popup-cat" style="--marker-color:' + groupColor(p.group) + '">' + escapeHtml(p.category) + '</div>' +
+        '<div class="popup-cat">' + catLabelHtml(p) + '</div>' +
         '<div class="popup-name">' + escapeHtml(p.name) + '</div>' +
         '<div class="popup-note">' + escapeHtml(p.note) + '</div>' +
         '<div class="links">' + linksHtml(p, 'popup-link') + '</div>';
@@ -743,12 +746,12 @@
     // picked, "Sushi (14)" becomes "Sushi (3)" — no chip that leads to nothing.
     function groupCount(group) {
       const pool = activeHood ? ALL_DATA.filter((p) => p.hood === activeHood) : ALL_DATA;
-      return group === 'All' ? pool.length : pool.filter((p) => p.group === group).length;
+      return group === 'All' ? pool.length : pool.filter((p) => hasGroup(p, group)).length;
     }
 
     function hoodCount(id) {
       return ALL_DATA.filter((p) => p.hood === id &&
-        (activeGroups.size === 0 || activeGroups.has(p.group))).length;
+        (activeGroups.size === 0 || Array.from(activeGroups).some((g) => hasGroup(p, g)))).length;
     }
 
     function renderFilters() {
@@ -796,9 +799,15 @@
       applyFilters();
     }
 
+    function hasGroup(p, group) {
+      return (p.groups || [p.group]).indexOf(group) > -1;
+    }
+
     function matchesFilter(p) {
       if (activeHood && p.hood !== activeHood) return false;
-      return activeGroups.size === 0 || activeGroups.has(p.group);
+      if (activeGroups.size === 0) return true;
+      for (const g of activeGroups) { if (hasGroup(p, g)) return true; }
+      return false;
     }
 
     function filteredCount() {
@@ -1027,6 +1036,14 @@
     }
     function escapeAttr(s) { return escapeHtml(s); }
 
+    // "WINE · TAPAS" — primary in its colour, the rest muted, so a place that
+    // belongs to two categories says so instead of picking one silently.
+    function catLabelHtml(p) {
+      const tags = p.groups && p.groups.length ? p.groups : [p.group];
+      return tags.map((g, i) => '<span style="color:' + (i === 0 ? groupColor(g) : 'var(--muted)') + '">' +
+        escapeHtml(g) + '</span>').join('<span class="cat-sep"> · </span>');
+    }
+
     // Every spot gets a maps link, whether or not it has a website.
     // Coordinates (not the name) are the query, so the pin always lands on the
     // exact place — names like "Hideout Burger" resolve to the wrong branch.
@@ -1054,17 +1071,38 @@
         if (!res.ok) throw new Error('HTTP ' + res.status);
         const raw = await res.json();
 
+        // Hand-set categories for places the keyword rules cannot know about:
+        // "el SET" is a wine and tapas place, but its name and note say neither.
+        try {
+          const ovr = await fetch('overrides.json', { cache: 'no-store' });
+          if (ovr.ok) {
+            const map = await ovr.json();
+            for (const key of Object.keys(map)) {
+              if (key.charAt(0) === '_' || !Array.isArray(map[key])) continue;
+              OVERRIDES[key.toLowerCase()] = map[key].filter((g) => GROUP_ORDER.indexOf(g) > 0);
+            }
+          }
+        } catch (e) {
+          console.warn('overrides.json not loaded:', e);
+        }
+
         const filtered = [];
         for (const p of raw) {
           if (!inBox(p)) {
             console.warn('[coord-guard] Skipping "' + (p.name || '?') + '" — outside region (' + p.lat + ', ' + p.lng + ')');
             continue;
           }
-          if (!p.group) p.group = p.category || 'Restaurant';
-          if (p.group === 'Restaurant') {
-            const sub = detectSubCategory(p);
-            if (sub) p.group = sub;
+          const base = p.group || p.category || 'Restaurant';
+          const manual = OVERRIDES[(p.name || '').toLowerCase()];
+          if (manual && manual.length) {
+            p.groups = manual.slice();
+          } else if (base === 'Restaurant') {
+            const found = detectCategories(p);
+            p.groups = found.length ? found : ['Restaurant'];
+          } else {
+            p.groups = [base];
           }
+          p.group = p.groups[0];   // primary — pin colour, row label
           filtered.push(p);
         }
         ALL_DATA = filtered;

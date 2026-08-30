@@ -33,28 +33,32 @@ RULES, HOODS = parse_rules(), parse_hoods()
 COLORS = dict(re.findall(r"--c-([a-z]+):\s*(#[0-9a-f]{6})", SRC))
 
 places = json.loads((ROOT / "data.json").read_text())
+ovr_raw = json.loads((ROOT / "overrides.json").read_text()) if (ROOT / "overrides.json").exists() else {}
+OVERRIDES = {k.lower(): v for k, v in ovr_raw.items()
+             if not k.startswith("_") and isinstance(v, list)}
 
 # --- mirror the app: group, then keyword sub-category for restaurants only ---
 rows = []
 for p in places:
     base = p.get("group") or p.get("category") or "Restaurant"
     hay = ((p.get("name") or "") + " " + (p.get("note") or "")).lower()
-    matches = [(k, kw) for k, kws in RULES for kw in kws if word(hay, kw)]
-    group, why = base, "group field"
-    if base == "Restaurant":
-        for k, kws in RULES:
-            hit = next((kw for kw in kws if word(hay, kw)), None)
-            if hit:
-                group, why = k, 'keyword "%s"' % hit
-                break
-    # a rule that lost only because another one came first
-    losers = sorted({k for k, _ in matches if k != group}) if base == "Restaurant" else []
+    manual = OVERRIDES.get((p.get("name") or "").lower())
+    if manual:
+        tags, why = list(manual), "overrides.json"
+    elif base == "Restaurant":
+        hits = [(k, next((kw for kw in kws if word(hay, kw)), None)) for k, kws in RULES]
+        hits = [(k, kw) for k, kw in hits if kw]
+        tags = [k for k, _ in hits] or ["Restaurant"]
+        why = ", ".join('%s: "%s"' % (k, kw) for k, kw in hits) if hits else "no keyword"
+    else:
+        tags, why = [base], "group field"
+    group = tags[0]
 
     m = re.search(r"\b(08\d{3})\b", p.get("note") or "")
     hood = next((label for _, label, codes in HOODS if m and m.group(1) in codes), None)
 
     rows.append({
-        "name": p.get("name", ""), "group": group, "why": why, "losers": losers,
+        "name": p.get("name", ""), "group": group, "tags": tags, "why": why,
         "cat": p.get("category", ""), "note": p.get("note", ""),
         "hood": hood or "(by proximity)", "url": p.get("url", ""),
         "lat": p.get("lat"), "lng": p.get("lng"),
@@ -64,9 +68,10 @@ ORDER = ["Coffee", "Brunch", "Sushi", "Asian", "Tapas", "Vegan", "Bakery",
          "Pizza", "Burger", "Bar", "Wine", "Restaurant"]
 rows.sort(key=lambda r: (ORDER.index(r["group"]) if r["group"] in ORDER else 99,
                          r["name"].lower()))
-counts = collections.Counter(r["group"] for r in rows)
-derived = [r for r in rows if r["why"] != "group field"]
-ambiguous = [r for r in rows if r["losers"]]
+counts = collections.Counter(t for r in rows for t in r["tags"])   # a place counts under each tag
+derived = [r for r in rows if ":" in r["why"]]                     # guessed by a keyword rule
+manual = [r for r in rows if r["why"] == "overrides.json"]
+ambiguous = [r for r in rows if len(r["tags"]) > 1]
 
 def color(g):
     return COLORS.get(g.lower(), "#ff7a59")
@@ -77,8 +82,9 @@ def esc(s):
 trs = []
 for r in rows:
     flag = ""
-    if r["losers"]:
-        flag += '<span class="flag" title="Other rules also matched">auch %s</span>' % esc(", ".join(r["losers"]))
+    if len(r["tags"]) > 1:
+        flag = "".join('<span class="flag" style="color:%s">%s</span>' % (color(t), esc(t))
+                       for t in r["tags"][1:])
     maps = "https://www.google.com/maps/search/?api=1&query=%s,%s" % (r["lat"], r["lng"])
     trs.append(
         '<tr data-cat="%s" data-text="%s">'
@@ -89,7 +95,7 @@ for r in rows:
         '<td class="note">%s</td>'
         '<td class="lnk"><a href="%s" target="_blank" rel="noopener">map</a>%s</td>'
         "</tr>" % (
-            esc(r["group"]), esc((r["name"] + " " + r["note"] + " " + r["group"]).lower()),
+            esc("|".join(r["tags"])), esc((r["name"] + " " + r["note"] + " " + " ".join(r["tags"])).lower()),
             color(r["group"]), esc(r["group"]), esc(r["name"]), flag, esc(r["why"]),
             esc(r["hood"]), esc(r["note"]), esc(maps),
             (' · <a href="%s" target="_blank" rel="noopener">site</a>' % esc(r["url"])) if r["url"] else "",
@@ -140,11 +146,13 @@ tr:hover td{background:var(--panel)}
 <h1>Alle Orte mit Kategorie</h1>
 <p class="lede">__TOTAL__ Orte. Kategorie ist die, die die App anzeigt. Spalte "Quelle" sagt, woher sie kommt:
 "group field" steht so in <code>data.json</code>, ein Keyword bedeutet, die Regel in <code>index.html</code> hat
-sie aus Name und Note geraten. __DERIVED__ Orte sind geraten. __FLAGGED__ davon sind markiert: "auch X" heisst, eine zweite Regel hätte ebenfalls gepasst,
-die erste in der Reihenfolge gewinnt. Gematcht wird auf ganze Wörter, ein Plural-s zählt mit.</p>
+sie aus Name und Note geraten, "overrides.json" heisst von Hand gesetzt. __DERIVED__ Orte sind geraten,
+__MANUAL__ von Hand gesetzt. __FLAGGED__ Orte haben mehr als eine Kategorie, die zusätzlichen stehen als Chip hinter dem Namen.
+Die erste Kategorie färbt den Pin. Gematcht wird auf ganze Wörter, ein Plural-s zählt mit;
+Einträge aus <code>overrides.json</code> schlagen die Regeln.</p>
 <div class="bar">
   <div class="chips"><button class="chip on" data-f="">Alle (__TOTAL__)</button>__CHIPS__
-    <button class="chip" data-f="__flag__">Nur markierte (__FLAGGED__)</button></div>
+    <button class="chip" data-f="__flag__">Mehrere Kategorien (__FLAGGED__)</button></div>
   <input id="q" type="search" placeholder="Suchen nach Name, Note, Kategorie">
   <p class="meta" id="meta"></p>
 </div>
@@ -167,9 +175,9 @@ apply();
 
 page = (page.replace("__ROWS__", "\n".join(trs)).replace("__CHIPS__", chips)
             .replace("__TOTAL__", str(len(rows))).replace("__DERIVED__", str(len(derived)))
-            .replace("__FLAGGED__", str(len(ambiguous))))
+            .replace("__FLAGGED__", str(len(ambiguous))).replace("__MANUAL__", str(len(manual))))
 out = ROOT / "docs" / "places-review.html"
 out.write_text(page)
 print("wrote", out, "|", len(rows), "places,", len(derived), "derived,",
-      len(ambiguous), "ambiguous")
+      len(ambiguous), "multi-tag,", len(manual), "manual")
 print(dict(counts))
