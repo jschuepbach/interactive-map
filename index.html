@@ -78,6 +78,7 @@
     letter-spacing: 0.08em; margin: 0 0 4px; font-weight: 600; }
   .row .name { font-size: 14px; font-weight: 600; margin: 0 0 4px; }
   .row .note { font-size: 12px; color: var(--muted); margin: 0 0 6px; line-height: 1.45; }
+  .links { display: flex; gap: 14px; flex-wrap: wrap; }
   .row a { color: var(--accent); font-size: 11px; text-decoration: none; font-weight: 600; }
   .row a:hover { text-decoration: underline; }
 
@@ -663,7 +664,7 @@
           '<div class="cat" style="--marker-color:' + groupColor(p.group) + '">' + escapeHtml(p.category) + '</div>' +
           '<div class="name">' + escapeHtml(p.name) + '</div>' +
           '<div class="note">' + escapeHtml(p.note) + '</div>' +
-          (p.url ? '<a href="' + escapeAttr(p.url) + '" target="_blank" rel="noopener">Visit →</a>' : '');
+          '<div class="links">' + linksHtml(p, '') + '</div>';
         row.addEventListener('click', (e) => {
           if (e.target && e.target.tagName === 'A') return;
           focusPoint(i);
@@ -695,7 +696,7 @@
         '<div class="popup-cat" style="--marker-color:' + groupColor(p.group) + '">' + escapeHtml(p.category) + '</div>' +
         '<div class="popup-name">' + escapeHtml(p.name) + '</div>' +
         '<div class="popup-note">' + escapeHtml(p.note) + '</div>' +
-        (p.url ? '<a class="popup-link" href="' + escapeAttr(p.url) + '" target="_blank" rel="noopener">Visit →</a>' : '');
+        '<div class="links">' + linksHtml(p, 'popup-link') + '</div>';
       currentPopup = new maplibregl.Popup({ offset: 20, closeButton: false, maxWidth: '260px' })
         .setLngLat([p.lng, p.lat])
         .setHTML(html)
@@ -1008,6 +1009,26 @@
       }[c]));
     }
     function escapeAttr(s) { return escapeHtml(s); }
+
+    // Every spot gets a maps link, whether or not it has a website.
+    // Coordinates (not the name) are the query, so the pin always lands on the
+    // exact place — names like "Hideout Burger" resolve to the wrong branch.
+    // iOS only — on every other platform (Mac included) Google Maps is the
+    // safer bet for a link that gets shared around.
+    const IS_APPLE = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    function mapsUrl(p) {
+      const ll = p.lat + ',' + p.lng;
+      return IS_APPLE
+        ? 'https://maps.apple.com/?ll=' + ll + '&q=' + encodeURIComponent(p.name)
+        : 'https://www.google.com/maps/search/?api=1&query=' + ll;
+    }
+    const MAPS_LABEL = IS_APPLE ? 'Maps →' : 'Google Maps →';
+
+    function linksHtml(p, cls) {
+      const c = cls ? ' class="' + cls + '"' : '';
+      return (p.url ? '<a' + c + ' href="' + escapeAttr(p.url) + '" target="_blank" rel="noopener">Visit →</a>' : '') +
+        '<a' + c + ' href="' + escapeAttr(mapsUrl(p)) + '" target="_blank" rel="noopener">' + MAPS_LABEL + '</a>';
+    }
 
     // ----- Boot -----
     async function boot() {
