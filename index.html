@@ -257,8 +257,13 @@
     text-underline-offset: 3px; }
   .lv-body { flex: 1; overflow-y: auto; padding: 0 24px 60px;
     padding-bottom: max(60px, env(safe-area-inset-bottom)); }
+  /* One centred column — 322 entries across a wide screen read badly, and the
+     links would end up an arm's length from the name they belong to. */
+  .lv-top, #lvSearch, .lv-active, .lv-body > * {
+    display: block; max-width: 900px; margin-left: auto; margin-right: auto; }
+  .lv-top { display: flex; }
   .lv-group { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--muted); margin: 26px 0 4px; padding-top: 10px;
+    color: var(--muted); margin: 26px auto 4px; padding-top: 10px;
     border-top: 1px solid var(--border); }
   .lv-item { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px 18px;
     align-items: baseline; padding: 12px 0; border-bottom: 1px solid var(--border); cursor: pointer; }
@@ -1307,10 +1312,13 @@
       }
     }
 
-    map.on('load', () => {
-      applyTheme();
-      boot();
-    });
+    // Data first, map second. The list, the sidebar and the filters only need
+    // data.json, so they must not wait for tiles: a slow style request or a
+    // browser that hands out no WebGL context used to leave the spinner turning
+    // forever. Markers can be attached to the map before its style is ready.
+    map.on('load', applyTheme);
+    map.on('error', (e) => console.warn('map error:', e && e.error ? e.error.message : e));
+    boot();
 
     // Close popup + clear active when clicking empty map (also collapses the
     // mobile sheet — marker click handlers stop propagation, so a real map
