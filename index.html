@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 <title>Specialty Coffee · Barcelona</title>
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" />
 <style>
@@ -36,12 +36,13 @@
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif;
     -webkit-font-smoothing: antialiased; }
 
-  #app { display: grid; grid-template-columns: 340px 1fr; height: 100vh; }
+  #app { display: grid; grid-template-columns: 340px 1fr; height: 100vh; height: 100dvh; }
 
   /* ---------- Sidebar ---------- */
   #sidebar { background: var(--panel); border-right: 1px solid var(--border);
     display: flex; flex-direction: column; min-height: 0; }
-  .side-header { padding: 18px 18px 14px; border-bottom: 1px solid var(--border); }
+  .sheet-handle { display: none; }
+  .side-header { padding: 18px 18px 14px; border-bottom: 1px solid var(--border); cursor: default; }
   .side-header h1 { font-size: 15px; margin: 0 0 4px; letter-spacing: -0.01em; font-weight: 600; }
   .side-header .sub { color: var(--muted); font-size: 12px; line-height: 1.5; }
   .count { display: inline-block; padding: 2px 8px; border-radius: 999px;
@@ -162,6 +163,50 @@
   .maplibregl-ctrl-group button span { filter: invert(1) brightness(0.85); }
   .maplibregl-ctrl-attrib { background: rgba(10,12,16,0.7) !important; color: var(--muted) !important; }
   .maplibregl-ctrl-attrib a { color: var(--muted) !important; }
+
+  /* ---------- Coarse pointer (touch): bigger targets, no reliance on hover ---------- */
+  @media (pointer: coarse) {
+    .marker-inner { width: 26px; height: 26px; margin-left: -13px; margin-top: -13px; }
+    .filter-btn { padding: 8px 14px; }
+    .btn { padding: 10px 16px; min-height: 44px; }
+    .row { padding: 14px 18px 16px; }
+  }
+
+  /* ---------- Mobile: map fills the screen, sidebar becomes a bottom sheet ---------- */
+  @media (max-width: 767px) {
+    #app { display: block; position: relative; height: 100vh; height: 100dvh; overflow: hidden; }
+    #map-wrap { position: absolute; inset: 0; }
+
+    #sidebar {
+      position: fixed; left: 0; right: 0; bottom: 0; z-index: 10;
+      height: 78vh; height: 78dvh; max-height: 78dvh;
+      border-right: none; border-radius: 16px 16px 0 0;
+      box-shadow: 0 -12px 32px rgba(0,0,0,0.5);
+      padding-bottom: env(safe-area-inset-bottom);
+      transform: translateY(calc(100% - var(--peek, 104px)));
+      transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: transform;
+    }
+    #sidebar.open { transform: translateY(0); }
+
+    .sheet-handle {
+      display: flex; align-items: center; justify-content: center;
+      padding: 10px 0 4px; cursor: pointer; touch-action: none;
+    }
+    .sheet-handle::before {
+      content: ''; width: 36px; height: 4px; border-radius: 999px;
+      background: var(--border);
+    }
+
+    .side-header { cursor: pointer; }
+
+    .controls { top: max(12px, env(safe-area-inset-top)); }
+
+    /* Our own footer duplicates the compact MapLibre attribution control
+       (top-right) which stays visible regardless of breakpoint — hide the
+       bar to reclaim space for the bottom sheet peek. */
+    footer { display: none; }
+  }
 </style>
 </head>
 <body>
@@ -169,7 +214,8 @@
 
   <div id="app">
     <aside id="sidebar">
-      <div class="side-header">
+      <div class="sheet-handle" id="sheetHandle" aria-hidden="true"></div>
+      <div class="side-header" id="sideHeader">
         <h1>Barcelona <span class="count" id="count">0 items</span></h1>
         <div class="sub">A hand-picked map of independent spots — coffee, brunch &amp; restaurants.</div>
       </div>
@@ -365,6 +411,37 @@
 
     document.getElementById('toggle3d').addEventListener('click', toggle3D);
 
+    // ----- Mobile bottom sheet -----
+    // On narrow screens the sidebar becomes a fixed bottom sheet (see CSS).
+    // It has two states: "peek" (header + filters visible, list hidden below
+    // the fold) and "open" (full list visible). We measure the peek content's
+    // real height so header/filter wrapping never gets clipped.
+    const isMobile = () => window.matchMedia('(max-width: 767px)').matches;
+    const sidebarEl = document.getElementById('sidebar');
+    const sheetHandle = document.getElementById('sheetHandle');
+    const sideHeader = document.getElementById('sideHeader');
+
+    function measurePeek() {
+      if (!isMobile()) return;
+      const filtersEl = document.getElementById('filters');
+      const h = sheetHandle.offsetHeight + sideHeader.offsetHeight + filtersEl.offsetHeight;
+      sidebarEl.style.setProperty('--peek', h + 'px');
+    }
+
+    function setSheetOpen(open) {
+      sidebarEl.classList.toggle('open', open);
+    }
+
+    function toggleSheet() {
+      if (!isMobile()) return;
+      setSheetOpen(!sidebarEl.classList.contains('open'));
+    }
+
+    sheetHandle.addEventListener('click', toggleSheet);
+    sideHeader.addEventListener('click', toggleSheet);
+
+    window.addEventListener('resize', measurePeek);
+
     // ----- Coordinate guard -----
     function inBox(p) {
       return typeof p.lat === 'number' && typeof p.lng === 'number'
@@ -457,6 +534,8 @@
         duration: 900
       });
       openPopup(i);
+      // On mobile, collapse the sheet to peek so the pin + popup are visible.
+      if (isMobile()) setSheetOpen(false);
     }
 
     // ----- Filters -----
@@ -494,6 +573,7 @@
       renderSidebar();
       clearMarkers();
       addMarkers();
+      measurePeek();
     }
 
     // ----- Markers -----
@@ -579,11 +659,13 @@
       boot();
     });
 
-    // Close popup + clear active when clicking empty map
+    // Close popup + clear active when clicking empty map (also collapses the
+    // mobile sheet — marker click handlers stop propagation, so a real map
+    // click here means the user tapped empty space).
     map.on('click', (e) => {
-      // Marker click handlers stop propagation, so a real map click means empty space
       if (currentPopup) currentPopup.remove();
       setActive(-1);
+      if (isMobile()) setSheetOpen(false);
     });
   })();
   </script>
