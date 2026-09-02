@@ -2887,5 +2887,23 @@
     "group": "Coffee",
     "note": "Amauta Coffee Bar, Travessera de Gràcia, 90, 08006, Barcelona",
     "url": ""
+  },
+  {
+    "name": "Akiro Hand Roll Bar",
+    "lat": 41.392146,
+    "lng": 2.1599514,
+    "category": "Sushi",
+    "group": "Sushi",
+    "note": "Akiro Hand Roll Bar, Carrer de Mallorca, 237, 08008, Barcelona",
+    "url": ""
+  },
+  {
+    "name": "Mercader Eixample",
+    "lat": 41.3923305,
+    "lng": 2.160347,
+    "category": "Restaurant",
+    "group": "Restaurant",
+    "note": "Mercader Eixample, Passatge de Mercader, 08008, Barcelona",
+    "url": ""
   }
 ]

@@ -1286,3 +1286,11 @@ One of the few spots where working for an hour or two is no problem. Specialty c
 ## Amauta Coffee Bar
 <!-- Coffee | Amauta Coffee Bar, Travessera de Gràcia, 90, 08006, Barcelona -->
 
+
+## Akiro Hand Roll Bar
+<!-- Sushi | Akiro Hand Roll Bar, Carrer de Mallorca, 237, 08008, Barcelona -->
+
+
+## Mercader Eixample
+<!-- Restaurant | Mercader Eixample, Passatge de Mercader, 08008, Barcelona -->
+
