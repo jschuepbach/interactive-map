@@ -660,7 +660,7 @@ They talked me into an iced matcha with coconut milk, and it has ruined every ot
 
 
 ## CASA BRUTA
-<!-- Restaurant | Casa Vicens, Carrer de les Carolines, 08006, Barcelona -->
+<!-- Restaurant | CASA BRUTA, Carrer de les Carolines, 24, 08012, Barcelona -->
 
 
 ## BAR PINO
