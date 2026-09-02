@@ -1315,11 +1315,11 @@
   },
   {
     "name": "Garage Bar",
-    "lat": 41.387102,
-    "lng": 2.133948,
+    "lat": 41.387002,
+    "lng": 2.160096,
     "category": "Restaurant",
     "group": "Restaurant",
-    "note": "Garage Bar, Carrer de Joan Gamper, 13, 08028, Barcelona",
+    "note": "Garage Bar, Carrer del Consell de Cent, 261, 08011, Barcelona",
     "url": ""
   },
   {
@@ -2431,11 +2431,11 @@
   },
   {
     "name": "Bar Electricitat",
-    "lat": 41.396236,
-    "lng": 2.143101,
+    "lat": 41.379349,
+    "lng": 2.190017,
     "category": "Restaurant",
     "group": "Restaurant",
-    "note": "Bar Electricitat, Carrer d'Amigó, 57, 08021, Barcelona",
+    "note": "Bar Electricitat, Carrer de Sant Carles, 15, 08003, Barcelona",
     "url": ""
   },
   {
