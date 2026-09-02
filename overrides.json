@@ -1,5 +1,9 @@
 {
   "_comment": "Manuelle Kategorien. Schlaegt die Keyword-Regeln in index.html. Key ist der Name aus data.json (Gross-/Kleinschreibung egal), Wert ist eine Liste von Kategorien. Erste Kategorie faerbt den Pin. Gueltig: Coffee, Brunch, Sushi, Asian, Tapas, Vegan, Bakery, Pizza, Burger, Bar, Wine, Restaurant.",
+  "Bocanariz": [
+    "Wine",
+    "Tapas"
+  ],
   "el SET": [
     "Wine",
     "Tapas"

@@ -179,10 +179,6 @@ A friendly little place with tables out on the terrace. Come for the beers and t
 <!-- Brunch | The Egg Lab, Carrer del Bruc, 33, 08010, Barcelona -->
 
 
-## Trópico
-<!-- Restaurant | TRÓPICO Brunch Barcelona | Balmes, Carrer de Balmes, 24, 08007, Barcel -->
-
-
 ## Asian Ways
 <!-- Restaurant | Asian Ways, Avinguda del Paral·lel, 08004, Barcelona -->
 
@@ -196,8 +192,8 @@ The terrace looks out over the old Olympic pool and the city rooftops. Go for th
 
 
 ## Vibliteca bar de vins i formatges
-<!-- Restaurant | Sui Géneris Vins i Formatges, Carrer del Baró de Maldà, 33, 08901, l'H -->
-
+<!-- Wine | Viblioteca, Carrer de les Guilleries, 10, 08012, Barcelona -->
+Wine and cheese without the wood-panelled solemnity. Modern room, sharp list, easy to spend an evening in.
 
 ## Apurado coffee
 <!-- Coffee | Apurado Café, Carrer de Roger de Flor, 253, 08025, Barcelona -->
@@ -428,7 +424,7 @@ They talked me into an iced matcha with coconut milk, and it has ruined every ot
 
 
 ## Itnig Café
-<!-- Coffee | Itnig, Carrer de Pujades, 08005, Barcelona -->
+<!-- Coffee | Itnig Café, Carrer de Pujades, 100, 08005, Barcelona -->
 
 
 ## Orient Express Cocktail Bar
@@ -472,7 +468,7 @@ They talked me into an iced matcha with coconut milk, and it has ruined every ot
 
 
 ## Noor Coffee
-<!-- Coffee | Noor Coffee, Carrer del Consell de Cent, 08011, Barcelona -->
+<!-- Coffee | Noor Coffee, Carrer del Consell de Cent, 187, 08011, Barcelona -->
 
 
 ## El Noa Noa
@@ -636,7 +632,7 @@ They talked me into an iced matcha with coconut milk, and it has ruined every ot
 
 
 ## Margarit restaurante
-<!-- Restaurant | Carrer de Margarit, 08004, Barcelona -->
+<!-- Restaurant | Margarit restaurante, Carrer de Margarit, 58, 08004, Barcelona -->
 
 
 ## La Greca
@@ -1000,7 +996,7 @@ Cakes built to look like fruit, oranges and all. Worth a detour for the pastry c
 
 
 ## Marta's Lemon Pie
-<!-- Restaurant | Marta's Lemon Pie, Avinguda Diagonal, 08021, Barcelona -->
+<!-- Restaurant | Marta's Lemon Pie, Avinguda Diagonal, 545-577, 08021, Barcelona -->
 
 
 ## Pinga Boteco
@@ -1289,4 +1285,9 @@ The best sushi in the city for my money. Hand rolls made right in front of you, 
 
 ## Mercader Eixample
 <!-- Restaurant | Mercader Eixample, Passatge de Mercader, 08008, Barcelona -->
+
+
+## Bocanariz
+<!-- Wine | Bocanariz, Carrer de Vallfogona, 12, 08012, Barcelona -->
+Small, stylish and loud, with vinyl on and a wine list worth working through. The tapas and the cheese hold up their end.
 
