@@ -588,7 +588,7 @@ They talked me into an iced matcha with coconut milk, and it has ruined every ot
 
 
 ## Garage Bar
-<!-- Restaurant | Garage, Carrer de Joan Gamper, 08028, Barcelona -->
+<!-- Restaurant | Garage Bar, Carrer del Consell de Cent, 261, 08011, Barcelona -->
 
 
 ## Origo
@@ -1084,7 +1084,7 @@ Cakes built to look like fruit, oranges and all. Worth a detour for the pastry c
 
 
 ## Bar Electricitat
-<!-- Restaurant | Electricitat F. Valls, Carrer d'Amigó, 57, 08021, Barcelona -->
+<!-- Restaurant | Bar Electricitat, Carrer de Sant Carles, 15, 08003, Barcelona -->
 
 
 ## Anís Cafe
