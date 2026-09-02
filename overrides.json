@@ -1,5 +1,9 @@
 {
   "_comment": "Manuelle Kategorien. Schlaegt die Keyword-Regeln in index.html. Key ist der Name aus data.json (Gross-/Kleinschreibung egal), Wert ist eine Liste von Kategorien. Erste Kategorie faerbt den Pin. Gueltig: Coffee, Brunch, Sushi, Asian, Tapas, Vegan, Bakery, Pizza, Burger, Bar, Wine, Restaurant.",
+  "el SET": [
+    "Wine",
+    "Tapas"
+  ],
   "Hotpot de Sichuan": [
     "Asian"
   ],
@@ -13,11 +17,10 @@
   "Masa Vins Barcelona": [
     "Wine"
   ],
-  "Vibliteca bar de vins i formatges": [
-    "Wine",
-    "Tapas"
+  "Morreig": [
+    "Bakery"
   ],
-  "el SET": [
+  "Vibliteca bar de vins i formatges": [
     "Wine",
     "Tapas"
   ]
