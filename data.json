@@ -396,15 +396,6 @@
     "url": ""
   },
   {
-    "name": "Trópico",
-    "lat": 41.387808,
-    "lng": 2.164885,
-    "category": "Restaurant",
-    "group": "Restaurant",
-    "note": "TRÓPICO Brunch Barcelona | Balmes, Carrer de Balmes, 24, 08007, Barcelona",
-    "url": ""
-  },
-  {
     "name": "Asian Ways",
     "lat": 41.375221,
     "lng": 2.166395,
@@ -433,11 +424,11 @@
   },
   {
     "name": "Vibliteca bar de vins i formatges",
-    "lat": 41.361215,
-    "lng": 2.099914,
+    "lat": 41.403273,
+    "lng": 2.1567918,
     "category": "Restaurant",
     "group": "Restaurant",
-    "note": "Sui Géneris Vins i Formatges, Carrer del Baró de Maldà, 33, 08901, l'Hospitalet de Llobregat",
+    "note": "Viblioteca, Carrer de les Guilleries, 10, 08012, Barcelona",
     "url": ""
   },
   {
@@ -959,7 +950,7 @@
     "lng": 2.193875,
     "category": "Coffee",
     "group": "Coffee",
-    "note": "Itnig, Carrer de Pujades, 08005, Barcelona",
+    "note": "Itnig Café, Carrer de Pujades, 100, 08005, Barcelona",
     "url": ""
   },
   {
@@ -1058,7 +1049,7 @@
     "lng": 2.15575,
     "category": "Coffee",
     "group": "Coffee",
-    "note": "Noor Coffee, Carrer del Consell de Cent, 08011, Barcelona",
+    "note": "Noor Coffee, Carrer del Consell de Cent, 187, 08011, Barcelona",
     "url": ""
   },
   {
@@ -1427,7 +1418,7 @@
     "lng": 2.163261,
     "category": "Restaurant",
     "group": "Restaurant",
-    "note": "Carrer de Margarit, 08004, Barcelona",
+    "note": "Margarit restaurante, Carrer de Margarit, 58, 08004, Barcelona",
     "url": ""
   },
   {
@@ -2246,7 +2237,7 @@
     "lng": 2.135346,
     "category": "Restaurant",
     "group": "Restaurant",
-    "note": "Marta's Lemon Pie, Avinguda Diagonal, 08021, Barcelona",
+    "note": "Marta's Lemon Pie, Avinguda Diagonal, 545-577, 08021, Barcelona",
     "url": ""
   },
   {
@@ -2895,6 +2886,15 @@
     "category": "Restaurant",
     "group": "Restaurant",
     "note": "Mercader Eixample, Passatge de Mercader, 08008, Barcelona",
+    "url": ""
+  },
+  {
+    "name": "Bocanariz",
+    "lat": 41.4028885,
+    "lng": 2.1572473,
+    "category": "Wine",
+    "group": "Wine",
+    "note": "Bocanariz, Carrer de Vallfogona, 12, 08012, Barcelona",
     "url": ""
   }
 ]
