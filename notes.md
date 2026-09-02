@@ -49,7 +49,7 @@ Poblenou hybrid: monstera-lined café with a tight specialty menu. Filter-only o
 
 ## Trópico Brunch Barcelona
 <!-- Brunch | TRÓPICO Brunch Barcelona | Balmes, Carrer de Balmes, 24, 08007, Barcel -->
-
+South American brunch done properly. I go for the cachaça with cheese every time, my dad swears by the tacos.
 
 ## Red Ant Noodle Bar
 <!-- Restaurant | Red Ant Noodle Bar, Carrer dels Tiradors, 08003, Barcelona -->
@@ -97,7 +97,7 @@ Poblenou hybrid: monstera-lined café with a tight specialty menu. Filter-only o
 
 ## el SET
 <!-- Restaurant | el Set, Carrer de l'Esparteria, 08003, Barcelona -->
-
+Half butcher and cheese counter, half restaurant, with the warmth of a cabin in the Pyrenees. The tapas are the reason to stay.
 
 ## LULU & FLYN
 <!-- Restaurant | Lulu & Flyn, Carrer del Rec, 08003, Barcelona -->
@@ -121,7 +121,7 @@ Poblenou hybrid: monstera-lined café with a tight specialty menu. Filter-only o
 
 ## Pueblo Libre
 <!-- Restaurant | Pueblo Libre - Taberna Peruana, Carrer de Sepúlveda, 151, 08011, Barce -->
-
+A Peruvian friend sent us here and we worked our way through half the menu, with Peruvian beer and a pisco sour to finish. The cooking is the real thing.
 
 ## Espai Quera Llibres i platillos
 <!-- Restaurant | Espai Quera. Llibres i platillos, Carrer de Petritxol, 2, 08002, Barce -->
@@ -141,7 +141,7 @@ Poblenou hybrid: monstera-lined café with a tight specialty menu. Filter-only o
 
 ## Carlos and Matilda
 <!-- Restaurant | Carlos and Mathilda, Baixada de Viladecols, 6, 08002, Barcelona -->
-
+A friendly little place with tables out on the terrace. Come for the beers and the tacos.
 
 ## paradero specialty coffee & brunch
 <!-- Brunch | La Eulàlia - Brunch & Specialty Coffee, Carrer de València, 437, 08013 -->
@@ -179,10 +179,6 @@ Poblenou hybrid: monstera-lined café with a tight specialty menu. Filter-only o
 <!-- Brunch | The Egg Lab, Carrer del Bruc, 33, 08010, Barcelona -->
 
 
-## CahootCoworking Barcelona
-<!-- Restaurant | Barcelona -->
-
-
 ## Trópico
 <!-- Restaurant | TRÓPICO Brunch Barcelona | Balmes, Carrer de Balmes, 24, 08007, Barcel -->
 
@@ -193,7 +189,7 @@ Poblenou hybrid: monstera-lined café with a tight specialty menu. Filter-only o
 
 ## Salts - Terrassa Bar Montjuïc
 <!-- Restaurant | Salts, Avinguda Miramar, 31, 08038, Barcelona -->
-
+The terrace looks out over the old Olympic pool and the city rooftops. Go for the view, stay for a drink.
 
 ## Vietnam autèntic restaurant
 <!-- Restaurant | L'AUTÈNTIC Restaurant Libanès, Rambla del Poblenou, 92, 08005, Barcelo -->
@@ -225,7 +221,7 @@ Japanese cakes worth going out of your way for, precise and not too sweet. The l
 
 ## Balzac Café
 <!-- Coffee | Balzac, Passeig de Sant Joan, 127, 08037, Barcelona -->
-
+The interior alone is worth the visit, and nobody minds if you work for a while. Order a slice of their homemade cake, then another one.
 
 ## Restaurant Mi Rincón Barcelona
 <!-- Restaurant | Restaurant Mi Rincón, Avinguda Diagonal, 303, 08013, Barcelona -->
@@ -281,7 +277,7 @@ Japanese cakes worth going out of your way for, precise and not too sweet. The l
 
 ## Brabo
 <!-- Restaurant | Miquel Brasó i Vaqués, Carrer de Verdi, 08012, Barcelona -->
-
+A good date spot if you both like things off the grill. The tapas are anything but predictable.
 
 ## Yoi Yoi Gion
 <!-- Restaurant | Yoi Yoi Gion, Avinguda Diagonal, 383, 08008, Barcelona -->
@@ -361,7 +357,7 @@ Order the milk tea, it comes with melting beans and a dusting of cinnamon and is
 
 ## Robata
 <!-- Restaurant | Robata Sushi & Grill, Carrer d'Enric Granados, 55, 08008, Barcelona -->
-
+Sushi that keeps you curious, in a room that is a pleasure to sit in.
 
 ## Compartir Barcelona
 <!-- Restaurant | Compartir, Carrer de València, 225, 08007, Barcelona -->
@@ -689,7 +685,7 @@ They talked me into an iced matcha with coconut milk, and it has ruined every ot
 
 ## Berbena
 <!-- Restaurant | Berbena, Carrer de Minerva, 6, 08008, Barcelona -->
-
+Not been in yet. I have walked past it too many times to keep ignoring it.
 
 ## Thailandes Restaurant
 <!-- Restaurant | Thailandès Restaurant, Avinguda Diagonal, 379, 08008, Barcelona -->
@@ -945,7 +941,7 @@ Every sushi plate arrives beautifully composed. It reads less like dinner and mo
 
 ## Morreig
 <!-- Restaurant | Morreig, Carrer de Verdi, 25, 08012, Barcelona -->
-
+Cakes built to look like fruit, oranges and all. Worth a detour for the pastry counter alone.
 
 ## CASA FIGARI Bar de Jazz
 <!-- Restaurant | Casa Figari, Carrer del Torrent de l'Olla, 141, 08012, Barcelona -->
@@ -1169,7 +1165,7 @@ One of the few spots where working for an hour or two is no problem. Specialty c
 
 ## Jaç Hi-fi Cafe
 <!-- Coffee | Avinguda Diagonal, 335, 08037 Barcelona, Spain -->
-
+Vinyl on the turntable and a room tuned like the inside of a Bang & Olufsen speaker.
 
 ## The Rooftop at Sir Victor
 <!-- Restaurant | Carrer del Rosselló, 265, 08008 Barcelona, Spain -->
@@ -1177,11 +1173,11 @@ One of the few spots where working for an hour or two is no problem. Specialty c
 
 ## Cresta Colorada Rosticeria Mexicana
 <!-- Restaurant | Carrer de Còrsega, 244, 08036 Barcelona, Spain -->
-
+My favourite Mexican in the city. Order tacos, then order more tacos.
 
 ## LABALABUSTA
 <!-- Restaurant | Carrer del Rosselló, 180, 08008 Barcelona, Spain -->
-
+Israeli cooking you keep picking at long after you are full. We always end up ordering another round of the bread.
 
 ## Yakumanka amb Gastón Acurio
 <!-- Restaurant | Carrer de València, 207, 08007 Barcelona, Spain -->
@@ -1285,11 +1281,11 @@ One of the few spots where working for an hour or two is no problem. Specialty c
 
 ## Amauta Coffee Bar
 <!-- Coffee | Amauta Coffee Bar, Travessera de Gràcia, 90, 08006, Barcelona -->
-
+Come for the coffee itself and the pastries, and leave the work outside the door.
 
 ## Akiro Hand Roll Bar
 <!-- Sushi | Akiro Hand Roll Bar, Carrer de Mallorca, 237, 08008, Barcelona -->
-
+The best sushi in the city for my money. Hand rolls made right in front of you, with a bit of conversation across the counter.
 
 ## Mercader Eixample
 <!-- Restaurant | Mercader Eixample, Passatge de Mercader, 08008, Barcelona -->
