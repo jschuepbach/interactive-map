@@ -587,20 +587,21 @@
     }
 
     // ----- Theme: recolor every layer to dark monochrome + hide POI labels -----
+    const C = {
+      bg:        '#0a0c10',
+      land:      '#11141a',
+      landAlt:   '#0d1015',
+      water:     '#06080d',
+      building:  '#161a22',
+      road:      '#1d2330',
+      roadMajor: '#2a3140',
+      rail:      '#171c26',
+      text:      '#7a8395',
+      textHalo:  '#0a0c10'
+    };
+
     function applyTheme() {
       const layers = (map.getStyle().layers || []);
-      const C = {
-        bg:        '#0a0c10',
-        land:      '#11141a',
-        landAlt:   '#0d1015',
-        water:     '#06080d',
-        building:  '#161a22',
-        road:      '#1d2330',
-        roadMajor: '#2a3140',
-        rail:      '#171c26',
-        text:      '#7a8395',
-        textHalo:  '#0a0c10'
-      };
 
       for (const layer of layers) {
         const id = layer.id;
@@ -609,6 +610,15 @@
         try {
           if (type === 'background') {
             map.setPaintProperty(id, 'background-color', C.bg);
+            continue;
+          }
+
+          if (type === 'fill-extrusion') {
+            // Liberty draws its buildings extruded, not flat: without this they
+            // keep the style's own light grey and sit on the dark map as pale
+            // blocks. Our own 3D layer already has its colour and adding it is
+            // what triggers one of these re-runs, so it stays untouched.
+            if (id !== '3d-buildings') map.setPaintProperty(id, 'fill-extrusion-color', C.building);
             continue;
           }
 
@@ -1429,7 +1439,50 @@
     // data.json, so they must not wait for tiles: a slow style request or a
     // browser that hands out no WebGL context used to leave the spinner turning
     // forever. Markers can be attached to the map before its style is ready.
-    map.on('load', applyTheme);
+    // 'load' alone is not enough: when the style arrives late the event can
+    // fire while getStyle() still has nothing to recolor, and the basemap then
+    // stays in its original light colours. 'styledata' fires again once the
+    // layers are really there, so both feed the same guarded call — the guard
+    // also stops the setPaintProperty calls inside applyTheme from
+    // re-triggering this handler.
+    // isStyleLoaded() can already be true while the style is not ready for
+    // paint calls: setPaintProperty then throws inside applyTheme, the per-layer
+    // catch swallows it, and the basemap keeps the light colours it shipped
+    // with. So the run is verified afterwards and repeated until it took —
+    // 'load' alone is not a reliable moment for this.
+    function isThemed() {
+      try {
+        const layers = map.getStyle().layers || [];
+        const bg = layers.find((l) => l.type === 'background');
+        if (!bg || map.getPaintProperty(bg.id, 'background-color') !== C.bg) return false;
+        const water = layers.find((l) => l.type === 'fill' && /water|sea|ocean/i.test(l.id));
+        return !water || map.getPaintProperty(water.id, 'fill-color') === C.water;
+      } catch (_) {
+        return false;
+      }
+    }
+
+    let theming = false, themed = false;
+    function themeOnce() {
+      if (theming || themed || !map.isStyleLoaded()) return;
+      const layers = map.getStyle().layers;
+      if (!layers || !layers.length) return;
+      theming = true;
+      try {
+        applyTheme();
+        themed = isThemed();
+      } catch (_) {
+        themed = false;
+      } finally {
+        theming = false;
+      }
+    }
+    map.on('load', themeOnce);
+    map.on('styledata', themeOnce);
+    map.on('idle', themeOnce);
+    // Map events can all land while the style is still unusable; these catch
+    // that case without keeping a timer running once the colours are in.
+    [200, 800, 2000, 5000].forEach((ms) => setTimeout(themeOnce, ms));
     map.on('error', (e) => console.warn('map error:', e && e.error ? e.error.message : e));
     boot();
 
