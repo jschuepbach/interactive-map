@@ -172,11 +172,11 @@
   },
   {
     "name": "Eixampeling Brunch Café & Bar",
-    "lat": 41.39628,
-    "lng": 2.167102,
+    "lat": 41.383435,
+    "lng": 2.157982,
     "category": "Brunch",
     "group": "Brunch",
-    "note": "Eixampeling Brunch Café & Bar, Carrer del Bruc, 118, 08009, Barcelona",
+    "note": "Eixampeling Brunch Café & Bar, Carrer de la Diputació, 158, 08011, Barcelona",
     "url": ""
   },
   {
@@ -253,11 +253,11 @@
   },
   {
     "name": "Kasarap Barcelona",
-    "lat": 41.392265,
-    "lng": 2.181043,
+    "lat": 41.382055,
+    "lng": 2.153325,
     "category": "Restaurant",
     "group": "Restaurant",
-    "note": "Kasarap Barcelona, Carrer de Roger de Flor, 08010, Barcelona",
+    "note": "Kasarap Barcelona, Carrer del Consell de Cent, 141, 08015, Barcelona",
     "url": ""
   },
   {
@@ -316,11 +316,11 @@
   },
   {
     "name": "paradero specialty coffee & brunch",
-    "lat": 41.402532,
-    "lng": 2.17623,
+    "lat": 41.379666,
+    "lng": 2.159043,
     "category": "Brunch",
     "group": "Brunch",
-    "note": "paradero specialty coffee & brunch, Carrer de València, 437, 08013, Barcelona",
+    "note": "paradero specialty coffee & brunch, Carrer del Comte Borrell, 107, 08015, Barcelona",
     "url": ""
   },
   {
@@ -415,11 +415,11 @@
   },
   {
     "name": "Vietnam autèntic restaurant",
-    "lat": 41.402083,
-    "lng": 2.200141,
+    "lat": 41.4052,
+    "lng": 2.173691,
     "category": "Restaurant",
     "group": "Restaurant",
-    "note": "Vietnam autèntic restaurant, Rambla del Poblenou, 92, 08005, Barcelona",
+    "note": "Vietnam autèntic restaurant, Carrer de la Marina, 298, 08025, Barcelona",
     "url": ""
   },
   {
@@ -721,20 +721,20 @@
   },
   {
     "name": "CocoVail Beer Hall",
-    "lat": 41.409791,
-    "lng": 2.186261,
+    "lat": 41.392608,
+    "lng": 2.165731,
     "category": "Restaurant",
     "group": "Restaurant",
-    "note": "CocoVail Beer Hall, Carrer de València, 614, 08026, Barcelona",
+    "note": "CocoVail Beer Hall, Carrer d'Aragó, 284, 08009, Barcelona",
     "url": ""
   },
   {
     "name": "HANA Grill & Bowl",
-    "lat": 41.409791,
-    "lng": 2.186261,
+    "lat": 41.392937,
+    "lng": 2.170236,
     "category": "Restaurant",
     "group": "Restaurant",
-    "note": "HANA Grill & Bowl, Carrer de València, 614, 08026, Barcelona",
+    "note": "HANA Grill & Bowl, Carrer de la Diputació, 309, 08009, Barcelona",
     "url": ""
   },
   {
@@ -937,11 +937,11 @@
   },
   {
     "name": "CASA TAOS",
-    "lat": 41.403506,
-    "lng": 2.150625,
+    "lat": 41.398329,
+    "lng": 2.194206,
     "category": "Restaurant",
     "group": "Restaurant",
-    "note": "CASA TAOS, Carrer de les Carolines, 24-18, 08006, Barcelona",
+    "note": "CASA TAOS, Carrer de Pere IV, 100, 08005, Barcelona",
     "url": ""
   },
   {
@@ -1270,11 +1270,11 @@
   },
   {
     "name": "vitrina café",
-    "lat": 41.378862,
-    "lng": 2.167488,
+    "lat": 41.381149,
+    "lng": 2.15354,
     "category": "Coffee",
     "group": "Coffee",
-    "note": "vitrina café, Carrer de la Riereta, 7, 08001, Barcelona",
+    "note": "vitrina café, Carrer de Calàbria, 128, 08015, Barcelona",
     "url": ""
   },
   {
@@ -1468,11 +1468,11 @@
   },
   {
     "name": "Seventy Barcelona",
-    "lat": 41.392265,
-    "lng": 2.181043,
+    "lat": 41.398184,
+    "lng": 2.161722,
     "category": "Restaurant",
     "group": "Restaurant",
-    "note": "Seventy Barcelona, Carrer de Roger de Flor, 08010, Barcelona",
+    "note": "Seventy Barcelona, Carrer de Còrsega, 344, 08037, Barcelona",
     "url": ""
   },
   {
@@ -1918,11 +1918,11 @@
   },
   {
     "name": "Mazah Restaurant Libanès",
-    "lat": 41.402083,
-    "lng": 2.200141,
+    "lat": 41.38781,
+    "lng": 2.16656,
     "category": "Restaurant",
     "group": "Restaurant",
-    "note": "Mazah Restaurant Libanès, Rambla del Poblenou, 92, 08005, Barcelona",
+    "note": "Mazah Restaurant Libanès, Gran Via de les Corts Catalanes, 618, 08007, Barcelona",
     "url": ""
   },
   {
@@ -1999,11 +1999,11 @@
   },
   {
     "name": "MITO Specialty Coffee",
-    "lat": 41.402532,
-    "lng": 2.17623,
+    "lat": 41.387002,
+    "lng": 2.160096,
     "category": "Coffee",
     "group": "Coffee",
-    "note": "MITO Specialty Coffee, Carrer de València, 437, 08013, Barcelona",
+    "note": "MITO Specialty Coffee, Carrer del Consell de Cent, 261, 08011, Barcelona",
     "url": ""
   },
   {
@@ -2017,11 +2017,11 @@
   },
   {
     "name": "Podonamu Restaurant Coreà",
-    "lat": 41.398658,
-    "lng": 2.154583,
+    "lat": 41.3867,
+    "lng": 2.155526,
     "category": "Restaurant",
     "group": "Restaurant",
-    "note": "Podonamu Restaurant Coreà, Carrer de Sant Gabriel, 2, 08012, Barcelona",
+    "note": "Podonamu Restaurant Coreà, Carrer de València, 164, 08011, Barcelona",
     "url": ""
   },
   {
@@ -2035,11 +2035,11 @@
   },
   {
     "name": "Capet Restaurant",
-    "lat": 41.397162,
-    "lng": 2.153032,
+    "lat": 41.381984,
+    "lng": 2.178892,
     "category": "Restaurant",
     "group": "Restaurant",
-    "note": "Capet Restaurant, Carrer de la Granada del Penedès, 14, 08006, Barcelona",
+    "note": "Capet Restaurant, Carrer del Cometa, 5, 08002, Barcelona",
     "url": ""
   },
   {
@@ -2170,11 +2170,11 @@
   },
   {
     "name": "Restaurant Salero",
-    "lat": 41.397162,
-    "lng": 2.153032,
+    "lat": 41.400597,
+    "lng": 2.160364,
     "category": "Restaurant",
     "group": "Restaurant",
-    "note": "Restaurant Salero, Carrer de la Granada del Penedès, 14, 08006, Barcelona",
+    "note": "Restaurant Salero, Carrer de Tordera, 10, 08012, Barcelona",
     "url": ""
   },
   {
@@ -2278,11 +2278,11 @@
   },
   {
     "name": "Restaurant Hiro",
-    "lat": 41.397162,
-    "lng": 2.153032,
+    "lat": 41.402293,
+    "lng": 2.190048,
     "category": "Restaurant",
     "group": "Restaurant",
-    "note": "Restaurant Hiro, Carrer de la Granada del Penedès, 14, 08006, Barcelona",
+    "note": "Restaurant Hiro, Carrer de Bolívia, 37, 08018, Barcelona",
     "url": ""
   },
   {
@@ -2440,11 +2440,11 @@
   },
   {
     "name": "Anís Cafe",
-    "lat": 41.378862,
-    "lng": 2.167488,
+    "lat": 41.37824,
+    "lng": 2.190283,
     "category": "Coffee",
     "group": "Coffee",
-    "note": "Anís Cafe, Carrer de la Riereta, 7, 08001, Barcelona",
+    "note": "Anís Cafe, Carrer de Pontevedra, 25, 08003, Barcelona",
     "url": ""
   },
   {
