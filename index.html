@@ -484,6 +484,7 @@
     let activeHood = null;   // neighbourhood collection, combines with the group filter
     const OVERRIDES = {};    // lowercased place name -> manual category list
     const NOTES = {};        // lowercased place name -> own note from notes.md
+    const LINKS = {};        // lowercased place name -> { url, instagram } from links.json
     const GROUP_ORDER = ['All', 'Coffee', 'Brunch', 'Sushi', 'Asian', 'Tapas', 'Vegan', 'Bakery', 'Pizza', 'Burger', 'Bar', 'Wine', 'Restaurant'];
     const GROUP_COLORS = {
       Coffee: 'var(--c-coffee)', Brunch: 'var(--c-brunch)', Sushi: 'var(--c-sushi)',
@@ -1356,8 +1357,19 @@
 
     function linksHtml(p, cls) {
       const c = cls ? ' class="' + cls + '"' : '';
-      return (p.url ? '<a' + c + ' href="' + escapeAttr(p.url) + '" target="_blank" rel="noopener">Visit →</a>' : '') +
-        '<a' + c + ' href="' + escapeAttr(mapsUrl(p)) + '" target="_blank" rel="noopener">' + MAPS_LABEL + '</a>';
+      const link = (href, label) =>
+        '<a' + c + ' href="' + escapeAttr(href) + '" target="_blank" rel="noopener">' + label + '</a>';
+      return (p.url ? link(p.url, 'Visit →') : '') +
+        (p.instagram ? link(p.instagram, 'Instagram →') : '') +
+        link(mapsUrl(p), MAPS_LABEL);
+    }
+
+    // "@nomadcoffee", "nomadcoffee" or a full profile URL — all end up as one.
+    function instagramUrl(handle) {
+      const h = (handle || '').trim();
+      if (!h) return '';
+      if (/^https?:\/\//i.test(h)) return h;
+      return 'https://instagram.com/' + h.replace(/^@/, '').replace(/\/+$/, '');
     }
 
     // ----- Boot -----
@@ -1382,6 +1394,23 @@
           console.warn('overrides.json not loaded:', e);
         }
 
+        // Websites and Instagram handles, for the same reason notes live outside
+        // data.json: the scrape only knows a website for a handful of places and
+        // knows no Instagram at all, so anything added by hand belongs in a file
+        // the next scrape does not touch.
+        try {
+          const lnk = await fetch('links.json', { cache: 'no-store' });
+          if (lnk.ok) {
+            const map = await lnk.json();
+            for (const key of Object.keys(map)) {
+              if (key.charAt(0) === '_' || !map[key] || typeof map[key] !== 'object') continue;
+              LINKS[key.toLowerCase()] = map[key];
+            }
+          }
+        } catch (e) {
+          console.warn('links.json not loaded:', e);
+        }
+
         // Personal notes live in notes.md, not in data.json: a re-scrape
         // rewrites data.json, and nobody wants to lose their own writing to
         // that. Plain markdown, one "## Place name" heading per place.
@@ -1400,6 +1429,10 @@
           }
           const own = NOTES[(p.name || '').toLowerCase()];
           if (own) p.note = own;
+
+          const own_links = LINKS[(p.name || '').toLowerCase()] || {};
+          if (own_links.url) p.url = own_links.url;
+          p.instagram = instagramUrl(own_links.instagram);
 
           const base = p.group || p.category || 'Restaurant';
           const manual = OVERRIDES[(p.name || '').toLowerCase()];
