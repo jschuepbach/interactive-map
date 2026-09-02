@@ -368,7 +368,7 @@ Sushi that keeps you curious, in a room that is a pleasure to sit in.
 
 
 ## Fauna Café
-<!-- Coffee | Cafè-Teatre el Llantiol, Carrer de la Riereta, 7, 08001, Barcelona -->
+<!-- Coffee | Fauna Café, Avinguda de Vilanova, 11, 08010, Barcelona -->
 
 
 ## Granja Petitbo
