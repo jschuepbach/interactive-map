@@ -15,7 +15,7 @@ Sibling outfit at the same Passatge Sert address — green-bean cupping room and
 <!-- Coffee | Pioneer roaster in Vila de Gràcia. Honest, clean coffees and warm past -->
 Pioneer roaster in Vila de Gràcia. Honest, clean coffees and warm pastries on a quiet corner — locals' favourite.
 
-## Satan's Coffee Corner
+## Right Side Coffee Bar
 <!-- Coffee | Tucked into the Gothic Quarter inside Hotel Casa Bonay. Reliable flat  -->
 Tucked into the Gothic Quarter inside Hotel Casa Bonay. Reliable flat whites and an all-day Japanese-leaning menu.
 
@@ -213,7 +213,7 @@ Poblenou hybrid: monstera-lined café with a tight specialty menu. Filter-only o
 
 ## Usagui cafe
 <!-- Coffee | Usagui, Carrer de les Santjoanistes, 28, 08006, Barcelona -->
-
+Japanese cakes worth going out of your way for, precise and not too sweet. The lunch is just as good.
 
 ## Suís & Bowls
 <!-- Restaurant | Suís & Bowls, Travessera de Gràcia, 08012, Barcelona -->
@@ -301,7 +301,7 @@ Poblenou hybrid: monstera-lined café with a tight specialty menu. Filter-only o
 
 ## Chinese Tofu Magician
 <!-- Restaurant | Chinese Tofu Magician, Carrer del Consell de Cent, 391, 08009, Barcelo -->
-
+Order the milk tea, it comes with melting beans and a dusting of cinnamon and is worth the trip on its own.
 
 ## Granja Hidden
 <!-- Restaurant | Hidden Cafe Barcelona, Carrer de Constança, 63, 08029, Barcelona -->
@@ -367,10 +367,6 @@ Poblenou hybrid: monstera-lined café with a tight specialty menu. Filter-only o
 <!-- Restaurant | Compartir, Carrer de València, 225, 08007, Barcelona -->
 
 
-## Alsur Café Llúria
-<!-- Coffee | Alsur Café, Carrer de Roger de Llúria, 23, 08002, Barcelona -->
-
-
 ## La Textil
 <!-- Restaurant | La Textil, Carrer de Casp, 08010, Barcelona -->
 
@@ -416,8 +412,8 @@ Poblenou hybrid: monstera-lined café with a tight specialty menu. Filter-only o
 
 
 ## bohl
-<!-- Restaurant | Passeig Marítim de la Barceloneta - Oriol Bohigas i Guardiola, 08003,  -->
-
+<!-- Restaurant | bohl, Carrer de Trafalgar, 47, 08010, Barcelona -->
+They talked me into an iced matcha with coconut milk, and it has ruined every other matcha for me since.
 
 ## Fismuler
 <!-- Restaurant | Fismuler, Carrer del Rec Comtal, 17, 08003, Barcelona -->
@@ -717,7 +713,7 @@ Poblenou hybrid: monstera-lined café with a tight specialty menu. Filter-only o
 
 ## sato i tanaka
 <!-- Restaurant | Sato i Tanaka, Carrer del Bruc, 79, 08009, Barcelona -->
-
+Every sushi plate arrives beautifully composed. It reads less like dinner and more like an occasion.
 
 ## Funky Bakers Eatery
 <!-- Restaurant | Funky Bakers, Passeig del Born, 10, 08003, Barcelona -->
@@ -1115,10 +1111,6 @@ Poblenou hybrid: monstera-lined café with a tight specialty menu. Filter-only o
 <!-- Restaurant | La Bombeta, Carrer de la Maquinista, 3, 08003, Barcelona -->
 
 
-## La Cala Barceloneta brunch
-<!-- Brunch | TRÓPICO Brunch Barcelona | Barceloneta, Passeig de Joan de Borbó, 15,  -->
-
-
 ## MUYSCA
 <!-- Restaurant | Muysca, Carrer del Baluard, 72, 08003, Barcelona -->
 
@@ -1169,7 +1161,7 @@ Poblenou hybrid: monstera-lined café with a tight specialty menu. Filter-only o
 
 ## The Miners Coffee Via Augusta
 <!-- Coffee | Via Augusta, 105, 08006 Barcelona, Spain -->
-
+One of the few spots where working for an hour or two is no problem. Specialty coffee and a pastry, and nobody rushes you.
 
 ## Àmbar cafè d'especialitat
 <!-- Coffee | Carrer de Provença, 341, Barcelona, Spain -->
@@ -1289,4 +1281,16 @@ Poblenou hybrid: monstera-lined café with a tight specialty menu. Filter-only o
 
 ## Coco Social House Barceloneta
 <!-- Restaurant | Carrer de Meer, 52, 08003 Barcelona, Spain -->
+
+
+## Amauta Coffee Bar
+<!-- Coffee | Amauta Coffee Bar, Travessera de Gràcia, 90, 08006, Barcelona -->
+
+
+## Akiro Hand Roll Bar
+<!-- Sushi | Akiro Hand Roll Bar, Carrer de Mallorca, 237, 08008, Barcelona -->
+
+
+## Mercader Eixample
+<!-- Restaurant | Mercader Eixample, Passatge de Mercader, 08008, Barcelona -->
 

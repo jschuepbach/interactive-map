@@ -3,9 +3,10 @@
   "configurations": [
     {
       "name": "map",
-      "runtimeExecutable": "python3",
-      "runtimeArgs": ["-m", "http.server", "4321"],
-      "port": 4321
+      "runtimeExecutable": "sh",
+      "runtimeArgs": ["-c", "python3 -m http.server \"${PORT:-4321}\""],
+      "port": 4321,
+      "autoPort": true
     }
   ]
 }

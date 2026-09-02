@@ -19,15 +19,15 @@
   },
   {
     "name": "SlowMov",
-    "lat": 41.3962,
-    "lng": 2.1543,
+    "lat": 41.3981094,
+    "lng": 2.1545583,
     "category": "Roaster + Café",
     "note": "Pioneer roaster in Vila de Gràcia. Honest, clean coffees and warm pastries on a quiet corner — locals' favourite.",
     "url": "https://slowmov.com",
     "group": "Coffee"
   },
   {
-    "name": "Satan's Coffee Corner",
+    "name": "Right Side Coffee Bar",
     "lat": 41.38253,
     "lng": 2.1763,
     "category": "Café",
@@ -819,15 +819,6 @@
     "url": ""
   },
   {
-    "name": "Alsur Café Llúria",
-    "lat": 41.391066,
-    "lng": 2.171365,
-    "category": "Coffee",
-    "group": "Coffee",
-    "note": "Alsur Café, Carrer de Roger de Llúria, 23, 08002, Barcelona",
-    "url": ""
-  },
-  {
     "name": "La Textil",
     "lat": 41.391147,
     "lng": 2.172875,
@@ -928,11 +919,11 @@
   },
   {
     "name": "bohl",
-    "lat": 41.380688,
-    "lng": 2.193158,
+    "lat": 41.3905527,
+    "lng": 2.1782284,
     "category": "Restaurant",
     "group": "Restaurant",
-    "note": "Passeig Marítim de la Barceloneta - Oriol Bohigas i Guardiola, 08003, Barcelona",
+    "note": "bohl, Carrer de Trafalgar, 47, 08010, Barcelona",
     "url": ""
   },
   {
@@ -2502,15 +2493,6 @@
     "url": ""
   },
   {
-    "name": "La Cala Barceloneta brunch",
-    "lat": 41.38019,
-    "lng": 2.187561,
-    "category": "Brunch",
-    "group": "Brunch",
-    "note": "TRÓPICO Brunch Barcelona | Barceloneta, Passeig de Joan de Borbó, 15, 08003, Barcelona",
-    "url": ""
-  },
-  {
     "name": "MUYSCA",
     "lat": 41.378625,
     "lng": 2.189458,
@@ -2895,6 +2877,33 @@
     "category": "Restaurant",
     "group": "Restaurant",
     "note": "Carrer de Meer, 52, 08003 Barcelona, Spain",
+    "url": ""
+  },
+  {
+    "name": "Amauta Coffee Bar",
+    "lat": 41.398093,
+    "lng": 2.152869,
+    "category": "Coffee",
+    "group": "Coffee",
+    "note": "Amauta Coffee Bar, Travessera de Gràcia, 90, 08006, Barcelona",
+    "url": ""
+  },
+  {
+    "name": "Akiro Hand Roll Bar",
+    "lat": 41.392146,
+    "lng": 2.1599514,
+    "category": "Sushi",
+    "group": "Sushi",
+    "note": "Akiro Hand Roll Bar, Carrer de Mallorca, 237, 08008, Barcelona",
+    "url": ""
+  },
+  {
+    "name": "Mercader Eixample",
+    "lat": 41.3923305,
+    "lng": 2.160347,
+    "category": "Restaurant",
+    "group": "Restaurant",
+    "note": "Mercader Eixample, Passatge de Mercader, 08008, Barcelona",
     "url": ""
   }
 ]

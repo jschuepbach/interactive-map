@@ -1,0 +1,3 @@
+{
+  "_comment": "Website und Instagram pro Ort. Key ist der Name aus data.json (Gross-/Kleinschreibung egal). Beide Felder optional: { \"url\": \"https://...\", \"instagram\": \"@handle\" }. Instagram nimmt @handle, handle oder die volle Profil-URL. Eine url hier schlaegt die aus data.json. Liegt ausserhalb von data.json, damit ein neuer Scrape die Links nicht loescht."
+}
