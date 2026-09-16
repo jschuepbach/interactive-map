@@ -46,6 +46,18 @@
   .side-header { padding: 18px 18px 14px; border-bottom: 1px solid var(--border); cursor: default; }
   .side-header h1 { font-size: 15px; margin: 0 0 4px; letter-spacing: -0.01em; font-weight: 600; }
   .side-header .sub { color: var(--muted); font-size: 12px; line-height: 1.5; }
+  /* The search field lives with the results, not behind a button: on the map
+     screen it is the fastest way through 322 places. */
+  #sideSearch { width: 100%; margin-top: 12px; background: var(--panel-2);
+    border: 1px solid var(--border); border-radius: 8px; color: var(--text);
+    font-family: inherit; font-size: 13px; padding: 9px 12px; }
+  #sideSearch::placeholder { color: var(--muted); }
+  #sideSearch:focus { outline: none; border-color: var(--accent); }
+
+  .list-empty { padding: 22px 18px; color: var(--muted); font-size: 13px; line-height: 1.6; }
+  .list-empty button { background: none; border: none; padding: 0; font: inherit;
+    color: var(--accent); font-weight: 600; cursor: pointer; text-decoration: underline; }
+
   .count { display: inline-block; padding: 2px 8px; border-radius: 999px;
     background: var(--panel-2); color: var(--accent); font-size: 11px; font-weight: 600;
     margin-left: 6px; vertical-align: middle; }
@@ -421,6 +433,7 @@
       <div class="side-header" id="sideHeader">
         <h1>Barcelona <span class="count" id="count">0 items</span></h1>
         <div class="sub">A hand-picked map of independent spots — coffee, brunch &amp; restaurants.</div>
+        <input id="sideSearch" type="search" placeholder="Search name, note or category" autocomplete="off">
       </div>
       <div class="filters" id="filters"></div>
       <div class="list" id="list"></div>
@@ -523,6 +536,7 @@
     // Empty set = "All". Sidebar buttons write a single group, intro chips toggle
     // multiple — same set, so the two can never drift apart.
     const activeGroups = new Set();
+    let query = '';          // shared by the sidebar field and the list view field
     let activeHood = null;   // neighbourhood collection, combines with the group filter
     const OVERRIDES = {};    // lowercased place name -> manual category list
     const NOTES = {};        // lowercased place name -> own note from notes.md
@@ -773,6 +787,13 @@
     function renderSidebar() {
       const list = document.getElementById('list');
       list.innerHTML = '';
+      document.getElementById('count').textContent = DATA.length + ' items';
+      if (!DATA.length) {
+        list.innerHTML = '<p class="list-empty">Nothing matches. ' +
+          '<button type="button" id="listReset">Start over</button></p>';
+        document.getElementById('listReset').addEventListener('click', resetFilters);
+        return;
+      }
       DATA.forEach((p, i) => {
         const row = document.createElement('div');
         row.className = 'row';
@@ -788,7 +809,12 @@
         });
         list.appendChild(row);
       });
-      document.getElementById('count').textContent = DATA.length + ' items';
+    }
+
+    function resetFilters() {
+      activeGroups.clear();
+      activeHood = null;
+      setQuery('', true);
     }
 
     function setActive(i) {
@@ -842,12 +868,15 @@
     // Counts always reflect the other axis of the filter: with a neighbourhood
     // picked, "Sushi (14)" becomes "Sushi (3)" — no chip that leads to nothing.
     function groupCount(group) {
-      const pool = activeHood ? ALL_DATA.filter((p) => p.hood === activeHood) : ALL_DATA;
+      const q = query.trim().toLowerCase();
+      const pool = ALL_DATA.filter((p) => matchesQuery(p, q) &&
+        (!activeHood || p.hood === activeHood));
       return group === 'All' ? pool.length : pool.filter((p) => hasGroup(p, group)).length;
     }
 
     function hoodCount(id) {
-      return ALL_DATA.filter((p) => p.hood === id &&
+      const q = query.trim().toLowerCase();
+      return ALL_DATA.filter((p) => p.hood === id && matchesQuery(p, q) &&
         (activeGroups.size === 0 || Array.from(activeGroups).some((g) => hasGroup(p, g)))).length;
     }
 
@@ -867,9 +896,12 @@
       }
 
       GROUP_ORDER.forEach((group) => {
+        const active = isGroupActive(group);
+        // A search that leaves a category empty removes its chip: a row of
+        // "(0)" pills is noise. A picked chip stays so it can be unpicked.
+        if (!groupCount(group) && !active) return;
         const btn = document.createElement('button');
         btn.type = 'button';
-        const active = isGroupActive(group);
         btn.className = 'filter-btn' + (active ? ' active' : '');
         btn.setAttribute('aria-pressed', String(active));
         const n = groupCount(group);
@@ -884,16 +916,26 @@
           btn.appendChild(dot);
         }
         btn.appendChild(document.createTextNode(group + ' (' + n + ')'));
-        btn.addEventListener('click', () => setFilter(group));
+        btn.addEventListener('click', () => toggleGroup(group));
         wrap.appendChild(btn);
       });
     }
 
-    // Sidebar filters stay single-select: picking one replaces the selection.
-    function setFilter(group) {
-      activeGroups.clear();
-      if (group !== 'All') activeGroups.add(group);
+    // One rule for every filter surface: sidebar, intro chips and list chips all
+    // toggle the same set, so a category picked in one place can be switched off
+    // in another. "All" is not a group, it is the clear button.
+    function toggleGroup(group) {
+      if (group === 'All') activeGroups.clear();
+      else if (activeGroups.has(group)) activeGroups.delete(group);
+      else activeGroups.add(group);
       applyFilters();
+    }
+
+    function matchesQuery(p, q) {
+      if (!q) return true;
+      const hay = (p.name + ' ' + (p.note || '') + ' ' +
+        (p.groups || [p.group]).join(' ')).toLowerCase();
+      return hay.indexOf(q) > -1;
     }
 
     function hasGroup(p, group) {
@@ -901,6 +943,7 @@
     }
 
     function matchesFilter(p) {
+      if (!matchesQuery(p, query.trim().toLowerCase())) return false;
       if (activeHood && p.hood !== activeHood) return false;
       if (activeGroups.size === 0) return true;
       for (const g of activeGroups) { if (hasGroup(p, g)) return true; }
@@ -927,24 +970,19 @@
 
     // ----- List view -----
     // An alternative view on the same selection: everything at once, grouped by
-    // category, with a local search. Filters are shared with the map, the search
-    // is not — it never touches activeGroups, so closing the list leaves the map
-    // exactly as it was.
+    // category. Filters and search are both shared with the map, so this view is
+    // a different shape of the same result set, never a second one.
     const listEl = document.getElementById('listview');
     const lvBody = document.getElementById('lvBody');
-    let lvQuery = '';
     let lvMissingOnly = false;   // "which ones still need writing?" 
 
     function renderListView() {
       if (!listEl || listEl.classList.contains('hidden')) return;
 
-      const q = lvQuery.trim().toLowerCase();
       const hits = [];
       DATA.forEach((p, i) => {
         if (lvMissingOnly && hasOwnNote(p)) return;
-        if (!q) { hits.push([p, i]); return; }
-        const hay = (p.name + ' ' + (p.note || '') + ' ' + (p.groups || [p.group]).join(' ')).toLowerCase();
-        if (hay.indexOf(q) > -1) hits.push([p, i]);
+        hits.push([p, i]);
       });
 
       // Grouped by category, so sort by category first — DATA is in file order.
@@ -970,9 +1008,7 @@
           (lvMissingOnly ? 'show all, written or not' : 'without a note (' + missing + ')') +
         '</button>';
       const clear = document.getElementById('lvClear');
-      if (clear) clear.addEventListener('click', () => {
-        activeGroups.clear(); activeHood = null; applyFilters();
-      });
+      if (clear) clear.addEventListener('click', resetFilters);
       document.getElementById('lvMissing').addEventListener('click', () => {
         lvMissingOnly = !lvMissingOnly;
         renderListView();
@@ -1049,10 +1085,7 @@
         }
         btn.appendChild(document.createTextNode(group + ' (' + n + ')'));
         btn.addEventListener('click', () => {
-          if (group === 'All') activeGroups.clear();
-          else if (activeGroups.has(group)) activeGroups.delete(group);
-          else activeGroups.add(group);
-          applyFilters();
+          toggleGroup(group);
           document.getElementById('lvBody').scrollTop = 0;
         });
         wrap.appendChild(btn);
@@ -1077,9 +1110,22 @@
 
     document.getElementById('listBtn').addEventListener('click', openListView);
     document.getElementById('lvClose').addEventListener('click', closeListView);
-    document.getElementById('lvSearch').addEventListener('input', (e) => {
-      lvQuery = e.target.value;
-      renderListView();
+    // Both fields write the same query. Re-drawing 322 markers on every
+    // keystroke is wasted work, so the map follows a beat behind the typing.
+    const searchFields = [document.getElementById('sideSearch'),
+                          document.getElementById('lvSearch')];
+    let queryTimer = null;
+
+    function setQuery(value, immediate) {
+      query = value;
+      searchFields.forEach((el) => { if (el && el.value !== value) el.value = value; });
+      clearTimeout(queryTimer);
+      if (immediate) { applyFilters(); return; }
+      queryTimer = setTimeout(applyFilters, 140);
+    }
+
+    searchFields.forEach((el) => {
+      if (el) el.addEventListener('input', (e) => setQuery(e.target.value));
     });
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && !listEl.classList.contains('hidden')) closeListView();
@@ -1115,11 +1161,7 @@
       dot.style.background = active ? '#0a0c10' : color;
       btn.appendChild(dot);
       btn.appendChild(document.createTextNode(group + ' (' + n + ')'));
-      btn.addEventListener('click', () => {
-        if (activeGroups.has(group)) activeGroups.delete(group);
-        else activeGroups.add(group);
-        applyFilters();
-      });
+      btn.addEventListener('click', () => toggleGroup(group));
       return btn;
     }
 
@@ -1197,6 +1239,8 @@
       if (activeGroups.size === 0) params.delete('c');
       else params.set('c', Array.from(activeGroups).join(',').toLowerCase());
       if (activeHood) params.set('n', activeHood); else params.delete('n');
+      const q = query.trim();
+      if (q) params.set('q', q); else params.delete('q');
       const qs = params.toString();
       history.replaceState(null, '', window.location.pathname + (qs ? '?' + qs : ''));
     }
@@ -1216,6 +1260,9 @@
 
       const hood = (params.get('n') || '').trim().toLowerCase();
       if (hood && HOODS.some((h) => h.id === hood)) { activeHood = hood; hit = true; }
+
+      const q = (params.get('q') || '').trim();
+      if (q) { query = q; hit = true; }
 
       return hit;
     }
@@ -1429,6 +1476,7 @@
         assignHoods(ALL_DATA);
 
         const fromUrl = readUrlFilters();
+        searchFields.forEach((el) => { if (el) el.value = query; });
         applyFilters();
         renderIntroStats();
 
