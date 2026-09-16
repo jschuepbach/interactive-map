@@ -320,12 +320,12 @@
     "name": "Bistrot Levante",
     "lat": 41.38362,
     "lng": 2.180194,
-    "category": "Restaurant",
-    "group": "French",
+    "category": "Tapas",
+    "group": "Tapas",
     "note": "Bistrot Levante, Carrer de l'Argenteria, 08003, Barcelona",
     "url": "",
     "groups": [
-      "French"
+      "Tapas"
     ]
   },
   {
@@ -766,12 +766,11 @@
     "name": "LADY BABKA",
     "lat": 41.394299,
     "lng": 2.137556,
-    "category": "Restaurant",
-    "group": "Israeli",
+    "category": "Coffee",
+    "group": "Coffee",
     "note": "LADY BABKA, Carrer de Santa Fe de Nou Mèxic, 08021, Barcelona",
     "url": "",
     "groups": [
-      "Israeli",
       "Coffee",
       "Pastry"
     ]
@@ -2115,15 +2114,6 @@
     ]
   },
   {
-    "name": "Lemon Pie",
-    "lat": 41.389513,
-    "lng": 2.135599,
-    "category": "Restaurant",
-    "note": "Lemon Pie, Avinguda Diagonal, 545-577, 08029, Barcelona",
-    "url": "",
-    "groups": []
-  },
-  {
     "name": "SENSATO Restaurant",
     "lat": 41.405218,
     "lng": 2.146789,
@@ -2455,12 +2445,12 @@
     "name": "Anís Cafe",
     "lat": 41.37824,
     "lng": 2.190283,
-    "category": "Coffee",
-    "group": "Lebanese",
+    "category": "Middle-Eastern",
+    "group": "Middle-Eastern",
     "note": "Anís Cafe, Carrer de Pontevedra, 25, 08003, Barcelona",
     "url": "",
     "groups": [
-      "Lebanese"
+      "Middle-Eastern"
     ]
   },
   {
@@ -2634,13 +2624,13 @@
     "name": "LABALABUSTA",
     "lat": 41.3922,
     "lng": 2.15606,
-    "category": "Restaurant",
-    "group": "Israeli",
+    "category": "Wine",
+    "group": "Wine",
     "note": "LABALABUSTA, Carrer del Rosselló, 180-178, 08008, Barcelona",
     "url": "",
     "groups": [
-      "Israeli",
-      "Wine"
+      "Wine",
+      "Middle-Eastern"
     ]
   },
   {
@@ -2868,6 +2858,55 @@
     "groups": [
       "Wine",
       "Tapas"
+    ]
+  },
+  {
+    "name": "Barra Oso",
+    "lat": 41.3946842,
+    "lng": 2.1489116,
+    "category": "Catalan",
+    "note": "Barra Oso, Carrer de Muntaner, 248, 08021, Barcelona",
+    "group": "Catalan",
+    "groups": [
+      "Catalan",
+      "Wine"
+    ]
+  },
+  {
+    "name": "Fauna Restaurant by Casa de Vivi",
+    "lat": 41.3852978,
+    "lng": 2.1722188,
+    "category": "Seafood",
+    "note": "Fauna Restaurant by Casa de Vivi, Carrer del Duc, 15, 08002, Barcelona",
+    "group": "Seafood",
+    "groups": [
+      "Seafood",
+      "Tapas",
+      "Wine"
+    ]
+  },
+  {
+    "name": "Monvinic",
+    "lat": 41.3890983,
+    "lng": 2.1650789,
+    "category": "Wine",
+    "note": "Monvinic, Carrer de la Diputació, 251, 08007, Barcelona",
+    "group": "Wine",
+    "groups": [
+      "Wine",
+      "Tapas"
+    ]
+  },
+  {
+    "name": "ÖSS Kaffe Barcelona",
+    "lat": 41.3820691,
+    "lng": 2.1663649,
+    "category": "Coffee",
+    "note": "ÖSS Kaffe Barcelona, Carrer de Joaquín Costa, 26, 08001, Barcelona",
+    "group": "Coffee",
+    "groups": [
+      "Coffee",
+      "Pastry"
     ]
   }
 ]
