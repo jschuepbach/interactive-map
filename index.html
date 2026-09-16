@@ -79,6 +79,13 @@
   .hood-pill span.x { color: var(--muted); font-weight: 400; }
   .hood-pill:hover span.x { color: var(--text); }
 
+  /* A different axis from the category chips, so a different shape. */
+  .note-pill { flex-basis: 100%; text-align: left; background: none; border: 0;
+    padding: 0 0 2px; margin: 0 0 2px; cursor: pointer; font-family: inherit;
+    font-size: 11px; font-weight: 600; letter-spacing: 0.02em; color: var(--muted); }
+  .note-pill:hover { color: var(--text); }
+  .note-pill.on { color: var(--accent); }
+
   .list { flex: 1; overflow-y: auto; padding-top: 12px; }
   .row { padding: 12px 18px 14px; border-bottom: 1px solid var(--border);
     cursor: pointer; transition: background 0.15s; border-left: 3px solid transparent; }
@@ -87,8 +94,12 @@
   .cat-sep { color: var(--border); }
   .row .cat { font-size: 10px; color: var(--marker-color, var(--accent)); text-transform: uppercase;
     letter-spacing: 0.08em; margin: 0 0 4px; font-weight: 600; }
-  .row .name { font-size: 14px; font-weight: 600; margin: 0 0 4px; }
-  .row .note { font-size: 12px; color: var(--muted); margin: 0 0 6px; line-height: 1.45; }
+  .row .name { font-size: 14px; font-weight: 600; margin: 0 0 5px; }
+  /* Jan's own words are the point of this map, so they read as text, not as
+     metadata. The scraped address gets the small quiet line underneath. */
+  .row .note { font-size: 13px; color: var(--text); opacity: 0.82; margin: 0 0 7px;
+    line-height: 1.5; }
+  .row .addr { font-size: 11px; color: var(--muted); margin: 0 0 6px; line-height: 1.4; }
   .links { display: flex; gap: 14px; flex-wrap: wrap; }
   .row a { color: var(--accent); font-size: 11px; text-decoration: none; font-weight: 600; }
   .row a:hover { text-decoration: underline; }
@@ -146,6 +157,8 @@
   .popup-name { font-weight: 600; font-size: 13px; margin: 0 0 4px; }
   .popup-note { color: var(--muted); font-size: 12px; margin: 0 0 8px;
     line-height: 1.45; max-width: 240px; }
+  .popup-addr { color: var(--muted); font-size: 11px; margin: 0 0 8px; line-height: 1.4;
+    max-width: 240px; }
   .popup-link { color: var(--accent); font-size: 11px; text-decoration: none; font-weight: 600; }
   .popup-link:hover { text-decoration: underline; }
 
@@ -534,6 +547,7 @@
     // multiple — same set, so the two can never drift apart.
     const activeGroups = new Set();
     let query = '';          // shared by the sidebar field and the list view field
+    let notedOnly = false;   // only places Jan has actually written about
     let activeHood = null;   // neighbourhood collection, combines with the group filter
     const NOTES = {};        // lowercased place name -> own note from notes.md
     const LINKS = {};        // lowercased place name -> { url, instagram } from links.json
@@ -781,7 +795,7 @@
         row.innerHTML =
           '<div class="cat">' + catLabelHtml(p) + '</div>' +
           '<div class="name">' + escapeHtml(p.name) + '</div>' +
-          noteHtml(p, 'note') +
+          noteHtml(p, 'note') + addrHtml(p) +
           '<div class="links">' + linksHtml(p, '') + '</div>';
         row.addEventListener('click', (e) => {
           if (e.target && e.target.tagName === 'A') return;
@@ -794,6 +808,7 @@
     function resetFilters() {
       activeGroups.clear();
       activeHood = null;
+      notedOnly = false;
       setQuery('', true);
     }
 
@@ -818,7 +833,8 @@
       const html =
         '<div class="popup-cat">' + catLabelHtml(p) + '</div>' +
         '<div class="popup-name">' + escapeHtml(p.name) + '</div>' +
-        '<div class="popup-note">' + escapeHtml(p.note) + '</div>' +
+        (hasOwnNote(p) ? '<div class="popup-note">' + escapeHtml(p.note) + '</div>'
+                       : addrHtml(p, 'popup-addr')) +
         '<div class="links">' + linksHtml(p, 'popup-link') + '</div>';
       currentPopup = new maplibregl.Popup({ offset: 20, closeButton: false, maxWidth: '260px' })
         .setLngLat([p.lng, p.lat])
@@ -850,13 +866,14 @@
     function groupCount(group) {
       const q = query.trim().toLowerCase();
       const pool = ALL_DATA.filter((p) => matchesQuery(p, q) &&
-        (!activeHood || p.hood === activeHood));
+        (!notedOnly || hasOwnNote(p)) && (!activeHood || p.hood === activeHood));
       return group === 'All' ? pool.length : pool.filter((p) => hasGroup(p, group)).length;
     }
 
     function hoodCount(id) {
       const q = query.trim().toLowerCase();
       return ALL_DATA.filter((p) => p.hood === id && matchesQuery(p, q) &&
+        (!notedOnly || hasOwnNote(p)) &&
         (activeGroups.size === 0 || Array.from(activeGroups).some((g) => hasGroup(p, g)))).length;
     }
 
@@ -873,6 +890,26 @@
         pill.innerHTML = escapeHtml(hoodLabel(activeHood)) + ' <span class="x">clear ×</span>';
         pill.addEventListener('click', () => { activeHood = null; applyFilters(); });
         wrap.appendChild(pill);
+      }
+
+      // How many of the current selection carry a note of Jan's. Counted against
+      // everything but this filter, so the number does not collapse to itself.
+      const written = ALL_DATA.filter((p) => hasOwnNote(p) && matchesQuery(p, query.trim().toLowerCase()) &&
+        (!activeHood || p.hood === activeHood) &&
+        (activeGroups.size === 0 || Array.from(activeGroups).some((g) => hasGroup(p, g)))).length;
+      if (written || notedOnly) {
+        const note = document.createElement('button');
+        note.type = 'button';
+        note.className = 'note-pill' + (notedOnly ? ' on' : '');
+        note.setAttribute('aria-pressed', String(notedOnly));
+        note.textContent = notedOnly ? '\u2713 Only the ones I have written about'
+                                     : 'Only the ones I have written about (' + written + ')';
+        note.addEventListener('click', () => {
+          notedOnly = !notedOnly;
+          if (notedOnly) lvMissingOnly = false;   // the two would cancel out
+          applyFilters();
+        });
+        wrap.appendChild(note);
       }
 
       GROUP_ORDER.forEach((group) => {
@@ -923,6 +960,7 @@
     }
 
     function matchesFilter(p) {
+      if (notedOnly && !hasOwnNote(p)) return false;
       if (!matchesQuery(p, query.trim().toLowerCase())) return false;
       if (activeHood && p.hood !== activeHood) return false;
       if (activeGroups.size === 0) return true;
@@ -991,6 +1029,7 @@
       if (clear) clear.addEventListener('click', resetFilters);
       document.getElementById('lvMissing').addEventListener('click', () => {
         lvMissingOnly = !lvMissingOnly;
+        if (lvMissingOnly && notedOnly) { notedOnly = false; applyFilters(); }
         renderListView();
         document.getElementById('lvBody').scrollTop = 0;
       });
@@ -1221,6 +1260,7 @@
       if (activeHood) params.set('n', activeHood); else params.delete('n');
       const q = query.trim();
       if (q) params.set('q', q); else params.delete('q');
+      if (notedOnly) params.set('w', '1'); else params.delete('w');
       const qs = params.toString();
       history.replaceState(null, '', window.location.pathname + (qs ? '?' + qs : ''));
     }
@@ -1243,6 +1283,8 @@
 
       const q = (params.get('q') || '').trim();
       if (q) { query = q; hit = true; }
+
+      if (params.get('w') === '1') { notedOnly = true; hit = true; }
 
       return hit;
     }
@@ -1336,6 +1378,16 @@
     function noteHtml(p, cls) {
       return isAddressNote(p.note) ? '' :
         '<p class="' + cls + '">' + escapeHtml(p.note) + '</p>';
+    }
+
+    // Shown only where there is no note to lead with, so the row is never bare.
+    function addrHtml(p, cls) {
+      if (!isAddressNote(p.note)) return '';
+      const street = String(p.note)
+        .replace(/^[^,]+,\s*/, '')            // the name, repeated
+        .replace(/,\s*Barcelona\s*$/i, '')   // the city, on a map of the city
+        .replace(/,\s*0?8\d{3}\s*$/, '');    // the postcode, once the city is gone
+      return '<p class="' + (cls || 'addr') + '">' + escapeHtml(street) + '</p>';
     }
 
     // "WINE · TAPAS" — primary in its colour, the rest muted, so a place that
