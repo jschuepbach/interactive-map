@@ -667,10 +667,6 @@ Every sushi plate arrives beautifully composed. It reads less like dinner and mo
 <!-- Restaurant | Restaurant Hofmann, Carrer de la Granada del Penedès, 14, 08006, Barce -->
 
 
-## Lemon Pie
-<!-- Restaurant | Marta's Lemon Pie (L'illa Diagonal), Avinguda Diagonal, 545-577, 08029 -->
-
-
 ## SENSATO Restaurant
 <!-- Restaurant | Restaurant SENSATO, Carrer de Septimània, 08006, Barcelona -->
 
@@ -906,4 +902,19 @@ The best sushi in the city for my money. Hand rolls made right in front of you, 
 ## Bocanariz
 <!-- Wine | Bocanariz, Carrer de Vallfogona, 12, 08012, Barcelona -->
 Small, stylish and loud, with vinyl on and a wine list worth working through. The tapas and the cheese hold up their end.
+
+## Barra Oso
+<!-- Catalan | Barra Oso, Carrer de Muntaner, 248, 08021, Barcelona -->
+
+
+## Fauna Restaurant by Casa de Vivi
+<!-- Seafood | Fauna Restaurant by Casa de Vivi, Carrer del Duc, 15, 08002, Barcelona -->
+
+
+## Monvinic
+<!-- Wine | Monvinic, Carrer de la Diputació, 251, 08007, Barcelona -->
+
+
+## ÖSS Kaffe Barcelona
+<!-- Coffee | ÖSS Kaffe Barcelona, Carrer de Joaquín Costa, 26, 08001, Barcelona -->
 
