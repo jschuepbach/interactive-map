@@ -6,7 +6,10 @@
     "category": "Roaster + Bar",
     "note": "Nømad Coffee Lab, Plaça de Sant Pere, 13, 08003, Barcelona",
     "url": "https://nomadcoffee.es",
-    "group": "Coffee"
+    "group": "Coffee",
+    "groups": [
+      "Coffee"
+    ]
   },
   {
     "name": "Nømad Coffee Productions",
@@ -15,7 +18,10 @@
     "category": "Roastery",
     "note": "Nømad Coffee Productions, Plaça de Sant Pere, 13, 08003, Barcelona",
     "url": "https://nomadcoffee.es",
-    "group": "Coffee"
+    "group": "Coffee",
+    "groups": [
+      "Coffee"
+    ]
   },
   {
     "name": "SlowMov",
@@ -24,7 +30,11 @@
     "category": "Roaster + Café",
     "note": "SlowMov, Carrer de Neptú, 36, Barcelona",
     "url": "https://slowmov.com",
-    "group": "Coffee"
+    "group": "Coffee",
+    "groups": [
+      "Coffee",
+      "Pastry"
+    ]
   },
   {
     "name": "Right Side Coffee Bar",
@@ -33,7 +43,11 @@
     "category": "Café",
     "note": "Right Side Coffee Bar, Carrer de Sant Honorat, 08002, Barcelona",
     "url": "https://satanscoffee.com",
-    "group": "Coffee"
+    "group": "Coffee",
+    "groups": [
+      "Coffee",
+      "Brunch"
+    ]
   },
   {
     "name": "Three Marks Coffee",
@@ -42,7 +56,11 @@
     "category": "Roaster + Bar",
     "note": "Three Marks Coffee, Carrer d'Enric Granados, 29-31, 08011, Barcelona",
     "url": "https://threemarkscoffee.com",
-    "group": "Coffee"
+    "group": "Coffee",
+    "groups": [
+      "Coffee",
+      "Pastry"
+    ]
   },
   {
     "name": "Onna Coffee",
@@ -51,7 +69,11 @@
     "category": "Roaster + Café",
     "note": "Onna Coffee, Carrer del Canó, 08012, Barcelona",
     "url": "https://onnacoffee.com",
-    "group": "Coffee"
+    "group": "Coffee",
+    "groups": [
+      "Coffee",
+      "Tea"
+    ]
   },
   {
     "name": "Skye Coffee Co.",
@@ -60,7 +82,10 @@
     "category": "Café",
     "note": "Skye Coffee Co., Carrer dels Almogàvers, 207-209, 08018, Barcelona",
     "url": "https://skyecoffee.co",
-    "group": "Coffee"
+    "group": "Coffee",
+    "groups": [
+      "Coffee"
+    ]
   },
   {
     "name": "Hidden Coffee Roasters",
@@ -69,7 +94,11 @@
     "category": "Roaster + Café",
     "note": "Hidden Coffee Roasters, Carrer del Pintor Fortuny, 25, 08001, Barcelona",
     "url": "https://hiddencoffeeroasters.com",
-    "group": "Coffee"
+    "group": "Coffee",
+    "groups": [
+      "Coffee",
+      "Pastry"
+    ]
   },
   {
     "name": "CAUA CACAO ROASTERS",
@@ -78,7 +107,11 @@
     "category": "Coffee",
     "group": "Coffee",
     "note": "CAUA CACAO ROASTERS, Carrer de los Castillejos, 343, 08025, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Coffee",
+      "Pastry"
+    ]
   },
   {
     "name": "Trópico Brunch Barcelona",
@@ -87,52 +120,75 @@
     "category": "Brunch",
     "group": "Brunch",
     "note": "Trópico Brunch Barcelona, Carrer de Balmes, 24, 08007, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Brunch",
+      "Coffee"
+    ]
   },
   {
     "name": "Bloome By Sasha",
     "lat": 41.386782,
     "lng": 2.174806,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Brunch",
     "note": "Bloome By Sasha, Via Laietana, 45, 08003, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Brunch",
+      "Coffee",
+      "Gluten-free"
+    ]
   },
   {
     "name": "Mosquito",
     "lat": 41.387463,
     "lng": 2.180592,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Pan-Asian",
     "note": "Mosquito, Carrer dels Carders, 46, 08003, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Pan-Asian"
+    ]
   },
   {
     "name": "Restaurante Casa Luz",
     "lat": 41.374037,
     "lng": 2.1689,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Tapas",
     "note": "Restaurante Casa Luz, Carrer de Vila i Vilà, 68, 08004, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Tapas",
+      "Wine"
+    ]
   },
   {
     "name": "Espai Puntal",
     "lat": 41.38653,
     "lng": 2.179948,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Grill",
     "note": "Espai Puntal, Carrer de Fonollar, 08003, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Grill",
+      "Wine"
+    ]
   },
   {
     "name": "NUDES",
     "lat": 41.386066,
     "lng": 2.182099,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Coffee",
     "note": "NUDES, Carrer del Rec, 10, 08003, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Coffee"
+    ]
   },
   {
     "name": "Departure Coffee Co.",
@@ -141,115 +197,163 @@
     "category": "Coffee",
     "group": "Coffee",
     "note": "Departure Coffee Co., Carrer de la Verge, 1, 08001, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Coffee",
+      "Pastry"
+    ]
   },
   {
     "name": "Casa Colomina",
     "lat": 41.384173,
     "lng": 2.174152,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Pastry",
     "note": "Casa Colomina, Carrer de Cucurulla, 08002, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Pastry"
+    ]
   },
   {
     "name": "Bun Bo Barcelona",
     "lat": 41.385069,
     "lng": 2.174997,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Vietnamese",
     "note": "Bun Bo Barcelona, Carrer dels Sagristans, 3, 08002, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Vietnamese"
+    ]
   },
   {
     "name": "el SET",
     "lat": 41.384284,
     "lng": 2.183094,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Catalan",
     "note": "el SET, Carrer de l'Esparteria, 08003, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Catalan",
+      "Tapas",
+      "Wine",
+      "Cheese"
+    ]
   },
   {
     "name": "LULU & FLYN",
     "lat": 41.384148,
     "lng": 2.184262,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Brunch",
     "note": "LULU & FLYN, Carrer del Rec, 08003, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Brunch",
+      "Coffee"
+    ]
   },
   {
     "name": "Maresme Brewery Taproom",
     "lat": 41.382531,
     "lng": 2.161804,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Beer",
     "note": "Maresme Brewery Taproom, Carrer de Sepúlveda, 164, 08011, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Beer"
+    ]
   },
   {
     "name": "TWO SCHMUCKS",
     "lat": 41.383125,
     "lng": 2.16527,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Drinks",
     "note": "TWO SCHMUCKS, Carrer de Joaquín Costa, 08001, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Drinks"
+    ]
   },
   {
     "name": "Kasarap Barcelona",
     "lat": 41.382055,
     "lng": 2.153325,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Filipino",
     "note": "Kasarap Barcelona, Carrer del Consell de Cent, 141, 08015, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Filipino"
+    ]
   },
   {
     "name": "Pueblo Libre",
     "lat": 41.382351,
     "lng": 2.161144,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Peruvian",
     "note": "Pueblo Libre, Carrer de Sepúlveda, 151, 08011, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Peruvian"
+    ]
   },
   {
     "name": "Espai Quera Llibres i platillos",
     "lat": 41.382502,
     "lng": 2.173379,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Middle-Eastern",
     "note": "Espai Quera Llibres i platillos, Carrer de Petritxol, 2, 08002, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Middle-Eastern",
+      "Wine"
+    ]
   },
   {
     "name": "Bistrot Levante",
     "lat": 41.38362,
     "lng": 2.180194,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "French",
     "note": "Bistrot Levante, Carrer de l'Argenteria, 08003, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "French"
+    ]
   },
   {
     "name": "Le Bouchon",
     "lat": 41.382671,
     "lng": 2.178913,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Catalan",
     "note": "Le Bouchon, Carrer de Lledó, 7, 08002, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Catalan",
+      "Tapas",
+      "Wine"
+    ]
   },
   {
     "name": "Carlos and Matilda",
     "lat": 41.381824,
     "lng": 2.179754,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Mexican",
     "note": "Carlos and Matilda, Baixada de Viladecols, 6, 08002, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Mexican",
+      "Tapas"
+    ]
   },
   {
     "name": "paradero specialty coffee & brunch",
@@ -258,16 +362,24 @@
     "category": "Brunch",
     "group": "Brunch",
     "note": "paradero specialty coffee & brunch, Carrer del Comte Borrell, 107, 08015, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Brunch",
+      "Coffee"
+    ]
   },
   {
     "name": "Petit Tapas",
     "lat": 41.375978,
     "lng": 2.189258,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Tapas",
     "note": "Petit Tapas, Carrer del Mar, 08003, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Tapas",
+      "Wine"
+    ]
   },
   {
     "name": "The Coffee",
@@ -276,25 +388,38 @@
     "category": "Coffee",
     "group": "Coffee",
     "note": "The Coffee, Carrer de Girona, 76, 08009, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Coffee",
+      "Pastry"
+    ]
   },
   {
     "name": "Bar Manifest",
     "lat": 41.395544,
     "lng": 2.157338,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Tapas",
     "note": "Bar Manifest, Rambla de Catalunya, 08008, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Tapas",
+      "Wine"
+    ]
   },
   {
     "name": "Federal Café Gotic",
     "lat": 41.379602,
     "lng": 2.176276,
     "category": "Coffee",
-    "group": "Coffee",
+    "group": "Brunch",
     "note": "Federal Café Gotic, Carrer dels Escudellers, 25, 08002, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Brunch",
+      "Coffee",
+      "Pastry"
+    ]
   },
   {
     "name": "The Egg Lab - Brunch",
@@ -303,43 +428,60 @@
     "category": "Brunch",
     "group": "Brunch",
     "note": "The Egg Lab - Brunch, Carrer del Bruc, 33, 08010, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Brunch",
+      "Coffee"
+    ]
   },
   {
     "name": "Asian Ways",
     "lat": 41.375221,
     "lng": 2.166395,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Pan-Asian",
     "note": "Asian Ways, Avinguda del Paral·lel, 08004, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Pan-Asian"
+    ]
   },
   {
     "name": "Salts - Terrassa Bar Montjuïc",
     "lat": 41.369055,
     "lng": 2.165463,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Burger",
     "note": "Salts - Terrassa Bar Montjuïc, Avinguda de Miramar, 31, 08038, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Burger"
+    ]
   },
   {
     "name": "Vietnam autèntic restaurant",
     "lat": 41.4052,
     "lng": 2.173691,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Vietnamese",
     "note": "Vietnam autèntic restaurant, Carrer de la Marina, 298, 08025, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Vietnamese"
+    ]
   },
   {
     "name": "Vibliteca bar de vins i formatges",
     "lat": 41.403273,
     "lng": 2.1567918,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Wine",
     "note": "Vibliteca bar de vins i formatges, Carrer de les Guilleries, 10, 08012, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Wine",
+      "Cheese"
+    ]
   },
   {
     "name": "Apurado coffee",
@@ -348,34 +490,50 @@
     "category": "Coffee",
     "group": "Coffee",
     "note": "Apurado coffee, Carrer de Roger de Flor, 253, 08025, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Coffee",
+      "Pastry"
+    ]
   },
   {
     "name": "Usagui cafe",
     "lat": 41.402167,
     "lng": 2.146385,
     "category": "Coffee",
-    "group": "Coffee",
+    "group": "Japanese",
     "note": "Usagui cafe, Carrer de les Santjoanistes, 28, 08006, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Japanese",
+      "Pastry",
+      "Tea"
+    ]
   },
   {
     "name": "Suís & Bowls",
     "lat": 41.400913,
     "lng": 2.15706,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Brunch",
     "note": "Suís & Bowls, Travessera de Gràcia, 08012, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Brunch",
+      "Coffee"
+    ]
   },
   {
     "name": "La Vietnamita",
     "lat": 41.387059,
     "lng": 2.182156,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Vietnamese",
     "note": "La Vietnamita, Carrer del Comerç, 08003, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Vietnamese"
+    ]
   },
   {
     "name": "Balzac Café",
@@ -384,16 +542,23 @@
     "category": "Coffee",
     "group": "Coffee",
     "note": "Balzac Café, Passeig de Sant Joan, 127, 08037, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Coffee",
+      "Pastry"
+    ]
   },
   {
     "name": "Tropicalissima",
     "lat": 41.400634,
     "lng": 2.173937,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Colombian",
     "note": "Tropicalissima, Carrer de València, 08013, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Colombian"
+    ]
   },
   {
     "name": "Morrow Coffee",
@@ -402,43 +567,62 @@
     "category": "Coffee",
     "group": "Coffee",
     "note": "Morrow Coffee, Gran Via de les Corts Catalanes, 403, 08015, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Coffee",
+      "Pastry"
+    ]
   },
   {
     "name": "NORI MATCHA",
     "lat": 41.380304,
     "lng": 2.156769,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Coffee",
     "note": "NORI MATCHA, Gran Via de les Corts Catalanes (lateral mar), 488, 08015, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Coffee",
+      "Tea"
+    ]
   },
   {
     "name": "Maramaia",
     "lat": 41.399241,
     "lng": 2.154606,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Italian",
     "note": "Maramaia, Carrer de Vic, 25, 08006, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Italian"
+    ]
   },
   {
     "name": "DosManos",
     "lat": 41.385017,
     "lng": 2.152807,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Middle-Eastern",
     "note": "DosManos, Carrer de València, 79, 08036, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Middle-Eastern"
+    ]
   },
   {
     "name": "La Pepita",
     "lat": 41.397964,
     "lng": 2.161024,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Catalan",
     "note": "La Pepita, Carrer de Còrsega, 343, 08037, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Catalan",
+      "Tapas",
+      "Wine"
+    ]
   },
   {
     "name": "Billy Brunch",
@@ -447,25 +631,35 @@
     "category": "Brunch",
     "group": "Brunch",
     "note": "Billy Brunch, Carrer de Jaume Giralt, 08003, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Brunch",
+      "Coffee"
+    ]
   },
   {
     "name": "Modu korean bowl",
     "lat": 41.396561,
     "lng": 2.156404,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Korean",
     "note": "Modu korean bowl, Carrer de Minerva, 08008, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Korean"
+    ]
   },
   {
     "name": "SUN TAKA",
     "lat": 41.397328,
     "lng": 2.16575,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Japanese",
     "note": "SUN TAKA, Carrer del Bruc, 08037, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Japanese"
+    ]
   },
   {
     "name": "Lato Café Breakfast Brunch y Ceviches",
@@ -474,97 +668,137 @@
     "category": "Brunch",
     "group": "Brunch",
     "note": "Lato Café Breakfast Brunch y Ceviches, Carrer del Bruc, 118, 08009, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Brunch",
+      "Coffee"
+    ]
   },
   {
     "name": "Brabo",
     "lat": 41.403497,
     "lng": 2.157181,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Grill",
     "note": "Brabo, Carrer de Verdi, 08012, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Grill",
+      "Wine"
+    ]
   },
   {
     "name": "Yoi Yoi Gion",
     "lat": 41.396559,
     "lng": 2.160619,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Japanese",
     "note": "Yoi Yoi Gion, Avinguda Diagonal (lateral mar), 383, 08008, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Japanese"
+    ]
   },
   {
     "name": "LA PAPA",
     "lat": 41.389809,
     "lng": 2.157737,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Brunch",
     "note": "LA PAPA, Carrer d'Aribau, 92, 08036, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Brunch",
+      "Coffee",
+      "Pastry"
+    ]
   },
   {
     "name": "Boca Grande",
     "lat": 41.394566,
     "lng": 2.159874,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Drinks",
     "note": "Boca Grande, Passatge de la Concepció, 08008, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Drinks"
+    ]
   },
   {
     "name": "Pizza Natura",
     "lat": 41.394505,
     "lng": 2.164564,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Italian",
     "note": "Pizza Natura, Carrer de Pau Claris, 153, 08009, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Italian"
+    ]
   },
   {
     "name": "Chinese Tofu Magician",
     "lat": 41.394602,
     "lng": 2.170178,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Tea",
     "note": "Chinese Tofu Magician, Carrer del Consell de Cent, 391, 08009, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Tea"
+    ]
   },
   {
     "name": "Granja Hidden",
     "lat": 41.388277,
     "lng": 2.135886,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Brunch",
     "note": "Granja Hidden, Carrer de Constança, 63, 08029, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Brunch",
+      "Coffee"
+    ]
   },
   {
     "name": "LADY BABKA",
     "lat": 41.394299,
     "lng": 2.137556,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Israeli",
     "note": "LADY BABKA, Carrer de Santa Fe de Nou Mèxic, 08021, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Israeli",
+      "Coffee",
+      "Pastry"
+    ]
   },
   {
     "name": "Hanoi Umami",
     "lat": 41.399831,
     "lng": 2.160659,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Vietnamese",
     "note": "Hanoi Umami, Carrer del Progrés, 6, 08012, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Vietnamese"
+    ]
   },
   {
     "name": "Tonkotsu",
     "lat": 41.393847,
     "lng": 2.165037,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Japanese",
     "note": "Tonkotsu, Carrer de València, 290, 08007, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Japanese"
+    ]
   },
   {
     "name": "LOT ROASTERS",
@@ -573,7 +807,10 @@
     "category": "Coffee",
     "group": "Coffee",
     "note": "LOT ROASTERS, Carrer de Pujades, 95, 08005, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Coffee"
+    ]
   },
   {
     "name": "Brew Coffee",
@@ -582,43 +819,60 @@
     "category": "Coffee",
     "group": "Coffee",
     "note": "Brew Coffee, Carrer de Roger de Flor, 08010, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Coffee",
+      "Pastry"
+    ]
   },
   {
     "name": "La Flauta Rambla",
     "lat": 41.392902,
     "lng": 2.160639,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Catalan",
     "note": "La Flauta Rambla, Rambla de Catalunya, 91-93, 08008, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Catalan",
+      "Wine"
+    ]
   },
   {
     "name": "HANA Grill & Bowl",
     "lat": 41.392937,
     "lng": 2.170236,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Korean",
     "note": "HANA Grill & Bowl, Carrer de la Diputació, 309, 08009, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Korean"
+    ]
   },
   {
     "name": "Mayura Restaurant Indian",
     "lat": 41.408331,
     "lng": 2.182116,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Indian",
     "note": "Mayura Restaurant Indian, Carrer de Mallorca, 08026, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Indian"
+    ]
   },
   {
     "name": "Little Andaman",
     "lat": 41.392337,
     "lng": 2.152128,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Indian",
     "note": "Little Andaman, Carrer de Muntaner, 182, 08036, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Indian"
+    ]
   },
   {
     "name": "Brooklyn Café",
@@ -627,61 +881,87 @@
     "category": "Coffee",
     "group": "Coffee",
     "note": "Brooklyn Café, Carrer de Pujades, 08005, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Coffee",
+      "Pastry"
+    ]
   },
   {
     "name": "La Selva",
     "lat": 41.41394,
     "lng": 2.202308,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Grill",
     "note": "La Selva, Carrer de la Selva de Mar, 165, 08020, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Grill",
+      "Wine"
+    ]
   },
   {
     "name": "Robata",
     "lat": 41.390489,
     "lng": 2.158584,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Japanese",
     "note": "Robata, Carrer d'Enric Granados, 55, 08008, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Japanese"
+    ]
   },
   {
     "name": "Compartir Barcelona",
     "lat": 41.391203,
     "lng": 2.161086,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Fine-dining",
     "note": "Compartir Barcelona, Carrer de València, 225, 08007, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Fine-dining"
+    ]
   },
   {
     "name": "La Textil",
     "lat": 41.391147,
     "lng": 2.172875,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Beer",
     "note": "La Textil, Carrer de Casp, 33B, 08010, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Beer"
+    ]
   },
   {
     "name": "Granja Petitbo",
     "lat": 41.389965,
     "lng": 2.157674,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Brunch",
     "note": "Granja Petitbo, Carrer de Mallorca, 194, 08036, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Brunch",
+      "Coffee"
+    ]
   },
   {
     "name": "Vinitus",
     "lat": 41.390024,
     "lng": 2.164097,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Catalan",
     "note": "Vinitus, Carrer del Consell de Cent, 333, 08007, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Catalan",
+      "Tapas",
+      "Wine"
+    ]
   },
   {
     "name": "Bonsai Coffee & Matcha",
@@ -690,61 +970,90 @@
     "category": "Coffee",
     "group": "Coffee",
     "note": "Bonsai Coffee & Matcha, Carrer de Casanova, 08036, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Coffee",
+      "Tea"
+    ]
   },
   {
     "name": "FUGAZ",
     "lat": 41.349977,
     "lng": 2.109895,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Catalan",
     "note": "FUGAZ, Rambla de la Marina, 141-149, 08907, l'Hospitalet de Llobregat",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Catalan",
+      "Wine"
+    ]
   },
   {
     "name": "Boa-Bao",
     "lat": 41.388543,
     "lng": 2.161236,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Pan-Asian",
     "note": "Boa-Bao, Plaça del Doctor Letamendi, 1, 08007, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Pan-Asian"
+    ]
   },
   {
     "name": "Lucciano's",
     "lat": 41.388611,
     "lng": 2.166495,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Ice Cream",
     "note": "Lucciano's, Rambla de Catalunya, 08007, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Ice Cream"
+    ]
   },
   {
     "name": "Alice Secret Garden",
     "lat": 41.390189,
     "lng": 2.170841,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Wine",
     "note": "Alice Secret Garden, Carrer de Pau Claris, 90, 08010, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Wine",
+      "Tapas"
+    ]
   },
   {
     "name": "bohl",
     "lat": 41.3905527,
     "lng": 2.1782284,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Brunch",
     "note": "bohl, Carrer de Trafalgar, 47, 08010, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Brunch",
+      "Coffee",
+      "Tea",
+      "Pastry"
+    ]
   },
   {
     "name": "Fismuler",
     "lat": 41.390134,
     "lng": 2.17996,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Tapas",
     "note": "Fismuler, Carrer del Rec Comtal, 19, 08003, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Tapas",
+      "Seafood",
+      "Wine"
+    ]
   },
   {
     "name": "Merle Coffee",
@@ -753,7 +1062,11 @@
     "category": "Coffee",
     "group": "Coffee",
     "note": "Merle Coffee, Carrer de Lepant, 338, 08025, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Coffee",
+      "Pastry"
+    ]
   },
   {
     "name": "Mono Café Poblenou",
@@ -762,16 +1075,24 @@
     "category": "Coffee",
     "group": "Coffee",
     "note": "Mono Café Poblenou, Carrer de Pujades, 08005, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Coffee",
+      "Pastry"
+    ]
   },
   {
     "name": "CASA TAOS",
     "lat": 41.398329,
     "lng": 2.194206,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Coffee",
     "note": "CASA TAOS, Carrer de Pere IV, 100, 08005, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Coffee",
+      "Pastry"
+    ]
   },
   {
     "name": "Itnig Café",
@@ -780,88 +1101,127 @@
     "category": "Coffee",
     "group": "Coffee",
     "note": "Itnig Café, Carrer de Pujades, 08005, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Coffee"
+    ]
   },
   {
     "name": "Orient Express Cocktail Bar",
     "lat": 41.428097,
     "lng": 2.190822,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Drinks",
     "note": "Orient Express Cocktail Bar, Carrer Gran de Sant Andreu, 12, 08030, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Drinks"
+    ]
   },
   {
     "name": "Bodega Borràs Restaurant",
     "lat": 41.386189,
     "lng": 2.157533,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Catalan",
     "note": "Bodega Borràs Restaurant, Carrer de Casanova, 08011, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Catalan",
+      "Tapas",
+      "Wine"
+    ]
   },
   {
     "name": "The Lobster Roll Barcelona",
     "lat": 41.385213,
     "lng": 2.161475,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Seafood",
     "note": "The Lobster Roll Barcelona, Carrer de Muntaner, 22, 08011, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Seafood",
+      "Sandwich"
+    ]
   },
   {
     "name": "Els 4 Gats",
     "lat": 41.385738,
     "lng": 2.173639,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Catalan",
     "note": "Els 4 Gats, Carrer de Montsió, 3, 08002, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Catalan",
+      "Wine",
+      "Tapas"
+    ]
   },
   {
     "name": "Koy Shunka",
     "lat": 41.38581,
     "lng": 2.175297,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Japanese",
     "note": "Koy Shunka, Carrer d'en Copons, 7, 08002, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Japanese"
+    ]
   },
   {
     "name": "Bar Pimentel",
     "lat": 41.317179,
     "lng": 2.089382,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Catalan",
     "note": "Bar Pimentel, Carrer del Riu Ebre, 19, 08820, el Prat de Llobregat",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Catalan",
+      "Tapas",
+      "Seafood"
+    ]
   },
   {
     "name": "Cremat 11",
     "lat": 41.385511,
     "lng": 2.18102,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Brunch",
     "note": "Cremat 11, Carrer Cremat Gran i Xic, 11, 08003, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Brunch",
+      "Coffee"
+    ]
   },
   {
     "name": "Xino Mandarino",
     "lat": 41.382202,
     "lng": 2.135096,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Chinese",
     "note": "Xino Mandarino, Carrer del Vallespir, 121, 08028, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Chinese"
+    ]
   },
   {
     "name": "El Noa Noa",
     "lat": 41.383685,
     "lng": 2.158611,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Coffee",
     "note": "El Noa Noa, Carrer de Villarroel, 71, 08015, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Coffee",
+      "Pastry"
+    ]
   },
   {
     "name": "Lodetto Café",
@@ -870,124 +1230,173 @@
     "category": "Coffee",
     "group": "Coffee",
     "note": "Lodetto Café, Carrer de Valldonzella, 34, 08001, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Coffee",
+      "Tea",
+      "Pastry"
+    ]
   },
   {
     "name": "Dos Palillos",
     "lat": 41.383361,
     "lng": 2.168685,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Pan-Asian",
     "note": "Dos Palillos, Carrer d'Elisabets, 08001, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Pan-Asian"
+    ]
   },
   {
     "name": "Bar Lobo",
     "lat": 41.383261,
     "lng": 2.170504,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Tapas",
     "note": "Bar Lobo, Carrer del Pintor Fortuny, 3, 08001, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Tapas",
+      "Wine"
+    ]
   },
   {
     "name": "La Cua Curta",
     "lat": 41.411779,
     "lng": 2.087552,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Wine",
     "note": "La Cua Curta, Camí de Santa Creu d'Olorda a Vallvidrera, 08196, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Wine",
+      "Cheese"
+    ]
   },
   {
     "name": "La Colmena",
     "lat": 41.383795,
     "lng": 2.17823,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Pastry",
     "note": "La Colmena, Plaça de l'Àngel, 12, 08002, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Pastry"
+    ]
   },
   {
     "name": "Estimar",
     "lat": 41.384149,
     "lng": 2.181665,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Fine-dining",
     "note": "Estimar, Carrer de Sant Antoni dels Sombrerers, 3, 08003, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Fine-dining"
+    ]
   },
   {
     "name": "Carlota Akaneya",
     "lat": 41.38596,
     "lng": 2.176282,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Japanese",
     "note": "Carlota Akaneya, Via Laietana, 42, 08003, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Japanese"
+    ]
   },
   {
     "name": "Granja M. Viader",
     "lat": 41.382956,
     "lng": 2.170998,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Coffee",
     "note": "Granja M. Viader, Carrer d'en Xuclà, 08001, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Coffee",
+      "Pastry"
+    ]
   },
   {
     "name": "Brugarol Barcelona",
     "lat": 41.392099,
     "lng": 2.153234,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Fine-dining",
     "note": "Brugarol Barcelona, Carrer de Còrsega, 08036, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Fine-dining"
+    ]
   },
   {
     "name": "Monk Barcelona",
     "lat": 41.383156,
     "lng": 2.181253,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Drinks",
     "note": "Monk Barcelona, Carrer dels Abaixadors, 08003, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Drinks"
+    ]
   },
   {
     "name": "Slow & Low",
     "lat": 41.393538,
     "lng": 2.153373,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Fine-dining",
     "note": "Slow & Low, Carrer de París, 186, 08036, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Fine-dining"
+    ]
   },
   {
     "name": "DR.BEER & MR.FRIED",
     "lat": 41.38039,
     "lng": 2.16573,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Burger",
     "note": "DR.BEER & MR.FRIED, Carrer de la Riera Alta, 33, 08001, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Burger"
+    ]
   },
   {
     "name": "Bacaro",
     "lat": 41.381209,
     "lng": 2.171523,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Italian",
     "note": "Bacaro, Carrer de Jerusalem, 6, 08001, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Italian",
+      "Wine"
+    ]
   },
   {
     "name": "Sensi Tapas",
     "lat": 41.380334,
     "lng": 2.179958,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Tapas",
     "note": "Sensi Tapas, Carrer Ample, 26, 08002, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Tapas",
+      "Wine"
+    ]
   },
   {
     "name": "vitrina café",
@@ -996,115 +1405,169 @@
     "category": "Coffee",
     "group": "Coffee",
     "note": "vitrina café, Carrer de Calàbria, 128, 08015, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Coffee",
+      "Pastry"
+    ]
   },
   {
     "name": "Bar Cañete",
     "lat": 41.37914,
     "lng": 2.173138,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Catalan",
     "note": "Cañete, Carrer de la Unió, 17, 08002, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Catalan",
+      "Tapas",
+      "Seafood",
+      "Wine"
+    ]
   },
   {
     "name": "Viana Barcelona",
     "lat": 41.37988,
     "lng": 2.176104,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Tapas",
     "note": "Viana Barcelona, Carrer del Vidre, 7, 08002, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Tapas",
+      "Fusion",
+      "Wine"
+    ]
   },
   {
     "name": "Garage Bar",
     "lat": 41.387002,
     "lng": 2.160096,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Beer",
     "note": "Garage Bar, Carrer del Consell de Cent, 261, 08011, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Beer"
+    ]
   },
   {
     "name": "Origo",
     "lat": 41.400451,
     "lng": 2.163241,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Bakery",
     "note": "Origo, Carrer de Milà i Fontanals, 9, 08037, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Bakery",
+      "Coffee",
+      "Pastry"
+    ]
   },
   {
     "name": "Suculent",
     "lat": 41.378198,
     "lng": 2.170438,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Catalan",
     "note": "Suculent, Rambla del Raval, 08001, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Catalan",
+      "Tapas",
+      "Wine"
+    ]
   },
   {
     "name": "Bar Marsella",
     "lat": 41.378242,
     "lng": 2.171243,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Catalan",
     "note": "Bar Marsella, Carrer de Sant Pau, 65, 08001, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Catalan",
+      "Tapas"
+    ]
   },
   {
     "name": "Doppietta",
     "lat": 41.37607,
     "lng": 2.162871,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Italian",
     "note": "Doppietta, Passatge Pere Calders, 08004, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Italian"
+    ]
   },
   {
     "name": "Cafè Cometa",
     "lat": 41.375859,
     "lng": 2.162024,
     "category": "Coffee",
-    "group": "Coffee",
+    "group": "Brunch",
     "note": "Cafè Cometa, Carrer del Parlament, 20, 08015, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Brunch",
+      "Coffee",
+      "Pastry"
+    ]
   },
   {
     "name": "Norai Raval Maritim Museum Restaurant",
     "lat": 41.375854,
     "lng": 2.176101,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Tapas",
     "note": "Norai Raval Maritim Museum Restaurant, Avinguda de les Drassanes, 08002, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Tapas"
+    ]
   },
   {
     "name": "Quimet & Quimet",
     "lat": 41.374222,
     "lng": 2.165739,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Catalan",
     "note": "Quimet & Quimet, Carrer del Poeta Cabanyes, 25, 08004, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Catalan"
+    ]
   },
   {
     "name": "Margarit restaurante",
     "lat": 41.372794,
     "lng": 2.163261,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Mediterranean",
     "note": "Margarit restaurante, Carrer de Margarit, 44, 08004, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Mediterranean",
+      "Wine"
+    ]
   },
   {
     "name": "La Greca",
     "lat": 41.422969,
     "lng": 2.186778,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Tapas",
     "note": "La Greca, Carrer de Garcilaso, 08027, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Tapas",
+      "Wine"
+    ]
   },
   {
     "name": "Yako Coffee",
@@ -1113,70 +1576,97 @@
     "category": "Coffee",
     "group": "Coffee",
     "note": "Yako Coffee, Carrer de Milton, 08006, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Coffee"
+    ]
   },
   {
     "name": "SEOUL PEOPLE",
     "lat": 41.398658,
     "lng": 2.154583,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Korean",
     "note": "SEOUL PEOPLE, Carrer de Sant Gabriel, 2, 08012, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Korean"
+    ]
   },
   {
     "name": "Old Fashioned",
     "lat": 41.398001,
     "lng": 2.159758,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Drinks",
     "note": "Old Fashioned, Carrer de Santa Teresa, 08008, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Drinks"
+    ]
   },
   {
     "name": "Bar Bocata",
     "lat": 41.39774,
     "lng": 2.152325,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Tapas",
     "note": "Bar Bocata, Travessera de Gràcia, 86, 08006, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Tapas",
+      "Wine"
+    ]
   },
   {
     "name": "La Balmesina",
     "lat": 41.39703,
     "lng": 2.152255,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Italian",
     "note": "La Balmesina, Carrer de Balmes, 193, 08006, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Italian",
+      "Wine"
+    ]
   },
   {
     "name": "Shoronpo",
     "lat": 41.39743,
     "lng": 2.155748,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Japanese",
     "note": "Shoronpo, Carrer del Doctor Rizal, 20, 08012, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Japanese"
+    ]
   },
   {
     "name": "Berbena",
     "lat": 41.396421,
     "lng": 2.156546,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Tapas",
     "note": "Berbena, Carrer de Minerva, 6, 08008, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Tapas",
+      "Wine"
+    ]
   },
   {
     "name": "Thailandes Restaurant",
     "lat": 41.39661,
     "lng": 2.160919,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Thai",
     "note": "Thailandes Restaurant, Avinguda Diagonal (lateral mar), 379, 08008, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Thai"
+    ]
   },
   {
     "name": "ONIS COFFEE",
@@ -1185,250 +1675,355 @@
     "category": "Coffee",
     "group": "Coffee",
     "note": "ONIS COFFEE, Carrer de Roger de Llúria, 87, 08009, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Coffee",
+      "Pastry"
+    ]
   },
   {
     "name": "Bar Cugat",
     "lat": 41.395583,
     "lng": 2.167629,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Tapas",
     "note": "Bar Cugat, Carrer del Bruc, 97, 08009, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Tapas",
+      "Wine"
+    ]
   },
   {
     "name": "Guanabara by El Rodizio",
     "lat": 41.395409,
     "lng": 2.171171,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Brazilian",
     "note": "Guanabara by El Rodizio, Carrer del Consell de Cent, 403, 08009, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Brazilian"
+    ]
   },
   {
     "name": "sato i tanaka",
     "lat": 41.394542,
     "lng": 2.168963,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Japanese",
     "note": "sato i tanaka, Carrer del Bruc, 79, 08009, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Japanese"
+    ]
   },
   {
     "name": "Funky Bakers Eatery",
     "lat": 41.384268,
     "lng": 2.182675,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Coffee",
     "note": "Funky Bakers Eatery, Passeig del Born, 10, 08003, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Coffee",
+      "Bakery"
+    ]
   },
   {
     "name": "Monster Sushi c/ Girona",
     "lat": 41.394856,
     "lng": 2.17126,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Japanese",
     "note": "Monster Sushi c/ Girona, Carrer de Girona, 68, 08009, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Japanese"
+    ]
   },
   {
     "name": "Hotpot de Sichuan",
     "lat": 41.394169,
     "lng": 2.175173,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Chinese",
     "note": "Hotpot de Sichuan, Plaça de Tetuan, 9, 08010, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Chinese"
+    ]
   },
   {
     "name": "La Dama",
     "lat": 41.394625,
     "lng": 2.152962,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Fine-dining",
     "note": "La Dama, Avinguda Diagonal (lateral mar), 423-425, 08036, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Fine-dining"
+    ]
   },
   {
     "name": "Lasarte",
     "lat": 41.405416,
     "lng": 2.176775,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Fine-dining",
     "note": "Lasarte, Carrer de Provença, 08025, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Fine-dining"
+    ]
   },
   {
     "name": "Babula Bar 1937",
     "lat": 41.393631,
     "lng": 2.165744,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Tapas",
     "note": "Babula Bar 1937, Carrer de Pau Claris, 139, 08009, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Tapas",
+      "Wine",
+      "Seafood"
+    ]
   },
   {
     "name": "Café Turó",
     "lat": 41.432367,
     "lng": 2.169068,
     "category": "Coffee",
-    "group": "Coffee",
+    "group": "Tapas",
     "note": "Café Turó, Passeig de la Peira, 60-58, 08031, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Tapas",
+      "Seafood",
+      "Wine"
+    ]
   },
   {
     "name": "Ceviche 103",
     "lat": 41.393681,
     "lng": 2.15079,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Peruvian",
     "note": "Ceviche 103, Carrer de Londres, 103, 08036, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Peruvian"
+    ]
   },
   {
     "name": "Bar El Velódromo",
     "lat": 41.393444,
     "lng": 2.150139,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Catalan",
     "note": "Bar El Velódromo, Passatge Lluis Pellicer, 08036, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Catalan",
+      "Tapas"
+    ]
   },
   {
     "name": "Melo-Jia",
     "lat": 41.393468,
     "lng": 2.155483,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Chinese",
     "note": "Melo-Jia, Carrer de Còrsega, 250, 08036, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Chinese"
+    ]
   },
   {
     "name": "Restaurante Solomillo",
     "lat": 41.393196,
     "lng": 2.161423,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Grill",
     "note": "Restaurante Solomillo, Carrer de Mallorca, 251, 08008, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Grill",
+      "Wine"
+    ]
   },
   {
     "name": "Focacha",
     "lat": 41.383808,
     "lng": 2.177313,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Drinks",
     "note": "Focacha, Baixada de Santa Clara, 2, 08002, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Drinks"
+    ]
   },
   {
     "name": "MIKAN",
     "lat": 41.40323,
     "lng": 2.127086,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Tapas",
     "note": "MIKAN, Passeig de la Bonanova, 08022, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Tapas",
+      "Pan-Asian",
+      "Wine"
+    ]
   },
   {
     "name": "RoofTop Garden El Palace Barcelona",
     "lat": 41.381346,
     "lng": 2.173957,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Tapas",
     "note": "RoofTop Garden El Palace Barcelona, Carrer de la Boqueria, 10, 08002, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Tapas",
+      "Drinks"
+    ]
   },
   {
     "name": "Pirineu En Boca",
     "lat": 41.391616,
     "lng": 2.175173,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Catalan",
     "note": "Pirineu En Boca, Carrer de Girona, 08010, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Catalan",
+      "Tapas",
+      "Wine"
+    ]
   },
   {
     "name": "concepto nonna",
     "lat": 41.383271,
     "lng": 2.181628,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Italian",
     "note": "concepto nonna, Carrer de les Caputxes, 08003, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Italian",
+      "Wine"
+    ]
   },
   {
     "name": "Gresca",
     "lat": 41.391298,
     "lng": 2.15714,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Catalan",
     "note": "Gresca, Carrer de Provença, 08036, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Catalan",
+      "Wine",
+      "Tapas"
+    ]
   },
   {
     "name": "Quevieres Serra",
     "lat": 41.442828,
     "lng": 2.166261,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Tapas",
     "note": "Quevieres Serra, Carrer d'Antonio Machado, 12, 08042, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Tapas",
+      "Wine"
+    ]
   },
   {
     "name": "Yashima",
     "lat": 41.391039,
     "lng": 2.143467,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Japanese",
     "note": "Yashima, Avinguda de Josep Tarradellas, 145, 08029, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Japanese"
+    ]
   },
   {
     "name": "Albé Barcelona",
     "lat": 41.390083,
     "lng": 2.157843,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Fine-dining",
     "note": "Albé Barcelona, Carrer de Mallorca, 196, 08036, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Fine-dining"
+    ]
   },
   {
     "name": "MAISON CARNE",
     "lat": 41.414424,
     "lng": 2.153572,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Grill",
     "note": "MAISON CARNE, Viaducte del Mig, 08024, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Grill",
+      "Wine"
+    ]
   },
   {
     "name": "Taco Alto",
     "lat": 41.386927,
     "lng": 2.166653,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Mexican",
     "note": "Taco Alto, Ronda de la Universitat, 08007, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Mexican"
+    ]
   },
   {
     "name": "PÖTSTOT",
     "lat": 41.382424,
     "lng": 2.168702,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Tapas",
     "note": "PÖTSTOT, Carrer del Pintor Fortuny, 32, 08001, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Tapas",
+      "Gluten-free"
+    ]
   },
   {
     "name": "La Cabrera Casa de Carnes",
     "lat": 41.378929,
     "lng": 2.188554,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Grill",
     "note": "La Cabrera Casa de Carnes, Carrer de Sant Carles, 08003, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Grill",
+      "Wine"
+    ]
   },
   {
     "name": "Roast Club Cafe",
@@ -1437,259 +2032,358 @@
     "category": "Coffee",
     "group": "Coffee",
     "note": "Roast Club Cafe, Carrer de València, 190, 08011, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Coffee"
+    ]
   },
   {
     "name": "Nikkei 103",
     "lat": 41.387495,
     "lng": 2.160418,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Peruvian",
     "note": "Nikkei 103, Carrer d'Aribau, 33, 08011, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Peruvian",
+      "Japanese"
+    ]
   },
   {
     "name": "Jon Cake",
     "lat": 41.38727,
     "lng": 2.177606,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Pastry",
     "note": "Jon Cake, Carrer de Sant Pere Més Baix, 08003, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Pastry"
+    ]
   },
   {
     "name": "Disfrutar",
     "lat": 41.387762,
     "lng": 2.153172,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Catalan",
     "note": "Disfrutar, Carrer de Villarroel, 163, 08001, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Catalan",
+      "Tapas",
+      "Wine"
+    ]
   },
   {
     "name": "Hideout Burger",
     "lat": 41.386822,
     "lng": 2.160268,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Burger",
     "note": "Hideout Burger, Carrer del Consell de Cent, 242, 08011, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Burger"
+    ]
   },
   {
     "name": "IKOYA Izakaya",
     "lat": 41.419973,
     "lng": 2.183103,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Japanese",
     "note": "IKOYA Izakaya, Carrer de Biscaia, 428, 08027, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Japanese"
+    ]
   },
   {
     "name": "Capet Restaurant",
     "lat": 41.381984,
     "lng": 2.178892,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Tapas",
     "note": "Capet Restaurant, Carrer del Cometa, 5, 08002, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Tapas",
+      "Catalan",
+      "Wine"
+    ]
   },
   {
     "name": "Lemon Pie",
     "lat": 41.389513,
     "lng": 2.135599,
     "category": "Restaurant",
-    "group": "Restaurant",
     "note": "Lemon Pie, Avinguda Diagonal, 545-577, 08029, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": []
   },
   {
     "name": "SENSATO Restaurant",
     "lat": 41.405218,
     "lng": 2.146789,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Japanese",
     "note": "SENSATO Restaurant, Carrer de Septimània, 08006, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Japanese"
+    ]
   },
   {
     "name": "San Kil",
     "lat": 41.407882,
     "lng": 2.160087,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Korean",
     "note": "San Kil, Carrer de la Legalitat, 08024, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Korean"
+    ]
   },
   {
     "name": "Morreig",
     "lat": 41.403703,
     "lng": 2.156947,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Pastry",
     "note": "Morreig, Carrer de Verdi, 25, 08012, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Pastry"
+    ]
   },
   {
     "name": "La Graciosa",
     "lat": 41.402873,
     "lng": 2.16052,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Wine",
     "note": "La Graciosa, Carrer de Milà i Fontanals, 88, 08012, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Wine"
+    ]
   },
   {
     "name": "Zed",
     "lat": 41.401287,
     "lng": 2.174551,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Mediterranean",
     "note": "Zed, Carrer de València, 399, 08013, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Mediterranean",
+      "Wine"
+    ]
   },
   {
     "name": "Extra Bar",
     "lat": 41.399061,
     "lng": 2.196851,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Tapas",
     "note": "Extra Bar, Carrer de la Ciutat de Granada, 08005, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Tapas",
+      "Wine"
+    ]
   },
   {
     "name": "Restaurant Salero",
     "lat": 41.400597,
     "lng": 2.160364,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Pan-Asian",
     "note": "Restaurant Salero, Carrer de Tordera, 10, 08012, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Pan-Asian",
+      "Wine"
+    ]
   },
   {
     "name": "El Manaba",
     "lat": 41.4007,
     "lng": 2.16926,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Ecuatorian",
     "note": "El Manaba, Carrer de Provença, 08037, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Ecuatorian"
+    ]
   },
   {
     "name": "La Punta Callao Cevichería",
     "lat": 41.401176,
     "lng": 2.154854,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Peruvian",
     "note": "La Punta Callao Cevichería, Carrer de Ros de Olano, 11, 08012, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Peruvian"
+    ]
   },
   {
     "name": "Green & Berry",
     "lat": 41.394492,
     "lng": 2.153324,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Vegan",
     "note": "Green & Berry, Carrer d'Enric Granados, 153, 08008, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Vegan"
+    ]
   },
   {
     "name": "Marta's Lemon Pie",
     "lat": 41.389525,
     "lng": 2.135346,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Pastry",
     "note": "Marta's Lemon Pie, Avinguda Diagonal, 545-577, 08021, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Pastry"
+    ]
   },
   {
     "name": "Pinga Boteco",
     "lat": 41.384401,
     "lng": 2.17432,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Brazilian",
     "note": "Pinga Boteco, Avinguda del Portal de l'Àngel, 1, 08002, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Brazilian"
+    ]
   },
   {
     "name": "KEMAKO JAPANESE BURGERS",
     "lat": 41.409876,
     "lng": 2.17501,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Japanese",
     "note": "KEMAKO JAPANESE BURGERS, Carrer de la Indústria, 162, 08025, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Japanese",
+      "Burger"
+    ]
   },
   {
     "name": "La Peruana Pollastres a la Brasa",
     "lat": 41.411649,
     "lng": 2.171221,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Peruvian",
     "note": "La Peruana Pollastres a la Brasa, Carrer de Santa Carolina, 48, 08025, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Peruvian",
+      "Grill"
+    ]
   },
   {
     "name": "Dreamboat Bar & Deli",
     "lat": 41.398669,
     "lng": 2.16023,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Drinks",
     "note": "Dreamboat Bar & Deli, Carrer de Bonavista, 29, 08012, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Drinks"
+    ]
   },
   {
     "name": "Osom Nou",
     "lat": 41.4043,
     "lng": 2.198179,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Brunch",
     "note": "Osom Nou, Carrer de Sant Joan de Malta, 148, 08018, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Brunch",
+      "Coffee"
+    ]
   },
   {
     "name": "Noru Bar",
     "lat": 41.401639,
     "lng": 2.196956,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Pan-Asian",
     "note": "Noru Bar, Carrer de Pere IV, 156, 08005, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Pan-Asian",
+      "Catalan",
+      "Pastry"
+    ]
   },
   {
     "name": "Masa Vins Barcelona",
     "lat": 41.397163,
     "lng": 2.19275,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Wine",
     "note": "Masa Vins Barcelona, Carrer d'Àlaba, 08018, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Wine"
+    ]
   },
   {
     "name": "Achaar bar",
     "lat": 41.398502,
     "lng": 2.194041,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Indian",
     "note": "Achaar bar, Carrer de Pere IV, 08018, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Indian"
+    ]
   },
   {
     "name": "Sartoria Panatieri",
     "lat": 41.397175,
     "lng": 2.16491,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Italian",
     "note": "Sartoria Panatieri, Carrer de Provença, 330, 08037, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Italian"
+    ]
   },
   {
     "name": "Amateur",
     "lat": 41.396754,
     "lng": 2.196285,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Tapas",
     "note": "Amateur, Carrer de Llull, 08005, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Tapas",
+      "Catalan",
+      "Wine"
+    ]
   },
   {
     "name": "Gabby's Brunch",
@@ -1698,7 +2392,11 @@
     "category": "Brunch",
     "group": "Brunch",
     "note": "Gabby's Brunch, Carrer de València, 22, 08029, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Brunch",
+      "Coffee"
+    ]
   },
   {
     "name": "Café Menssana",
@@ -1707,106 +2405,153 @@
     "category": "Coffee",
     "group": "Coffee",
     "note": "Café Menssana, Carrer de Ramon Turró, 08003, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Coffee",
+      "Mexican",
+      "Brunch"
+    ]
   },
   {
     "name": "Farola Cocktail Bar Barcelona",
     "lat": 41.384384,
     "lng": 2.180059,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Drinks",
     "note": "Farola Cocktail Bar Barcelona, Carrer dels Vigatans, 13, 08003, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Drinks"
+    ]
   },
   {
     "name": "Can Paixano",
     "lat": 41.381762,
     "lng": 2.183415,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Catalan",
     "note": "Can Paixano, Carrer de la Reina Cristina, 7, 08003, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Catalan",
+      "Tapas",
+      "Wine"
+    ]
   },
   {
     "name": "Bar Electricitat",
     "lat": 41.379349,
     "lng": 2.190017,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Catalan",
     "note": "Bar Electricitat, Carrer de Sant Carles, 15, 08003, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Catalan",
+      "Tapas"
+    ]
   },
   {
     "name": "Anís Cafe",
     "lat": 41.37824,
     "lng": 2.190283,
     "category": "Coffee",
-    "group": "Coffee",
+    "group": "Lebanese",
     "note": "Anís Cafe, Carrer de Pontevedra, 25, 08003, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Lebanese"
+    ]
   },
   {
     "name": "Restaurante Can Ramonet",
     "lat": 41.38082,
     "lng": 2.188916,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Catalan",
     "note": "Restaurante Can Ramonet, Carrer de la Maquinista, 17, 08003, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Catalan",
+      "Tapas"
+    ]
   },
   {
     "name": "La Bombeta",
     "lat": 41.380566,
     "lng": 2.187711,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Catalan",
     "note": "La Bombeta, Carrer de la Maquinista, 3, 08003, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Catalan",
+      "Seafood",
+      "Tapas"
+    ]
   },
   {
     "name": "MUYSCA",
     "lat": 41.378625,
     "lng": 2.189458,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Colombian",
     "note": "MUYSCA, Carrer del Baluard, 72, 08003, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Colombian"
+    ]
   },
   {
     "name": "Lola Divine",
     "lat": 41.408699,
     "lng": 2.203071,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Grill",
     "note": "Lola Divine, Carrer de Cristóbal de Moura, 23, 08019, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Grill",
+      "Wine"
+    ]
   },
   {
     "name": "T.44 TAULAT 44",
     "lat": 41.398827,
     "lng": 2.205064,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Coffee",
     "note": "T.44 TAULAT 44, Carrer del Taulat, 08005, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Coffee",
+      "Pastry"
+    ]
   },
   {
     "name": "Orval Studio",
     "lat": 41.392625,
     "lng": 2.185774,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Coffee",
     "note": "Orval Studio, Carrer de Buenaventura Muñoz, 31, 08003, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Coffee",
+      "Pastry"
+    ]
   },
   {
     "name": "Rasoi Ghar Restaurant Indian",
     "lat": 41.381805,
     "lng": 2.183593,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Indian",
     "note": "Rasoi Ghar Restaurant Indian, Carrer de la Reina Cristina, 10, 08003, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Indian"
+    ]
   },
   {
     "name": "Morning Glory Coffee & Brunch",
@@ -1815,7 +2560,11 @@
     "category": "Brunch",
     "group": "Brunch",
     "note": "Morning Glory Coffee & Brunch, Carrer de la Riereta, 15, 08001, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Brunch",
+      "Coffee"
+    ]
   },
   {
     "name": "The Miners Coffee Via Augusta",
@@ -1824,7 +2573,11 @@
     "category": "Coffee",
     "group": "Coffee",
     "note": "The Miners Coffee Via Augusta, Via Augusta, 105, 08006, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Coffee",
+      "Pastry"
+    ]
   },
   {
     "name": "Àmbar cafè d'especialitat",
@@ -1833,7 +2586,11 @@
     "category": "Coffee",
     "group": "Coffee",
     "note": "Àmbar cafè d'especialitat, Carrer de Provença, 341, 08037, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Coffee",
+      "Pastry"
+    ]
   },
   {
     "name": "Jaç Hi-fi Cafe",
@@ -1842,43 +2599,61 @@
     "category": "Coffee",
     "group": "Coffee",
     "note": "Jaç Hi-fi Cafe, Avinguda Diagonal (lateral mar), 335, 08037, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Coffee",
+      "Brunch",
+      "Pastry"
+    ]
   },
   {
     "name": "The Rooftop at Sir Victor",
     "lat": 41.396178,
     "lng": 2.160917,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Wine",
     "note": "The Rooftop at Sir Victor, Carrer del Rosselló, 265, 08008, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Wine"
+    ]
   },
   {
     "name": "Cresta Colorada Rosticeria Mexicana",
     "lat": 41.393107,
     "lng": 2.155042,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Mexican",
     "note": "Cresta Colorada Rosticeria Mexicana, Carrer de Còrsega, 244, 08036, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Mexican"
+    ]
   },
   {
     "name": "LABALABUSTA",
     "lat": 41.3922,
     "lng": 2.15606,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Israeli",
     "note": "LABALABUSTA, Carrer del Rosselló, 180-178, 08008, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Israeli",
+      "Wine"
+    ]
   },
   {
     "name": "Yakumanka amb Gastón Acurio",
     "lat": 41.390248,
     "lng": 2.159896,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Peruvian",
     "note": "Yakumanka amb Gastón Acurio, Carrer de València, 207, 08007, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Peruvian"
+    ]
   },
   {
     "name": "Nomad Coffee Lab & Shop",
@@ -1887,25 +2662,36 @@
     "category": "Coffee",
     "group": "Coffee",
     "note": "Nomad Coffee Lab & Shop, Carrer de Sant Pere Més Alt, 51, 08003, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Coffee"
+    ]
   },
   {
     "name": "Fiffty fifty",
     "lat": 41.397506,
     "lng": 2.19674,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Wine",
     "note": "Fiffty fifty, Carrer de Badajoz, 65, 08005, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Wine",
+      "Burger"
+    ]
   },
   {
     "name": "Piñata Cantina Cocteleria Barcelona",
     "lat": 41.382579,
     "lng": 2.162059,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Mexican",
     "note": "Piñata Cantina Cocteleria Barcelona, Carrer de Casanova, 19, 08011, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Mexican",
+      "Drinks"
+    ]
   },
   {
     "name": "Kiosco de Ideas Libreria y Cafe",
@@ -1914,88 +2700,125 @@
     "category": "Coffee",
     "group": "Coffee",
     "note": "Kiosco de Ideas Libreria y Cafe, Carrer de la Riera Alta, 34, 08001, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Coffee"
+    ]
   },
   {
     "name": "Restaurant Candela en Rama",
     "lat": 41.377184,
     "lng": 2.163339,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Grill",
     "note": "Restaurant Candela en Rama, Carrer del Parlament, 41, 08015, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Grill",
+      "Seafood",
+      "Wine"
+    ]
   },
   {
     "name": "Mercado Central Taberna Cevichera",
     "lat": 41.374411,
     "lng": 2.161874,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Peruvian",
     "note": "Mercado Central Taberna Cevichera, Carrer de la Creu dels Molers, 4, 08004, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Peruvian"
+    ]
   },
   {
     "name": "Santamadre Carn peix i marisc",
     "lat": 41.372084,
     "lng": 2.157496,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Seafood",
     "note": "Santamadre Carn peix i marisc, Carrer de la França Xica, 23, 08004, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Seafood",
+      "Grill",
+      "Wine"
+    ]
   },
   {
     "name": "The Sopa Boba Restaurant Tapes",
     "lat": 41.396309,
     "lng": 2.166666,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Tapas",
     "note": "The Sopa Boba Restaurant Tapes, Carrer del Bruc, 115, 08009, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Tapas",
+      "Wine"
+    ]
   },
   {
     "name": "Tragaluz",
     "lat": 41.394731,
     "lng": 2.1604,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Tapas",
     "note": "Tragaluz, Passatge de la Concepció, 5, 08008, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Tapas",
+      "Wine"
+    ]
   },
   {
     "name": "IKENOCHA Matcha Tea House",
     "lat": 41.391514,
     "lng": 2.150237,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Japanese",
     "note": "IKENOCHA, Carrer de París, 149, 08036, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Japanese",
+      "Tea"
+    ]
   },
   {
     "name": "KOH-NDAL THAI BISTRO",
     "lat": 41.41106,
     "lng": 2.138108,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Thai",
     "note": "KOH-NDAL THAI BISTRO, Passeig de Sant Gervasi, 57b, 08022, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Thai"
+    ]
   },
   {
     "name": "LAMAI THAI TAPAS",
     "lat": 41.379043,
     "lng": 2.189043,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Thai",
     "note": "LAMAI THAI TAPAS, Carrer de Sant Carles, 12, 08003, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Thai"
+    ]
   },
   {
     "name": "Coco Social House Barceloneta",
     "lat": 41.377153,
     "lng": 2.190418,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Brunch",
     "note": "Coco Social House Barceloneta, Carrer de Meer, 52, 08003, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Brunch"
+    ]
   },
   {
     "name": "Amauta Coffee Bar",
@@ -2004,25 +2827,35 @@
     "category": "Coffee",
     "group": "Coffee",
     "note": "Amauta Coffee Bar, Travessera de Gràcia, 90, 08006, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Coffee"
+    ]
   },
   {
     "name": "Akiro Hand Roll Bar",
     "lat": 41.392146,
     "lng": 2.1599514,
     "category": "Sushi",
-    "group": "Sushi",
+    "group": "Japanese",
     "note": "Akiro Hand Roll Bar, Carrer de Mallorca, 237, 08008, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Japanese"
+    ]
   },
   {
     "name": "Mercader Eixample",
     "lat": 41.3923305,
     "lng": 2.160347,
     "category": "Restaurant",
-    "group": "Restaurant",
+    "group": "Tapas",
     "note": "Mercader Eixample, Passatge de Mercader, 08008, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Tapas",
+      "Wine"
+    ]
   },
   {
     "name": "Bocanariz",
@@ -2031,6 +2864,10 @@
     "category": "Wine",
     "group": "Wine",
     "note": "Bocanariz, Carrer de Vallfogona, 12, 08012, Barcelona",
-    "url": ""
+    "url": "",
+    "groups": [
+      "Wine",
+      "Tapas"
+    ]
   }
 ]

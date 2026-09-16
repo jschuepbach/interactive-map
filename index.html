@@ -18,18 +18,13 @@
     --border: #1f2530;
 
     /* Category colors — used for markers, sidebar labels, popups, filters. */
-    --c-coffee: #c68a4e;
-    --c-brunch: #e8c15a;
-    --c-sushi: #3fb6c9;
-    --c-asian: #d6598f;
-    --c-tapas: #a8455c;
-    --c-vegan: #6cae5b;
-    --c-bakery: #e39bc0;
-    --c-pizza: #d97347;
-    --c-burger: #8a5a3c;
-    --c-bar: #8f7fd6;
-    --c-wine: #b4536e;
-    --c-restaurant: #ff7a59;
+    --c-sweet: #c68a4e;
+    --c-local: #ff7a59;
+    --c-asia: #3fb6c9;
+    --c-americas: #6cae5b;
+    --c-europe: #d6598f;
+    --c-drinks: #8f7fd6;
+    --c-other: #b4536e;
   }
 
   * { box-sizing: border-box; }
@@ -62,7 +57,9 @@
     background: var(--panel-2); color: var(--accent); font-size: 11px; font-weight: 600;
     margin-left: 6px; vertical-align: middle; }
 
-  .filters { display: flex; gap: 6px; padding: 12px 18px 0; flex-wrap: wrap; }
+  /* 39 tags would push the list off the screen, so the block scrolls on its own. */
+  .filters { display: flex; gap: 6px; padding: 12px 18px 0; flex-wrap: wrap;
+    max-height: 32vh; overflow-y: auto; scrollbar-width: thin; }
   .filter-btn {
     background: var(--panel-2); color: var(--muted); border: 1px solid var(--border);
     padding: 6px 12px; font-size: 11px; font-weight: 600; border-radius: 999px;
@@ -538,23 +535,45 @@
     const activeGroups = new Set();
     let query = '';          // shared by the sidebar field and the list view field
     let activeHood = null;   // neighbourhood collection, combines with the group filter
-    const OVERRIDES = {};    // lowercased place name -> manual category list
     const NOTES = {};        // lowercased place name -> own note from notes.md
     const LINKS = {};        // lowercased place name -> { url, instagram } from links.json
-    const GROUP_ORDER = ['All', 'Coffee', 'Brunch', 'Sushi', 'Asian', 'Tapas', 'Vegan', 'Bakery', 'Pizza', 'Burger', 'Bar', 'Wine', 'Restaurant'];
+    // The tag vocabulary is Jan's, maintained in the Notion table; data.json carries
+    // the tags per place. Nothing is inferred here any more.
+    const GROUP_ORDER = ['All', 'Coffee', 'Brunch', 'Pastry', 'Bakery', 'Tea', 'Ice Cream',
+      'Catalan', 'Tapas', 'Seafood', 'Grill', 'Mediterranean', 'Fine-dining', 'Japanese',
+      'Pan-Asian', 'Korean', 'Vietnamese', 'Chinese', 'Thai', 'Indian', 'Filipino', 'Peruvian',
+      'Mexican', 'Brazilian', 'Colombian', 'Ecuatorian', 'Italian', 'French', 'Israeli',
+      'Lebanese', 'Middle-Eastern', 'Wine', 'Beer', 'Drinks', 'Cheese', 'Burger', 'Vegan',
+      'Sandwich', 'Fusion', 'Gluten-free'];
+    // One colour per band, not per tag: 39 tags in 39 colours reads as confetti.
     const GROUP_COLORS = {
-      Coffee: 'var(--c-coffee)', Brunch: 'var(--c-brunch)', Sushi: 'var(--c-sushi)',
-      Asian: 'var(--c-asian)', Tapas: 'var(--c-tapas)', Vegan: 'var(--c-vegan)',
-      Bakery: 'var(--c-bakery)', Pizza: 'var(--c-pizza)', Burger: 'var(--c-burger)',
-      Bar: 'var(--c-bar)', Wine: 'var(--c-wine)', Restaurant: 'var(--c-restaurant)'
+      Coffee: 'var(--c-sweet)', Brunch: 'var(--c-sweet)', Pastry: 'var(--c-sweet)',
+      Bakery: 'var(--c-sweet)', Tea: 'var(--c-sweet)', 'Ice Cream': 'var(--c-sweet)',
+      Catalan: 'var(--c-local)', Tapas: 'var(--c-local)', Seafood: 'var(--c-local)',
+      Grill: 'var(--c-local)', Mediterranean: 'var(--c-local)', 'Fine-dining': 'var(--c-local)',
+      Japanese: 'var(--c-asia)', 'Pan-Asian': 'var(--c-asia)', Korean: 'var(--c-asia)',
+      Vietnamese: 'var(--c-asia)', Chinese: 'var(--c-asia)', Thai: 'var(--c-asia)',
+      Indian: 'var(--c-asia)', Filipino: 'var(--c-asia)',
+      Peruvian: 'var(--c-americas)', Mexican: 'var(--c-americas)', Brazilian: 'var(--c-americas)',
+      Colombian: 'var(--c-americas)', Ecuatorian: 'var(--c-americas)',
+      Italian: 'var(--c-europe)', French: 'var(--c-europe)', Israeli: 'var(--c-europe)',
+      Lebanese: 'var(--c-europe)', 'Middle-Eastern': 'var(--c-europe)',
+      Wine: 'var(--c-drinks)', Beer: 'var(--c-drinks)', Drinks: 'var(--c-drinks)',
+      Cheese: 'var(--c-drinks)',
+      Burger: 'var(--c-other)', Vegan: 'var(--c-other)', Sandwich: 'var(--c-other)',
+      Fusion: 'var(--c-other)', 'Gluten-free': 'var(--c-other)'
     };
     function groupColor(group) { return GROUP_COLORS[group] || 'var(--accent)'; }
 
     // Chip bands — presentation only, the filter state stays flat.
     const CHIP_BANDS = [
-      { label: 'Coffee & sweet', groups: ['Coffee', 'Brunch', 'Bakery'] },
-      { label: 'Food',           groups: ['Sushi', 'Asian', 'Tapas', 'Vegan', 'Pizza', 'Burger', 'Restaurant'] },
-      { label: 'Drinks',         groups: ['Bar', 'Wine'] }
+      { label: 'Coffee & sweet',  groups: ['Coffee', 'Brunch', 'Pastry', 'Bakery', 'Tea', 'Ice Cream'] },
+      { label: 'Catalan & tapas', groups: ['Catalan', 'Tapas', 'Seafood', 'Grill', 'Mediterranean', 'Fine-dining'] },
+      { label: 'Asia',            groups: ['Japanese', 'Pan-Asian', 'Korean', 'Vietnamese', 'Chinese', 'Thai', 'Indian', 'Filipino'] },
+      { label: 'Americas',        groups: ['Peruvian', 'Mexican', 'Brazilian', 'Colombian', 'Ecuatorian'] },
+      { label: 'Europe & Levante', groups: ['Italian', 'French', 'Israeli', 'Lebanese', 'Middle-Eastern'] },
+      { label: 'Drinks',          groups: ['Wine', 'Beer', 'Drinks', 'Cheese'] },
+      { label: 'Everything else', groups: ['Burger', 'Vegan', 'Sandwich', 'Fusion', 'Gluten-free'] }
     ];
 
     // ----- Neighbourhoods -----
@@ -603,44 +622,6 @@
         }
         p.hood = best;
       }
-    }
-
-    // ----- Sub-category detection (keyword match against name + note) -----
-    // Runs only on places already bucketed as "Restaurant" — Coffee/Brunch are
-    // already precise. First matching rule wins (exclusive, like the top-level groups).
-    const CATEGORY_RULES = [
-      { key: 'Burger', keywords: ['burger', 'hamburgueseria'] },
-      { key: 'Pizza',  keywords: ['pizza', 'pizzeria', 'pasta', 'italian', 'italiana', 'trattoria'] },
-      { key: 'Sushi',  keywords: ['sushi', 'ramen', 'izakaya', 'yakitori', 'sashimi', 'nigiri', 'omakase', 'tonkotsu', 'hotpot', 'japon', 'japonès', 'japonés', 'japones', 'japanese', 'nikkei'] },
-      { key: 'Asian',  keywords: ['thai', 'thailandes', 'thailandès', 'tailandes', 'vietnam', 'vietnamita', 'pho', 'korea', 'korean', 'coreà', 'coreana', 'coreano', 'seoul', 'wok', 'dumpling', 'bao', 'chinese', 'chino', 'china', 'sichuan', 'indian', 'india', 'asian', 'asiatic', 'asiàtic'] },
-      { key: 'Vegan',  keywords: ['vegan', 'vegana', 'vegetarian', 'vegetariano', 'vegetariana', 'healthy', 'salad', 'poke'] },
-      { key: 'Bakery', keywords: ['pastisseria', 'bakery', 'pastry', 'pie', 'cake', 'granja', 'gelato', 'croissant', 'forn'] },
-      { key: 'Wine',   keywords: ['vins', 'vinos', 'vino', 'wine', 'vinoteca', 'enoteca', 'celler'] },
-      { key: 'Bar',    keywords: ['cocktail', 'coctel', 'beer', 'cerveza', 'cerveseria', 'brewery', 'vermouth', 'vermut', 'copas', 'bar de', 'bar del'] },
-      { key: 'Tapas',  keywords: ['tapas', 'tapes', 'bodega', 'pintxos'] },
-    ];
-    // Every matching rule, in rule order — a wine bar that also does tapas is
-    // both. The first one is the primary: it colours the pin and labels the row.
-    function detectCategories(p) {
-      const haystack = ((p.name || '') + ' ' + (p.note || '')).toLowerCase();
-      return CATEGORY_RULES
-        .filter((rule) => rule.keywords.some((kw) => matchesWord(haystack, kw)))
-        .map((rule) => rule.key);
-    }
-
-    // Whole-word match (an optional plural "s" still counts). Substring matching
-    // put "Doppietta" into Bakery via "pie" and "La Mar Salada" into Vegan via
-    // "salad"; accented letters count as word characters so "Japonès" still hits.
-    const WORD = '0-9a-z\u00e0-\u00ff';
-    const wordRe = new Map();
-    function matchesWord(haystack, kw) {
-      let re = wordRe.get(kw);
-      if (!re) {
-        re = new RegExp('(?<![' + WORD + '])' + kw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') +
-          's?(?![' + WORD + '])');
-        wordRe.set(kw, re);
-      }
-      return re.test(haystack);
     }
 
     // ----- 3D buildings layer -----
@@ -1404,21 +1385,6 @@
         if (!res.ok) throw new Error('HTTP ' + res.status);
         const raw = await res.json();
 
-        // Hand-set categories for places the keyword rules cannot know about:
-        // "el SET" is a wine and tapas place, but its name and note say neither.
-        try {
-          const ovr = await fetch('overrides.json', { cache: 'no-store' });
-          if (ovr.ok) {
-            const map = await ovr.json();
-            for (const key of Object.keys(map)) {
-              if (key.charAt(0) === '_' || !Array.isArray(map[key])) continue;
-              OVERRIDES[key.toLowerCase()] = map[key].filter((g) => GROUP_ORDER.indexOf(g) > 0);
-            }
-          }
-        } catch (e) {
-          console.warn('overrides.json not loaded:', e);
-        }
-
         // Websites and Instagram handles, for the same reason notes live outside
         // data.json: the scrape only knows a website for a handful of places and
         // knows no Instagram at all, so anything added by hand belongs in a file
@@ -1459,17 +1425,10 @@
           if (own_links.url) p.url = own_links.url;
           p.instagram = instagramUrl(own_links.instagram);
 
-          const base = p.group || p.category || 'Restaurant';
-          const manual = OVERRIDES[(p.name || '').toLowerCase()];
-          if (manual && manual.length) {
-            p.groups = manual.slice();
-          } else if (base === 'Restaurant') {
-            const found = detectCategories(p);
-            p.groups = found.length ? found : ['Restaurant'];
-          } else {
-            p.groups = [base];
-          }
-          p.group = p.groups[0];   // primary — pin colour, row label
+          // Tags ship with the data now. A place Jan has not tagged yet keeps an
+          // empty list: it stays on the map and answers search, but no chip claims it.
+          p.groups = Array.isArray(p.groups) ? p.groups.filter((g) => GROUP_ORDER.indexOf(g) > 0) : [];
+          p.group = p.groups[0] || '';   // primary — pin colour, row label
           filtered.push(p);
         }
         ALL_DATA = filtered;

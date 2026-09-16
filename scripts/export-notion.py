@@ -3,9 +3,10 @@
 
   python3 scripts/export-notion.py > places.json
 
-Category rules, neighbourhood postcodes and the proximity fallback are read out
-of index.html, so a row says exactly what the app shows. Personal notes come
-from notes.md, websites and Instagram from links.json.
+Tags come straight from data.json, which is fed by the Cuisine column in Notion.
+Neighbourhood postcodes and the proximity fallback are read out of index.html, so
+a row says exactly what the app shows. Personal notes come from notes.md,
+websites and Instagram from links.json.
 Run: python3 scripts/export-notion.py [outfile]
 """
 import json, pathlib, re, sys, unicodedata
@@ -13,19 +14,11 @@ import json, pathlib, re, sys, unicodedata
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 SRC = (ROOT / "index.html").read_text()
 
-def parse_rules():
-    block = re.search(r"const CATEGORY_RULES = \[(.*?)\n    \];", SRC, re.S).group(1)
-    return [(key, re.findall(r"'([^']*)'", kws))
-            for key, kws in re.findall(r"\{ key: '([^']+)',\s*keywords: \[(.*?)\] \}", block, re.S)]
-
 def parse_hoods():
     block = re.search(r"const HOODS = \[(.*?)\n    \];", SRC, re.S).group(1)
     return [(hid, label, set(re.findall(r"'([^']*)'", codes)))
             for hid, label, codes in re.findall(
                 r"\{ id: '([^']+)',\s*label: '([^']*)',\s*codes: \[(.*?)\] \}", block, re.S)]
-
-def word(hay, kw):
-    return re.search(r"(?<![0-9a-zà-ÿ])" + re.escape(kw) + r"s?(?![0-9a-zà-ÿ])", hay) is not None
 
 def is_address(note):
     n = (note or "").strip()
@@ -54,10 +47,8 @@ def instagram_url(handle):
         return h
     return "https://instagram.com/" + h.lstrip("@").rstrip("/")
 
-RULES, HOODS = parse_rules(), parse_hoods()
+HOODS = parse_hoods()
 places = json.loads((ROOT / "data.json").read_text())
-ovr = json.loads((ROOT / "overrides.json").read_text()) if (ROOT / "overrides.json").exists() else {}
-OVERRIDES = {k.lower(): v for k, v in ovr.items() if not k.startswith("_") and isinstance(v, list)}
 links = json.loads((ROOT / "links.json").read_text()) if (ROOT / "links.json").exists() else {}
 LINKS = {k.lower(): v for k, v in links.items() if not k.startswith("_") and isinstance(v, dict)}
 NOTES = own_notes()
@@ -67,15 +58,7 @@ BY_CODE = {c: (hid, label) for hid, label, codes in HOODS for c in codes}
 rows, pending = [], []
 for p in places:
     name = p.get("name", "")
-    base = p.get("group") or p.get("category") or "Restaurant"
-    hay = (name + " " + (p.get("note") or "")).lower()
-    manual = OVERRIDES.get(name.lower())
-    if manual:
-        tags = list(manual)
-    elif base == "Restaurant":
-        tags = [k for k, kws in RULES if any(word(hay, kw) for kw in kws)] or ["Restaurant"]
-    else:
-        tags = [base]
+    tags = list(p.get("groups") or [])
 
     code = re.search(r"\b(08\d{3})\b", p.get("note") or "")
     hood = BY_CODE.get(code.group(1)) if code else None
