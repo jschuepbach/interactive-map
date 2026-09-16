@@ -884,15 +884,18 @@
           btn.appendChild(dot);
         }
         btn.appendChild(document.createTextNode(group + ' (' + n + ')'));
-        btn.addEventListener('click', () => setFilter(group));
+        btn.addEventListener('click', () => toggleGroup(group));
         wrap.appendChild(btn);
       });
     }
 
-    // Sidebar filters stay single-select: picking one replaces the selection.
-    function setFilter(group) {
-      activeGroups.clear();
-      if (group !== 'All') activeGroups.add(group);
+    // One rule for every filter surface: sidebar, intro chips and list chips all
+    // toggle the same set, so a category picked in one place can be switched off
+    // in another. "All" is not a group, it is the clear button.
+    function toggleGroup(group) {
+      if (group === 'All') activeGroups.clear();
+      else if (activeGroups.has(group)) activeGroups.delete(group);
+      else activeGroups.add(group);
       applyFilters();
     }
 
@@ -1049,10 +1052,7 @@
         }
         btn.appendChild(document.createTextNode(group + ' (' + n + ')'));
         btn.addEventListener('click', () => {
-          if (group === 'All') activeGroups.clear();
-          else if (activeGroups.has(group)) activeGroups.delete(group);
-          else activeGroups.add(group);
-          applyFilters();
+          toggleGroup(group);
           document.getElementById('lvBody').scrollTop = 0;
         });
         wrap.appendChild(btn);
@@ -1115,11 +1115,7 @@
       dot.style.background = active ? '#0a0c10' : color;
       btn.appendChild(dot);
       btn.appendChild(document.createTextNode(group + ' (' + n + ')'));
-      btn.addEventListener('click', () => {
-        if (activeGroups.has(group)) activeGroups.delete(group);
-        else activeGroups.add(group);
-        applyFilters();
-      });
+      btn.addEventListener('click', () => toggleGroup(group));
       return btn;
     }
 
