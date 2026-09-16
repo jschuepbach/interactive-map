@@ -23,10 +23,6 @@ Tucked into the Gothic Quarter inside Hotel Casa Bonay. Reliable flat whites and
 <!-- Coffee | Modern espresso bar in Eixample. Light roasts, multi-roaster guest bea -->
 Modern espresso bar in Eixample. Light roasts, multi-roaster guest beans, attentive baristas — a serious cup.
 
-## Cafés El Magnífico
-<!-- Coffee | Family-run since 1919, but specialty-focused since the early 2000s. Wi -->
-Family-run since 1919, but specialty-focused since the early 2000s. Wide bean selection by weight.
-
 ## Onna Coffee
 <!-- Coffee | Gràcia roaster with their own farm in Honduras. Honey-processed lots f -->
 Gràcia roaster with their own farm in Honduras. Honey-processed lots feature regularly — sit at the bar.
@@ -39,10 +35,6 @@ Inside Espacio 88 in Poblenou. Vintage Citroën-van vibe, brews from rotating Eu
 <!-- Coffee | Slim Raval spot doing their own roasting. Excellent V60 program, great -->
 Slim Raval spot doing their own roasting. Excellent V60 program, great cardamom buns — easy to miss, worth the hunt.
 
-## Espai Joliu
-<!-- Coffee | Poblenou hybrid: monstera-lined café with a tight specialty menu. Filt -->
-Poblenou hybrid: monstera-lined café with a tight specialty menu. Filter-only on Saturdays — bring a notebook.
-
 ## CAUA CACAO ROASTERS
 <!-- Coffee | Cacao's - Gelato Siciliano, Carrer de los Castillejos, 343, 08025, Bar -->
 
@@ -50,10 +42,6 @@ Poblenou hybrid: monstera-lined café with a tight specialty menu. Filter-only o
 ## Trópico Brunch Barcelona
 <!-- Brunch | TRÓPICO Brunch Barcelona | Balmes, Carrer de Balmes, 24, 08007, Barcel -->
 South American brunch done properly. I go for the cachaça with cheese every time, my dad swears by the tacos.
-
-## Red Ant Noodle Bar
-<!-- Restaurant | Red Ant Noodle Bar, Carrer dels Tiradors, 08003, Barcelona -->
-
 
 ## Bloome By Sasha
 <!-- Restaurant | Bloome by Sasha, Via Laietana, 45, 08003, Barcelona -->
@@ -73,14 +61,6 @@ South American brunch done properly. I go for the cachaça with cheese every tim
 
 ## NUDES
 <!-- Restaurant | nudes, Carrer del Rec, 10, 08003, Barcelona -->
-
-
-## Restaurant Club Bananas
-<!-- Restaurant | Restaurant Reial Club Maritim, Moll d'Espanya, 08039, Barcelona -->
-
-
-## Eixampeling Brunch Café & Bar
-<!-- Brunch | Lato Café - Breakfast, Brunch y Ceviches, Carrer del Bruc, 118, 08009, -->
 
 
 ## Departure Coffee Co.
@@ -111,10 +91,6 @@ Half butcher and cheese counter, half restaurant, with the warmth of a cabin in 
 <!-- Restaurant | Two Schmucks, Carrer de Joaquín Costa, 08001, Barcelona -->
 
 
-## Vegan Junk Food Bar
-<!-- Restaurant | Vegan Junk Food bar, Carrer del Rosselló, 239, 08008, Barcelona -->
-
-
 ## Kasarap Barcelona
 <!-- Restaurant | Barcelona-Arc de Triomf, Carrer de Roger de Flor, 08010, Barcelona -->
 
@@ -135,10 +111,6 @@ A Peruvian friend sent us here and we worked our way through half the menu, with
 <!-- Restaurant | Le Bouchon, Carrer de Lledó, 7, 08002, Barcelona -->
 
 
-## Ninas coffee & Brunch
-<!-- Brunch | Pantry brunch & coffee, Carrer de Provença, 08013, Barcelona -->
-
-
 ## Carlos and Matilda
 <!-- Restaurant | Carlos and Mathilda, Baixada de Viladecols, 6, 08002, Barcelona -->
 A friendly little place with tables out on the terrace. Come for the beers and the tacos.
@@ -147,24 +119,12 @@ A friendly little place with tables out on the terrace. Come for the beers and t
 <!-- Brunch | La Eulàlia - Brunch & Specialty Coffee, Carrer de València, 437, 08013 -->
 
 
-## El Jardí
-<!-- Restaurant | El Jardí, Carrer de Cartagena, 217, 08013, Barcelona -->
-
-
 ## Petit Tapas
 <!-- Restaurant | Perlazul Tapas & Grill Barceloneta, 68 Passeig de Joan de Borbó, 08003 -->
 
 
-## Restaurant Japonès Yamado
-<!-- Restaurant | Restaurant Japonés Tian Fu, Carrer de Còrsega, 610, 08025, Barcelona -->
-
-
 ## The Coffee
 <!-- Coffee | The Coffee, Carrer de Girona, 76, 08009, Barcelona -->
-
-
-## Frankie Gallo Cha Cha Cha
-<!-- Restaurant | Frankie Gallo Cha Cha Cha, Carrer del Marquès de Barberà, 15, 08001, B -->
 
 
 ## Bar Manifest
@@ -199,10 +159,6 @@ Wine and cheese without the wood-panelled solemnity. Modern room, sharp list, ea
 <!-- Coffee | Apurado Café, Carrer de Roger de Flor, 253, 08025, Barcelona -->
 
 
-## Muss & Coco
-<!-- Restaurant | Coco-Mat, Carrer de Balmes, 08006, Barcelona -->
-
-
 ## Usagui cafe
 <!-- Coffee | Usagui, Carrer de les Santjoanistes, 28, 08006, Barcelona -->
 Japanese cakes worth going out of your way for, precise and not too sweet. The lunch is just as good.
@@ -219,20 +175,12 @@ Japanese cakes worth going out of your way for, precise and not too sweet. The l
 <!-- Coffee | Balzac, Passeig de Sant Joan, 127, 08037, Barcelona -->
 The interior alone is worth the visit, and nobody minds if you work for a while. Order a slice of their homemade cake, then another one.
 
-## Restaurant Mi Rincón Barcelona
-<!-- Restaurant | Restaurant Mi Rincón, Avinguda Diagonal, 303, 08013, Barcelona -->
-
-
 ## Tropicalissima
 <!-- Restaurant | Tropicalissima, Carrer de València, 08013, Barcelona -->
 
 
 ## Morrow Coffee
 <!-- Coffee | Morrow Coffee, Gran Via de les Corts Catalanes, 403, 08015, Barcelona -->
-
-
-## Aventura Park Barcelona Gran Via
-<!-- Restaurant | Gran Via de les Corts Catalanes, 08018, Barcelona -->
 
 
 ## NORI MATCHA
@@ -253,10 +201,6 @@ The interior alone is worth the visit, and nobody minds if you work for a while.
 
 ## Billy Brunch
 <!-- Brunch | Billy Brunch, Carrer de Jaume Giralt, 08003, Barcelona -->
-
-
-## Duo coffee
-<!-- Coffee | Yi Duo 2, Carrer de Concepción Arenal, 4, 08027, Barcelona -->
 
 
 ## Modu korean bowl
@@ -323,20 +267,12 @@ Order the milk tea, it comes with melting beans and a dusting of cinnamon and is
 <!-- Restaurant | La Flauta Rambla, Rambla de Catalunya, 91-93, 08008, Barcelona -->
 
 
-## CocoVail Beer Hall
-<!-- Restaurant | New Grill Beef Halal, Carrer de València, 614, 08026, Barcelona -->
-
-
 ## HANA Grill & Bowl
 <!-- Restaurant | New Grill Beef Halal, Carrer de València, 614, 08026, Barcelona -->
 
 
 ## Mayura Restaurant Indian
 <!-- Restaurant | Atithi Indian Restaurant, Carrer de Mallorca, 08026, Barcelona -->
-
-
-## El Árbol
-<!-- Restaurant | El Arbol, Carrer del Consell de Cent, 08011, Barcelona -->
 
 
 ## Little Andaman
@@ -363,14 +299,6 @@ Sushi that keeps you curious, in a room that is a pleasure to sit in.
 <!-- Restaurant | La Textil, Carrer de Casp, 08010, Barcelona -->
 
 
-## Firebug
-<!-- Restaurant | Firebug Brunch, Passeig de Sant Joan, 08010, Barcelona -->
-
-
-## Fauna Café
-<!-- Coffee | Fauna Café, Avinguda de Vilanova, 11, 08010, Barcelona -->
-
-
 ## Granja Petitbo
 <!-- Restaurant | Granja Petitbo, Carrer de Mallorca, 194, 08036, Barcelona -->
 
@@ -393,10 +321,6 @@ Sushi that keeps you curious, in a room that is a pleasure to sit in.
 
 ## Lucciano's
 <!-- Restaurant | Lucciano's Barcelona, Rambla de Catalunya, 08007, Barcelona -->
-
-
-## Formatgeria Simó
-<!-- Restaurant | Carrer de la Formatgeria, 08003, Barcelona -->
 
 
 ## Alice Secret Garden
@@ -439,10 +363,6 @@ They talked me into an iced matcha with coconut milk, and it has ruined every ot
 <!-- Restaurant | The Lobster Roll Barcelona, Carrer de Muntaner, 22, 08011, Barcelona -->
 
 
-## Muteki Ramen
-<!-- Restaurant | Muteki Japanese Ramen, Rambla de Catalunya, 08007, Barcelona -->
-
-
 ## Els 4 Gats
 <!-- Restaurant | 4Gats, Carrer de Montsió, 3, 08002, Barcelona -->
 
@@ -459,16 +379,8 @@ They talked me into an iced matcha with coconut milk, and it has ruined every ot
 <!-- Restaurant | Cremat 11, Carrer Cremat Gran i Xic, 11, 08003, Barcelona -->
 
 
-## Café Bobé
-<!-- Coffee | Cafe Bobe, Carrer de la Barra de Ferro, 8, 08003, Barcelona -->
-
-
 ## Xino Mandarino
 <!-- Restaurant | Xino Xano, Carrer del Vallespir, 08028, Barcelona -->
-
-
-## Noor Coffee
-<!-- Coffee | Noor Coffee, Carrer del Consell de Cent, 187, 08011, Barcelona -->
 
 
 ## El Noa Noa
@@ -477,10 +389,6 @@ They talked me into an iced matcha with coconut milk, and it has ruined every ot
 
 ## Lodetto Café
 <!-- Coffee | Lodetto, Carrer de Valldonzella, 08001, Barcelona -->
-
-
-## Llibreria Byron
-<!-- Restaurant | Byron llibreria & espais, Carrer de Casanova, 32, 08011, Barcelona -->
 
 
 ## Dos Palillos
@@ -503,28 +411,12 @@ They talked me into an iced matcha with coconut milk, and it has ruined every ot
 <!-- Restaurant | Estimar, Carrer de Sant Antoni dels Sombrerers, 3, 08003, Barcelona -->
 
 
-## Rooftop Smokehouse
-<!-- Restaurant | Rooftop Smokehouse, Carrer del Comte Borrell, 08011, Barcelona -->
-
-
-## Isla Negra
-<!-- Restaurant | Isla Negra, Carrer de Sepúlveda, 159, 08011, Barcelona -->
-
-
 ## Carlota Akaneya
 <!-- Restaurant | Farmàcia de Vilarrubia Goula, Maria Carlota, vi laietana, 40, 08003, B -->
 
 
-## Froots & Roots
-<!-- Restaurant | Froots & Roots, Carrer del Peu de la Creu, 19, 08001, Barcelona -->
-
-
 ## Granja M. Viader
 <!-- Restaurant | Granja M. Viader, Carrer d'en Xuclà, 08001, Barcelona -->
-
-
-## Vivinos
-<!-- Restaurant | Dr. J. Vivancos García, Travessera de Gràcia, 68-70, 08006, Barcelona -->
 
 
 ## Brugarol Barcelona
@@ -533,14 +425,6 @@ They talked me into an iced matcha with coconut milk, and it has ruined every ot
 
 ## Monk Barcelona
 <!-- Restaurant | ALIMENTACIÓ MONK, Carrer dels Abaixadors, 08003, Barcelona -->
-
-
-## Vila Viniteca
-<!-- Restaurant | Vila Viniteca, Carrer dels Agullers, 9, 08003, Barcelona -->
-
-
-## Ugot Bruncherie
-<!-- Brunch | Bonica Bruncherie, Carrer d'Aragó, 388, 08009, Barcelona -->
 
 
 ## Slow & Low
@@ -555,14 +439,6 @@ They talked me into an iced matcha with coconut milk, and it has ruined every ot
 <!-- Restaurant | Bacaro, Carrer de Jerusalem, 6, 08001, Barcelona -->
 
 
-## Gaijin Sushi
-<!-- Restaurant | Kayi Sushi Barcelona, Carrer de Balmes, 164-166, 08008, Barcelona -->
-
-
-## Rasoterra
-<!-- Restaurant | Rasoterra, Carrer de Palau, 5, 08002, Barcelona -->
-
-
 ## Sensi Tapas
 <!-- Restaurant | Sensi Tapas, Carrer Ample, 26, 08002, Barcelona -->
 
@@ -571,20 +447,12 @@ They talked me into an iced matcha with coconut milk, and it has ruined every ot
 <!-- Coffee | Cafè-Teatre el Llantiol, Carrer de la Riereta, 7, 08001, Barcelona -->
 
 
-## Hotel Peninsular
-<!-- Restaurant | Hotel Peninsular, Carrer Sant Pau, 34, 08001, Barcelona -->
-
-
-## Cañete
+## Bar Cañete
 <!-- Restaurant | Bar Cañete, Carrer de la Unió, 17, 08002, Barcelona -->
 
 
 ## Viana Barcelona
 <!-- Restaurant | Viana, Carrer del Vidre, 7, 08002, Barcelona -->
-
-
-## Wittmore Hotel
-<!-- Restaurant | The Wittmore, Carrer de Riudarenes, 08002, Barcelona -->
 
 
 ## Garage Bar
@@ -603,24 +471,12 @@ They talked me into an iced matcha with coconut milk, and it has ruined every ot
 <!-- Restaurant | Bar Marsella, Carrer de Sant Pau, 65, 08001, Barcelona -->
 
 
-## Pastisseria Tartalà
-<!-- Restaurant | La Pastisseria Barcelona, Carrer d'Aragó, 228, 08007, Barcelona -->
-
-
 ## Doppietta
 <!-- Restaurant | Doppietta, Passatge Pere Calders, 08004, Barcelona -->
 
 
-## Ikibana Paralelo
-<!-- Restaurant | Ikibana, Passatge Mercantil, 08003, Barcelona -->
-
-
 ## Cafè Cometa
 <!-- Coffee | Cafe Cometa, Carrer del Parlament, 20, 08015, Barcelona -->
-
-
-## Tembo Family Club
-<!-- Restaurant | La Sagrada Maria Club, Carrer de Mallorca, 440, 08013, Barcelona -->
 
 
 ## Norai Raval Maritim Museum Restaurant
@@ -647,24 +503,8 @@ They talked me into an iced matcha with coconut milk, and it has ruined every ot
 <!-- Restaurant | Restaurant Coreà SEOUL PEOPLE, Carrer de Sant Gabriel, 2, 08012, Barce -->
 
 
-## Cafe Pagès
-<!-- Coffee | Cafè Pagès, Carrer del Torrent de l'Olla, 08012, Barcelona -->
-
-
 ## Old Fashioned
 <!-- Restaurant | Old fashioned, Carrer de Santa Teresa, 08008, Barcelona -->
-
-
-## Seventy Barcelona
-<!-- Restaurant | Barcelona-Arc de Triomf, Carrer de Roger de Flor, 08010, Barcelona -->
-
-
-## CASA BRUTA
-<!-- Restaurant | CASA BRUTA, Carrer de les Carolines, 24, 08012, Barcelona -->
-
-
-## BAR PINO
-<!-- Restaurant | El Quinto Pino, Carrer dels Madrazo, 08006, Barcelona -->
 
 
 ## Bar Bocata
@@ -695,10 +535,6 @@ Not been in yet. I have walked past it too many times to keep ignoring it.
 <!-- Restaurant | Bar Cugat, Carrer del Bruc, 97, 08009, Barcelona -->
 
 
-## Roots & Rolls
-<!-- Restaurant | Roots Barcelona, Carrer de la Ribera, 6, 08003, Barcelona -->
-
-
 ## Guanabara by El Rodizio
 <!-- Restaurant | Guanabara by El Rodizio, Carrer del Consell de Cent, 403, 08009, Barce -->
 
@@ -715,20 +551,8 @@ Every sushi plate arrives beautifully composed. It reads less like dinner and mo
 <!-- Restaurant | Monster Sushi, Carrer de Girona, 68, 08009, Barcelona -->
 
 
-## Yuan Lao Si Hotpot
-<!-- Restaurant | Yuan Lao Si Hotpot, Carrer de la Diputació, 304, 08013, Barcelona -->
-
-
 ## Hotpot de Sichuan
 <!-- Restaurant | HotPot de Sichuan, Plaça de Tetuan, 9, 08010, Barcelona -->
-
-
-## Micelio By Sasha
-<!-- Restaurant | Blooms by Sasha, Avinguda de Gaudí, 08025, Barcelona -->
-
-
-## Cafe Equilibrium
-<!-- Coffee | Eqvilibrivm Café, Carrer de València, 352, 08009, Barcelona -->
 
 
 ## La Dama
@@ -741,10 +565,6 @@ Every sushi plate arrives beautifully composed. It reads less like dinner and mo
 
 ## Babula Bar 1937
 <!-- Restaurant | Babula Bar 1937, Carrer de Pau Claris, 139, 08009, Barcelona -->
-
-
-## TALLER DE PASTA
-<!-- Restaurant | Pasta Madre, Carrer dels Tallers, 3, 08001, Barcelona -->
 
 
 ## Café Turó
@@ -771,10 +591,6 @@ Every sushi plate arrives beautifully composed. It reads less like dinner and mo
 <!-- Restaurant | Buenas Migas, Baixada de Santa Clara, 2, 08002, Barcelona -->
 
 
-## POTRA
-<!-- Restaurant | Porta, 08016, Barcelona -->
-
-
 ## MIKAN
 <!-- Restaurant | Hotel Catalonia Mikado, Passeig de la Bonanova, 08022, Barcelona -->
 
@@ -787,24 +603,8 @@ Every sushi plate arrives beautifully composed. It reads less like dinner and mo
 <!-- Restaurant | Pirinev En Boca, Carrer de Girona, 08010, Barcelona -->
 
 
-## Club 61
-<!-- Restaurant | Bitcoin ATM - Shitcoins.club, Salvador Espriu, 61, 08005, Barcelona -->
-
-
-## Clara Barcelona
-<!-- Restaurant | Palau del Lloctinent, Passatge de Santa Clara, 08002, Barcelona -->
-
-
 ## concepto nonna
 <!-- Restaurant | Nonna's Brunch, Carrer de les Caputxes, 08003, Barcelona -->
-
-
-## Viet Kitchen
-<!-- Restaurant | Viet Kitchen, Carrer d'Aribau, 137, 08036, Barcelona -->
-
-
-## Uniko
-<!-- Restaurant | Uniko, Carrer de Còrsega, 08036, Barcelona -->
 
 
 ## Gresca
@@ -815,32 +615,16 @@ Every sushi plate arrives beautifully composed. It reads less like dinner and mo
 <!-- Restaurant | Parc de Josep Maria Serra Martí, Barcelona -->
 
 
-## MATNA
-<!-- Restaurant | Alfons el Magnànim, Carrer d'Alfons el Magnànim, 08019, Barcelona -->
-
-
 ## Yashima
 <!-- Restaurant | Yashima, Avinguda de Josep Tarradellas, 145, 08029, Barcelona -->
-
-
-## Out of China
-<!-- Restaurant | Out of China, Carrer d'Aribau, 112, 08036, Barcelona -->
 
 
 ## Albé Barcelona
 <!-- Restaurant | Albé Barcelona, Carrer de Mallorca, 196, 08036, Barcelona -->
 
 
-## Tsukimi
-<!-- Restaurant | Tsukimi, Carrer de Mallorca, 191, 08036, Barcelona -->
-
-
 ## MAISON CARNE
 <!-- Restaurant | Casa Museu Gaudí, Viaducte del Mig, 08024, Barcelona -->
-
-
-## Madame Saigon
-<!-- Restaurant | Pho Saigon, Carrer d'Aragó, 334, 08009, Barcelona -->
 
 
 ## Taco Alto
@@ -855,32 +639,12 @@ Every sushi plate arrives beautifully composed. It reads less like dinner and mo
 <!-- Restaurant | Centte Cultural Casa de la Barceloneta 1761, Carrer de Sant Carles, 08 -->
 
 
-## Mazah Restaurant Libanès
-<!-- Restaurant | L'AUTÈNTIC Restaurant Libanès, Rambla del Poblenou, 92, 08005, Barcelo -->
-
-
-## Canela Fina
-<!-- Restaurant | Fina, Carrer del Cardenal Reig, 08904, Barcelona -->
-
-
-## Exotica Brunch
-<!-- Brunch | Exotica, Carrer de Trafalgar, 08010, Barcelona -->
-
-
 ## Roast Club Cafe
 <!-- Coffee | Roast Club Cafè, Carrer de València, 190, 08011, Barcelona -->
 
 
-## Slotmania
-<!-- Restaurant | Scalextric. Slotmania, Carrer de Muntaner, 08011, Barcelona -->
-
-
 ## Nikkei 103
 <!-- Restaurant | Nikkei 103, Carrer d'Aribau, 33, 08011, Barcelona -->
-
-
-## Bar del Convent
-<!-- Restaurant | Bar del Convent, Plaça de l'Acadèmia, 08003, Barcelona -->
 
 
 ## Jon Cake
@@ -891,16 +655,8 @@ Every sushi plate arrives beautifully composed. It reads less like dinner and mo
 <!-- Restaurant | Disfrutar, Carrer de Villarroel, 163, 08001, Barcelona -->
 
 
-## MITO Specialty Coffee
-<!-- Coffee | La Eulàlia - Brunch & Specialty Coffee, Carrer de València, 437, 08013 -->
-
-
 ## Hideout Burger
 <!-- Restaurant | Hideout Burger, Carrer del Consell de Cent, 242, 08011, Barcelona -->
-
-
-## Podonamu Restaurant Coreà
-<!-- Restaurant | Restaurant Coreà SEOUL PEOPLE, Carrer de Sant Gabriel, 2, 08012, Barce -->
 
 
 ## IKOYA Izakaya
@@ -909,10 +665,6 @@ Every sushi plate arrives beautifully composed. It reads less like dinner and mo
 
 ## Capet Restaurant
 <!-- Restaurant | Restaurant Hofmann, Carrer de la Granada del Penedès, 14, 08006, Barce -->
-
-
-## West Street
-<!-- Restaurant | West street, Carrer de Rosalía de Castro, 54, 08025, Barcelona -->
 
 
 ## Lemon Pie
@@ -927,40 +679,16 @@ Every sushi plate arrives beautifully composed. It reads less like dinner and mo
 <!-- Restaurant | San Kil, Carrer de la Legalitat, 08024, Barcelona -->
 
 
-## Posidònia
-<!-- Restaurant | Posidònia, Carrer de Bruniquer, 51, 08012, Barcelona -->
-
-
-## Bar Salvatge
-<!-- Restaurant | Salvatge, Carrer del Penedès, 3, 08012, Barcelona -->
-
-
 ## Morreig
 <!-- Restaurant | Morreig, Carrer de Verdi, 25, 08012, Barcelona -->
 Cakes built to look like fruit, oranges and all. Worth a detour for the pastry counter alone.
-
-## CASA FIGARI Bar de Jazz
-<!-- Restaurant | Casa Figari, Carrer del Torrent de l'Olla, 141, 08012, Barcelona -->
-
 
 ## La Graciosa
 <!-- Restaurant | La Graciosa, Carrer de Milà i Fontanals, 88, 08012, Barcelona -->
 
 
-## Guapaletas Barcelona
-<!-- Restaurant | Barcelona -->
-
-
 ## Zed
 <!-- Restaurant | Zed, Carrer de València, 399, 08013, Barcelona -->
-
-
-## Old Coffees House
-<!-- Coffee | Barcelona House Hotel, Carrer dels Escudellers, 19, 08002, Barcelona -->
-
-
-## KITSUNE
-<!-- Restaurant | Kitsune Sushi Bar, Carrer del Montseny, 13, 08012, Barcelona -->
 
 
 ## Extra Bar
@@ -971,24 +699,12 @@ Cakes built to look like fruit, oranges and all. Worth a detour for the pastry c
 <!-- Restaurant | Restaurant Hofmann, Carrer de la Granada del Penedès, 14, 08006, Barce -->
 
 
-## Can Kenji
-<!-- Restaurant | Can Kenji, Carrer del Rosselló, 325, 08037, Barcelona -->
-
-
 ## El Manaba
 <!-- Restaurant | El Manaba, Carrer de Provença, 08037, Barcelona -->
 
 
-## Ramen-ya Hiro
-<!-- Restaurant | Ramen Ya-Hiro, Carrer de Girona, 164, 08037, Barcelona -->
-
-
 ## La Punta Callao Cevichería
 <!-- Restaurant | La Punta Callao, Carrer de Ros de Olano, 11, 08012, Barcelona -->
-
-
-## Kakigori Barcelona
-<!-- Restaurant | Kakigori Barcelona, Plaça de la Vila de Gràcia, 3, 08012, Barcelona -->
 
 
 ## Green & Berry
@@ -1015,10 +731,6 @@ Cakes built to look like fruit, oranges and all. Worth a detour for the pastry c
 <!-- Restaurant | Romà, Carrer de Bonavista, 29, 08012, Barcelona -->
 
 
-## Restaurant Hiro
-<!-- Restaurant | Restaurant Hofmann, Carrer de la Granada del Penedès, 14, 08006, Barce -->
-
-
 ## Osom Nou
 <!-- Restaurant | Osom Nou, Carrer de Sant Joan de Malta, 148, 08018, Barcelona -->
 
@@ -1027,24 +739,12 @@ Cakes built to look like fruit, oranges and all. Worth a detour for the pastry c
 <!-- Restaurant | NoruBar, Carrer de Pere IV, 156, 08005, Barcelona -->
 
 
-## Café Labath
-<!-- Coffee | Labath, Carrer de Pujades, 08005, Barcelona -->
-
-
 ## Masa Vins Barcelona
 <!-- Restaurant | Masa Vins, Carrer d'Àlaba, 08018, Barcelona -->
 
 
-## Koh
-<!-- Restaurant | Restaurante Koh-i-noor india, Carrer del Marquès de Campo Sagrado, 3,  -->
-
-
 ## Achaar bar
 <!-- Restaurant | Achaar Bar, Carrer de Pere IV, 08018, Barcelona -->
-
-
-## Bricks
-<!-- Restaurant | Bricks, Carrer de la Ciutat de Granada, 08005, Barcelona -->
 
 
 ## Sartoria Panatieri
@@ -1059,10 +759,6 @@ Cakes built to look like fruit, oranges and all. Worth a detour for the pastry c
 <!-- Brunch | Consonn's brunch & lunch, Carrer de València, 08029, Barcelona -->
 
 
-## LO Restaurant
-<!-- Restaurant | Uniko Restaurant, Carrer de los Castillejos, 08013, Barcelona -->
-
-
 ## Café Menssana
 <!-- Coffee | Menssana, Carrer de Ramón Turró, 08003, Barcelona -->
 
@@ -1075,24 +771,12 @@ Cakes built to look like fruit, oranges and all. Worth a detour for the pastry c
 <!-- Restaurant | Can Paixano, Carrer de la Reina Cristina, 7, 08003, Barcelona -->
 
 
-## Liceu
-<!-- Restaurant | Liceu, La Rambla, 08002, Barcelona -->
-
-
-## BURRITOS Ferran
-<!-- Restaurant | Burritos, Carrer d'en Quintana, 08002, Barcelona -->
-
-
 ## Bar Electricitat
 <!-- Restaurant | Bar Electricitat, Carrer de Sant Carles, 15, 08003, Barcelona -->
 
 
 ## Anís Cafe
 <!-- Coffee | Cafè-Teatre el Llantiol, Carrer de la Riereta, 7, 08001, Barcelona -->
-
-
-## La Mar Salada Restaurant
-<!-- Restaurant | La Mar Salada, Passeig de Joan de Borbó, 58-59, 08003, Barcelona -->
 
 
 ## Restaurante Can Ramonet
@@ -1115,36 +799,12 @@ Cakes built to look like fruit, oranges and all. Worth a detour for the pastry c
 <!-- Restaurant | T44, Carrer del Taulat, 08005, Barcelona -->
 
 
-## Babol Burger
-<!-- Restaurant | Carrer Nou de Zurbano, 8, 08002, Barcelona -->
-
-
 ## Orval Studio
 <!-- Restaurant | Orval, Carrer de Buenaventura Muñoz, 31, 08003, Barcelona -->
 
 
-## El Árbol Brunch Aribau
-<!-- Brunch | Carrer d'Aribau, 36, 08011 Barcelona, Spain -->
-
-
-## Takumi Ramen and Yakisoba
-<!-- Restaurant | Carrer d'Aribau, 16, 08011 Barcelona, Spain -->
-
-
-## El Flako Corn Flakes & Co.
-<!-- Restaurant | Carrer dels Sagristans, 9, 08002 Barcelona, Spain -->
-
-
-## Restaurante Bistro Helena
-<!-- Restaurant | Via Laietana, 30, 08003 Barcelona, Spain -->
-
-
 ## Rasoi Ghar Restaurant Indian
 <!-- Restaurant | Carrer de la Reina Cristina, 10, 08003 Barcelona, Spain -->
-
-
-## Nomad Coffee Every Day
-<!-- Coffee | Carrer de Joaquín Costa, 26, 08001 Barcelona, Spain -->
 
 
 ## Morning Glory Coffee & Brunch
@@ -1187,28 +847,12 @@ Israeli cooking you keep picking at long after you are full. We always end up or
 <!-- Restaurant | Carrer de Badajoz, 65, 08005 Barcelona, Spain -->
 
 
-## Nomad Café Petit Nomad
-<!-- Coffee | Carrer de Bergara, 10, 08002 Barcelona, Spain -->
-
-
 ## Piñata Cantina Cocteleria Barcelona
 <!-- Restaurant | Carrer de Casanova, 19, 08011 Barcelona, Spain -->
 
 
 ## Kiosco de Ideas Libreria y Cafe
 <!-- Coffee | Carrer de la Riera Alta, 34, Barcelona, Spain -->
-
-
-## CUINA PANDA Homemade Sichuan Food
-<!-- Restaurant | Carrer de Viladomat, 101, 08015 Barcelona, Spain -->
-
-
-## Chaka Khan Gastro Bar Exotique
-<!-- Restaurant | Carrer de l'Hospital, 104, 08001 Barcelona, Spain -->
-
-
-## COBAB cocina coreana
-<!-- Restaurant | Carrer d'Entença, 62, Barcelona, Spain -->
 
 
 ## Restaurant Candela en Rama
@@ -1223,10 +867,6 @@ Israeli cooking you keep picking at long after you are full. We always end up or
 <!-- Restaurant | Carrer de la França Xica, 25, 08004 Barcelona, Spain -->
 
 
-## Restaurante coreano Kamasot
-<!-- Restaurant | Carrer del Consell de Cent, 465, 08013 Barcelona, Spain -->
-
-
 ## The Sopa Boba Restaurant Tapes
 <!-- Restaurant | Carrer del Bruc, 115, 08009 Barcelona, Spain -->
 
@@ -1235,36 +875,12 @@ Israeli cooking you keep picking at long after you are full. We always end up or
 <!-- Restaurant | Passatge de la Concepció, 5, 08008 Barcelona, Spain -->
 
 
-## KOYO SUSHI Pau Claris
-<!-- Restaurant | Carrer de Pau Claris, 139, 08009 Barcelona, Spain -->
-
-
-## IKENOCHA
+## IKENOCHA Matcha Tea House
 <!-- Restaurant | Carrer de París, 149, 08036 Barcelona, Spain -->
-
-
-## Shiko by Yamato
-<!-- Restaurant | Carrer de Balmes, 76, 08007 Barcelona, Spain -->
-
-
-## Potan Asian BBQ
-<!-- Restaurant | Carrer del Comte d'Urgell, 188, 08036 Barcelona, Spain -->
-
-
-## Brunch and The City
-<!-- Brunch | Carrer d'Aragó, 103, 08015 Barcelona, Spain -->
 
 
 ## KOH-NDAL THAI BISTRO
 <!-- Restaurant | Passeig de Sant Gervasi, 57B, 08022 Barcelona, Spain -->
-
-
-## Cafeteria Japonesa Kasa Hanaka
-<!-- Coffee | Carrer de Saragossa, 29, Barcelona, Spain -->
-
-
-## Mantegueries Pirenaiques
-<!-- Restaurant | Carrer de Muntaner, 460, 08006 Barcelona, Spain -->
 
 
 ## LAMAI THAI TAPAS
