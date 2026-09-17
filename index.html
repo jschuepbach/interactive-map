@@ -711,8 +711,7 @@
             (<a href="https://themondayclub.studio" target="_blank" rel="noopener">themondayclub.studio</a>).</p>
           <p>Walking the streets of Barcelona, he makes a note of places. He has
             kept a list since 2021, never meant as a project, just something to jog
-            his own memory. A friend asks where to eat around here, he sends a pin,
-            the list grows. Five years later it is <span id="introTotal">0</span> places.</p>
+            his own memory.</p>
           <p>No stars, no rankings, no paid placements. Only places he has been to
             himself, with people who matter to him. His Google Maps is covered in
             pins, because nothing comes closer to plain contentment for him than a
@@ -1973,9 +1972,6 @@
     }
 
 
-    function renderIntroTotal() {
-      document.getElementById('introTotal').textContent = String(ALL_DATA.length);
-    }
 
     // Shareable state: ?c=sushi,vegan opens straight into that filter.
     function syncUrl() {
@@ -2326,7 +2322,6 @@
         const fromUrl = readUrlFilters();
         searchFields.forEach((el) => { if (el) el.value = query; });
         applyFilters();
-        renderIntroTotal();
         setTopbarVar();
 
         // Played the moment the loader lifts, not while it is still covering
