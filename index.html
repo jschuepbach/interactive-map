@@ -64,7 +64,14 @@
      Airbnb's web pattern: one bar across the top that owns the search, a rail of
      categories under it, then results left and a sticky map right. The map never
      scrolls away, the results never stop being the main column. */
-  #app { display: grid; grid-template-rows: auto auto minmax(0, 1fr);
+  /* The single column is declared, not left to auto. An auto track is sized
+     against its content's max-content, and the filter rail's max-content is the
+     full un-scrolled width of every chip: on a 375px phone that resolved to a
+     967px column, so the top bar, the rail, the column and every card were laid
+     out at 967px and then clipped by the overflow below. minmax(0, 1fr) is the
+     fix: the track may never exceed the container. */
+  #app { display: grid; grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto auto minmax(0, 1fr);
     height: 100vh; height: 100dvh; }
 
   #topbar { display: grid; grid-template-columns: minmax(0, 1fr) minmax(220px, 460px) auto;
@@ -510,6 +517,13 @@
     .topbar-actions { display: flex; }
     /* Same breakpoint that swaps the popup for the docked card. */
     .marker-label { display: block; }
+
+    /* The column's opening line was still at its desktop size, which on a phone
+       ran to two lines and pushed the first place 210px down an 812px screen. */
+    .intro-head { padding: 10px 16px 8px; }
+    .intro-head h2 { font-size: 18px; letter-spacing: -0.2px; }
+    .result-line { padding: 0 16px; }
+    .filters { padding: 8px 0; }
     .btn-icon { display: inline-flex; }
 
     /* Closed: wordmark and controls. Open: the field takes the whole bar and
