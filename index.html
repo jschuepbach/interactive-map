@@ -353,19 +353,33 @@
   .maplibregl-ctrl-attrib a { color: var(--muted) !important; }
 
   /* ---------- Coarse pointer (touch): bigger targets, no reliance on hover ---------- */
+  /* Touch sizing. The old rule here set vertical padding on a control with a
+     fixed height, which changed nothing; these raise the hit area itself. */
   @media (pointer: coarse) {
     .marker-inner { width: 26px; height: 26px; margin-left: -13px; margin-top: -13px; }
-    .filter-btn { padding: 8px 14px; }
-    .btn { padding: 10px 16px; min-height: 44px; }
+    .filter-btn { height: 42px; padding: 0 16px; }
+    .filter-btn.sub { height: 38px; padding: 0 14px; }
+    .btn { height: 44px; padding: 0 16px; }
+    .clear-inline { padding: 0 6px 0 12px; min-height: 38px; display: inline-flex;
+      align-items: center; }
     .row { padding: 15px 16px 14px; }
-    .list { grid-template-columns: 1fr; padding: 10px 16px 24px; }
+    .list { padding: 10px 16px 24px; }
   }
 
   /* ---------- Mobile: map fills the screen, sidebar becomes a bottom sheet ---------- */
   @media (max-width: 767px) {
     #app { grid-template-rows: auto auto minmax(0, 1fr); overflow: hidden; }
-    #topbar { grid-template-columns: 1fr; gap: 10px; padding: 10px 16px; }
-    .topbar-actions { display: none; }
+    /* One row, not three stacked. Wordmark, search, About: 56px of chrome
+       instead of 102px, which is most of a place card handed back to the map. */
+    #topbar { grid-template-columns: auto minmax(0, 1fr) auto; gap: 10px;
+      padding: 8px 14px; padding-top: max(8px, env(safe-area-inset-top)); }
+    .brand h1 { font-size: 15px; }
+    #sideSearch { height: 40px; padding: 0 14px; font-size: 16px; }
+    .topbar-actions { display: flex; }
+    /* Tilting a map with one thumb while walking is not a thing anyone does. */
+    #toggle3d { display: none; }
+    #introBtn { padding: 0 14px; }
+    .list { grid-template-columns: 1fr; }
     #body { position: relative; display: block; }
     #map-wrap { position: absolute; inset: 0; }
     .filter-row, .filter-head, .filter-sub-label { padding-inline: 16px; }
@@ -381,17 +395,26 @@
       will-change: transform;
     }
     #sidebar.open { transform: translateY(0); }
+    /* While a finger is on it the sheet follows the finger, so the easing that
+       makes the snap feel good would fight the drag. */
+    #sidebar.dragging { transition: none; }
 
+    /* The grab area is the handle plus the line of text beside it: a 4px bar is
+       not something you catch while walking. */
     .sheet-handle {
       display: flex; align-items: center; justify-content: center;
-      padding: 10px 0 4px; cursor: pointer; touch-action: none;
+      padding: 12px 0 6px; cursor: grab; touch-action: none;
     }
     .sheet-handle::before {
-      content: ''; width: 36px; height: 4px; border-radius: 999px;
+      content: ''; width: 40px; height: 4px; border-radius: 999px;
       background: var(--border);
     }
+    #sidebar.dragging .sheet-handle { cursor: grabbing; }
 
-    .side-header { cursor: pointer; }
+    .side-header { cursor: pointer; touch-action: none; }
+    .intro-head { padding: 6px 16px 10px; }
+    .intro-head h2 { font-size: 17px; letter-spacing: -0.2px; }
+    .result-line { padding: 0 16px; }
 
 
 
@@ -458,7 +481,8 @@
 
     <div id="body">
     <aside id="sidebar">
-      <div class="sheet-handle" id="sheetHandle" aria-hidden="true"></div>
+      <div class="sheet-handle" id="sheetHandle" role="button" tabindex="0"
+        aria-controls="list" aria-expanded="false" aria-label="Show the list of places"></div>
       <div class="side-header" id="sideHeader"></div>
       <div class="list" id="list"></div>
     </aside>
@@ -858,15 +882,24 @@
     const sheetHandle = document.getElementById('sheetHandle');
     const sideHeader = document.getElementById('sideHeader');
 
+    // The peek used to reserve room for the filter rail, which is not in the
+    // sheet at all: it sits above #body. So the sheet rested on a headline and
+    // a sliver of nothing, and there was no sign a list was down there. It now
+    // rests on the first place card, cut off, which is the only honest way to
+    // say "there is more of this below".
     function measurePeek() {
       if (!isMobile()) return;
-      const filtersEl = document.getElementById('filters');
-      const h = sheetHandle.offsetHeight + sideHeader.offsetHeight + filtersEl.offsetHeight;
-      sidebarEl.style.setProperty('--peek', h + 'px');
+      const firstRow = sidebarEl.querySelector('.row');
+      const card = firstRow ? Math.min(firstRow.offsetHeight, 150) : 110;
+      const h = sheetHandle.offsetHeight + sideHeader.offsetHeight + card;
+      sidebarEl.style.setProperty('--peek', Math.round(h) + 'px');
     }
 
     function setSheetOpen(open) {
       sidebarEl.classList.toggle('open', open);
+      sheetHandle.setAttribute('aria-expanded', String(open));
+      sheetHandle.setAttribute('aria-label',
+        open ? 'Hide the list of places' : 'Show the list of places');
     }
 
     function toggleSheet() {
@@ -874,8 +907,66 @@
       setSheetOpen(!sidebarEl.classList.contains('open'));
     }
 
-    sheetHandle.addEventListener('click', toggleSheet);
-    sideHeader.addEventListener('click', toggleSheet);
+    // Drag the sheet. A two-state tap target is fine with a mouse; a thumb
+    // expects the sheet to follow it and to keep going when flicked, so the
+    // gesture reads position for the live transform and velocity for the snap.
+    (function sheetDrag() {
+      const TAP = 6;           // px of travel still counted as a tap
+      const FLICK = 0.45;      // px/ms that decides the snap regardless of travel
+      let startY = 0, lastY = 0, lastT = 0, vel = 0, span = 0, base = 0, live = false;
+
+      function peekPx() {
+        const v = getComputedStyle(sidebarEl).getPropertyValue('--peek');
+        return parseFloat(v) || 104;
+      }
+
+      function down(e) {
+        if (!isMobile() || e.button) return;
+        span = sidebarEl.offsetHeight - peekPx();   // travel between the two states
+        if (span <= 0) return;
+        base = sidebarEl.classList.contains('open') ? 0 : span;
+        startY = lastY = e.clientY;
+        lastT = e.timeStamp;
+        vel = 0;
+        live = true;
+        sidebarEl.classList.add('dragging');
+        e.currentTarget.setPointerCapture(e.pointerId);
+      }
+
+      function move(e) {
+        if (!live) return;
+        const y = Math.min(span, Math.max(0, base + (e.clientY - startY)));
+        sidebarEl.style.transform = 'translateY(' + y + 'px)';
+        const dt = e.timeStamp - lastT;
+        if (dt > 0) vel = (e.clientY - lastY) / dt;
+        lastY = e.clientY;
+        lastT = e.timeStamp;
+      }
+
+      function up(e) {
+        if (!live) return;
+        live = false;
+        sidebarEl.classList.remove('dragging');
+        sidebarEl.style.transform = '';
+        const travel = e.clientY - startY;
+        if (Math.abs(travel) < TAP) { toggleSheet(); return; }
+        if (Math.abs(vel) > FLICK) setSheetOpen(vel < 0);
+        else setSheetOpen(base + travel < span / 2);
+      }
+
+      [sheetHandle, sideHeader].forEach((el) => {
+        el.addEventListener('pointerdown', down);
+        el.addEventListener('pointermove', move);
+        el.addEventListener('pointerup', up);
+        el.addEventListener('pointercancel', up);
+      });
+    })();
+
+    // Keyboard and mouse still get the plain toggle; the drag handler calls it
+    // itself when the pointer barely moved.
+    sheetHandle.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleSheet(); }
+    });
 
     window.addEventListener('resize', measurePeek);
 
