@@ -25,6 +25,7 @@
     --c-europe: #d6598f;
     --c-drinks: #8f7fd6;
     --c-other: #b4536e;
+    --c-brunch: #5b8def;
   }
 
   * { box-sizing: border-box; }
@@ -586,7 +587,7 @@
     const FAMILIES = [
       { id: 'coffee',  label: 'Coffee & pastry', color: 'var(--c-sweet)',
         groups: ['Coffee', 'Pastry', 'Bakery', 'Tea', 'Ice Cream'] },
-      { id: 'brunch',  label: 'Brunch',          color: 'var(--c-other)',
+      { id: 'brunch',  label: 'Brunch',          color: 'var(--c-brunch)',
         groups: ['Brunch'] },
       { id: 'tapas',   label: 'Tapas & Catalan', color: 'var(--c-local)',
         groups: ['Tapas', 'Catalan'] },
@@ -597,8 +598,12 @@
       { id: 'dinner',  label: 'Dinner',          color: 'var(--c-europe)',
         groups: ['Fine-dining', 'Grill', 'Seafood', 'Italian', 'Mediterranean', 'Middle-Eastern',
                  'Burger', 'Sandwich', 'Fusion', 'Vegan', 'Gluten-free'] },
-      { id: 'drinks',  label: 'Drinks',          color: 'var(--c-drinks)',
-        groups: ['Wine', 'Beer', 'Drinks', 'Cheese'] }
+      { id: 'wine',    label: 'Wine',            color: 'var(--c-drinks)',
+        groups: ['Wine', 'Cheese'] },
+      // Drinks means the Drinks tag: cocktail bars, not every tapas place that
+      // also pours wine. The three beer taprooms are bars too, so they sit here.
+      { id: 'drinks',  label: 'Drinks',          color: 'var(--c-other)',
+        groups: ['Drinks', 'Beer'] }
     ];
     const FAMILY_OF = {};
     FAMILIES.forEach((f) => f.groups.forEach((g) => { FAMILY_OF[g] = f; }));
