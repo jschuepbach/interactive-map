@@ -77,8 +77,14 @@
   #topbar { display: grid; grid-template-columns: minmax(0, 1fr) minmax(220px, 460px) auto;
     align-items: center; gap: 20px; padding: 12px 20px;
     border-bottom: 1px solid var(--hairline); background: var(--ground); }
-  .brand { display: flex; align-items: center; }
-  .brand h1 { font-size: 16px; font-weight: 600; margin: 0; }
+  /* The lockup from the design system: octagon, rose dot, wordmark. The
+     octagon takes currentColor so it follows the ink rather than sitting at a
+     hardcoded white, which is what the guideline asks for; the dot stays rose
+     in both themes. Ratio of mark to wordmark is the system's own, 34 to 24. */
+  .brand { display: flex; align-items: center; gap: 8px; }
+  .brand .mark { width: 23px; height: 23px; flex: none; color: var(--ink);
+    display: block; }
+  .brand h1 { font-size: 16px; font-weight: 600; margin: 0; letter-spacing: -0.02em; }
   .searchwrap { display: flex; align-items: center; gap: 10px; }
   /* Phone only: the field is a control you open, not a row the map pays for. */
   .btn.btn-icon { display: none; width: 44px; padding: 0; align-items: center;
@@ -541,6 +547,7 @@
     #topbar { grid-template-columns: auto minmax(0, 1fr) auto; gap: 10px;
       padding: 8px 14px; padding-top: max(8px, env(safe-area-inset-top)); }
     .brand h1 { font-size: 15px; }
+    .brand .mark { width: 21px; height: 21px; }
     #sideSearch { height: 40px; padding: 0 14px; font-size: 16px; }
     .topbar-actions { display: flex; }
     /* Same breakpoint that swaps the popup for the docked card. */
@@ -653,10 +660,26 @@
     .geo-note { right: 12px; left: 12px; max-width: none;
       bottom: calc(130px + env(safe-area-inset-bottom)); }
 
+    /* The card sat with both edges clear of the screen, so nothing said there
+       was anything either side of it and the count read as a label rather than
+       a position. The neighbours show a sliver at each edge now, which is the
+       whole affordance. They are inert, sized only to be seen. */
+    .place-ghost {
+      display: none;
+      position: absolute; z-index: 19;
+      width: 15px; height: 96px;
+      bottom: calc(80px + env(safe-area-inset-bottom));
+      background: var(--surface); border: 1px solid var(--hairline);
+      box-shadow: 0 8px 22px rgba(0,0,0,0.45);
+    }
+    .g-left { left: 11px; border-right: 0; border-radius: 14px 0 0 14px; }
+    .g-right { right: 11px; border-left: 0; border-radius: 0 14px 14px 0; }
+    body.card-open.deck .place-ghost { display: block; }
+
     .place-card {
       display: block;
       position: absolute; z-index: 20;
-      left: 12px; right: 12px; bottom: calc(74px + env(safe-area-inset-bottom));
+      left: 30px; right: 30px; bottom: calc(74px + env(safe-area-inset-bottom));
       background: var(--surface); border: 1px solid var(--hairline);
       border-radius: 14px; padding: 14px 16px 12px;
       box-shadow: 0 8px 28px rgba(0,0,0,0.55);
@@ -687,6 +710,7 @@
   @media (max-width: 900px) and (max-height: 460px) {
     #topbar { padding-block: 4px; padding-top: max(4px, env(safe-area-inset-top)); }
     .brand h1 { font-size: 14px; }
+    .brand .mark { width: 19px; height: 19px; }
     #sideSearch { height: 36px; }
     .btn, .btn.btn-icon { height: 38px; }
     .filters { padding: 5px 0; }
@@ -749,6 +773,11 @@
   <div id="app">
     <header id="topbar">
       <div class="brand">
+        <svg class="mark" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+          <polygon points="19,4 45,4 60,19 60,45 45,60 19,60 4,45 4,19"
+            fill="none" stroke="currentColor" stroke-width="6" stroke-linejoin="round" />
+          <circle cx="32" cy="32" r="9" fill="var(--rausch)" />
+        </svg>
         <h1>Barcelona</h1>
       </div>
       <div class="searchwrap">
@@ -790,6 +819,8 @@
 
       <!-- Phone only: the selected place, as the same object the list uses,
            docked over the map instead of tethered to the pin. -->
+      <span class="place-ghost g-left" aria-hidden="true"></span>
+      <span class="place-ghost g-right" aria-hidden="true"></span>
       <div id="placeCard" class="place-card" hidden aria-live="polite">
         <button id="placeClose" class="place-close" type="button" aria-label="Close this place">&times;</button>
         <div id="placeBody" class="place-body"></div>
@@ -1368,12 +1399,14 @@
       placeCard.hidden = false;
       // The locate button sits exactly where the card lands.
       document.body.classList.add('card-open');
+      // One place is not a deck, so it gets no neighbours to swipe to.
+      document.body.classList.toggle('deck', DATA.length > 1);
     }
 
     function hidePlaceCard() {
       placeCard.hidden = true;
       placeCard.style.transform = '';
-      document.body.classList.remove('card-open');
+      document.body.classList.remove('card-open', 'deck');
     }
 
     document.getElementById('placeClose').addEventListener('click', () => {
