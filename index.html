@@ -118,7 +118,8 @@
   .cat-sep { color: var(--faint); }
   .row .name { font-size: 16px; font-weight: 600; margin: 0 0 6px; line-height: 1.25; }
   .row .note { font-size: 14px; color: var(--body-text); margin: 0 0 8px; line-height: 1.43; }
-  .row .addr { font-size: 13px; color: var(--muted-text); margin: 0 0 8px; line-height: 1.23; }
+  .row .pending { font-size: 13px; color: var(--muted-text); margin: 0 0 8px;
+    line-height: 1.43; font-style: italic; }
   .row .tip { font-size: 13px; color: var(--muted-text); margin: 0 0 10px; line-height: 1.4;
     padding-left: 11px; border-left: 2px solid var(--rausch); }
   .row .tip b { color: var(--ink); font-weight: 600; }
@@ -222,8 +223,8 @@
   .popup-name { font-size: 16px; line-height: 1.25; margin: 0 0 6px; font-weight: 600; }
   .popup-note { color: var(--body-text); font-size: 14px; margin: 0 0 10px;
     line-height: 1.43; max-width: 250px; }
-  .popup-addr { color: var(--muted-text); font-size: 13px; margin: 0 0 10px; line-height: 1.23;
-    max-width: 250px; }
+  .popup-pending { color: var(--muted-text); font-size: 13px; margin: 0 0 10px;
+    line-height: 1.43; font-style: italic; max-width: 250px; }
   .popup-tip { color: var(--muted-text); font-size: 13px; margin: 0 0 10px; line-height: 1.4;
     max-width: 250px; padding-left: 11px; border-left: 2px solid var(--rausch); }
   .popup-link { color: var(--ink); font-size: 13px; text-decoration: underline;
@@ -394,6 +395,7 @@
     font-weight: 600; margin: 0 0 4px; color: var(--muted); }
   .lv-note { color: var(--muted); font-size: 12px; margin: 0; line-height: 1.45; }
   .lv-tip { color: var(--muted); font-size: 12px; margin: 4px 0 0; line-height: 1.45; }
+  .lv-pending { color: var(--muted-text); font-size: 13px; font-style: italic; margin: 0; }
   .lv-meta { text-align: right; white-space: nowrap; }
   .lv-hood { display: block; color: var(--muted); font-size: 11px; margin-bottom: 5px; }
   .lv-meta a { color: var(--accent); font-size: 11px; font-weight: 600; text-decoration: none;
@@ -938,7 +940,7 @@
         row.innerHTML =
           '<div class="cat">' + catLabelHtml(p) + '</div>' +
           '<div class="name">' + escapeHtml(p.name) + '</div>' +
-          noteHtml(p, 'note') + tipHtml(p, 'tip') + addrHtml(p) +
+          noteHtml(p, 'note') + pendingHtml(p, 'pending') + tipHtml(p, 'tip') +
           '<div class="links">' + linksHtml(p, '') + '</div>';
         row.addEventListener('click', (e) => {
           if (e.target && e.target.tagName === 'A') return;
@@ -977,7 +979,7 @@
         '<div class="popup-cat">' + catLabelHtml(p) + '</div>' +
         '<div class="popup-name">' + escapeHtml(p.name) + '</div>' +
         (hasOwnNote(p) ? '<div class="popup-note">' + escapeHtml(p.note) + '</div>'
-                       : addrHtml(p, 'popup-addr')) +
+                       : pendingHtml(p, 'popup-pending')) +
         tipHtml(p, 'popup-tip') +
         '<div class="links">' + linksHtml(p, 'popup-link') + '</div>';
       currentPopup = new maplibregl.Popup({ offset: 20, closeButton: false, maxWidth: '260px' })
@@ -1129,6 +1131,19 @@
       row.appendChild(label);
       const rail = document.createElement('div');
       rail.className = 'filter-row';
+
+      // The way back to the whole family. Without it the only exit from a picked
+      // tag is Clear filters, which also throws the family away.
+      const family = FAMILIES.find((f) => activeFamilies.has(f.id));
+      if (family) {
+        const fire = () => { activeGroups.clear(); applyFilters(); };
+        rail.appendChild(chip({
+          label: 'All ' + family.label.toLowerCase(), count: familyCount(family.id),
+          color: family.color, active: activeGroups.size === 0, dot: false,
+          cls: cls || 'filter-btn sub', onClick: wrapClick ? wrapClick(fire) : fire
+        }));
+      }
+
       let any = false;
       activeFamilyGroups().forEach((g) => {
         const n = groupCount(g);
@@ -1139,7 +1154,7 @@
         rail.appendChild(chip({ label: g, count: n, color: groupColor(g), active: active,
           dot: false, cls: cls || 'filter-btn sub', onClick: wrapClick ? wrapClick(fire) : fire }));
       });
-      if (!any) return null;
+      if (!any) return null;   // a family whose tags are all empty under the query
       row.appendChild(rail);
       return row;
     }
@@ -1263,7 +1278,7 @@
             (extra.length ? '<p class="lv-tags">also ' + extra.map((g) =>
               '<span style="color:' + groupColor(g) + '">' + escapeHtml(g) + '</span>').join(', ') + '</p>' : '') +
             '<p class="lv-name">' + escapeHtml(p.name) + '</p>' +
-            noteHtml(p, 'lv-note') + tipHtml(p, 'lv-tip') +
+            noteHtml(p, 'lv-note') + pendingHtml(p, 'lv-pending') + tipHtml(p, 'lv-tip') +
           '</div>' +
           '<div class="lv-meta">' +
             '<span class="lv-hood">' + escapeHtml(hoodLabel(p.hood)) + '</span>' +
@@ -1562,7 +1577,14 @@
       return p.note ? '<p class="' + cls + '">' + escapeHtml(p.note) + '</p>' : '';
     }
 
-    // Shown only where there is no note to lead with, so the row is never bare.
+    // No note means Jan has not been there yet, and the Notion table says so in
+    // as many words. That line belongs on the card; the scraped address does not,
+    // because the map and the Maps link already answer where.
+    function pendingHtml(p, cls) {
+      return p.note ? '' : '<p class="' + cls + '">Still on my bucket list</p>';
+    }
+
+    // Kept for search and for the neighbourhood, not shown on a card any more.
     function addrHtml(p, cls) {
       if (p.note || !p.address) return '';
       const street = String(p.address)
