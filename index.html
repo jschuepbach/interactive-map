@@ -143,6 +143,15 @@
   .maker-note p:first-child { color: var(--ink); }
   .maker-note a { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
   .maker-note a:hover { color: var(--rausch); }
+
+  /* Quieter than the text it follows: an offer, not a call to action. */
+  .maker-note p.maker-foot { margin: 18px 0 0; padding-top: 14px;
+    border-top: 1px solid var(--hairline-soft);
+    font-size: 13px; line-height: 1.5; color: var(--muted-text); }
+  .maker-note p.maker-foot a { color: var(--muted-text); font-size: 13px; }
+  .maker-note p.maker-foot a:hover { color: var(--rausch); }
+  .maker-note p.maker-foot #dataDate { display: block; margin-top: 4px; }
+
   .maker-shot { position: relative; border-radius: 16px; overflow: hidden;
     background: var(--surface); aspect-ratio: 4 / 5; }
   .maker-shot img { position: absolute; inset: 0; width: 100%; height: 100%;
@@ -727,6 +736,10 @@
             good spot, good food and the right people at the table.</p>
           <p>This list is not a guide. It is a collection of moments that were
             worth a second time.</p>
+          <p class="maker-foot">
+            <a href="mailto:smile@themondayclub.studio?subject=Barcelona%20map">Something
+            missing, or somewhere closed down? Tell me.</a><span id="dataDate"></span>
+          </p>
         </div>
       </div>
 
@@ -2276,6 +2289,17 @@
         const res = await fetch('data.json', { cache: 'no-store' });
         if (!res.ok) throw new Error('HTTP ' + res.status);
         const raw = await res.json();
+
+        // When the list last grew, taken off the file rather than written into
+        // it: data.json is a plain array that a re-scrape rewrites wholesale,
+        // and the server already knows when that happened. Silent when there is
+        // no header, which is what opening the file locally gives you.
+        const stamp = res.headers.get('last-modified');
+        const when = stamp ? new Date(stamp) : null;
+        if (when && !isNaN(when)) {
+          document.getElementById('dataDate').textContent = 'Last updated ' +
+            when.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) + '.';
+        }
 
         // Websites and Instagram handles, for the same reason notes live outside
         // data.json: the scrape only knows a website for a handful of places and
