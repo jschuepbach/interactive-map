@@ -800,3 +800,7 @@ Beautiful place for even better wine, wow!!
 ## ÖSS Kaffe Barcelona
 <!-- Coffee, Pastry -->
 Scandinavian-sounding name, often signals light roasts and a filter-coffee focus.
+
+## Lukumas
+<!-- Pastry, Coffee -->
+Greek doughnuts made with a family recipe in a beautifully designed shop.

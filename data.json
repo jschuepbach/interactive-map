@@ -2963,5 +2963,18 @@
       "Pastry"
     ],
     "tip": "Filter coffee instead of espresso."
+  },
+  {
+    "name": "Lukumas",
+    "lat": 41.4048481,
+    "lng": 2.1541491,
+    "category": "Bakery",
+    "note": "Lukumas, Carrer del Torrent de l'Olla, 169, 08012, Barcelona",
+    "group": "Pastry",
+    "groups": [
+      "Pastry",
+      "Coffee"
+    ],
+    "tip": "Go for the Greek doughnut with green cream."
   }
 ]

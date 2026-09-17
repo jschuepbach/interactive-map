@@ -1121,6 +1121,15 @@
   "tip": "Stick to the classic flavors like pistachio or hazelnut, that's where gelato places usually show their real quality.",
   "why": "An Italian gelato spot regularly called out as one of the best places for gelato in the city, simple and consistently good."
  },
+ "Lukumas": {
+  "bucket": false,
+  "cuisine": [
+   "Pastry",
+   "Coffee"
+  ],
+  "tip": "Go for the Greek doughnut with green cream.",
+  "why": "Greek doughnuts made with a family recipe in a beautifully designed shop."
+ },
  "MAISON CARNE": {
   "bucket": true,
   "cuisine": [
