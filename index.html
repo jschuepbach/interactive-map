@@ -52,11 +52,6 @@
     --c-drinks: #8f86e0;
     --c-other: #c2727f;
     --c-quick: #5b93d6;
-
-    /* The wall Jan is standing against, so the note panel and the photograph
-       are one object rather than two. */
-    --forest: #1d3a28;
-    --forest-ink: #8fb8a0;
   }
 
   * { box-sizing: border-box; }
@@ -115,25 +110,27 @@
     text-underline-offset: 3px; }
 
   /* ---------- Who picked these ----------
-     Two panels of equal height inside the About panel: the note on the wall's
-     own green, the portrait beside it. The note's text sets the height; the
-     photograph fills whatever that turns out to be. This is the panel's whole
-     framing, which is why there is no separate standfirst above it. */
-  .maker { margin: 2px 0 22px; }
-  .maker-panels { display: grid; grid-template-columns: 1.15fr 1fr; gap: 10px;
-    align-items: stretch; }
-  .maker-note { background: var(--forest); border-radius: 14px;
-    padding: clamp(18px, 2.2vw, 28px); display: flex; align-items: flex-start; }
-  .maker-note p { margin: 0; color: #ffffff; text-wrap: pretty;
-    font-size: clamp(15px, 1.3vw, 19px); line-height: 1.36; letter-spacing: -0.2px; }
-  .maker-note .who { color: var(--forest-ink); }
-  .maker-shot { position: relative; border-radius: 14px; overflow: hidden;
-    background: var(--surface); min-height: 240px; }
+     The portrait sets the left column and the note runs beside it as a reading
+     column, not a caption: at five paragraphs the two can no longer be panels of
+     matched height. The note sits on the same surface as every card in the
+     product, so the only colour in here is the photograph. */
+  .maker-panels { width: 100%; display: grid; grid-template-columns: 270px minmax(0, 1fr);
+    gap: 20px; align-items: start; }
+  .maker-note { background: var(--surface); border: 1px solid var(--hairline-soft);
+    border-radius: 16px; padding: clamp(20px, 2.2vw, 28px); }
+  .maker-note p { margin: 0 0 12px; color: var(--body-text); text-wrap: pretty;
+    font-size: 15px; line-height: 1.58; max-width: 62ch; }
+  .maker-note p:last-child { margin-bottom: 0; }
+  .maker-note p:first-child { color: var(--ink); }
+  .maker-note a { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
+  .maker-note a:hover { color: var(--rausch); }
+  .maker-shot { position: relative; border-radius: 16px; overflow: hidden;
+    background: var(--surface); aspect-ratio: 4 / 5; }
   .maker-shot img { position: absolute; inset: 0; width: 100%; height: 100%;
     object-fit: cover; object-position: 50% 12%; display: block; }
   @media (max-width: 900px) {
-    .maker-panels { grid-template-columns: 1fr; }
-    .maker-shot { aspect-ratio: 16 / 10; min-height: 0; }
+    .maker-panels { grid-template-columns: 1fr; gap: 14px; }
+    .maker-shot { aspect-ratio: 16 / 10; }
     .maker-shot img { object-position: 50% 24%; }
   }
 
@@ -289,83 +286,24 @@
     transition: opacity 0.28s ease, visibility 0.28s ease;
   }
   #intro.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
-  .intro-inner { width: 100%; max-width: 620px; margin: auto; }
-  .intro-eyebrow { font-size: 12px; letter-spacing: 0.32px; text-transform: uppercase;
-    color: var(--muted-text); margin: 0 0 14px; font-weight: 700; }
-  /* Modest display: the system tops out at 28px / 600 and trusts whitespace,
-     which is exactly why it never reads as a pitch deck. */
-  #intro h2 { font-size: clamp(19px, 2.4vw, 22px); line-height: 1.22; letter-spacing: -0.3px;
-    margin: 0 0 12px; font-weight: 600; }
-  .intro-sub { color: var(--body-text); font-size: 16px; line-height: 1.5;
-    margin: 0 0 28px; max-width: 46ch; }
-  .intro-q { font-size: 16px; font-weight: 600; color: var(--ink); margin: 0 0 12px; }
-  .intro-chips { margin: 0 0 26px; }
-  /* Chips are split into named bands so 11 categories don't read as one wall. */
-  .chip-band { margin-bottom: 14px; }
-  .chip-band:last-child { margin-bottom: 0; }
-  .chip-band-label { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--muted); margin: 0 0 8px; }
-  .chip-row { display: flex; flex-wrap: wrap; gap: 8px; }
-  .intro-chip {
-    background: var(--surface); border: 1px solid var(--hairline); color: var(--ink);
-    height: 40px; padding: 0 16px; font-size: 14px; font-weight: 500;
-    border-radius: 9999px; cursor: pointer; font-family: inherit;
-    display: inline-flex; align-items: center;
-    transition: background 0.15s, border-color 0.15s;
-  }
-  .intro-chip:hover { border-color: var(--faint); }
-  .intro-chip.active { background: var(--rausch); color: #ffffff; border-color: var(--rausch); }
-  .intro-chip .filter-dot { width: 8px; height: 8px; }
-  /* Neighbourhood tiles: one horizontal band, snap-scrolled on touch. */
-  .intro-hoods { display: flex; gap: 10px; overflow-x: auto; margin: 0 -24px 28px;
-    padding: 2px 24px 8px; scroll-snap-type: x proximity; scrollbar-width: none; }
-  .intro-hoods::-webkit-scrollbar { display: none; }
-  /* Cards, 14px corners, the same object as a result card one screen later. */
-  .hood-tile {
-    flex: 0 0 auto; scroll-snap-align: start; text-align: left;
-    background: var(--surface); border: 1px solid var(--hairline-soft); border-radius: 14px;
-    padding: 14px 16px; min-width: 156px; cursor: pointer; font-family: inherit; color: var(--ink);
-    transition: background 0.15s, border-color 0.15s;
-  }
-  .hood-tile:hover { background: var(--surface-strong); border-color: var(--hairline); }
-  .hood-tile.active { border-color: var(--rausch); }
-  .hood-tile .hood-name { display: block; font-size: 16px; font-weight: 600; margin-bottom: 3px; }
-  .hood-tile .hood-count { display: block; font-size: 13px; color: var(--muted-text); }
-  .hood-tile.active .hood-count { color: var(--rausch); }
-
-  .intro-actions { display: flex; align-items: center; gap: 18px; flex-wrap: wrap;
-    margin-bottom: 22px; }
-  /* button-primary: Rausch, 8px, 48px tall. The one voltage on the screen. */
-  .intro-cta {
-    background: var(--rausch); color: #ffffff; border: 0;
-    height: 48px; padding: 0 24px; font-size: 16px; font-weight: 500;
-    border-radius: 8px; cursor: pointer; font-family: inherit;
-  }
-  .intro-cta:hover { background: var(--rausch-active); }
-
-  .intro-band { display: flex; flex-direction: column; gap: 14px; margin-top: 28px; }
-  .intro-band .intro-actions { margin-bottom: 0; }
+  /* Nothing in here but the person. The filters live in the rail behind this
+     overlay, so repeating them was asking the reader to choose a cuisine in the
+     middle of an introduction. */
+  .intro-inner { width: 100%; max-width: 780px; margin: auto;
+    display: flex; flex-direction: column; align-items: flex-start; gap: 20px; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
   .intro-skip { background: none; border: 0; color: var(--ink); font: inherit; font-size: 14px;
     font-weight: 500; cursor: pointer; padding: 4px 0; text-decoration: underline;
     text-underline-offset: 3px; }
   .intro-skip:hover { color: var(--rausch); }
-  .intro-stats { color: var(--muted-text); font-size: 13px; margin: 0; }
   #intro :focus-visible, .btn:focus-visible, .filter-btn:focus-visible {
     outline: 2px solid var(--accent); outline-offset: 2px; }
 
   @media (max-width: 767px) {
     #intro { justify-content: flex-start; padding-top: max(44px, env(safe-area-inset-top));
       padding-bottom: 0; }
-    /* Sticky CTA last in the column, stats above it — the bottom sheet behind
-       would otherwise read through the action bar. */
-    .intro-inner { display: flex; flex-direction: column; }
-    .intro-stats { margin-bottom: 10px; }
-    .intro-band { order: 1; margin: 10px -24px 0; border-radius: 0; padding: 16px 24px;
-      padding-bottom: max(16px, env(safe-area-inset-bottom));
-      position: sticky; bottom: 0; gap: 10px; }
-    .intro-band .intro-stats { order: -1; }
-    .intro-cta { flex: 1; }
-    /* Hide the bottom sheet while the landing is up */
+    /* Hide the bottom sheet while the panel is up */
     body.intro-open #sidebar { visibility: hidden; }
   }
 
@@ -475,35 +413,35 @@
 
   <div id="intro" class="hidden" role="dialog" aria-modal="true" aria-labelledby="introTitle">
     <div class="intro-inner">
-      <p class="intro-eyebrow">Barcelona</p>
+      <h2 id="introTitle" class="sr-only" tabindex="-1">About this map</h2>
 
-      <div class="maker">
-        <div class="maker-panels">
-          <div class="maker-note"><p><span class="who">Jan Schupbach</span> is a
-            product designer living in Barcelona. He has kept this map since 2021,
-            a note to himself that grew every time a friend asked where to eat. It
-            is <span id="introTotal">0</span> places now, with no ratings and no
-            sponsors.</p></div>
-          <div class="maker-shot">
-            <img src="img/jan.jpg" alt="Jan Schupbach" width="751" height="1000"
-              decoding="async">
-          </div>
+      <div class="maker-panels">
+        <div class="maker-shot">
+          <img src="img/jan.jpg" alt="Jan Schupbach" width="751" height="1000"
+            decoding="async">
+        </div>
+        <div class="maker-note">
+          <p>Tagsüber designt Jan beim Monday Club
+            (<a href="https://themondayclub.studio" target="_blank" rel="noopener">themondayclub.studio</a>)
+            Fintech- und Insurance-Produkte.</p>
+          <p>Wenn er durch die Strassen Barcelonas schlendert, merkt er sich Orte.
+            Seit 2021 führt er eine Liste, die nie als Projekt gedacht war, sondern
+            als Gedächtnisstütze für sich selbst. Ein Freund fragt &bdquo;wo isst man
+            hier gut&ldquo;, er schickt einen Pin, die Liste wächst. Fünf Jahre später
+            sind es <span id="introTotal">0</span> Orte.</p>
+          <p>Keine Sterne, keine Rankings, keine bezahlten Platzierungen. Nur Orte,
+            an denen er selbst war, mit Leuten, die ihm wichtig sind. Sein Google
+            Maps ist vollgepinnt, weil für ihn nichts näher an pures Wohlbefinden
+            kommt als ein guter Spot, gutes Essen, die richtigen Leute am Tisch.</p>
+          <p>Vielleicht ist das derselbe Blick, nur privat statt beruflich: genau
+            hinschauen, bevor man urteilt, ob&rsquo;s ein Interface oder ein
+            Restaurant ist.</p>
+          <p>Diese Liste ist kein Guide. Es ist eine Sammlung von Momenten, die ein
+            zweites Mal wert waren.</p>
         </div>
       </div>
 
-      <h2 id="introTitle" tabindex="-1">What are you in the mood for?</h2>
-      <div class="intro-chips" id="introChips"></div>
-
-      <p class="intro-q">Or start from a neighbourhood</p>
-      <div class="intro-hoods" id="introHoods"></div>
-
-      <div class="intro-band">
-        <div class="intro-actions">
-          <button id="introCta" class="intro-cta" type="button">Show all places</button>
-          <button id="introSkip" class="intro-skip" type="button">Skip to the map</button>
-        </div>
-        <p class="intro-stats" id="introStats"></p>
-      </div>
+      <button id="introSkip" class="intro-skip" type="button">Back to the map</button>
     </div>
   </div>
 
@@ -1294,7 +1232,6 @@
       activeIdx = -1;
       if (currentPopup) { currentPopup.remove(); currentPopup = null; }
       renderFilters();
-      renderIntroChips();
       renderSidebar();
       clearMarkers();
       addMarkers();
@@ -1323,8 +1260,6 @@
     // write into activeGroups, so what you pick here is already applied when
     // the overlay fades out. Nothing reloads.
     const introEl = document.getElementById('intro');
-    const introChipsEl = document.getElementById('introChips');
-    const introCta = document.getElementById('introCta');
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     function storage(fn, fallback) {
@@ -1332,70 +1267,7 @@
     }
 
 
-    function renderIntroChips() {
-      if (!introChipsEl) return;
-      introChipsEl.innerHTML = '';
-      // The landing shows the seven families and nothing finer. Someone arriving
-      // for the first time is choosing a mood, not a cuisine tag.
-      const row = document.createElement('div');
-      row.className = 'chip-row';
-      FAMILIES.forEach((f) => {
-        const n = familyCount(f.id);
-        const active = activeFamilies.has(f.id);
-        if (!n && !active) return;
-        row.appendChild(chip({ label: f.label, count: n, color: f.color, active: active,
-          dot: true, cls: 'intro-chip', onClick: () => toggleFamily(f.id) }));
-      });
-      introChipsEl.appendChild(row);
-      renderHoodTiles();
-      updateIntroCta();
-    }
-
-    function renderHoodTiles() {
-      const wrap = document.getElementById('introHoods');
-      if (!wrap) return;
-      wrap.innerHTML = '';
-      HOODS.forEach((h) => {
-        const n = hoodCount(h.id);
-        if (!n && activeHood !== h.id) return;
-        const active = activeHood === h.id;
-        const tile = document.createElement('button');
-        tile.type = 'button';
-        tile.className = 'hood-tile' + (active ? ' active' : '');
-        tile.setAttribute('aria-pressed', String(active));
-        tile.innerHTML =
-          '<span class="hood-name">' + escapeHtml(h.label) + '</span>' +
-          '<span class="hood-count">' + n + ' place' + (n === 1 ? '' : 's') + '</span>';
-        tile.addEventListener('click', () => {
-          activeHood = active ? null : h.id;
-          applyFilters();
-        });
-        wrap.appendChild(tile);
-      });
-    }
-
-    function updateIntroCta() {
-      if (!introCta) return;
-      const n = filteredCount();
-      const untouched = activeGroups.size === 0 && !activeHood;
-      introCta.textContent = untouched
-        ? 'Show all ' + n + ' places'
-        : 'Show ' + n + ' place' + (n === 1 ? '' : 's') +
-          (activeHood ? ' in ' + hoodLabel(activeHood) : '');
-      introCta.disabled = n === 0;
-    }
-
-    function renderIntroStats() {
-      const el = document.getElementById('introStats');
-      if (!el) return;
-      // Three families, counted by tag. Not a partition — a place can be two of
-      // them — so the line names them instead of implying the numbers add up.
-      const count = (id) => {
-        const f = familyById(id);
-        return ALL_DATA.filter((p) => f.groups.some((g) => hasGroup(p, g))).length;
-      };
-      el.textContent = count('coffee') + ' coffee & pastry · ' + count('brunch') + ' brunch · ' +
-        count('tapas') + ' tapas & catalan';
+    function renderIntroTotal() {
       document.getElementById('introTotal').textContent = String(ALL_DATA.length);
     }
 
@@ -1452,7 +1324,6 @@
     function openIntro() {
       introEl.classList.remove('hidden');
       document.body.classList.add('intro-open');
-      renderIntroChips();
       document.getElementById('introTitle').focus();
       if (!reducedMotion) {
         map.easeTo({ zoom: 12.9, bearing: -14, pitch: 30, duration: 9000, easing: (t) => t });
@@ -1470,7 +1341,6 @@
       if (firstFilter) firstFilter.focus();
     }
 
-    introCta.addEventListener('click', closeIntro);
     document.getElementById('introSkip').addEventListener('click', closeIntro);
     document.getElementById('introBtn').addEventListener('click', openIntro);
 
@@ -1661,7 +1531,7 @@
         const fromUrl = readUrlFilters();
         searchFields.forEach((el) => { if (el) el.value = query; });
         applyFilters();
-        renderIntroStats();
+        renderIntroTotal();
 
         loadCount.data(ALL_DATA.length);
 
