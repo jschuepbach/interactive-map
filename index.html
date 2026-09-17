@@ -242,8 +242,8 @@
   .locate:hover { border-color: var(--faint); }
   .locate[aria-pressed="true"] { background: var(--rausch); border-color: var(--rausch);
     color: #ffffff; }
-  .locate.working svg { animation: locating 1.1s linear infinite; }
-  @keyframes locating { to { transform: rotate(360deg); } }
+  .locate.working svg { animation: locating 1s ease-in-out infinite; }
+  @keyframes locating { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
 
   .geo-note {
     position: absolute; z-index: 6;
@@ -760,10 +760,9 @@
       <button id="locateBtn" class="locate" type="button"
         aria-pressed="false" aria-label="Sort by how close places are to me">
         <svg viewBox="0 0 22 22" aria-hidden="true" focusable="false">
-          <circle cx="11" cy="11" r="4.2" fill="none" stroke="currentColor" stroke-width="1.8"/>
-          <circle cx="11" cy="11" r="1.5" fill="currentColor"/>
-          <path d="M11 1.6v3M11 17.4v3M1.6 11h3M17.4 11h3" stroke="currentColor"
-            stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M18.7 3.3 3.8 9.7c-.8.3-.7 1.4.1 1.6l5.4 1.4 1.4 5.4c.2.8 1.3.9 1.6.1z"
+            fill="currentColor" stroke="currentColor" stroke-width="1.1"
+            stroke-linejoin="round" />
         </svg>
       </button>
       <p id="geoNote" class="geo-note" role="status" hidden></p>
