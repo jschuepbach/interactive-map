@@ -381,19 +381,17 @@
   .marker-label {
     display: none;
     position: absolute; left: 16px; top: -12px; z-index: 1;
-    max-width: 168px; padding: 4px 9px; border-radius: 8px;
+    max-width: 168px; padding: 3px 8px; border-radius: 7px;
     background: var(--surface); border: 1px solid var(--hairline);
     box-shadow: 0 2px 10px rgba(0,0,0,0.55);
-    font-size: 12px; font-weight: 600; color: var(--ink);
+    font-size: 10px; font-weight: 600; letter-spacing: 0.3px;
+    text-transform: uppercase; color: var(--marker-color, var(--muted-text));
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     pointer-events: none;
     opacity: 0; transform: translateX(-4px);
     transition: opacity 0.18s ease, transform 0.22s cubic-bezier(0.22, 1, 0.36, 1);
   }
-  .marker-label .cat {
-    display: block; font-size: 10px; font-weight: 600; letter-spacing: 0.3px;
-    text-transform: uppercase; color: var(--marker-color, var(--muted-text));
-  }
+
   .marker.selected .marker-label { opacity: 1; transform: none; }
   /* Near the right edge the label would run off the map, so it flips sides. */
   .marker.flip .marker-label { left: auto; right: 16px; transform: translateX(4px); }
@@ -614,6 +612,9 @@
     body.mode-map .filter-btn { box-shadow: 0 2px 10px rgba(0,0,0,0.5); }
     /* The tag row and its label need reading room, which the map does not have. */
     body.mode-map .filter-sub { display: none; }
+    /* The map's origin in this mode is the top of the floating rail, so the
+       default controls landed underneath the chips. */
+    body.mode-map .maplibregl-ctrl-top-right { padding-top: 70px; }
 
     .mode-toggle {
       display: inline-flex;
@@ -2143,7 +2144,7 @@
 
       const label = document.createElement('div');
       label.className = 'marker-label';
-      label.innerHTML = '<span class="cat">' + escapeHtml(cat) + '</span>' + escapeHtml(p.name);
+      label.textContent = cat;
       label.style.setProperty('--marker-color', groupColor(p.group));
       el.appendChild(label);
 
