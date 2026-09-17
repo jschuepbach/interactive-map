@@ -697,8 +697,7 @@
       { id: 'latin',   label: 'Latin America',   color: 'var(--c-americas)',
         groups: ['Peruvian', 'Mexican', 'Brazilian', 'Colombian', 'Ecuatorian'] },
       { id: 'dinner',  label: 'Dinner',          color: 'var(--c-europe)',
-        groups: ['Fine-dining', 'Grill', 'Seafood', 'Italian', 'Mediterranean',
-                 'Fusion', 'Gluten-free'] },
+        groups: ['Fine-dining', 'Grill', 'Seafood', 'Italian', 'Mediterranean', 'Fusion'] },
       // Somewhere you eat standing up or in half an hour, which is a different
       // question from where you book a table.
       { id: 'quick',   label: 'Quick bite',      color: 'var(--c-quick)',
@@ -717,13 +716,15 @@
       return f ? f.color : 'var(--accent)';
     }
     function familyById(id) { return FAMILIES.find((f) => f.id === id); }
-    // A place belongs to the family of its FIRST tag, not of any tag it carries.
-    // Membership by any tag put 90 of 227 places in two families at once, which
-    // is how a gluten-free brunch cafe turned up under Dinner. The primary tag is
-    // the one that colours the pin and leads the row, so it decides the family
-    // too: the eight counts now add up to 227 instead of overlapping.
-    function familyOf(p) { return FAMILY_OF[(p.groups || [])[0]] || null; }
-    function inFamily(p, id) { const f = familyOf(p); return !!f && f.id === id; }
+    // A place belongs to every family any of its tags names. The Lobster Roll is
+    // Seafood and Sandwich, so it belongs under Dinner and under Quick bite;
+    // Nikkei 103 is Peruvian and Japanese and belongs under both. The counts
+    // therefore overlap and add up to more than 227, which is correct: they count
+    // places in a family, not slices of a pie.
+    function inFamily(p, id) {
+      const f = familyById(id);
+      return !!f && f.groups.some((g) => hasGroup(p, g));
+    }
     // Every tag of every picked family, which is both what the second row shows
     // and what an unnarrowed family match tests against.
     function activeFamilyGroups() {
@@ -1048,9 +1049,7 @@
       const pool = ALL_DATA.filter((p) => matchesQuery(p, q) &&
         (!activeHood || p.hood === activeHood));
       if (group === 'All') return pool.length;
-      const home = FAMILY_OF[group];
-      return pool.filter((p) => hasGroup(p, group) &&
-        (!home || inFamily(p, home.id))).length;
+      return pool.filter((p) => hasGroup(p, group)).length;
     }
 
     function hoodCount(id) {
