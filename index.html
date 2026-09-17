@@ -615,7 +615,7 @@
       touch-action: pan-y;
     }
     .place-card[hidden] { display: none; }
-    .place-card.swiping { transition: none; }
+    .place-card.swiping { transition: none !important; }
     .place-close {
       position: absolute; top: 6px; right: 8px; z-index: 1;
       width: 34px; height: 34px; border: 0; border-radius: 999px;
@@ -1334,16 +1334,48 @@
         placeCard.style.opacity = String(Math.max(0.35, 1 - Math.abs(dx) / 420));
       });
 
+      // A completed swipe carries the card off the way it was thrown and brings
+      // the next one in from the other side, so the deck reads as a deck. The
+      // map is already easing to the new pin underneath it.
+      function slide(step, next) {
+        const travel = placeCard.offsetWidth + 24;
+        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (reduce) { focusPoint(next); return; }
+        void placeCard.offsetWidth;
+        placeCard.style.transition = 'transform 0.17s ease-in, opacity 0.17s ease-in';
+        placeCard.style.transform = 'translateX(' + (step > 0 ? -travel : travel) + 'px)';
+        placeCard.style.opacity = '0';
+        setTimeout(() => {
+          focusPoint(next);                       // showPlaceCard clears the transform
+          placeCard.style.transition = 'none';
+          placeCard.style.transform = 'translateX(' + (step > 0 ? travel : -travel) + 'px)';
+          placeCard.style.opacity = '0';
+          // Read a layout property to flush the start state, so the change below
+          // is a transition and not a coalesced jump. A rAF is not enough here:
+          // both writes land in the same style recalculation.
+          void placeCard.offsetWidth;
+          placeCard.style.transition =
+            'transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.22s ease';
+          placeCard.style.transform = 'none';
+          placeCard.style.opacity = '1';
+        }, 170);
+      }
+
       function release() {
         if (!live) return;
         live = false;
         placeCard.classList.remove('swiping');
-        placeCard.style.opacity = '';
         const step = Math.abs(dx) > THRESHOLD ? (dx < 0 ? 1 : -1) : 0;
-        placeCard.style.transform = '';
-        if (!step || DATA.length < 2) return;
+        if (!step || DATA.length < 2) {
+          // Not far enough: it settles back where it came from.
+          placeCard.style.transition =
+            'transform 0.26s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.2s ease';
+          placeCard.style.transform = '';
+          placeCard.style.opacity = '';
+          return;
+        }
         const next = (activeIdx + step + DATA.length) % DATA.length;
-        focusPoint(next);
+        slide(step, next);
       }
 
       placeCard.addEventListener('pointerup', release);
