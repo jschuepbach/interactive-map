@@ -99,9 +99,7 @@
   .intro-head h2 { font-size: 22px; font-weight: 600; line-height: 1.18;
     letter-spacing: -0.44px; margin: 0 0 6px; }
   .intro-head p { font-size: 14px; color: var(--muted-text); line-height: 1.43; margin: 0; }
-  .intro-head button { background: none; border: 0; padding: 0; font: inherit;
-    color: var(--ink); cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
-  .intro-head button:hover { color: var(--rausch); }
+
 
   .list { flex: 1; overflow-y: auto; padding: 12px 20px 24px;
     display: grid; grid-template-columns: repeat(auto-fill, minmax(258px, 1fr));
@@ -347,20 +345,23 @@
     #intro { transition: none; }
   }
 
-  /* ---------- Loader ---------- */
+  /* ---------- Loader ----------
+     The wait says the one thing worth saying at that moment: a person picked
+     these, and there are this many. The line stands from the first frame at
+     reading size; the only thing that moves is the figure. */
   #loader {
-    position: fixed; inset: 0; background: var(--bg); z-index: 100;
-    display: flex; align-items: center; justify-content: center;
-    transition: opacity 0.4s ease;
+    position: fixed; inset: 0; background: var(--ground); z-index: 100;
+    transition: opacity 0.32s ease-out;
   }
   #loader.hidden { opacity: 0; pointer-events: none; }
-  .spinner {
-    width: 32px; height: 32px; border: 3px solid var(--border);
-    border-top-color: var(--accent); border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-  }
-  @keyframes spin { to { transform: rotate(360deg); } }
-
+  .load-stack { position: absolute; left: clamp(20px, 5vw, 64px); right: 20px;
+    bottom: clamp(20px, 5vh, 56px); display: flex; flex-direction: column; gap: 4px; }
+  .load-num { font-size: clamp(72px, 17vw, 190px); font-weight: 600; letter-spacing: -0.03em;
+    line-height: 0.86; font-variant-numeric: tabular-nums; }
+  .load-cap { font-size: clamp(18px, 3.4vw, 34px); font-weight: 500; line-height: 1.15;
+    letter-spacing: -0.01em; color: var(--ink); }
+  .load-rule { position: absolute; left: 0; bottom: 0; height: 2px; width: 0;
+    background: var(--rausch); }
   /* ---------- Footer ---------- */
   footer {
     position: absolute; bottom: 0; left: 0; right: 0; z-index: 4;
@@ -437,7 +438,13 @@
 </style>
 </head>
 <body>
-  <div id="loader"><div class="spinner"></div></div>
+  <div id="loader">
+    <div class="load-rule" id="loadRule"></div>
+    <div class="load-stack">
+      <div class="load-num" id="loadNum">0</div>
+      <div class="load-cap">hand-picked spots in Barcelona</div>
+    </div>
+  </div>
 
   <div id="intro" class="hidden" role="dialog" aria-modal="true" aria-labelledby="introTitle">
     <div class="intro-inner">
@@ -506,6 +513,96 @@
       if (l) l.innerHTML = '<div style="color:#ff7a59;font:13px monospace;padding:20px;text-align:center">' +
         'JS error: ' + (e.message || '') + '<br>' + (e.filename || '') + ':' + (e.lineno || '') + '</div>';
     });
+
+    // ----- Loader -----
+    // Counting in. The figure runs to however many places the data actually
+    // holds, never to a hardcoded number and never to a percentage: a percentage
+    // is a promise about time, and this file loads in a fraction of a second.
+    // The animation and the fetch start together, so on a fast line this is a
+    // number going past, not a wait we invented.
+    const LOAD_MS = 2500;
+    const COUNT_KEY = 'bcn-map-count';     // last known total, so the count can
+    const SESSION_KEY = 'bcn-map-counted'; // start before data.json has landed
+    const loaderEl = document.getElementById('loader');
+    const loadNum = document.getElementById('loadNum');
+    const loadRule = document.getElementById('loadRule');
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function safeStorage(fn, fallback) {
+      try { return fn(); } catch (_) { return fallback; }
+    }
+
+    const loadCount = (function () {
+      let total = Number(safeStorage(() => localStorage.getItem(COUNT_KEY), 0)) || 0;
+      let dataReady = false, finished = false, started = 0, raf = 0;
+      const seenThisSession = safeStorage(() => sessionStorage.getItem(SESSION_KEY), null);
+
+      function easeInOut(t) { return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2; }
+      function easeOutQuart(t) { return 1 - Math.pow(1 - t, 4); }
+
+      // A hand on a dial rather than a machine: a sweep, a short hold while the
+      // eye catches up, another sweep, then a slow last stretch where the final
+      // numbers are readable. Flat pairs are the holds.
+      const PACE = [[0, 0], [0.16, 0.30], [0.26, 0.33], [0.46, 0.66], [0.56, 0.70],
+                    [0.78, 0.93], [1, 1]];
+      function paced(t) {
+        for (let i = 1; i < PACE.length; i++) {
+          if (t <= PACE[i][0]) {
+            const a = PACE[i - 1], b = PACE[i];
+            const span = b[0] - a[0];
+            return a[1] + (b[1] - a[1]) * easeInOut(span ? (t - a[0]) / span : 1);
+          }
+        }
+        return 1;
+      }
+
+      function done() {
+        if (finished) return;
+        finished = true;
+        cancelAnimationFrame(raf);
+        if (total) loadNum.textContent = total;
+        loadRule.style.width = '100%';
+        safeStorage(() => sessionStorage.setItem(SESSION_KEY, '1'));
+        setTimeout(() => loaderEl.classList.add('hidden'), 220);
+      }
+
+      function frame(now) {
+        const t = Math.min(1, (now - started) / LOAD_MS);
+        loadRule.style.width = (easeOutQuart(t) * 100).toFixed(1) + '%';
+        // Before data.json lands there is no honest number to count towards, so
+        // the figure holds at the last value rather than racing to a guess.
+        const ceiling = dataReady ? 1 : 0.82;
+        loadNum.textContent = Math.round(paced(Math.min(t, ceiling)) * total);
+        if (t < 1 || !dataReady) { raf = requestAnimationFrame(frame); return; }
+        done();
+      }
+
+      return {
+        start() {
+          // Seen once already this session: no second performance.
+          if (seenThisSession || prefersReduced) return;
+          if (!total) return;            // first ever visit, wait for the data
+          started = performance.now();
+          raf = requestAnimationFrame(frame);
+        },
+        data(n) {
+          total = n;
+          dataReady = true;
+          safeStorage(() => localStorage.setItem(COUNT_KEY, String(n)));
+          if (seenThisSession) { loaderEl.classList.add('hidden'); return; }
+          if (prefersReduced) {
+            loadNum.textContent = n;
+            loadRule.style.width = '100%';
+            setTimeout(() => loaderEl.classList.add('hidden'), 200);
+            safeStorage(() => sessionStorage.setItem(SESSION_KEY, '1'));
+            return;
+          }
+          if (!started) { started = performance.now(); raf = requestAnimationFrame(frame); }
+        },
+        fail() { loaderEl.classList.add('hidden'); }
+      };
+    })();
+    loadCount.start();
 
     // ----- Config -----
     const CENTER = [2.1734, 41.3851]; // Barcelona
@@ -886,10 +983,7 @@
         head.className = 'side-header intro-head';
         head.innerHTML =
           '<h2>' + DATA.length + ' places I recommend to my friends.</h2>' +
-          '<p>Coffee, brunch and restaurants, picked by hand. No ratings, no compromises. ' +
-          '<button type="button" id="headAbout">More about this map</button></p>';
-        const about = document.getElementById('headAbout');
-        if (about) about.addEventListener('click', openIntro);
+          '<p>Coffee, brunch and restaurants, picked by hand. No ratings, no compromises.</p>';
       }
       head.style.display = head.innerHTML ? '' : 'none';
       if (!DATA.length) {
@@ -1533,7 +1627,7 @@
         applyFilters();
         renderIntroStats();
 
-        document.getElementById('loader').classList.add('hidden');
+        loadCount.data(ALL_DATA.length);
 
         // No landing screen on arrival. Asking someone to pick a craving before
         // they have seen a single place is asking them to decide what they are
