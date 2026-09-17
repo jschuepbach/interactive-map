@@ -1646,15 +1646,11 @@
     }
     const MAPS_LABEL = IS_APPLE ? 'Maps →' : 'Google Maps →';
 
-    // A card ends with where the place is, not with a link to a map the reader is
-    // already looking at. Maps belongs in the pin's own card, one click away.
+    // A card ends with where the place is, and nothing else. Every link — website,
+    // Instagram, Maps — waits in the pin's own card, one click away.
     function cardFootHtml(p) {
       const hood = hoodLabel(p.hood);
-      return '<div class="links">' +
-        (hood ? '<span class="hood-tag">' + escapeHtml(hood) + '</span>' : '') +
-        (p.url ? '<a href="' + escapeAttr(p.url) + '" target="_blank" rel="noopener">Visit →</a>' : '') +
-        (p.instagram ? '<a href="' + escapeAttr(p.instagram) + '" target="_blank" rel="noopener">Instagram →</a>' : '') +
-        '</div>';
+      return hood ? '<div class="links"><span class="hood-tag">' + escapeHtml(hood) + '</span></div>' : '';
     }
 
     function linksHtml(p, cls) {
