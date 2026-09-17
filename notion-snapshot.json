@@ -1,0 +1,1995 @@
+{
+ "Achaar bar": {
+  "bucket": true,
+  "cuisine": [
+   "Indian"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Akiro Hand Roll Bar": {
+  "bucket": false,
+  "cuisine": [
+   "Japanese"
+  ],
+  "tip": null,
+  "why": "The best sushi in the city for my money. Hand rolls made right in front of you, with a bit of conversation across the counter."
+ },
+ "Albé Barcelona": {
+  "bucket": true,
+  "cuisine": [
+   "Fine-dining"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Alice Secret Garden": {
+  "bucket": false,
+  "cuisine": [
+   "Wine",
+   "Tapas"
+  ],
+  "tip": "Go for cocktails and the courtyard vibe rather than the food.",
+  "why": "Whimsical Alice in Wonderland-themed spot with a leafy courtyard of giant mushrooms outside and a cozy blue lounge inside. Cafe by day, cocktail bar by night, known for good espresso martinis."
+ },
+ "Amateur": {
+  "bucket": true,
+  "cuisine": [
+   "Tapas",
+   "Catalan",
+   "Wine"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Amauta Coffee Bar": {
+  "bucket": false,
+  "cuisine": [
+   "Coffee"
+  ],
+  "tip": "Ask for something from their Reserve line.",
+  "why": "Specialty roastery since 2019 with its own two Barcelona locations, focused on single-origin lots roasted to show terroir, plus a premium reserve line."
+ },
+ "Anís Cafe": {
+  "bucket": true,
+  "cuisine": [
+   "Middle-Eastern"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Apurado coffee": {
+  "bucket": false,
+  "cuisine": [
+   "Coffee",
+   "Pastry"
+  ],
+  "tip": "Espresso to go, don't linger.",
+  "why": "Small neighborhood spot focused on fast, clean espresso rather than decor."
+ },
+ "Asian Ways": {
+  "bucket": false,
+  "cuisine": [
+   "Pan-Asian"
+  ],
+  "tip": "Order the miso ramen with a side of gyoza.",
+  "why": "Casual, well-rated ramen spot on Paral·lel with slow-cooked soy and miso broths plus Vietnamese rolls and dumplings. Popular with groups, good value."
+ },
+ "BAR LOBO": {
+  "bucket": true,
+  "cuisine": [
+   "Tapas",
+   "Wine"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Babula Bar 1937": {
+  "bucket": true,
+  "cuisine": [
+   "Tapas",
+   "Wine",
+   "Seafood"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Bacaro": {
+  "bucket": true,
+  "cuisine": [
+   "Italian",
+   "Wine"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Balzac Café": {
+  "bucket": false,
+  "cuisine": [
+   "Coffee",
+   "Pastry"
+  ],
+  "tip": "Filter coffee, and stay for the outdoor seating.",
+  "why": "Specialty coffee spot on Passeig de Sant Joan working with Ineffable Coffee Roasters from Sevilla, laptop and dog friendly with outdoor seating."
+ },
+ "Bar Bocata": {
+  "bucket": true,
+  "cuisine": [
+   "Tapas",
+   "Wine"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Bar Cañete": {
+  "bucket": true,
+  "cuisine": [
+   "Catalan",
+   "Tapas",
+   "Seafood",
+   "Wine"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Bar Cugat": {
+  "bucket": true,
+  "cuisine": [
+   "Tapas",
+   "Wine"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Bar El Velódromo": {
+  "bucket": true,
+  "cuisine": [
+   "Catalan",
+   "Tapas"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Bar Electricitat": {
+  "bucket": true,
+  "cuisine": [
+   "Catalan",
+   "Tapas"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Bar Manifest": {
+  "bucket": true,
+  "cuisine": [
+   "Tapas",
+   "Wine"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Bar Marsella": {
+  "bucket": true,
+  "cuisine": [
+   "Catalan",
+   "Tapas"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Bar Pimentel": {
+  "bucket": true,
+  "cuisine": [
+   "Catalan",
+   "Tapas",
+   "Seafood"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Barra Oso": {
+  "bucket": true,
+  "cuisine": [
+   "Catalan",
+   "Wine"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Berbena": {
+  "bucket": true,
+  "cuisine": [
+   "Tapas",
+   "Wine"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Billy Brunch": {
+  "bucket": false,
+  "cuisine": [
+   "Brunch",
+   "Coffee"
+  ],
+  "tip": "Eggs benedict and a pancake stack to share.",
+  "why": "All-day breakfast concept with an open kitchen and local sourcing, strong on eggs benedict and pancake stacks with solid vegetarian, vegan and gluten-free options."
+ },
+ "Bistrot Levante": {
+  "bucket": true,
+  "cuisine": [
+   "Tapas"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Bloome By Sasha": {
+  "bucket": false,
+  "cuisine": [
+   "Brunch",
+   "Coffee",
+   "Gluten-free"
+  ],
+  "tip": "Good option if you need strictly gluten-free, try the cinnamon cookie.",
+  "why": "Dedicated gluten-free cafe on Via Laietana, cozy and less touristy, known for gluten-free cookies, pancakes and croissants."
+ },
+ "Boa-Bao": {
+  "bucket": false,
+  "cuisine": [
+   "Pan-Asian"
+  ],
+  "tip": "The seabass bao and a few starters to share, skip the mains.",
+  "why": "Pan-Asian restaurant in a former art gallery with an immersive, playful design and a multicultural kitchen team led by an Indonesian chef. Known for its bao and sharing dishes."
+ },
+ "Boca Grande": {
+  "bucket": false,
+  "cuisine": [
+   "Drinks"
+  ],
+  "tip": "Oysters and the burrata with Iberian ham.",
+  "why": "Restored townhouse combining restaurant, bar and lounge with long hours, glamorous but relaxed decor, and Mediterranean sharing plates and seafood."
+ },
+ "Bocanariz": {
+  "bucket": false,
+  "cuisine": [
+   "Wine",
+   "Tapas"
+  ],
+  "tip": null,
+  "why": "Small, stylish and loud, with vinyl on and a wine list worth working through. The tapas and the cheese hold up their end."
+ },
+ "Bodega Borràs Restaurant": {
+  "bucket": true,
+  "cuisine": [
+   "Catalan",
+   "Tapas",
+   "Wine"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Bohl": {
+  "bucket": false,
+  "cuisine": [
+   "Brunch",
+   "Coffee",
+   "Tea",
+   "Pastry"
+  ],
+  "tip": null,
+  "why": "They talked me into an iced matcha with coconut milk, and it has ruined every other matcha for me since."
+ },
+ "Bonsai Coffee & Matcha": {
+  "bucket": false,
+  "cuisine": [
+   "Coffee",
+   "Tea"
+  ],
+  "tip": "If you like matcha, get that instead of coffee.",
+  "why": "Combines specialty coffee with properly done matcha, rare to see done well in Barcelona."
+ },
+ "Brabo": {
+  "bucket": false,
+  "cuisine": [
+   "Grill",
+   "Wine"
+  ],
+  "tip": null,
+  "why": "A good date spot if you both like things off the grill. The tapas are anything but predictable."
+ },
+ "Brew Coffee": {
+  "bucket": false,
+  "cuisine": [
+   "Coffee",
+   "Pastry"
+  ],
+  "tip": "Ask for the filter of the day.",
+  "why": "Focus on filter coffee and brew methods, for people who want more than just espresso."
+ },
+ "Brooklyn Café": {
+  "bucket": false,
+  "cuisine": [
+   "Coffee",
+   "Pastry"
+  ],
+  "tip": "Good spot for a work meeting over coffee.",
+  "why": "Breakfast-focused café with a relaxed vibe for working."
+ },
+ "Brugarol Barcelona": {
+  "bucket": true,
+  "cuisine": [
+   "Fine-dining"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Bun Bo Barcelona": {
+  "bucket": false,
+  "cuisine": [
+   "Vietnamese"
+  ],
+  "tip": "Summer rolls with shrimp, then a pho.",
+  "why": "Vietnamese-inspired spot in the Gothic Quarter with one of the few real terraces in the center, strong on gluten-free, vegan and vegetarian options."
+ },
+ "CASA TAOS": {
+  "bucket": false,
+  "cuisine": [
+   "Coffee",
+   "Pastry"
+  ],
+  "tip": "Order a coffee, then browse the shop, it's part of the point.",
+  "why": "Love the unconventional vibe and the pastry."
+ },
+ "CAUA CACAO ROASTERS": {
+  "bucket": false,
+  "cuisine": [
+   "Coffee",
+   "Pastry"
+  ],
+  "tip": "If they roast their own cacao, try that instead of coffee.",
+  "why": "The name suggests in-house cacao/chocolate roasting alongside coffee, a niche angle few places do."
+ },
+ "Cafè Cometa": {
+  "bucket": true,
+  "cuisine": [
+   "Brunch",
+   "Coffee",
+   "Pastry"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Café Menssana": {
+  "bucket": false,
+  "cuisine": [
+   "Coffee",
+   "Mexican",
+   "Brunch"
+  ],
+  "tip": "Good solo work coffee.",
+  "why": "Known for a calm, minimalist atmosphere and clean coffee, good place to focus."
+ },
+ "Café Turó": {
+  "bucket": true,
+  "cuisine": [
+   "Tapas",
+   "Seafood",
+   "Wine"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Can Paixano": {
+  "bucket": true,
+  "cuisine": [
+   "Catalan",
+   "Tapas",
+   "Wine"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Capet Restaurant": {
+  "bucket": true,
+  "cuisine": [
+   "Tapas",
+   "Catalan",
+   "Wine"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Carlos and Matilda": {
+  "bucket": false,
+  "cuisine": [
+   "Mexican",
+   "Tapas"
+  ],
+  "tip": null,
+  "why": "A friendly little place with tables out on the terrace. Come for the beers and the tacos."
+ },
+ "Carlota Akaneya": {
+  "bucket": true,
+  "cuisine": [
+   "Japanese"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Casa Colomina": {
+  "bucket": false,
+  "cuisine": [
+   "Pastry"
+  ],
+  "tip": "Get the traditional, plain Turron!",
+  "why": "If you wanna bring home a turron, a Spanish specialty, then get it here!"
+ },
+ "Ceviche 103": {
+  "bucket": true,
+  "cuisine": [
+   "Peruvian"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Chinese Tofu Magician": {
+  "bucket": false,
+  "cuisine": [
+   "Tea"
+  ],
+  "tip": null,
+  "why": "Order the milk tea, it comes with melting beans and a dusting of cinnamon and is worth the trip on its own."
+ },
+ "Coco Social House Barceloneta": {
+  "bucket": true,
+  "cuisine": [
+   "Brunch"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Compartir Barcelona": {
+  "bucket": false,
+  "cuisine": [
+   "Fine-dining"
+  ],
+  "tip": "Book well in advance and let the staff guide the order of dishes, it's designed as a full sequence, not a pick-and-choose menu.",
+  "why": "A Michelin Guide-listed restaurant built entirely around sharing, reworking classic Catalan dishes into refined small plates meant to pass around the table."
+ },
+ "Cremat 11": {
+  "bucket": true,
+  "cuisine": [
+   "Brunch",
+   "Coffee"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Cresta Colorada Rosticeria Mexicana": {
+  "bucket": false,
+  "cuisine": [
+   "Mexican"
+  ],
+  "tip": null,
+  "why": "My favourite Mexican in the city. Order tacos, then order more tacos."
+ },
+ "DR.BEER & MR.FRIED": {
+  "bucket": true,
+  "cuisine": [
+   "Burger"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Departure Coffee Co.": {
+  "bucket": false,
+  "cuisine": [
+   "Coffee",
+   "Pastry"
+  ],
+  "tip": "Ask for the current single origin.",
+  "why": "Travel theme in the name, usually young independent roasters with clear bean sourcing."
+ },
+ "Disfrutar": {
+  "bucket": true,
+  "cuisine": [
+   "Catalan",
+   "Tapas",
+   "Wine"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Doppietta": {
+  "bucket": true,
+  "cuisine": [
+   "Italian"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Dos Palillos": {
+  "bucket": true,
+  "cuisine": [
+   "Pan-Asian"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "DosManos": {
+  "bucket": false,
+  "cuisine": [
+   "Middle-Eastern"
+  ],
+  "tip": null,
+  "why": "A perfectly cool, tasty bite for a short break."
+ },
+ "Dreamboat Bar & Deli": {
+  "bucket": true,
+  "cuisine": [
+   "Drinks"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "El Manaba": {
+  "bucket": false,
+  "cuisine": [
+   "Ecuatorian"
+  ],
+  "tip": "Go for any Ceviche!",
+  "why": "Highly recommended by an Ecuatorian friend."
+ },
+ "El Noa Noa": {
+  "bucket": false,
+  "cuisine": [
+   "Coffee",
+   "Pastry"
+  ],
+  "tip": "Get a cortado and take time to browse the books.",
+  "why": "Coffee shop and LGBTQI+ bookstore in one, sourcing from Nomad and Hola Coffee Roasters on a La Marzocco machine. Colorful, intentional space in Gràcia, built as a community space as much as a coffee spot."
+ },
+ "El Set": {
+  "bucket": false,
+  "cuisine": [
+   "Catalan",
+   "Tapas",
+   "Wine",
+   "Cheese"
+  ],
+  "tip": null,
+  "why": "Half butcher and cheese counter, half restaurant, with the warmth of a cabin in the Pyrenees. The tapas are the reason to stay."
+ },
+ "Els 4 Gats": {
+  "bucket": true,
+  "cuisine": [
+   "Catalan",
+   "Wine",
+   "Tapas"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Espai Puntal": {
+  "bucket": true,
+  "cuisine": [
+   "Grill",
+   "Wine"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Espai Quera Llibres i platillos": {
+  "bucket": false,
+  "cuisine": [
+   "Wine",
+   "Catalan",
+   "Tapas",
+   "Cheese"
+  ],
+  "tip": "Go for cheese from the Pyrenees and wine.",
+  "why": "Lovely and hidden - a tapas place in Barcelona’s oldest library."
+ },
+ "Estimar": {
+  "bucket": true,
+  "cuisine": [
+   "Fine-dining"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Extra Bar": {
+  "bucket": true,
+  "cuisine": [
+   "Tapas",
+   "Wine"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "FUGAZ": {
+  "bucket": false,
+  "cuisine": [
+   "Catalan",
+   "Wine"
+  ],
+  "tip": null,
+  "why": "Cool, yet romantic and delicious place for a lovely dinner."
+ },
+ "Farola Cocktail Bar Barcelona": {
+  "bucket": true,
+  "cuisine": [
+   "Drinks"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Fauna Restaurant by Casa de Vivi": {
+  "bucket": true,
+  "cuisine": [
+   "Seafood",
+   "Tapas",
+   "Wine"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Federal Café Gotic": {
+  "bucket": false,
+  "cuisine": [
+   "Brunch",
+   "Coffee",
+   "Pastry"
+  ],
+  "tip": null,
+  "why": "Delicious brunch and tasty pastry! And you can bring your laptop to work there a few hours."
+ },
+ "Fiffty fifty": {
+  "bucket": false,
+  "cuisine": [
+   "Wine",
+   "Burger"
+  ],
+  "tip": null,
+  "why": "Cool, fine Burger spot. You eat a greasy burger while sipping an organic local wine - unbeatable at times."
+ },
+ "Fismuler": {
+  "bucket": false,
+  "cuisine": [
+   "Tapas",
+   "Seafood",
+   "Wine"
+  ],
+  "tip": null,
+  "why": "Romantic and delicious place for a lovely dinner."
+ },
+ "Focacha": {
+  "bucket": true,
+  "cuisine": [
+   "Drinks"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Funky Bakers Eatery": {
+  "bucket": false,
+  "cuisine": [
+   "Coffee",
+   "Bakery"
+  ],
+  "tip": "Go for the pastries, coffee as a side.",
+  "why": "Bakery-café combo, coffee is usually secondary to the pastries."
+ },
+ "Gabby's Brunch": {
+  "bucket": true,
+  "cuisine": [
+   "Brunch",
+   "Coffee"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Garage Bar": {
+  "bucket": true,
+  "cuisine": [
+   "Beer"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Granja Hidden": {
+  "bucket": false,
+  "cuisine": [
+   "Brunch",
+   "Coffee"
+  ],
+  "tip": "Order the Nata Vendrell, it's the dish this place is actually known for.",
+  "why": "A revived 1921 Vendrell farmhouse granja that blends specialty coffee with traditional Catalan treats like Nata Vendrell cream and a proper Viennese cafe."
+ },
+ "Granja M. Viader": {
+  "bucket": false,
+  "cuisine": [
+   "Coffee",
+   "Pastry"
+  ],
+  "tip": "Go for the history, not the coffee.",
+  "why": "Historic institution since 1870, not specialty coffee, but a piece of Barcelona history (Cacaolat was invented here)."
+ },
+ "Granja Petitbo": {
+  "bucket": false,
+  "cuisine": [
+   "Brunch",
+   "Coffee"
+  ],
+  "tip": "Go early on a weekend, they don't take reservations and it fills up fast.",
+  "why": "Vintage-decorated weekend brunch spot on Passeig Sant Joan, popular for pancakes with red fruit and vanilla cream in a relaxed, photogenic setting."
+ },
+ "Green & Berry": {
+  "bucket": true,
+  "cuisine": [
+   "Vegan"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Gresca": {
+  "bucket": true,
+  "cuisine": [
+   "Catalan",
+   "Wine",
+   "Tapas"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Guanabara by El Rodizio": {
+  "bucket": true,
+  "cuisine": [
+   "Brazilian"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "HANA Grill & Bowl": {
+  "bucket": false,
+  "cuisine": [
+   "Korean"
+  ],
+  "tip": null,
+  "why": "Love the lunch menus there - and evenings with the table grill!"
+ },
+ "Hanoi Umami": {
+  "bucket": false,
+  "cuisine": [
+   "Vietnamese"
+  ],
+  "tip": "Start with the pho, it's the dish the place is named and known for.",
+  "why": "A proper Vietnamese restaurant known for pho and fresh, herb-forward dishes, straightforward and reliable rather than fusion or fancy."
+ },
+ "Hidden Coffee Roasters": {
+  "bucket": false,
+  "cuisine": [
+   "Coffee",
+   "Pastry"
+  ],
+  "tip": "Ask what's freshly roasted that week, that's usually the best cup on the menu.",
+  "why": "A well-regarded specialty coffee roaster with its own roastery, known for careful sourcing and for helping push Barcelona's specialty coffee scene forward."
+ },
+ "Hideout Burger": {
+  "bucket": true,
+  "cuisine": [
+   "Burger"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Hotpot de Sichuan": {
+  "bucket": true,
+  "cuisine": [
+   "Chinese"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "IKENOCHA Matcha Tea House": {
+  "bucket": true,
+  "cuisine": [
+   "Japanese",
+   "Tea"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "IKOYA Izakaya": {
+  "bucket": true,
+  "cuisine": [
+   "Japanese"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Itnig Café": {
+  "bucket": false,
+  "cuisine": [
+   "Coffee"
+  ],
+  "tip": "Good for a business meeting, not a coffee destination.",
+  "why": "Part of the Itnig coworking/startup ecosystem, more functional for meetings than for coffee enjoyment."
+ },
+ "Jaç Hi-fi Cafe": {
+  "bucket": false,
+  "cuisine": [
+   "Coffee",
+   "Brunch",
+   "Pastry"
+  ],
+  "tip": null,
+  "why": "Vinyl on the turntable and a room tuned like the inside of a Bang & Olufsen speaker."
+ },
+ "Jon Cake": {
+  "bucket": false,
+  "cuisine": [
+   "Pastry"
+  ],
+  "tip": null,
+  "why": "A wonderful variety of tasty pastry - the name says it all."
+ },
+ "KEMAKO JAPANESE BURGERS": {
+  "bucket": true,
+  "cuisine": [
+   "Japanese",
+   "Burger"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "KOH-NDAL THAI BISTRO": {
+  "bucket": true,
+  "cuisine": [
+   "Thai"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Kasarap Barcelona": {
+  "bucket": true,
+  "cuisine": [
+   "Filipino"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Kiosco de Ideas Libreria y Cafe": {
+  "bucket": false,
+  "cuisine": [
+   "Coffee"
+  ],
+  "tip": "Go to browse and stay, not for a quick coffee.",
+  "why": "Bookshop-café hybrid, the appeal is the concept, not primarily the coffee."
+ },
+ "Koy Shunka": {
+  "bucket": true,
+  "cuisine": [
+   "Japanese"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "LA PAPA": {
+  "bucket": false,
+  "cuisine": [
+   "Brunch",
+   "Coffee",
+   "Pastry"
+  ],
+  "tip": "Good for a laptop-friendly breakfast, it's calmer than most brunch spots nearby.",
+  "why": "A relaxed neighborhood cafe with a good all-day food menu, the kind of place that works equally well for a coffee stop or a proper meal."
+ },
+ "LABALABUSTA": {
+  "bucket": false,
+  "cuisine": [
+   "Wine",
+   "Middle-Eastern",
+   "Mediterranean"
+  ],
+  "tip": "Get to taste their bread - wow!!",
+  "why": "Israeli cooking you keep picking at long after you are full. We always end up ordering another round of the bread."
+ },
+ "LADY BABKA": {
+  "bucket": false,
+  "cuisine": [
+   "Coffee",
+   "Pastry"
+  ],
+  "tip": "Order the babka, coffee alongside.",
+  "why": "Bakery focused on babka and pastries, coffee is a companion."
+ },
+ "LAMAI THAI TAPAS": {
+  "bucket": true,
+  "cuisine": [
+   "Thai"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "LOT ROASTERS": {
+  "bucket": false,
+  "cuisine": [
+   "Coffee"
+  ],
+  "tip": "Buy a bag of beans to take home.",
+  "why": "In-house roastery, meaning you get freshly roasted coffee straight from the source."
+ },
+ "LULU & FLYN": {
+  "bucket": false,
+  "cuisine": [
+   "Brunch",
+   "Coffee"
+  ],
+  "tip": "Good for a coffee break between the beach and the old town, it's a convenient stop rather than a destination in itself.",
+  "why": "A relaxed cafe, bar and pub near Barceloneta with a good coffee program alongside food and drinks, an easy all-day option in the area."
+ },
+ "La Balmesina": {
+  "bucket": true,
+  "cuisine": [
+   "Italian",
+   "Wine"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "La Bombeta": {
+  "bucket": true,
+  "cuisine": [
+   "Catalan",
+   "Seafood",
+   "Tapas"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "La Cabrera Casa de Carnes": {
+  "bucket": false,
+  "cuisine": [
+   "Grill",
+   "Wine"
+  ],
+  "tip": null,
+  "why": "Absolute must if you’re into meat - and Argentinian barbecue - and wine."
+ },
+ "La Colmena": {
+  "bucket": true,
+  "cuisine": [
+   "Pastry"
+  ],
+  "tip": "I’m into croissants filled with cream!",
+  "why": null
+ },
+ "La Cua Curta": {
+  "bucket": true,
+  "cuisine": [
+   "Wine",
+   "Cheese"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "La Dama": {
+  "bucket": true,
+  "cuisine": [
+   "Fine-dining"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "La Flauta Rambla": {
+  "bucket": false,
+  "cuisine": [
+   "Catalan",
+   "Wine"
+  ],
+  "tip": "Order the flautas, the stuffed baguette sandwiches are the house specialty.",
+  "why": "A popular tapas bar on Rambla de Catalunya doing classic Spanish tapas and flauta sandwiches, casual and reliably busy with both locals and tourists."
+ },
+ "La Graciosa": {
+  "bucket": true,
+  "cuisine": [
+   "Wine"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "La Greca": {
+  "bucket": true,
+  "cuisine": [
+   "Tapas",
+   "Wine"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "La Pepita": {
+  "bucket": false,
+  "cuisine": [
+   "Catalan",
+   "Tapas",
+   "Wine"
+  ],
+  "tip": "Expect a wait on weekend evenings, they don't take reservations for small groups.",
+  "why": "A long-running, well-loved tapas bar in Gracia with an old-fashioned feel and a strong local following, known for consistently good, unpretentious tapas."
+ },
+ "La Peruana Pollastres a la Brasa": {
+  "bucket": true,
+  "cuisine": [
+   "Peruvian",
+   "Grill"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "La Punta Callao Cevichería": {
+  "bucket": true,
+  "cuisine": [
+   "Peruvian"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "La Selva": {
+  "bucket": false,
+  "cuisine": [
+   "Grill",
+   "Wine"
+  ],
+  "tip": null,
+  "why": "Such a cool place, space for larger groups and all meat lovers!"
+ },
+ "La Textil": {
+  "bucket": true,
+  "cuisine": [
+   "Beer"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "La Vietnamita": {
+  "bucket": false,
+  "cuisine": [
+   "Vietnamese"
+  ],
+  "tip": "Try the fresh spring rolls and a pho, it's a solid baseline test for how good a Vietnamese kitchen is.",
+  "why": "A genuine Vietnamese kitchen with locations in Born and Gracia, rewarding those who seek it out with authentic dishes rather than a generic pan-Asian menu."
+ },
+ "Lasarte": {
+  "bucket": true,
+  "cuisine": [
+   "Fine-dining"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Lato Café Breakfast Brunch y Ceviches": {
+  "bucket": false,
+  "cuisine": [
+   "Brunch",
+   "Coffee"
+  ],
+  "tip": "Go for brunch and try a ceviche alongside it, that pairing is the place's signature move.",
+  "why": "A cheerful breakfast and brunch spot that also does ceviches, an unusual but well-received combination that gets good marks for food and vibe alike."
+ },
+ "Le Bouchon": {
+  "bucket": false,
+  "cuisine": [
+   "Catalan",
+   "Tapas",
+   "Wine"
+  ],
+  "tip": "Good pick for a special dinner, it has hotel-restaurant polish without feeling stiff.",
+  "why": "A French bistro-style restaurant inside the Mercer Barcelona five-star hotel, offering classic French cooking in an elegant boutique-hotel setting."
+ },
+ "Little Andaman": {
+  "bucket": false,
+  "cuisine": [
+   "Indian"
+  ],
+  "tip": null,
+  "why": "Indian restaurant where you feel like in a spa - love the vibe there."
+ },
+ "Lodetto Café": {
+  "bucket": false,
+  "cuisine": [
+   "Coffee",
+   "Tea",
+   "Pastry"
+  ],
+  "tip": "Flat white with a chocolate croissant.",
+  "why": "Newer spot in Ciutat Vella that built a fast local following. Known for batch brew and flat white, plus proper pastries including vegan options."
+ },
+ "Lola Divine": {
+  "bucket": true,
+  "cuisine": [
+   "Grill",
+   "Wine"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Lucciano's": {
+  "bucket": false,
+  "cuisine": [
+   "Ice Cream"
+  ],
+  "tip": "Stick to the classic flavors like pistachio or hazelnut, that's where gelato places usually show their real quality.",
+  "why": "An Italian gelato spot regularly called out as one of the best places for gelato in the city, simple and consistently good."
+ },
+ "Lukumas": {
+  "bucket": false,
+  "cuisine": [
+   "Pastry",
+   "Coffee"
+  ],
+  "tip": "Go for the Greek doughnut with green cream.",
+  "why": "Greek doughnuts made with a family recipe in a beautifully designed shop."
+ },
+ "MAISON CARNE": {
+  "bucket": true,
+  "cuisine": [
+   "Grill",
+   "Wine"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "MIKAN": {
+  "bucket": true,
+  "cuisine": [
+   "Tapas",
+   "Pan-Asian",
+   "Wine"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "MUYSCA": {
+  "bucket": false,
+  "cuisine": [
+   "Colombian"
+  ],
+  "tip": "Ask what the daily special is, that's usually the most authentic option on the menu.",
+  "why": "An authentic Colombian restaurant in Sant Marti, one of the few in Barcelona doing real Colombian home cooking rather than a generic Latin American menu."
+ },
+ "Maramaia": {
+  "bucket": false,
+  "cuisine": [
+   "Italian"
+  ],
+  "tip": "Fine for a casual weeknight pizza, don't expect anything fancier than that.",
+  "why": "A neighborhood pizzeria in Gracia doing solid, no-nonsense pizza, the kind of reliable local spot rather than a destination restaurant."
+ },
+ "Maresme Brewery Taproom": {
+  "bucket": false,
+  "cuisine": [
+   "Beer"
+  ],
+  "tip": "Ask for a flight if you want to try several of their own brews before committing to a pint.",
+  "why": "A craft beer taproom in Sant Antoni pouring Maresme Brewery's own beers, a solid stop for anyone into local craft beer rather than the standard bar selection."
+ },
+ "Margarit restaurante": {
+  "bucket": true,
+  "cuisine": [
+   "Mediterranean",
+   "Wine"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Marta's Lemon Pie": {
+  "bucket": true,
+  "cuisine": [
+   "Pastry"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Masa Vins Barcelona": {
+  "bucket": true,
+  "cuisine": [
+   "Wine"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Mayura Restaurant Indian": {
+  "bucket": false,
+  "cuisine": [
+   "Indian"
+  ],
+  "tip": null,
+  "why": "Definitely insanely delicious Indian food and cozy place."
+ },
+ "Melo-Jia": {
+  "bucket": true,
+  "cuisine": [
+   "Chinese"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Mercader Eixample": {
+  "bucket": false,
+  "cuisine": [
+   "Tapas",
+   "Wine"
+  ],
+  "tip": null,
+  "why": "Our go to for tapas if we don’t wanna walk too far yet enjoy a very pleasing experience."
+ },
+ "Mercado Central Taberna Cevichera": {
+  "bucket": true,
+  "cuisine": [
+   "Peruvian"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Merle Coffee": {
+  "bucket": false,
+  "cuisine": [
+   "Coffee",
+   "Pastry"
+  ],
+  "tip": "Ask which roasters are currently on the menu.",
+  "why": "Small independent specialty café, usually with rotating roasters on offer."
+ },
+ "Modu korean bowl": {
+  "bucket": false,
+  "cuisine": [
+   "Korean"
+  ],
+  "tip": "Order the bibimbap, it's the dish the place is built around.",
+  "why": "A small Korean spot in Gracia doing bibimbap bowls and Korean home cooking, casual and quick without sacrificing authenticity."
+ },
+ "Monk Barcelona": {
+  "bucket": false,
+  "cuisine": [
+   "Drinks"
+  ],
+  "tip": null,
+  "why": "Looks like a Supermarket from the outside but it’s a bar behind the surface."
+ },
+ "Mono Café Poblenou": {
+  "bucket": false,
+  "cuisine": [
+   "Coffee",
+   "Pastry"
+  ],
+  "tip": "Good for a quiet morning in the area.",
+  "why": "Neighborhood café in Poblenou, more local and relaxed than technical."
+ },
+ "Monster Sushi c/ Girona": {
+  "bucket": true,
+  "cuisine": [
+   "Japanese"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Monvinic": {
+  "bucket": false,
+  "cuisine": [
+   "Wine",
+   "Tapas"
+  ],
+  "tip": null,
+  "why": "Beautiful place for even better wine, wow!!"
+ },
+ "Morning Glory Coffee & Brunch": {
+  "bucket": false,
+  "cuisine": [
+   "Brunch",
+   "Coffee"
+  ],
+  "tip": "Go on a weekday morning if you can, Raval brunch spots get busy fast on weekends.",
+  "why": "A well-regarded coffee and brunch spot in Raval, frequently named among the neighborhood's best breakfast options."
+ },
+ "Morreig": {
+  "bucket": false,
+  "cuisine": [
+   "Pastry"
+  ],
+  "tip": null,
+  "why": "Cakes built to look like fruit, oranges and all. Worth a detour for the pastry counter alone."
+ },
+ "Morrow Coffee": {
+  "bucket": false,
+  "cuisine": [
+   "Coffee",
+   "Pastry"
+  ],
+  "tip": "Get the filter, not the standard espresso.",
+  "why": "Known for very careful preparation, often with a third-wave approach."
+ },
+ "Mosquito": {
+  "bucket": false,
+  "cuisine": [
+   "Pan-Asian"
+  ],
+  "tip": "Order several small dishes to share, that's the format the whole menu is built around.",
+  "why": "A long-running Asian tapas spot in Born, often cited as one of the best places in Barcelona for that specific mix of small Asian dishes."
+ },
+ "NORI MATCHA": {
+  "bucket": false,
+  "cuisine": [
+   "Coffee",
+   "Tea"
+  ],
+  "tip": "Matcha latte instead of a cortado.",
+  "why": "Specializes in matcha rather than coffee, for the day you want something different."
+ },
+ "NUDES": {
+  "bucket": false,
+  "cuisine": [
+   "Coffee"
+  ],
+  "tip": "Good spot for photos and quiet coffee.",
+  "why": "Minimalist design, focus on reduced, clean coffee culture."
+ },
+ "Nikkei 103": {
+  "bucket": true,
+  "cuisine": [
+   "Peruvian",
+   "Japanese"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Norai Raval Maritim Museum Restaurant": {
+  "bucket": true,
+  "cuisine": [
+   "Tapas"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Noru Bar": {
+  "bucket": true,
+  "cuisine": [
+   "Pan-Asian",
+   "Catalan",
+   "Pastry"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Nømad Coffee Lab": {
+  "bucket": false,
+  "cuisine": [
+   "Coffee"
+  ],
+  "tip": null,
+  "why": "The flagship lab of Nømad — bright, acid-driven filters and a rotating single-origin espresso. Tiny, intense, no laptops."
+ },
+ "ONIS COFFEE": {
+  "bucket": false,
+  "cuisine": [
+   "Coffee",
+   "Pastry"
+  ],
+  "tip": "Classic flat white, well made.",
+  "why": "Solid specialty café with a clear focus on espresso quality."
+ },
+ "Old Fashioned": {
+  "bucket": true,
+  "cuisine": [
+   "Drinks"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Onna Coffee": {
+  "bucket": true,
+  "cuisine": [
+   "Coffee",
+   "Tea"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Orient Express Cocktail Bar": {
+  "bucket": true,
+  "cuisine": [
+   "Drinks"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Origo": {
+  "bucket": true,
+  "cuisine": [
+   "Bakery",
+   "Coffee",
+   "Pastry"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Orval Studio": {
+  "bucket": false,
+  "cuisine": [
+   "Coffee",
+   "Pastry"
+  ],
+  "tip": "Filter coffee with breakfast on the terrace.",
+  "why": "Specialty café in Gràcia with espresso, filter and cold brew, plant-based milks and a vegan-friendly breakfast menu. Dog-friendly, outdoor seating."
+ },
+ "Osom Nou": {
+  "bucket": true,
+  "cuisine": [
+   "Brunch",
+   "Coffee"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Petit Tapas": {
+  "bucket": false,
+  "cuisine": [
+   "Tapas",
+   "Wine"
+  ],
+  "tip": "Go with a few people so you can order a wide spread of tapas rather than just one or two dishes.",
+  "why": "A cozy Spanish tapas bar that has built a strong reputation locally, confident enough to call itself one of the best tapas spots in the city."
+ },
+ "Pinga Boteco": {
+  "bucket": true,
+  "cuisine": [
+   "Brazilian"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Pirineu En Boca": {
+  "bucket": true,
+  "cuisine": [
+   "Catalan",
+   "Tapas",
+   "Wine"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Pizza Natura": {
+  "bucket": false,
+  "cuisine": [
+   "Italian"
+  ],
+  "tip": "Great pick if anyone in your group is celiac, you won't need to double-check every ingredient.",
+  "why": "A dedicated 100 percent gluten-free pizza restaurant on Pau Claris, rare in that it treats gluten-free as the whole concept rather than a side option."
+ },
+ "Piñata Cantina Cocteleria Barcelona": {
+  "bucket": true,
+  "cuisine": [
+   "Mexican",
+   "Drinks"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Pueblo Libre": {
+  "bucket": false,
+  "cuisine": [
+   "Peruvian"
+  ],
+  "tip": null,
+  "why": "A Peruvian friend sent us here and we worked our way through half the menu, with Peruvian beer and a pisco sour to finish. The cooking is the real thing."
+ },
+ "PÖTSTOT": {
+  "bucket": true,
+  "cuisine": [
+   "Tapas",
+   "Gluten-free"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Quevieres Serra": {
+  "bucket": true,
+  "cuisine": [
+   "Tapas",
+   "Wine"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Quimet & Quimet": {
+  "bucket": true,
+  "cuisine": [
+   "Catalan"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Rasoi Ghar Restaurant Indian": {
+  "bucket": false,
+  "cuisine": [
+   "Indian"
+  ],
+  "tip": "Ask for their spice level to be adjusted if you're not used to it, they'll happily tone it up or down.",
+  "why": "Part of Grupo Rasoi, which bills itself as Barcelona's finest Indian cuisine, serving proper Indian cooking in the Born area."
+ },
+ "Restaurant Candela en Rama": {
+  "bucket": true,
+  "cuisine": [
+   "Grill",
+   "Seafood",
+   "Wine"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Restaurant Salero": {
+  "bucket": true,
+  "cuisine": [
+   "Pan-Asian",
+   "Wine"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Restaurante Can Ramonet": {
+  "bucket": true,
+  "cuisine": [
+   "Catalan",
+   "Tapas"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Restaurante Casa Luz": {
+  "bucket": false,
+  "cuisine": [
+   "Tapas",
+   "Wine"
+  ],
+  "tip": "Check their current menu online before going, it's the kind of place worth confirming what's on offer that week.",
+  "why": "A restaurant with consistently solid reviews across multiple platforms, a dependable choice rather than a flashy destination spot."
+ },
+ "Restaurante Solomillo": {
+  "bucket": true,
+  "cuisine": [
+   "Grill",
+   "Wine"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Right Side Coffee Bar": {
+  "bucket": false,
+  "cuisine": [
+   "Coffee",
+   "Brunch"
+  ],
+  "tip": null,
+  "why": "Tucked into the Gothic Quarter inside Hotel Casa Bonay. Reliable flat whites and an all-day Japanese-leaning menu."
+ },
+ "Roast Club Cafe": {
+  "bucket": false,
+  "cuisine": [
+   "Coffee"
+  ],
+  "tip": "Ask about the current week's roast profile.",
+  "why": "Name suggests in-house roasting and a community focus."
+ },
+ "Robata": {
+  "bucket": false,
+  "cuisine": [
+   "Japanese"
+  ],
+  "tip": null,
+  "why": "Sushi that keeps you curious, in a room that is a pleasure to sit in."
+ },
+ "RoofTop Garden El Palace Barcelona": {
+  "bucket": true,
+  "cuisine": [
+   "Tapas",
+   "Drinks"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "SENSATO Restaurant": {
+  "bucket": true,
+  "cuisine": [
+   "Japanese"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "SEOUL PEOPLE": {
+  "bucket": true,
+  "cuisine": [
+   "Korean"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "SUN TAKA": {
+  "bucket": true,
+  "cuisine": [
+   "Japanese"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Salts - Terrassa Bar Montjuïc": {
+  "bucket": false,
+  "cuisine": [
+   "Burger"
+  ],
+  "tip": null,
+  "why": "The terrace looks out over the old Olympic pool and the city rooftops. Go for the view, stay for a drink."
+ },
+ "San Kil": {
+  "bucket": true,
+  "cuisine": [
+   "Korean"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Santamadre Carn peix i marisc": {
+  "bucket": true,
+  "cuisine": [
+   "Seafood",
+   "Grill",
+   "Wine"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Sartoria Panatieri": {
+  "bucket": false,
+  "cuisine": [
+   "Italian"
+  ],
+  "tip": null,
+  "why": "A pizzeria that has won Barcelona’s best Pizza recently."
+ },
+ "Sensi Tapas": {
+  "bucket": false,
+  "cuisine": [
+   "Tapas",
+   "Wine"
+  ],
+  "tip": "Go for their tasting-style tapas menu rather than picking dishes individually, it's built to showcase the range.",
+  "why": "A creative tapas bar in the Gothic Quarter, part of the well-regarded Sensi Restaurants group, confident enough to bill itself as the best tapas experience in the city."
+ },
+ "Shoronpo": {
+  "bucket": true,
+  "cuisine": [
+   "Japanese"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Skye Coffee Co.": {
+  "bucket": false,
+  "cuisine": [
+   "Coffee"
+  ],
+  "tip": null,
+  "why": "Inside Espacio 88 in Poblenou. Vintage Citroën-van vibe, brews from rotating European roasters, courtyard seating."
+ },
+ "Slow & Low": {
+  "bucket": true,
+  "cuisine": [
+   "Fine-dining"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "SlowMov": {
+  "bucket": false,
+  "cuisine": [
+   "Coffee",
+   "Pastry"
+  ],
+  "tip": null,
+  "why": "Pioneer roaster in Vila de Gràcia. Honest, clean coffees and warm pastries on a quiet corner — locals' favourite."
+ },
+ "Suculent": {
+  "bucket": true,
+  "cuisine": [
+   "Catalan",
+   "Tapas",
+   "Wine"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Suís & Bowls": {
+  "bucket": true,
+  "cuisine": [
+   "Brunch",
+   "Coffee"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "T.44 TAULAT 44": {
+  "bucket": false,
+  "cuisine": [
+   "Coffee",
+   "Pastry"
+  ],
+  "tip": "Go for brunch, not just a quick coffee.",
+  "why": "Bakery, deli and specialty coffee spot in Poblenou, known for brunch and pastries alongside good coffee."
+ },
+ "TWO SCHMUCKS": {
+  "bucket": false,
+  "cuisine": [
+   "Drinks"
+  ],
+  "tip": "Go for cocktails first, that's what earned this place its reputation.",
+  "why": "A cocktail bar recognized on the World's 50 Best Discovery list, known for a strong drinks program alongside its food."
+ },
+ "Taco Alto": {
+  "bucket": true,
+  "cuisine": [
+   "Mexican"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Thailandes Restaurant": {
+  "bucket": true,
+  "cuisine": [
+   "Thai"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "The Coffee": {
+  "bucket": false,
+  "cuisine": [
+   "Coffee",
+   "Pastry"
+  ],
+  "tip": "Buy a bag of their own-roast beans to take home.",
+  "why": "Brazilian Japanese fusion kinda vibe and delicious coffee to go."
+ },
+ "The Egg Lab - Brunch": {
+  "bucket": false,
+  "cuisine": [
+   "Brunch",
+   "Coffee"
+  ],
+  "tip": null,
+  "why": "The name says it - Egg Benedict is highly recommended. Cool, cozy place served all types of meals with eggs."
+ },
+ "The Lobster Roll Barcelona": {
+  "bucket": true,
+  "cuisine": [
+   "Seafood",
+   "Sandwich"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "The Miners Coffee Via Augusta": {
+  "bucket": false,
+  "cuisine": [
+   "Coffee",
+   "Pastry"
+  ],
+  "tip": null,
+  "why": "One of the few spots where working for an hour or two is no problem. Specialty coffee and a pastry, and nobody rushes you."
+ },
+ "The Rooftop at Sir Victor": {
+  "bucket": false,
+  "cuisine": [
+   "Wine"
+  ],
+  "tip": "Go around sunset and book ahead, rooftop bars like this fill up fast in the evening.",
+  "why": "A rooftop bar atop the Sir Victor hotel regularly named among Barcelona's best, known for skyline views and a solid cocktail and food menu."
+ },
+ "The Sopa Boba Restaurant Tapes": {
+  "bucket": true,
+  "cuisine": [
+   "Tapas",
+   "Wine"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Three Marks Coffee": {
+  "bucket": false,
+  "cuisine": [
+   "Coffee",
+   "Pastry"
+  ],
+  "tip": null,
+  "why": "Modern espresso bar in Eixample. Light roasts, multi-roaster guest beans, attentive baristas — a serious cup."
+ },
+ "Tonkotsu": {
+  "bucket": false,
+  "cuisine": [
+   "Japanese"
+  ],
+  "tip": "Pair the ramen with one of their street food starters, that combination is what the menu is built around.",
+  "why": "A ramen and Asian street food spot in Eixample, casual and well-reviewed, a straightforward option when you want ramen without ceremony."
+ },
+ "Tragaluz": {
+  "bucket": false,
+  "cuisine": [
+   "Tapas",
+   "Wine"
+  ],
+  "tip": "Good for a special occasion dinner, it has the polish for it without being stiff.",
+  "why": "The flagship of Grupo Tragaluz, one of Barcelona's best-known restaurant groups, offering elegant modern Mediterranean cooking near Passeig de Gracia."
+ },
+ "Tropicalissima": {
+  "bucket": false,
+  "cuisine": [
+   "Colombian"
+  ],
+  "tip": "Ask for a Colombian specialty rather than the Spanish side of the menu, that's what sets this place apart.",
+  "why": "A Colombian and Spanish restaurant with several locations across the city, a reliable choice for authentic Colombian dishes."
+ },
+ "Trópico Brunch Barcelona": {
+  "bucket": false,
+  "cuisine": [
+   "Brunch",
+   "Coffee"
+  ],
+  "tip": null,
+  "why": "South American brunch done properly. I go for the cachaça with cheese every time, my dad swears by the tacos."
+ },
+ "Usagui cafe": {
+  "bucket": false,
+  "cuisine": [
+   "Japanese",
+   "Pastry",
+   "Tea"
+  ],
+  "tip": null,
+  "why": "Japanese cakes worth going out of your way for, precise and not too sweet. The lunch is just as good."
+ },
+ "Viana Barcelona": {
+  "bucket": true,
+  "cuisine": [
+   "Tapas",
+   "Fusion",
+   "Wine"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Vibliteca bar de vins i formatges": {
+  "bucket": false,
+  "cuisine": [
+   "Wine",
+   "Cheese"
+  ],
+  "tip": null,
+  "why": "Wine and cheese without the wood-panelled solemnity. Modern room, sharp list, easy to spend an evening in."
+ },
+ "Vietnam autèntic restaurant": {
+  "bucket": true,
+  "cuisine": [
+   "Vietnamese"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Vinitus": {
+  "bucket": false,
+  "cuisine": [
+   "Catalan",
+   "Tapas",
+   "Wine"
+  ],
+  "tip": "Pair your tapas with a glass from their wine list, it's built as a tapas-and-vino combination, not just food.",
+  "why": "A lively tapas and wine bar in Eixample, listed by TasteAtlas as a recommended authentic restaurant, popular with both locals and visitors."
+ },
+ "Xino Mandarino": {
+  "bucket": true,
+  "cuisine": [
+   "Chinese"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Yako Coffee": {
+  "bucket": false,
+  "cuisine": [
+   "Coffee"
+  ],
+  "tip": "Try the straight espresso.",
+  "why": "Small independent spot, likely focused on clean espresso."
+ },
+ "Yakumanka amb Gastón Acurio": {
+  "bucket": false,
+  "cuisine": [
+   "Peruvian"
+  ],
+  "tip": null,
+  "why": "A bit pricey but super tasty peruvian Ceviche!"
+ },
+ "Yashima": {
+  "bucket": true,
+  "cuisine": [
+   "Japanese"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "Yoi Yoi Gion": {
+  "bucket": false,
+  "cuisine": [
+   "Japanese"
+  ],
+  "tip": "Ask about Kyoto-style specialties beyond sushi, that regional focus is what sets it apart.",
+  "why": "A Japanese restaurant near Avinguda Diagonal leaning into a Kyoto-style concept, offering a cozier, more regional take than standard sushi spots."
+ },
+ "Zed": {
+  "bucket": false,
+  "cuisine": [
+   "Mediterranean"
+  ],
+  "tip": "Good pick if you're visiting Sagrada Familia and want a real meal nearby instead of a tourist menu.",
+  "why": "A well-reviewed restaurant near Sagrada Familia, often called out as a hidden gem in a neighborhood mostly full of tourist-trap options."
+ },
+ "concepto nonna": {
+  "bucket": true,
+  "cuisine": [
+   "Italian",
+   "Wine"
+  ],
+  "tip": null,
+  "why": null
+ },
+ "paradero specialty coffee & brunch": {
+  "bucket": false,
+  "cuisine": [
+   "Brunch",
+   "Coffee"
+  ],
+  "tip": "Go for brunch rather than just coffee, the food gets as much praise as the coffee here.",
+  "why": "A specialty coffee and brunch spot in Sant Antoni with consistently good reviews for both the coffee quality and the food, a solid all-rounder."
+ },
+ "sato i tanaka": {
+  "bucket": false,
+  "cuisine": [
+   "Japanese"
+  ],
+  "tip": null,
+  "why": "Every sushi plate arrives beautifully composed. It reads less like dinner and more like an occasion."
+ },
+ "vitrina café": {
+  "bucket": false,
+  "cuisine": [
+   "Coffee",
+   "Pastry"
+  ],
+  "tip": "Matcha or coffee with a homemade pastry.",
+  "why": "Neighborhood café in Eixample on the ground floor of Hotel Magatzem 128. Locally roasted coffee paired with matcha, homemade pastries and sandwiches."
+ },
+ "Àmbar cafè d'especialitat": {
+  "bucket": false,
+  "cuisine": [
+   "Coffee",
+   "Pastry"
+  ],
+  "tip": "Ask for the current origin coffee.",
+  "why": "The name says it directly: specialty focus, likely rotating origin coffees."
+ },
+ "ÖSS Kaffe Barcelona": {
+  "bucket": false,
+  "cuisine": [
+   "Coffee",
+   "Pastry"
+  ],
+  "tip": "Filter coffee instead of espresso.",
+  "why": "Scandinavian-sounding name, often signals light roasts and a filter-coffee focus."
+ }
+}

@@ -1,920 +1,806 @@
 <!-- Deine Notizen. Eine Ueberschrift pro Ort, darunter freier Text.
-     Die App liest diese Datei direkt, kein Build-Schritt: speichern, neu laden.
-     Ueberschrift muss exakt dem Namen aus data.json entsprechen.
-     Orte ohne Text darunter zeigen in der App keine Notiz an. -->
+     Gepflegt wird der Text in Notion, Spalte "Why it's good".
+     Diese Datei schreibt scripts/apply-notion.py aus notion-snapshot.json.
+     Die App liest sie direkt, kein Build-Schritt: speichern, neu laden.
+     Orte ohne Text darunter stehen noch auf der Bucket-Liste. -->
 
 ## Nømad Coffee Lab
-<!-- Coffee | The flagship lab of Nømad — bright, acid-driven filters and a rotating -->
+<!-- Coffee -->
 The flagship lab of Nømad — bright, acid-driven filters and a rotating single-origin espresso. Tiny, intense, no laptops.
 
-## Nømad Coffee Productions
-<!-- Coffee | Sibling outfit at the same Passatge Sert address — green-bean cupping  -->
-Sibling outfit at the same Passatge Sert address — green-bean cupping room and small-batch production roasting.
-
 ## SlowMov
-<!-- Coffee | Pioneer roaster in Vila de Gràcia. Honest, clean coffees and warm past -->
+<!-- Coffee, Pastry -->
 Pioneer roaster in Vila de Gràcia. Honest, clean coffees and warm pastries on a quiet corner — locals' favourite.
 
 ## Right Side Coffee Bar
-<!-- Coffee | Tucked into the Gothic Quarter inside Hotel Casa Bonay. Reliable flat  -->
+<!-- Coffee, Brunch -->
 Tucked into the Gothic Quarter inside Hotel Casa Bonay. Reliable flat whites and an all-day Japanese-leaning menu.
 
 ## Three Marks Coffee
-<!-- Coffee | Modern espresso bar in Eixample. Light roasts, multi-roaster guest bea -->
+<!-- Coffee, Pastry -->
 Modern espresso bar in Eixample. Light roasts, multi-roaster guest beans, attentive baristas — a serious cup.
 
 ## Onna Coffee
-<!-- Coffee | Gràcia roaster with their own farm in Honduras. Honey-processed lots f -->
-Gràcia roaster with their own farm in Honduras. Honey-processed lots feature regularly — sit at the bar.
+<!-- Coffee, Tea -->
 
 ## Skye Coffee Co.
-<!-- Coffee | Inside Espacio 88 in Poblenou. Vintage Citroën-van vibe, brews from ro -->
+<!-- Coffee -->
 Inside Espacio 88 in Poblenou. Vintage Citroën-van vibe, brews from rotating European roasters, courtyard seating.
 
 ## Hidden Coffee Roasters
-<!-- Coffee | Slim Raval spot doing their own roasting. Excellent V60 program, great -->
-Slim Raval spot doing their own roasting. Excellent V60 program, great cardamom buns — easy to miss, worth the hunt.
+<!-- Coffee, Pastry -->
+A well-regarded specialty coffee roaster with its own roastery, known for careful sourcing and for helping push Barcelona's specialty coffee scene forward.
 
 ## CAUA CACAO ROASTERS
-<!-- Coffee | Cacao's - Gelato Siciliano, Carrer de los Castillejos, 343, 08025, Bar -->
-
+<!-- Coffee, Pastry -->
+The name suggests in-house cacao/chocolate roasting alongside coffee, a niche angle few places do.
 
 ## Trópico Brunch Barcelona
-<!-- Brunch | TRÓPICO Brunch Barcelona | Balmes, Carrer de Balmes, 24, 08007, Barcel -->
+<!-- Brunch, Coffee -->
 South American brunch done properly. I go for the cachaça with cheese every time, my dad swears by the tacos.
 
 ## Bloome By Sasha
-<!-- Restaurant | Bloome by Sasha, Via Laietana, 45, 08003, Barcelona -->
-
+<!-- Brunch, Coffee, Gluten-free -->
+Dedicated gluten-free cafe on Via Laietana, cozy and less touristy, known for gluten-free cookies, pancakes and croissants.
 
 ## Mosquito
-<!-- Restaurant | Mosquito, Carrer dels Carders, 46, 08003, Barcelona -->
-
+<!-- Pan-Asian -->
+A long-running Asian tapas spot in Born, often cited as one of the best places in Barcelona for that specific mix of small Asian dishes.
 
 ## Restaurante Casa Luz
-<!-- Restaurant | Restaurante Casa Gallega, Carrer de Vila i Vilà, 68, 08004, Barcelona -->
-
+<!-- Tapas, Wine -->
+A restaurant with consistently solid reviews across multiple platforms, a dependable choice rather than a flashy destination spot.
 
 ## Espai Puntal
-<!-- Restaurant | Espai Puntal, Carrer de Fonollar, 08003, Barcelona -->
-
+<!-- Grill, Wine -->
 
 ## NUDES
-<!-- Restaurant | nudes, Carrer del Rec, 10, 08003, Barcelona -->
-
+<!-- Coffee -->
+Minimalist design, focus on reduced, clean coffee culture.
 
 ## Departure Coffee Co.
-<!-- Coffee | Departure Coffee, Carrer de la Verge, 08001, Barcelona -->
-
+<!-- Coffee, Pastry -->
+Travel theme in the name, usually young independent roasters with clear bean sourcing.
 
 ## Casa Colomina
-<!-- Restaurant | Casa Colomina, Carrer de Cucurulla, 08002, Barcelona -->
-
+<!-- Pastry -->
+If you wanna bring home a turron, a Spanish specialty, then get it here!
 
 ## Bun Bo Barcelona
-<!-- Restaurant | Bun Bo Gótico, Carrer dels Sagristans, 3, 08002, Barcelona -->
+<!-- Vietnamese -->
+Vietnamese-inspired spot in the Gothic Quarter with one of the few real terraces in the center, strong on gluten-free, vegan and vegetarian options.
 
-
-## el SET
-<!-- Restaurant | el Set, Carrer de l'Esparteria, 08003, Barcelona -->
+## El Set
+<!-- Catalan, Tapas, Wine, Cheese -->
 Half butcher and cheese counter, half restaurant, with the warmth of a cabin in the Pyrenees. The tapas are the reason to stay.
 
 ## LULU & FLYN
-<!-- Restaurant | Lulu & Flyn, Carrer del Rec, 08003, Barcelona -->
-
+<!-- Brunch, Coffee -->
+A relaxed cafe, bar and pub near Barceloneta with a good coffee program alongside food and drinks, an easy all-day option in the area.
 
 ## Maresme Brewery Taproom
-<!-- Restaurant | Marseme Brewery Taproom, Carrer de Sepúlveda, 164, 08011, Barcelona -->
-
+<!-- Beer -->
+A craft beer taproom in Sant Antoni pouring Maresme Brewery's own beers, a solid stop for anyone into local craft beer rather than the standard bar selection.
 
 ## TWO SCHMUCKS
-<!-- Restaurant | Two Schmucks, Carrer de Joaquín Costa, 08001, Barcelona -->
-
+<!-- Drinks -->
+A cocktail bar recognized on the World's 50 Best Discovery list, known for a strong drinks program alongside its food.
 
 ## Kasarap Barcelona
-<!-- Restaurant | Barcelona-Arc de Triomf, Carrer de Roger de Flor, 08010, Barcelona -->
-
+<!-- Filipino -->
 
 ## Pueblo Libre
-<!-- Restaurant | Pueblo Libre - Taberna Peruana, Carrer de Sepúlveda, 151, 08011, Barce -->
+<!-- Peruvian -->
 A Peruvian friend sent us here and we worked our way through half the menu, with Peruvian beer and a pisco sour to finish. The cooking is the real thing.
 
 ## Espai Quera Llibres i platillos
-<!-- Restaurant | Espai Quera. Llibres i platillos, Carrer de Petritxol, 2, 08002, Barce -->
-
+<!-- Wine, Catalan, Tapas, Cheese -->
+Lovely and hidden - a tapas place in Barcelona’s oldest library.
 
 ## Bistrot Levante
-<!-- Restaurant | Bistrot by Lady Babka, Carrer de l'Argenteria, 08003, Barcelona -->
-
+<!-- Tapas -->
 
 ## Le Bouchon
-<!-- Restaurant | Le Bouchon, Carrer de Lledó, 7, 08002, Barcelona -->
-
+<!-- Catalan, Tapas, Wine -->
+A French bistro-style restaurant inside the Mercer Barcelona five-star hotel, offering classic French cooking in an elegant boutique-hotel setting.
 
 ## Carlos and Matilda
-<!-- Restaurant | Carlos and Mathilda, Baixada de Viladecols, 6, 08002, Barcelona -->
+<!-- Mexican, Tapas -->
 A friendly little place with tables out on the terrace. Come for the beers and the tacos.
 
 ## paradero specialty coffee & brunch
-<!-- Brunch | La Eulàlia - Brunch & Specialty Coffee, Carrer de València, 437, 08013 -->
-
+<!-- Brunch, Coffee -->
+A specialty coffee and brunch spot in Sant Antoni with consistently good reviews for both the coffee quality and the food, a solid all-rounder.
 
 ## Petit Tapas
-<!-- Restaurant | Perlazul Tapas & Grill Barceloneta, 68 Passeig de Joan de Borbó, 08003 -->
-
+<!-- Tapas, Wine -->
+A cozy Spanish tapas bar that has built a strong reputation locally, confident enough to call itself one of the best tapas spots in the city.
 
 ## The Coffee
-<!-- Coffee | The Coffee, Carrer de Girona, 76, 08009, Barcelona -->
-
+<!-- Coffee, Pastry -->
+Brazilian Japanese fusion kinda vibe and delicious coffee to go.
 
 ## Bar Manifest
-<!-- Restaurant | Manifest de Barcelona, Rambla de Catalunya, 08008, Barcelona -->
-
+<!-- Tapas, Wine -->
 
 ## Federal Café Gotic
-<!-- Coffee | Café Arabia Barcelona, Carrer dels Escudellers, 25, 08002, Barcelona -->
-
+<!-- Brunch, Coffee, Pastry -->
+Delicious brunch and tasty pastry! And you can bring your laptop to work there a few hours.
 
 ## The Egg Lab - Brunch
-<!-- Brunch | The Egg Lab, Carrer del Bruc, 33, 08010, Barcelona -->
-
+<!-- Brunch, Coffee -->
+The name says it - Egg Benedict is highly recommended. Cool, cozy place served all types of meals with eggs.
 
 ## Asian Ways
-<!-- Restaurant | Asian Ways, Avinguda del Paral·lel, 08004, Barcelona -->
-
+<!-- Pan-Asian -->
+Casual, well-rated ramen spot on Paral·lel with slow-cooked soy and miso broths plus Vietnamese rolls and dumplings. Popular with groups, good value.
 
 ## Salts - Terrassa Bar Montjuïc
-<!-- Restaurant | Salts, Avinguda Miramar, 31, 08038, Barcelona -->
+<!-- Burger -->
 The terrace looks out over the old Olympic pool and the city rooftops. Go for the view, stay for a drink.
 
 ## Vietnam autèntic restaurant
-<!-- Restaurant | L'AUTÈNTIC Restaurant Libanès, Rambla del Poblenou, 92, 08005, Barcelo -->
-
+<!-- Vietnamese -->
 
 ## Vibliteca bar de vins i formatges
-<!-- Wine | Viblioteca, Carrer de les Guilleries, 10, 08012, Barcelona -->
+<!-- Wine, Cheese -->
 Wine and cheese without the wood-panelled solemnity. Modern room, sharp list, easy to spend an evening in.
 
 ## Apurado coffee
-<!-- Coffee | Apurado Café, Carrer de Roger de Flor, 253, 08025, Barcelona -->
-
+<!-- Coffee, Pastry -->
+Small neighborhood spot focused on fast, clean espresso rather than decor.
 
 ## Usagui cafe
-<!-- Coffee | Usagui, Carrer de les Santjoanistes, 28, 08006, Barcelona -->
+<!-- Japanese, Pastry, Tea -->
 Japanese cakes worth going out of your way for, precise and not too sweet. The lunch is just as good.
 
 ## Suís & Bowls
-<!-- Restaurant | Suís & Bowls, Travessera de Gràcia, 08012, Barcelona -->
-
+<!-- Brunch, Coffee -->
 
 ## La Vietnamita
-<!-- Restaurant | La Vietnamita, Carrer del Comerç, 08003, Barcelona -->
-
+<!-- Vietnamese -->
+A genuine Vietnamese kitchen with locations in Born and Gracia, rewarding those who seek it out with authentic dishes rather than a generic pan-Asian menu.
 
 ## Balzac Café
-<!-- Coffee | Balzac, Passeig de Sant Joan, 127, 08037, Barcelona -->
-The interior alone is worth the visit, and nobody minds if you work for a while. Order a slice of their homemade cake, then another one.
+<!-- Coffee, Pastry -->
+Specialty coffee spot on Passeig de Sant Joan working with Ineffable Coffee Roasters from Sevilla, laptop and dog friendly with outdoor seating.
 
 ## Tropicalissima
-<!-- Restaurant | Tropicalissima, Carrer de València, 08013, Barcelona -->
-
+<!-- Colombian -->
+A Colombian and Spanish restaurant with several locations across the city, a reliable choice for authentic Colombian dishes.
 
 ## Morrow Coffee
-<!-- Coffee | Morrow Coffee, Gran Via de les Corts Catalanes, 403, 08015, Barcelona -->
-
+<!-- Coffee, Pastry -->
+Known for very careful preparation, often with a third-wave approach.
 
 ## NORI MATCHA
-<!-- Restaurant | Matcha Gracias, Gran Via de les Corts Catalanes, 488, 08015, Barcelona -->
-
+<!-- Coffee, Tea -->
+Specializes in matcha rather than coffee, for the day you want something different.
 
 ## Maramaia
-<!-- Restaurant | Maramaia, Carrer de Vic, 25, 08006, Barcelona -->
-
+<!-- Italian -->
+A neighborhood pizzeria in Gracia doing solid, no-nonsense pizza, the kind of reliable local spot rather than a destination restaurant.
 
 ## DosManos
-<!-- Restaurant | Domino's, Carrer de València, 08036, Barcelona -->
-
+<!-- Middle-Eastern -->
+A perfectly cool, tasty bite for a short break.
 
 ## La Pepita
-<!-- Restaurant | La Pepita, Carrer de Còrsega, 343, 08037, Barcelona -->
-
+<!-- Catalan, Tapas, Wine -->
+A long-running, well-loved tapas bar in Gracia with an old-fashioned feel and a strong local following, known for consistently good, unpretentious tapas.
 
 ## Billy Brunch
-<!-- Brunch | Billy Brunch, Carrer de Jaume Giralt, 08003, Barcelona -->
-
+<!-- Brunch, Coffee -->
+All-day breakfast concept with an open kitchen and local sourcing, strong on eggs benedict and pancake stacks with solid vegetarian, vegan and gluten-free options.
 
 ## Modu korean bowl
-<!-- Restaurant | Modu Korean Bowl-bibimbap, Carrer de Minerva, 08008, Barcelona -->
-
+<!-- Korean -->
+A small Korean spot in Gracia doing bibimbap bowls and Korean home cooking, casual and quick without sacrificing authenticity.
 
 ## SUN TAKA
-<!-- Restaurant | Sun Taka, Carrer del Bruc, 08037, Barcelona -->
-
+<!-- Japanese -->
 
 ## Lato Café Breakfast Brunch y Ceviches
-<!-- Brunch | Lato Café - Breakfast, Brunch y Ceviches, Carrer del Bruc, 118, 08009, -->
-
+<!-- Brunch, Coffee -->
+A cheerful breakfast and brunch spot that also does ceviches, an unusual but well-received combination that gets good marks for food and vibe alike.
 
 ## Brabo
-<!-- Restaurant | Miquel Brasó i Vaqués, Carrer de Verdi, 08012, Barcelona -->
+<!-- Grill, Wine -->
 A good date spot if you both like things off the grill. The tapas are anything but predictable.
 
 ## Yoi Yoi Gion
-<!-- Restaurant | Yoi Yoi Gion, Avinguda Diagonal, 383, 08008, Barcelona -->
-
+<!-- Japanese -->
+A Japanese restaurant near Avinguda Diagonal leaning into a Kyoto-style concept, offering a cozier, more regional take than standard sushi spots.
 
 ## LA PAPA
-<!-- Restaurant | La Papa, Carrer d'Aribau, 92, 08036, Barcelona -->
-
+<!-- Brunch, Coffee, Pastry -->
+A relaxed neighborhood cafe with a good all-day food menu, the kind of place that works equally well for a coffee stop or a proper meal.
 
 ## Boca Grande
-<!-- Restaurant | Boca Grande, Passatge de la Concepció, 08008, Barcelona -->
-
+<!-- Drinks -->
+Restored townhouse combining restaurant, bar and lounge with long hours, glamorous but relaxed decor, and Mediterranean sharing plates and seafood.
 
 ## Pizza Natura
-<!-- Restaurant | Pizza Natura, Carrer de Pau Claris, 153, 08009, Barcelona -->
-
+<!-- Italian -->
+A dedicated 100 percent gluten-free pizza restaurant on Pau Claris, rare in that it treats gluten-free as the whole concept rather than a side option.
 
 ## Chinese Tofu Magician
-<!-- Restaurant | Chinese Tofu Magician, Carrer del Consell de Cent, 391, 08009, Barcelo -->
+<!-- Tea -->
 Order the milk tea, it comes with melting beans and a dusting of cinnamon and is worth the trip on its own.
 
 ## Granja Hidden
-<!-- Restaurant | Hidden Cafe Barcelona, Carrer de Constança, 63, 08029, Barcelona -->
-
+<!-- Brunch, Coffee -->
+A revived 1921 Vendrell farmhouse granja that blends specialty coffee with traditional Catalan treats like Nata Vendrell cream and a proper Viennese cafe.
 
 ## LADY BABKA
-<!-- Restaurant | Lady Babka, Carrer de Santa Fe de Nou Mèxic, 08021, Barcelona -->
-
+<!-- Coffee, Pastry -->
+Bakery focused on babka and pastries, coffee is a companion.
 
 ## Hanoi Umami
-<!-- Restaurant | Umami Plant Based, Carrer del Progrés, 6, 08012, Barcelona -->
-
+<!-- Vietnamese -->
+A proper Vietnamese restaurant known for pho and fresh, herb-forward dishes, straightforward and reliable rather than fusion or fancy.
 
 ## Tonkotsu
-<!-- Restaurant | Tonkotsu, Carrer de València, 290, 08007, Barcelona -->
-
+<!-- Japanese -->
+A ramen and Asian street food spot in Eixample, casual and well-reviewed, a straightforward option when you want ramen without ceremony.
 
 ## LOT ROASTERS
-<!-- Coffee | Nomad Frutas Selectas, Carrer de Pujades, 95, 08005, Barcelona -->
-
+<!-- Coffee -->
+In-house roastery, meaning you get freshly roasted coffee straight from the source.
 
 ## Brew Coffee
-<!-- Coffee | Brew Coffee, Carrer de Roger de Flor, 08010, Barcelona -->
-
+<!-- Coffee, Pastry -->
+Focus on filter coffee and brew methods, for people who want more than just espresso.
 
 ## La Flauta Rambla
-<!-- Restaurant | La Flauta Rambla, Rambla de Catalunya, 91-93, 08008, Barcelona -->
-
+<!-- Catalan, Wine -->
+A popular tapas bar on Rambla de Catalunya doing classic Spanish tapas and flauta sandwiches, casual and reliably busy with both locals and tourists.
 
 ## HANA Grill & Bowl
-<!-- Restaurant | New Grill Beef Halal, Carrer de València, 614, 08026, Barcelona -->
-
+<!-- Korean -->
+Love the lunch menus there - and evenings with the table grill!
 
 ## Mayura Restaurant Indian
-<!-- Restaurant | Atithi Indian Restaurant, Carrer de Mallorca, 08026, Barcelona -->
-
+<!-- Indian -->
+Definitely insanely delicious Indian food and cozy place.
 
 ## Little Andaman
-<!-- Restaurant | Little Andaman, Carrer de Muntaner, 182, 08036, Barcelona -->
-
+<!-- Indian -->
+Indian restaurant where you feel like in a spa - love the vibe there.
 
 ## Brooklyn Café
-<!-- Coffee | Brooklyn Cafe & Torrefaction, Carrer de Pujades, 08005, Barcelona -->
-
+<!-- Coffee, Pastry -->
+Breakfast-focused café with a relaxed vibe for working.
 
 ## La Selva
-<!-- Restaurant | Carrer de la Selva de Mar, 08020, Barcelona -->
-
+<!-- Grill, Wine -->
+Such a cool place, space for larger groups and all meat lovers!
 
 ## Robata
-<!-- Restaurant | Robata Sushi & Grill, Carrer d'Enric Granados, 55, 08008, Barcelona -->
+<!-- Japanese -->
 Sushi that keeps you curious, in a room that is a pleasure to sit in.
 
 ## Compartir Barcelona
-<!-- Restaurant | Compartir, Carrer de València, 225, 08007, Barcelona -->
-
+<!-- Fine-dining -->
+A Michelin Guide-listed restaurant built entirely around sharing, reworking classic Catalan dishes into refined small plates meant to pass around the table.
 
 ## La Textil
-<!-- Restaurant | La Textil, Carrer de Casp, 08010, Barcelona -->
-
+<!-- Beer -->
 
 ## Granja Petitbo
-<!-- Restaurant | Granja Petitbo, Carrer de Mallorca, 194, 08036, Barcelona -->
-
+<!-- Brunch, Coffee -->
+Vintage-decorated weekend brunch spot on Passeig Sant Joan, popular for pancakes with red fruit and vanilla cream in a relaxed, photogenic setting.
 
 ## Vinitus
-<!-- Restaurant | Vinitus, Carrer del Consell de Cent, 333, 08007, Barcelona -->
-
+<!-- Catalan, Tapas, Wine -->
+A lively tapas and wine bar in Eixample, listed by TasteAtlas as a recommended authentic restaurant, popular with both locals and visitors.
 
 ## Bonsai Coffee & Matcha
-<!-- Coffee | Bonsai Coffee, Carrer de Casanova, 08036, Barcelona -->
-
+<!-- Coffee, Tea -->
+Combines specialty coffee with properly done matcha, rare to see done well in Barcelona.
 
 ## FUGAZ
-<!-- Restaurant | Bar Estrella Fugaz, Rambla de la Marina, 149, 08907, L'Hospitalet de L -->
-
+<!-- Catalan, Wine -->
+Cool, yet romantic and delicious place for a lovely dinner.
 
 ## Boa-Bao
-<!-- Restaurant | Boa-Bao, Plaça del Doctor Letamendi, 1, 08007, Barcelona -->
-
+<!-- Pan-Asian -->
+Pan-Asian restaurant in a former art gallery with an immersive, playful design and a multicultural kitchen team led by an Indonesian chef. Known for its bao and sharing dishes.
 
 ## Lucciano's
-<!-- Restaurant | Lucciano's Barcelona, Rambla de Catalunya, 08007, Barcelona -->
-
+<!-- Ice Cream -->
+An Italian gelato spot regularly called out as one of the best places for gelato in the city, simple and consistently good.
 
 ## Alice Secret Garden
-<!-- Restaurant | Alice, Carrer de Pau Claris, 90, 08010, Barcelona -->
+<!-- Wine, Tapas -->
+Whimsical Alice in Wonderland-themed spot with a leafy courtyard of giant mushrooms outside and a cozy blue lounge inside. Cafe by day, cocktail bar by night, known for good espresso martinis.
 
-
-## bohl
-<!-- Restaurant | bohl, Carrer de Trafalgar, 47, 08010, Barcelona -->
+## Bohl
+<!-- Brunch, Coffee, Tea, Pastry -->
 They talked me into an iced matcha with coconut milk, and it has ruined every other matcha for me since.
 
 ## Fismuler
-<!-- Restaurant | Fismuler, Carrer del Rec Comtal, 17, 08003, Barcelona -->
-
+<!-- Tapas, Seafood, Wine -->
+Romantic and delicious place for a lovely dinner.
 
 ## Merle Coffee
-<!-- Coffee | Merle Speciality Coffee, Carrer de Lepant, 338, 08025, Barcelona -->
-
+<!-- Coffee, Pastry -->
+Small independent specialty café, usually with rotating roasters on offer.
 
 ## Mono Café Poblenou
-<!-- Coffee | Mono Cafe, Carrer de Pujades, 08005, Barcelona -->
-
+<!-- Coffee, Pastry -->
+Neighborhood café in Poblenou, more local and relaxed than technical.
 
 ## CASA TAOS
-<!-- Restaurant | Casa Vicens, Carrer de les Carolines, 08006, Barcelona -->
-
+<!-- Coffee, Pastry -->
+Love the unconventional vibe and the pastry.
 
 ## Itnig Café
-<!-- Coffee | Itnig Café, Carrer de Pujades, 100, 08005, Barcelona -->
-
+<!-- Coffee -->
+Part of the Itnig coworking/startup ecosystem, more functional for meetings than for coffee enjoyment.
 
 ## Orient Express Cocktail Bar
-<!-- Restaurant | Orient Express, Carrer Gran de Sant Andreu, 12, 08030, Barcelona -->
-
+<!-- Drinks -->
 
 ## Bodega Borràs Restaurant
-<!-- Restaurant | Bodega Borràs Restaurant, Carrer de Casanova, 08011, Barcelona -->
-
+<!-- Catalan, Tapas, Wine -->
 
 ## The Lobster Roll Barcelona
-<!-- Restaurant | The Lobster Roll Barcelona, Carrer de Muntaner, 22, 08011, Barcelona -->
-
+<!-- Seafood, Sandwich -->
 
 ## Els 4 Gats
-<!-- Restaurant | 4Gats, Carrer de Montsió, 3, 08002, Barcelona -->
-
+<!-- Catalan, Wine, Tapas -->
 
 ## Koy Shunka
-<!-- Restaurant | Koy Shunka, Carrer d'en Copons, 7, 08002, Barcelona -->
-
+<!-- Japanese -->
 
 ## Bar Pimentel
-<!-- Restaurant | Farmàcia M. Elena Pimentel Godoy, carrer del Riu Ebre, 19, 08820, el P -->
-
+<!-- Catalan, Tapas, Seafood -->
 
 ## Cremat 11
-<!-- Restaurant | Cremat 11, Carrer Cremat Gran i Xic, 11, 08003, Barcelona -->
-
+<!-- Brunch, Coffee -->
 
 ## Xino Mandarino
-<!-- Restaurant | Xino Xano, Carrer del Vallespir, 08028, Barcelona -->
-
+<!-- Chinese -->
 
 ## El Noa Noa
-<!-- Restaurant | El Noa Noa, Carrer de Villarroel, 71, 08015, Barcelona -->
-
+<!-- Coffee, Pastry -->
+Coffee shop and LGBTQI+ bookstore in one, sourcing from Nomad and Hola Coffee Roasters on a La Marzocco machine. Colorful, intentional space in Gràcia, built as a community space as much as a coffee spot.
 
 ## Lodetto Café
-<!-- Coffee | Lodetto, Carrer de Valldonzella, 08001, Barcelona -->
-
+<!-- Coffee, Tea, Pastry -->
+Newer spot in Ciutat Vella that built a fast local following. Known for batch brew and flat white, plus proper pastries including vegan options.
 
 ## Dos Palillos
-<!-- Restaurant | Dos palillos, Carrer d'Elisabets, 08001, Barcelona -->
+<!-- Pan-Asian -->
 
-
-## Bar Lobo
-<!-- Restaurant | Bar Lobo, Carrer del Pintor Fortuny, 3, 08001, Barcelona -->
-
+## BAR LOBO
+<!-- Tapas, Wine -->
 
 ## La Cua Curta
-<!-- Restaurant | Sot de la Cua del Bacallà, 08196, Barcelona -->
-
+<!-- Wine, Cheese -->
 
 ## La Colmena
-<!-- Restaurant | La Colmena, Plaça de l'Àngel, 12, 08002, Barcelona -->
-
+<!-- Pastry -->
 
 ## Estimar
-<!-- Restaurant | Estimar, Carrer de Sant Antoni dels Sombrerers, 3, 08003, Barcelona -->
-
+<!-- Fine-dining -->
 
 ## Carlota Akaneya
-<!-- Restaurant | Farmàcia de Vilarrubia Goula, Maria Carlota, vi laietana, 40, 08003, B -->
-
+<!-- Japanese -->
 
 ## Granja M. Viader
-<!-- Restaurant | Granja M. Viader, Carrer d'en Xuclà, 08001, Barcelona -->
-
+<!-- Coffee, Pastry -->
+Historic institution since 1870, not specialty coffee, but a piece of Barcelona history (Cacaolat was invented here).
 
 ## Brugarol Barcelona
-<!-- Restaurant | Brugarol X, Carrer de Còrsega, 08036, Barcelona -->
-
+<!-- Fine-dining -->
 
 ## Monk Barcelona
-<!-- Restaurant | ALIMENTACIÓ MONK, Carrer dels Abaixadors, 08003, Barcelona -->
-
+<!-- Drinks -->
+Looks like a Supermarket from the outside but it’s a bar behind the surface.
 
 ## Slow & Low
-<!-- Restaurant | Slow, Carrer de París, 186, 08036, Barcelona -->
-
+<!-- Fine-dining -->
 
 ## DR.BEER & MR.FRIED
-<!-- Restaurant | Dr. Beer & Mr. Fried, Carrer de la Riera Alta, 33, 08001, Barcelona -->
-
+<!-- Burger -->
 
 ## Bacaro
-<!-- Restaurant | Bacaro, Carrer de Jerusalem, 6, 08001, Barcelona -->
-
+<!-- Italian, Wine -->
 
 ## Sensi Tapas
-<!-- Restaurant | Sensi Tapas, Carrer Ample, 26, 08002, Barcelona -->
-
+<!-- Tapas, Wine -->
+A creative tapas bar in the Gothic Quarter, part of the well-regarded Sensi Restaurants group, confident enough to bill itself as the best tapas experience in the city.
 
 ## vitrina café
-<!-- Coffee | Cafè-Teatre el Llantiol, Carrer de la Riereta, 7, 08001, Barcelona -->
-
+<!-- Coffee, Pastry -->
+Neighborhood café in Eixample on the ground floor of Hotel Magatzem 128. Locally roasted coffee paired with matcha, homemade pastries and sandwiches.
 
 ## Bar Cañete
-<!-- Restaurant | Bar Cañete, Carrer de la Unió, 17, 08002, Barcelona -->
-
+<!-- Catalan, Tapas, Seafood, Wine -->
 
 ## Viana Barcelona
-<!-- Restaurant | Viana, Carrer del Vidre, 7, 08002, Barcelona -->
-
+<!-- Tapas, Fusion, Wine -->
 
 ## Garage Bar
-<!-- Restaurant | Garage Bar, Carrer del Consell de Cent, 261, 08011, Barcelona -->
-
+<!-- Beer -->
 
 ## Origo
-<!-- Restaurant | Origo, Carrer de Milà i Fontanals, 9, 08037, Barcelona -->
-
+<!-- Bakery, Coffee, Pastry -->
 
 ## Suculent
-<!-- Restaurant | Suculent, Rambla del Raval, 08001, Barcelona -->
-
+<!-- Catalan, Tapas, Wine -->
 
 ## Bar Marsella
-<!-- Restaurant | Bar Marsella, Carrer de Sant Pau, 65, 08001, Barcelona -->
-
+<!-- Catalan, Tapas -->
 
 ## Doppietta
-<!-- Restaurant | Doppietta, Passatge Pere Calders, 08004, Barcelona -->
-
+<!-- Italian -->
 
 ## Cafè Cometa
-<!-- Coffee | Cafe Cometa, Carrer del Parlament, 20, 08015, Barcelona -->
-
+<!-- Brunch, Coffee, Pastry -->
 
 ## Norai Raval Maritim Museum Restaurant
-<!-- Restaurant | Norai Raval · Restaurante del Museo Marítimo, Avinguda de les Drassane -->
-
+<!-- Tapas -->
 
 ## Quimet & Quimet
-<!-- Restaurant | Quimet & Quimet, Carrer del Poeta Cabanyes, 25, 08004, Barcelona -->
-
+<!-- Catalan -->
 
 ## Margarit restaurante
-<!-- Restaurant | Margarit restaurante, Carrer de Margarit, 58, 08004, Barcelona -->
-
+<!-- Mediterranean, Wine -->
 
 ## La Greca
-<!-- Restaurant | Barcelona-La Sagrera-Meridiana, Carrer de Garcilaso, 08027, Barcelona -->
-
+<!-- Tapas, Wine -->
 
 ## Yako Coffee
-<!-- Coffee | Yako Coffee, Carrer de Milton, 08006, Barcelona -->
-
+<!-- Coffee -->
+Small independent spot, likely focused on clean espresso.
 
 ## SEOUL PEOPLE
-<!-- Restaurant | Restaurant Coreà SEOUL PEOPLE, Carrer de Sant Gabriel, 2, 08012, Barce -->
-
+<!-- Korean -->
 
 ## Old Fashioned
-<!-- Restaurant | Old fashioned, Carrer de Santa Teresa, 08008, Barcelona -->
-
+<!-- Drinks -->
 
 ## Bar Bocata
-<!-- Restaurant | Bar Bocata, Travessera de Gràcia, 86, 08006, Barcelona -->
-
+<!-- Tapas, Wine -->
 
 ## La Balmesina
-<!-- Restaurant | La Balmesina, Carrer de Balmes, 193, 08006, Barcelona -->
-
+<!-- Italian, Wine -->
 
 ## Shoronpo
-<!-- Restaurant | Shoronpo, Carrer del Doctor Rizal, 20, 08012, Barcelona -->
-
+<!-- Japanese -->
 
 ## Berbena
-<!-- Restaurant | Berbena, Carrer de Minerva, 6, 08008, Barcelona -->
-Not been in yet. I have walked past it too many times to keep ignoring it.
+<!-- Tapas, Wine -->
 
 ## Thailandes Restaurant
-<!-- Restaurant | Thailandès Restaurant, Avinguda Diagonal, 379, 08008, Barcelona -->
-
+<!-- Thai -->
 
 ## ONIS COFFEE
-<!-- Coffee | Onis Coffee, Carrer de Roger de Llúria, 87, 08009, Barcelona -->
-
+<!-- Coffee, Pastry -->
+Solid specialty café with a clear focus on espresso quality.
 
 ## Bar Cugat
-<!-- Restaurant | Bar Cugat, Carrer del Bruc, 97, 08009, Barcelona -->
-
+<!-- Tapas, Wine -->
 
 ## Guanabara by El Rodizio
-<!-- Restaurant | Guanabara by El Rodizio, Carrer del Consell de Cent, 403, 08009, Barce -->
-
+<!-- Brazilian -->
 
 ## sato i tanaka
-<!-- Restaurant | Sato i Tanaka, Carrer del Bruc, 79, 08009, Barcelona -->
+<!-- Japanese -->
 Every sushi plate arrives beautifully composed. It reads less like dinner and more like an occasion.
 
 ## Funky Bakers Eatery
-<!-- Restaurant | Funky Bakers, Passeig del Born, 10, 08003, Barcelona -->
-
+<!-- Coffee, Bakery -->
+Bakery-café combo, coffee is usually secondary to the pastries.
 
 ## Monster Sushi c/ Girona
-<!-- Restaurant | Monster Sushi, Carrer de Girona, 68, 08009, Barcelona -->
-
+<!-- Japanese -->
 
 ## Hotpot de Sichuan
-<!-- Restaurant | HotPot de Sichuan, Plaça de Tetuan, 9, 08010, Barcelona -->
-
+<!-- Chinese -->
 
 ## La Dama
-<!-- Restaurant | La Dama, Avinguda Diagonal, 423-425, 08036, Barcelona -->
-
+<!-- Fine-dining -->
 
 ## Lasarte
-<!-- Restaurant | Refugi climàtic Biblioteca Sagrada Família - Josep M. Ainaud de Lasart -->
-
+<!-- Fine-dining -->
 
 ## Babula Bar 1937
-<!-- Restaurant | Babula Bar 1937, Carrer de Pau Claris, 139, 08009, Barcelona -->
-
+<!-- Tapas, Wine, Seafood -->
 
 ## Café Turó
-<!-- Coffee | el Turó de la Peira, 08031, Barcelona -->
-
+<!-- Tapas, Seafood, Wine -->
 
 ## Ceviche 103
-<!-- Restaurant | Ceviche 103, Carrer de Londres, 103, 08036, Barcelona -->
-
+<!-- Peruvian -->
 
 ## Bar El Velódromo
-<!-- Restaurant | Bar El Velodromo, Passatge Lluis Pellicer, 08036, Barcelona -->
-
+<!-- Catalan, Tapas -->
 
 ## Melo-Jia
-<!-- Restaurant | Melo-Jia, Carrer de Còrsega, 250, 08036, Barcelona -->
-
+<!-- Chinese -->
 
 ## Restaurante Solomillo
-<!-- Restaurant | Restaurante Solomillo, Carrer de Mallorca, 251, 08008, Barcelona -->
-
+<!-- Grill, Wine -->
 
 ## Focacha
-<!-- Restaurant | Buenas Migas, Baixada de Santa Clara, 2, 08002, Barcelona -->
-
+<!-- Drinks -->
 
 ## MIKAN
-<!-- Restaurant | Hotel Catalonia Mikado, Passeig de la Bonanova, 08022, Barcelona -->
-
+<!-- Tapas, Pan-Asian, Wine -->
 
 ## RoofTop Garden El Palace Barcelona
-<!-- Restaurant | Petit Palace Boquería Garden, Carrer de la Boqueria, 10, 08002, Barcel -->
-
+<!-- Tapas, Drinks -->
 
 ## Pirineu En Boca
-<!-- Restaurant | Pirinev En Boca, Carrer de Girona, 08010, Barcelona -->
-
+<!-- Catalan, Tapas, Wine -->
 
 ## concepto nonna
-<!-- Restaurant | Nonna's Brunch, Carrer de les Caputxes, 08003, Barcelona -->
-
+<!-- Italian, Wine -->
 
 ## Gresca
-<!-- Restaurant | Gresca, Carrer de Provença, 08036, Barcelona -->
-
+<!-- Catalan, Wine, Tapas -->
 
 ## Quevieres Serra
-<!-- Restaurant | Parc de Josep Maria Serra Martí, Barcelona -->
-
+<!-- Tapas, Wine -->
 
 ## Yashima
-<!-- Restaurant | Yashima, Avinguda de Josep Tarradellas, 145, 08029, Barcelona -->
-
+<!-- Japanese -->
 
 ## Albé Barcelona
-<!-- Restaurant | Albé Barcelona, Carrer de Mallorca, 196, 08036, Barcelona -->
-
+<!-- Fine-dining -->
 
 ## MAISON CARNE
-<!-- Restaurant | Casa Museu Gaudí, Viaducte del Mig, 08024, Barcelona -->
-
+<!-- Grill, Wine -->
 
 ## Taco Alto
-<!-- Restaurant | taco alto, Ronda de la Universitat, 08007, Barcelona -->
-
+<!-- Mexican -->
 
 ## PÖTSTOT
-<!-- Restaurant | PÖTSTOT, Carrer del Pintor Fortuny, 32, 08001, Barcelona -->
-
+<!-- Tapas, Gluten-free -->
 
 ## La Cabrera Casa de Carnes
-<!-- Restaurant | Centte Cultural Casa de la Barceloneta 1761, Carrer de Sant Carles, 08 -->
-
+<!-- Grill, Wine -->
+Absolute must if you’re into meat - and Argentinian barbecue - and wine.
 
 ## Roast Club Cafe
-<!-- Coffee | Roast Club Cafè, Carrer de València, 190, 08011, Barcelona -->
-
+<!-- Coffee -->
+Name suggests in-house roasting and a community focus.
 
 ## Nikkei 103
-<!-- Restaurant | Nikkei 103, Carrer d'Aribau, 33, 08011, Barcelona -->
-
+<!-- Peruvian, Japanese -->
 
 ## Jon Cake
-<!-- Restaurant | Jon Cake, Carrer de Sant Pere Més Baix, 08003, Barcelona -->
-
+<!-- Pastry -->
+A wonderful variety of tasty pastry - the name says it all.
 
 ## Disfrutar
-<!-- Restaurant | Disfrutar, Carrer de Villarroel, 163, 08001, Barcelona -->
-
+<!-- Catalan, Tapas, Wine -->
 
 ## Hideout Burger
-<!-- Restaurant | Hideout Burger, Carrer del Consell de Cent, 242, 08011, Barcelona -->
-
+<!-- Burger -->
 
 ## IKOYA Izakaya
-<!-- Restaurant | Izakaya Barcelona Gastro & Sushi, Carrer de Biscaia, 428, 08027, Barce -->
-
+<!-- Japanese -->
 
 ## Capet Restaurant
-<!-- Restaurant | Restaurant Hofmann, Carrer de la Granada del Penedès, 14, 08006, Barce -->
-
+<!-- Tapas, Catalan, Wine -->
 
 ## SENSATO Restaurant
-<!-- Restaurant | Restaurant SENSATO, Carrer de Septimània, 08006, Barcelona -->
-
+<!-- Japanese -->
 
 ## San Kil
-<!-- Restaurant | San Kil, Carrer de la Legalitat, 08024, Barcelona -->
-
+<!-- Korean -->
 
 ## Morreig
-<!-- Restaurant | Morreig, Carrer de Verdi, 25, 08012, Barcelona -->
+<!-- Pastry -->
 Cakes built to look like fruit, oranges and all. Worth a detour for the pastry counter alone.
 
 ## La Graciosa
-<!-- Restaurant | La Graciosa, Carrer de Milà i Fontanals, 88, 08012, Barcelona -->
-
+<!-- Wine -->
 
 ## Zed
-<!-- Restaurant | Zed, Carrer de València, 399, 08013, Barcelona -->
-
+<!-- Mediterranean -->
+A well-reviewed restaurant near Sagrada Familia, often called out as a hidden gem in a neighborhood mostly full of tourist-trap options.
 
 ## Extra Bar
-<!-- Restaurant | Extra, Carrer de la Ciutat de Granada, 08005, Barcelona -->
-
+<!-- Tapas, Wine -->
 
 ## Restaurant Salero
-<!-- Restaurant | Restaurant Hofmann, Carrer de la Granada del Penedès, 14, 08006, Barce -->
-
+<!-- Pan-Asian, Wine -->
 
 ## El Manaba
-<!-- Restaurant | El Manaba, Carrer de Provença, 08037, Barcelona -->
-
+<!-- Ecuatorian -->
+Highly recommended by an Ecuatorian friend.
 
 ## La Punta Callao Cevichería
-<!-- Restaurant | La Punta Callao, Carrer de Ros de Olano, 11, 08012, Barcelona -->
-
+<!-- Peruvian -->
 
 ## Green & Berry
-<!-- Restaurant | Green&Berry, Carrer d'Enric Granados, 153, 08008, Barcelona -->
-
+<!-- Vegan -->
 
 ## Marta's Lemon Pie
-<!-- Restaurant | Marta's Lemon Pie, Avinguda Diagonal, 545-577, 08021, Barcelona -->
-
+<!-- Pastry -->
 
 ## Pinga Boteco
-<!-- Restaurant | Casa Bassols-Pignatelli, Avinguda del Portal de l'Àngel, 08002, Barcel -->
-
+<!-- Brazilian -->
 
 ## KEMAKO JAPANESE BURGERS
-<!-- Restaurant | KEMAKO JAPANESE BURGERS / SAGRADA FAMILIA, Carrer de la Indústria, 162 -->
-
+<!-- Japanese, Burger -->
 
 ## La Peruana Pollastres a la Brasa
-<!-- Restaurant | POLLASTRES A L'AST, Carrer de Santa Carolina, 48, 08025, Barcelona -->
-
+<!-- Peruvian, Grill -->
 
 ## Dreamboat Bar & Deli
-<!-- Restaurant | Romà, Carrer de Bonavista, 29, 08012, Barcelona -->
-
+<!-- Drinks -->
 
 ## Osom Nou
-<!-- Restaurant | Osom Nou, Carrer de Sant Joan de Malta, 148, 08018, Barcelona -->
-
+<!-- Brunch, Coffee -->
 
 ## Noru Bar
-<!-- Restaurant | NoruBar, Carrer de Pere IV, 156, 08005, Barcelona -->
-
+<!-- Pan-Asian, Catalan, Pastry -->
 
 ## Masa Vins Barcelona
-<!-- Restaurant | Masa Vins, Carrer d'Àlaba, 08018, Barcelona -->
-
+<!-- Wine -->
 
 ## Achaar bar
-<!-- Restaurant | Achaar Bar, Carrer de Pere IV, 08018, Barcelona -->
-
+<!-- Indian -->
 
 ## Sartoria Panatieri
-<!-- Restaurant | Sartoria Panatieri, Carrer de Provença, 330, 08037, Barcelona -->
-
+<!-- Italian -->
+A pizzeria that has won Barcelona’s best Pizza recently.
 
 ## Amateur
-<!-- Restaurant | Amateur, Carrer de Llull, 08005, Barcelona -->
-
+<!-- Tapas, Catalan, Wine -->
 
 ## Gabby's Brunch
-<!-- Brunch | Consonn's brunch & lunch, Carrer de València, 08029, Barcelona -->
-
+<!-- Brunch, Coffee -->
 
 ## Café Menssana
-<!-- Coffee | Menssana, Carrer de Ramón Turró, 08003, Barcelona -->
-
+<!-- Coffee, Mexican, Brunch -->
+Known for a calm, minimalist atmosphere and clean coffee, good place to focus.
 
 ## Farola Cocktail Bar Barcelona
-<!-- Restaurant | Dux Gin & Cocktail Bar Barcelona, Carrer dels Vigatans, 13, 08003, Bar -->
-
+<!-- Drinks -->
 
 ## Can Paixano
-<!-- Restaurant | Can Paixano, Carrer de la Reina Cristina, 7, 08003, Barcelona -->
-
+<!-- Catalan, Tapas, Wine -->
 
 ## Bar Electricitat
-<!-- Restaurant | Bar Electricitat, Carrer de Sant Carles, 15, 08003, Barcelona -->
-
+<!-- Catalan, Tapas -->
 
 ## Anís Cafe
-<!-- Coffee | Cafè-Teatre el Llantiol, Carrer de la Riereta, 7, 08001, Barcelona -->
-
+<!-- Middle-Eastern -->
 
 ## Restaurante Can Ramonet
-<!-- Restaurant | Can Ramonet, Carrer de La Maquinista, 17, 08003, Barcelona -->
-
+<!-- Catalan, Tapas -->
 
 ## La Bombeta
-<!-- Restaurant | La Bombeta, Carrer de la Maquinista, 3, 08003, Barcelona -->
-
+<!-- Catalan, Seafood, Tapas -->
 
 ## MUYSCA
-<!-- Restaurant | Muysca, Carrer del Baluard, 72, 08003, Barcelona -->
-
+<!-- Colombian -->
+An authentic Colombian restaurant in Sant Marti, one of the few in Barcelona doing real Colombian home cooking rather than a generic Latin American menu.
 
 ## Lola Divine
-<!-- Restaurant | Lola Divine, Carrer de Cristóbal de Moura, 23, 08019, Barcelona -->
-
+<!-- Grill, Wine -->
 
 ## T.44 TAULAT 44
-<!-- Restaurant | T44, Carrer del Taulat, 08005, Barcelona -->
-
+<!-- Coffee, Pastry -->
+Bakery, deli and specialty coffee spot in Poblenou, known for brunch and pastries alongside good coffee.
 
 ## Orval Studio
-<!-- Restaurant | Orval, Carrer de Buenaventura Muñoz, 31, 08003, Barcelona -->
-
+<!-- Coffee, Pastry -->
+Specialty café in Gràcia with espresso, filter and cold brew, plant-based milks and a vegan-friendly breakfast menu. Dog-friendly, outdoor seating.
 
 ## Rasoi Ghar Restaurant Indian
-<!-- Restaurant | Carrer de la Reina Cristina, 10, 08003 Barcelona, Spain -->
-
+<!-- Indian -->
+Part of Grupo Rasoi, which bills itself as Barcelona's finest Indian cuisine, serving proper Indian cooking in the Born area.
 
 ## Morning Glory Coffee & Brunch
-<!-- Brunch | Carrer de la Riereta, 15, 08001 Barcelona, Spain -->
-
+<!-- Brunch, Coffee -->
+A well-regarded coffee and brunch spot in Raval, frequently named among the neighborhood's best breakfast options.
 
 ## The Miners Coffee Via Augusta
-<!-- Coffee | Via Augusta, 105, 08006 Barcelona, Spain -->
+<!-- Coffee, Pastry -->
 One of the few spots where working for an hour or two is no problem. Specialty coffee and a pastry, and nobody rushes you.
 
 ## Àmbar cafè d'especialitat
-<!-- Coffee | Carrer de Provença, 341, Barcelona, Spain -->
-
+<!-- Coffee, Pastry -->
+The name says it directly: specialty focus, likely rotating origin coffees.
 
 ## Jaç Hi-fi Cafe
-<!-- Coffee | Avinguda Diagonal, 335, 08037 Barcelona, Spain -->
+<!-- Coffee, Brunch, Pastry -->
 Vinyl on the turntable and a room tuned like the inside of a Bang & Olufsen speaker.
 
 ## The Rooftop at Sir Victor
-<!-- Restaurant | Carrer del Rosselló, 265, 08008 Barcelona, Spain -->
-
+<!-- Wine -->
+A rooftop bar atop the Sir Victor hotel regularly named among Barcelona's best, known for skyline views and a solid cocktail and food menu.
 
 ## Cresta Colorada Rosticeria Mexicana
-<!-- Restaurant | Carrer de Còrsega, 244, 08036 Barcelona, Spain -->
+<!-- Mexican -->
 My favourite Mexican in the city. Order tacos, then order more tacos.
 
 ## LABALABUSTA
-<!-- Restaurant | Carrer del Rosselló, 180, 08008 Barcelona, Spain -->
+<!-- Wine, Middle-Eastern, Mediterranean -->
 Israeli cooking you keep picking at long after you are full. We always end up ordering another round of the bread.
 
 ## Yakumanka amb Gastón Acurio
-<!-- Restaurant | Carrer de València, 207, 08007 Barcelona, Spain -->
-
-
-## Nomad Coffee Lab & Shop
-<!-- Coffee | Passatge de Sert, 12, 08003 Barcelona, Spain -->
-
+<!-- Peruvian -->
+A bit pricey but super tasty peruvian Ceviche!
 
 ## Fiffty fifty
-<!-- Restaurant | Carrer de Badajoz, 65, 08005 Barcelona, Spain -->
-
+<!-- Wine, Burger -->
+Cool, fine Burger spot. You eat a greasy burger while sipping an organic local wine - unbeatable at times.
 
 ## Piñata Cantina Cocteleria Barcelona
-<!-- Restaurant | Carrer de Casanova, 19, 08011 Barcelona, Spain -->
-
+<!-- Mexican, Drinks -->
 
 ## Kiosco de Ideas Libreria y Cafe
-<!-- Coffee | Carrer de la Riera Alta, 34, Barcelona, Spain -->
-
+<!-- Coffee -->
+Bookshop-café hybrid, the appeal is the concept, not primarily the coffee.
 
 ## Restaurant Candela en Rama
-<!-- Restaurant | Carrer del Parlament, 41, 08015 Barcelona, Spain -->
-
+<!-- Grill, Seafood, Wine -->
 
 ## Mercado Central Taberna Cevichera
-<!-- Restaurant | Carrer de la Creu dels Molers, 4, 08004 Barcelona, Spain -->
-
+<!-- Peruvian -->
 
 ## Santamadre Carn peix i marisc
-<!-- Restaurant | Carrer de la França Xica, 25, 08004 Barcelona, Spain -->
-
+<!-- Seafood, Grill, Wine -->
 
 ## The Sopa Boba Restaurant Tapes
-<!-- Restaurant | Carrer del Bruc, 115, 08009 Barcelona, Spain -->
-
+<!-- Tapas, Wine -->
 
 ## Tragaluz
-<!-- Restaurant | Passatge de la Concepció, 5, 08008 Barcelona, Spain -->
-
+<!-- Tapas, Wine -->
+The flagship of Grupo Tragaluz, one of Barcelona's best-known restaurant groups, offering elegant modern Mediterranean cooking near Passeig de Gracia.
 
 ## IKENOCHA Matcha Tea House
-<!-- Restaurant | Carrer de París, 149, 08036 Barcelona, Spain -->
-
+<!-- Japanese, Tea -->
 
 ## KOH-NDAL THAI BISTRO
-<!-- Restaurant | Passeig de Sant Gervasi, 57B, 08022 Barcelona, Spain -->
-
+<!-- Thai -->
 
 ## LAMAI THAI TAPAS
-<!-- Restaurant | Carrer de Sant Carles, 12, 08003 Barcelona, Spain -->
-
+<!-- Thai -->
 
 ## Coco Social House Barceloneta
-<!-- Restaurant | Carrer de Meer, 52, 08003 Barcelona, Spain -->
-
+<!-- Brunch -->
 
 ## Amauta Coffee Bar
-<!-- Coffee | Amauta Coffee Bar, Travessera de Gràcia, 90, 08006, Barcelona -->
-Come for the coffee itself and the pastries, and leave the work outside the door.
+<!-- Coffee -->
+Specialty roastery since 2019 with its own two Barcelona locations, focused on single-origin lots roasted to show terroir, plus a premium reserve line.
 
 ## Akiro Hand Roll Bar
-<!-- Sushi | Akiro Hand Roll Bar, Carrer de Mallorca, 237, 08008, Barcelona -->
+<!-- Japanese -->
 The best sushi in the city for my money. Hand rolls made right in front of you, with a bit of conversation across the counter.
 
 ## Mercader Eixample
-<!-- Restaurant | Mercader Eixample, Passatge de Mercader, 08008, Barcelona -->
-
+<!-- Tapas, Wine -->
+Our go to for tapas if we don’t wanna walk too far yet enjoy a very pleasing experience.
 
 ## Bocanariz
-<!-- Wine | Bocanariz, Carrer de Vallfogona, 12, 08012, Barcelona -->
+<!-- Wine, Tapas -->
 Small, stylish and loud, with vinyl on and a wine list worth working through. The tapas and the cheese hold up their end.
 
 ## Barra Oso
-<!-- Catalan | Barra Oso, Carrer de Muntaner, 248, 08021, Barcelona -->
-
+<!-- Catalan, Wine -->
 
 ## Fauna Restaurant by Casa de Vivi
-<!-- Seafood | Fauna Restaurant by Casa de Vivi, Carrer del Duc, 15, 08002, Barcelona -->
-
+<!-- Seafood, Tapas, Wine -->
 
 ## Monvinic
-<!-- Wine | Monvinic, Carrer de la Diputació, 251, 08007, Barcelona -->
-
+<!-- Wine, Tapas -->
+Beautiful place for even better wine, wow!!
 
 ## ÖSS Kaffe Barcelona
-<!-- Coffee | ÖSS Kaffe Barcelona, Carrer de Joaquín Costa, 26, 08001, Barcelona -->
+<!-- Coffee, Pastry -->
+Scandinavian-sounding name, often signals light roasts and a filter-coffee focus.
 
+## Lukumas
+<!-- Pastry, Coffee -->
+Greek doughnuts made with a family recipe in a beautifully designed shop.
