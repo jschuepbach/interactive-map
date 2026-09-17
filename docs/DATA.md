@@ -14,9 +14,9 @@ Columns that matter:
 | `Adresse`, `Maps`  | `data.json` `note` (scraped address), `lat`/`lng` |
 
 `Why it's good` still reading **"Still on my bucket list"** means Jan has not been
-there. Those places get no note and `"bucket": true` instead, which is what keeps
-the two filters honest: *Only the ones I have written about* and *Still on my
-bucket list* are the two halves of the same question.
+there. Those places simply get no note, and the app says nothing about it: a
+reader sees a place without a recommendation, not a label. The flag stays in
+`notion-snapshot.json` and never reaches `data.json`.
 
 ## The path
 

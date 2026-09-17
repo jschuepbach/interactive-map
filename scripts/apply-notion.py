@@ -10,8 +10,9 @@ The snapshot is the Notion table, one entry per place:
   why       the "Why it's good" column. Becomes the note in notes.md.
   tip       the "My suggestion" column. Becomes "tip" in data.json.
   bucket    true when "Why it's good" still reads "Still on my bucket list".
-            Those places get no note, so the written-about filter keeps meaning
-            "Jan has been there".
+            Those places simply get no note. The app never says so: whether Jan
+            has been somewhere is his business, the reader just sees no
+            recommendation.
 
 Places missing from the snapshot are dropped, as agreed: Notion is the list.
 Names are matched loosely (accents, case, punctuation), and the snapshot's
@@ -64,10 +65,7 @@ def main(argv):
             p["tip"] = row["tip"]
         else:
             p.pop("tip", None)
-        if row["bucket"]:
-            p["bucket"] = True
-        else:
-            p.pop("bucket", None)
+        p.pop("bucket", None)
         kept.append(p)
 
     missing = sorted(by_fold.values())
