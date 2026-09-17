@@ -1635,6 +1635,7 @@
     let lastOpenFamily = null;
 
     function renderFilters() {
+      let picked = null;
       const wrap = document.getElementById('filters');
       // Rebuilding the rail throws away where it was scrolled to, which on a
       // phone means a tag you just pressed can jump off screen.
@@ -1672,11 +1673,26 @@
           dot: true, cls: 'filter-btn', key: 'f:' + f.id,
           onClick: () => { poppedChip = 'f:' + f.id; toggleFamily(f.id); } });
         top.appendChild(btn);
-        // A picked chip can sit far to the right of a scrolled rail.
-        if (active) requestAnimationFrame(() => btn.scrollIntoView({ inline: 'center', block: 'nearest' }));
+        // The families are exclusive, so picking one is a move from one to
+        // another, and the rail should show that rather than cut to it: the
+        // picked chip glides to the middle and its neighbours slide aside with
+        // it. Instant centring made the rail look like it had been replaced.
+        if (active) picked = btn;
       });
       wrap.appendChild(top);
       const openNow = (FAMILIES.find((f) => activeFamilies.has(f.id)) || {}).id || null;
+      const prevOpen = lastOpenFamily;
+      const glide = !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+        && openNow !== prevOpen;
+      requestAnimationFrame(() => {
+        if (picked) {
+          picked.scrollIntoView({ inline: 'center', block: 'nearest',
+            behavior: glide ? 'smooth' : 'auto' });
+        } else if (openNow === null && prevOpen !== null) {
+          // Cleared: the rail travels back to its start rather than snapping.
+          top.scrollTo({ left: 0, behavior: glide ? 'smooth' : 'auto' });
+        }
+      });
       const sub = renderSubRow();
       if (sub) {
         // The row animates in when it arrives or changes family, not every time
