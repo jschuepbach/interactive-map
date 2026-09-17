@@ -177,7 +177,9 @@
   .filter-btn { background: var(--surface); color: var(--ink); border: 1px solid var(--hairline);
     height: 36px; padding: 0 15px; font-size: 14px; font-weight: 500; border-radius: 9999px;
     cursor: pointer; font-family: inherit; display: inline-flex; align-items: center;
-    transition: background 0.15s, border-color 0.15s, color 0.15s; }
+    transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease,
+      transform 0.12s cubic-bezier(0.22, 1, 0.36, 1); }
+  .filter-btn:active { transform: scale(0.96); }
   .filter-btn:hover { border-color: var(--faint); }
   .filter-btn.active { background: var(--rausch); color: #ffffff; border-color: var(--rausch); }
   .filter-btn.sub { height: 32px; font-size: 13px; font-weight: 400; background: transparent; }
@@ -206,6 +208,33 @@
   .hood-pill { display: flex; align-items: center; gap: 6px; color: var(--text); }
   .hood-pill span.x { color: var(--faint); }
   .hood-pill:hover span.x { color: var(--text); }
+
+  /* ---------- Filtering, made visible ----------
+     Picking a chip used to be an instant swap: 228 cards and 228 pins were
+     destroyed and 22 of each appeared. Nothing showed that the 22 came out of
+     the 228, which is the only thing a filter has to say. So the chip
+     acknowledges the press, the leaving pins shrink out while the staying ones
+     hold their ground, and the new cards arrive in a short wave. Every
+     duration here is under 300ms: this is feedback, not a performance. */
+  @keyframes chip-pop {
+    0% { transform: scale(1); }
+    38% { transform: scale(1.07); }
+    100% { transform: scale(1); }
+  }
+  .filter-btn.pop { animation: chip-pop 280ms cubic-bezier(0.22, 1, 0.36, 1); }
+
+  @keyframes row-in {
+    from { opacity: 0; transform: translateY(9px); }
+    to { opacity: 1; transform: none; }
+  }
+  /* backwards fill, so a card that never animates still renders at rest. */
+  .row.entering { animation: row-in 300ms cubic-bezier(0.22, 1, 0.36, 1) backwards; }
+
+  @keyframes sub-in {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: none; }
+  }
+  .filter-sub { animation: sub-in 240ms cubic-bezier(0.22, 1, 0.36, 1); }
 
   /* ---------- Map ---------- */
   #map-wrap { position: relative; }
@@ -239,9 +268,13 @@
     border: 2px solid var(--ground);
     box-shadow: 0 1px 4px rgba(0,0,0,0.5);
     cursor: pointer;
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.15s ease, opacity 0.2s ease;
     pointer-events: auto;
   }
+  /* A pin entering or leaving the filter. Kept pins get neither class and so
+     never move, which is what makes the narrowing readable. */
+  .marker-inner.enter, .marker-inner.leaving { transform: scale(0.1); opacity: 0; }
   .marker-inner:hover { transform: scale(1.25); }
   .marker-inner.active {
     transform: scale(1.4);
@@ -294,10 +327,18 @@
     display: flex; flex-direction: column; align-items: flex-start; gap: 20px; }
   .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
     overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
-  .intro-skip { background: none; border: 0; color: var(--ink); font: inherit; font-size: 14px;
-    font-weight: 500; cursor: pointer; padding: 4px 0; text-decoration: underline;
-    text-underline-offset: 3px; }
-  .intro-skip:hover { color: var(--rausch); }
+  /* Corner close, the way a dialog closes. A text link at the foot of the
+     panel made leaving feel like the end of a page you had to read. */
+  .intro-close {
+    position: absolute; z-index: 2;
+    top: max(18px, env(safe-area-inset-top)); right: max(18px, env(safe-area-inset-right));
+    width: 44px; height: 44px; border-radius: 999px;
+    background: var(--surface); border: 1px solid var(--hairline); color: var(--ink);
+    font-family: inherit; font-size: 22px; line-height: 1; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .intro-close:hover { background: var(--surface-strong); border-color: var(--faint); }
   #intro :focus-visible, .btn:focus-visible, .filter-btn:focus-visible {
     outline: 2px solid var(--accent); outline-offset: 2px; }
 
@@ -310,6 +351,10 @@
 
   @media (prefers-reduced-motion: reduce) {
     #intro { transition: none; }
+    .filter-btn, .filter-btn:active { transition: none; transform: none; }
+    .filter-btn.pop, .row.entering, .filter-sub { animation: none; }
+    .marker-inner { transition: none; }
+    .marker-inner.enter, .marker-inner.leaving { transform: none; opacity: 1; }
   }
 
   /* ---------- Loader ----------
@@ -479,6 +524,7 @@
   </div>
 
   <div id="intro" class="hidden" role="dialog" aria-modal="true" aria-labelledby="introTitle">
+    <button id="introSkip" class="intro-close" type="button" aria-label="Close">&times;</button>
     <div class="intro-inner">
       <h2 id="introTitle" class="sr-only" tabindex="-1">About this map</h2>
 
@@ -503,7 +549,6 @@
         </div>
       </div>
 
-      <button id="introSkip" class="intro-skip" type="button">Back to the map</button>
     </div>
   </div>
 
@@ -1092,6 +1137,8 @@
     function renderSidebar() {
       const list = document.getElementById('list');
       list.innerHTML = '';
+      // A shorter list under an old scroll offset opens halfway down itself.
+      list.scrollTop = 0;
 
       // Unfiltered, the column opens with what this is and who picked it: the
       // one thing the old landing screen was actually good for. Filter or search
@@ -1120,9 +1167,12 @@
         document.getElementById('listReset').addEventListener('click', resetFilters);
         return;
       }
+      // Only what can actually be seen gets a delay; past that the wave would
+      // be animating cards nobody has scrolled to yet.
       DATA.forEach((p, i) => {
         const row = document.createElement('div');
-        row.className = 'row';
+        row.className = 'row' + (i < 12 ? ' entering' : '');
+        if (i < 12) row.style.animationDelay = (i * 26) + 'ms';
         row.dataset.idx = String(i);
         row.innerHTML =
           '<div class="cat">' + catLabelHtml(p) + '</div>' +
@@ -1268,8 +1318,8 @@
       const top = document.createElement('div');
       top.className = 'filter-row';
       top.appendChild(chip({ label: 'All', count: groupCount('All'), color: 'var(--accent)',
-        active: isGroupActive('All'), dot: false, cls: 'filter-btn',
-        onClick: () => toggleGroup('All') }));
+        active: isGroupActive('All'), dot: false, cls: 'filter-btn', key: 'all',
+        onClick: () => { poppedChip = 'all'; toggleGroup('All'); } }));
       FAMILIES.forEach((f) => {
         const n = familyCount(f.id);
         const active = activeFamilies.has(f.id);
@@ -1277,7 +1327,8 @@
         // the one currently picked: a chip you cannot switch off again is a trap.
         if (!n && !active) return;
         const btn = chip({ label: f.label, count: n, color: f.color, active: active,
-          dot: true, cls: 'filter-btn', onClick: () => toggleFamily(f.id) });
+          dot: true, cls: 'filter-btn', key: 'f:' + f.id,
+          onClick: () => { poppedChip = 'f:' + f.id; toggleFamily(f.id); } });
         top.appendChild(btn);
         // A picked chip can sit far to the right of a scrolled rail.
         if (active) requestAnimationFrame(() => btn.scrollIntoView({ inline: 'center', block: 'nearest' }));
@@ -1285,14 +1336,18 @@
       wrap.appendChild(top);
       const sub = renderSubRow();
       if (sub) wrap.appendChild(sub);
+      poppedChip = null;
     }
 
     // One chip, four surfaces. Colour comes from the family, so a chip, the tag
     // on a list row and the pin on the map are never three different hues.
+    let poppedChip = null;
+
     function chip(o) {
       const btn = document.createElement('button');
       btn.type = 'button';
-      btn.className = o.cls + (o.active ? ' active' : '');
+      btn.className = o.cls + (o.active ? ' active' : '') +
+        (o.key && o.key === poppedChip ? ' pop' : '');
       btn.setAttribute('aria-pressed', String(o.active));
       // The chip is grayscale; only the dot carries the family's colour, and on a
       // picked chip even that gives way to the inverted fill.
@@ -1331,9 +1386,10 @@
         const active = activeGroups.has(g);
         if (!n && !active) return;
         any = true;
-        const fire = () => toggleGroup(g);
+        const fire = () => { poppedChip = 'g:' + g; toggleGroup(g); };
         rail.appendChild(chip({ label: g, count: n, color: groupColor(g), active: active,
-          dot: false, cls: cls || 'filter-btn sub', onClick: wrapClick ? wrapClick(fire) : fire }));
+          dot: false, cls: cls || 'filter-btn sub', key: 'g:' + g,
+          onClick: wrapClick ? wrapClick(fire) : fire }));
       });
       if (!any) return null;   // a family whose tags are all empty under the query
 
@@ -1391,8 +1447,7 @@
       if (currentPopup) { currentPopup.remove(); currentPopup = null; }
       renderFilters();
       renderSidebar();
-      clearMarkers();
-      addMarkers();
+      syncMarkers();
       syncUrl();
     }
 
@@ -1507,39 +1562,85 @@
     });
 
     // ----- Markers -----
+    // ----- Markers -----
+    // Keyed by place, not by position in the filtered list. Rebuilding all 228
+    // on every chip press made even the pins that survived the filter blink out
+    // and back, which reads as "something happened" rather than "this is what
+    // is left". Kept pins are now left strictly alone.
+    const markerByKey = new Map();
+    const placeKey = (p) => p.name + '@' + p.lat.toFixed(5) + ',' + p.lng.toFixed(5);
+
+    function buildMarker(p) {
+      // Root element MUST stay clean — no transform/transition/animation
+      const el = document.createElement('div');
+      el.className = 'marker';
+
+      // Inner child owns ALL visuals + hover/animation
+      const inner = document.createElement('div');
+      inner.className = 'marker-inner';
+      inner.style.setProperty('--marker-color', groupColor(p.group));
+      inner.setAttribute('aria-label', p.name);
+      inner.title = p.name;
+      el.appendChild(inner);
+
+      // The index into DATA changes with every filter, so the handler asks for
+      // it at click time instead of closing over a stale one.
+      inner.addEventListener('click', (ev) => {
+        ev.stopPropagation();
+        const i = DATA.indexOf(p);
+        if (i >= 0) focusPoint(i);
+      });
+
+      const marker = new maplibregl.Marker({ element: el })
+        .setLngLat([p.lng, p.lat])
+        .addTo(map);
+      return { marker, inner };
+    }
+
     function clearMarkers() {
-      markers.forEach((m) => m.remove());
+      markerByKey.forEach((rec) => rec.marker.remove());
+      markerByKey.clear();
       markers = [];
     }
 
-    function addMarkers() {
+    function syncMarkers() {
       const offsets = computeFanOffsets(DATA);
-      DATA.forEach((p, i) => {
-        // Root element MUST stay clean — no transform/transition/animation
-        const el = document.createElement('div');
-        el.className = 'marker';
+      const wanted = new Set(DATA.map(placeKey));
 
-        // Inner child owns ALL visuals + hover/animation
-        const inner = document.createElement('div');
-        inner.className = 'marker-inner';
-        inner.style.setProperty('--marker-color', groupColor(p.group));
-        inner.setAttribute('aria-label', p.name);
-        inner.title = p.name;
-        el.appendChild(inner);
+      markerByKey.forEach((rec, key) => {
+        if (wanted.has(key) || rec.leaving) return;
+        rec.leaving = true;
+        rec.inner.classList.add('leaving');
+        // Pull it after the shrink; if reduced motion killed the transition the
+        // timer still fires, so nothing can strand a pin on the map.
+        setTimeout(() => {
+          rec.marker.remove();
+          if (markerByKey.get(key) === rec) markerByKey.delete(key);
+        }, 220);
+      });
 
-        inner.addEventListener('click', (ev) => {
-          ev.stopPropagation();
-          focusPoint(i);
-        });
-
-        const marker = new maplibregl.Marker({
-          element: el,
-          offset: offsets[i] // fan-out as fixed pixel offset (MapLibre handles transforms)
-        })
-          .setLngLat([p.lng, p.lat])
-          .addTo(map);
-
-        markers.push(marker);
+      markers = DATA.map((p, i) => {
+        const key = placeKey(p);
+        let rec = markerByKey.get(key);
+        if (rec && rec.leaving) {
+          // It was on its way out and the filter brought it back.
+          rec.leaving = false;
+          rec.inner.classList.remove('leaving');
+        }
+        if (!rec) {
+          rec = buildMarker(p);
+          markerByKey.set(key, rec);
+          rec.inner.classList.add('enter');
+          // One frame at the small size, then a staggered release. The stagger
+          // is capped so a 71-place family still lands inside a fifth of a
+          // second rather than crawling across the map.
+          const delay = Math.min(i * 4, 180);
+          requestAnimationFrame(() => {
+            setTimeout(() => rec.inner.classList.remove('enter'), delay);
+          });
+        }
+        rec.marker.setOffset(offsets[i]);
+        return rec.marker;
       });
     }
 
