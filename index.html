@@ -108,12 +108,22 @@
 
   /* 39 tags would push the list off the screen, so the block scrolls on its own. */
   /* Two levels: the family row, and the tags of an open family under it. */
-  .filters { display: flex; flex-direction: column; gap: 10px; padding: 12px 18px 0;
-    max-height: 42vh; overflow-y: auto; scrollbar-width: thin; }
-  .filter-row { display: flex; gap: 6px; flex-wrap: wrap; }
+  .filters { display: flex; flex-direction: column; gap: 10px; padding: 12px 0 0; }
+  /* One line that scrolls, not three that wrap: wrapping pushed the first place
+     below the fold, which on a phone is the whole screen. The chip cut off at the
+     right edge is the affordance, so the row keeps its padding inside the scroller. */
+  .filter-row { display: flex; gap: 6px; flex-wrap: nowrap; overflow-x: auto;
+    padding: 0 18px 2px; scrollbar-width: none; -ms-overflow-style: none;
+    scroll-padding-inline: 18px; }
+  .filter-row::-webkit-scrollbar { display: none; }
+  .filter-row > * { flex: 0 0 auto; }
+  /* The two text toggles are lines of their own, above the rails. */
+  .filter-head { display: flex; flex-direction: column; align-items: flex-start;
+    gap: 2px; padding: 0 18px; }
   .filter-sub { display: flex; flex-direction: column; gap: 6px;
     padding: 10px 0 2px; border-top: 1px solid var(--border); }
-  .filter-sub-label { font-size: 13px; font-weight: 500; color: var(--muted); margin: 0; }
+  .filter-sub-label { font-size: 13px; font-weight: 500; color: var(--muted);
+    margin: 0; padding: 0 18px; }
   /* Quieter than the family above it: this row is an option, not the main choice. */
   .filter-btn.sub { padding: 6px 14px; font-size: 13px; font-weight: 400;
     background: transparent; border-color: var(--hairline); }
@@ -1031,7 +1041,7 @@
       const wrap = document.getElementById('filters');
       wrap.innerHTML = '';
       const head = document.createElement('div');
-      head.className = 'filter-row';
+      head.className = 'filter-head';
       wrap.appendChild(head);
 
       // Neighbourhood is set in the intro, so it needs a visible, clearable
@@ -1077,8 +1087,11 @@
         // A family that a search or a barrio has emptied is dropped, unless it is
         // the one currently picked: a chip you cannot switch off again is a trap.
         if (!n && !active) return;
-        top.appendChild(chip({ label: f.label, count: n, color: f.color, active: active,
-          dot: true, cls: 'filter-btn', onClick: () => toggleFamily(f.id) }));
+        const btn = chip({ label: f.label, count: n, color: f.color, active: active,
+          dot: true, cls: 'filter-btn', onClick: () => toggleFamily(f.id) });
+        top.appendChild(btn);
+        // A picked chip can sit far to the right of a scrolled rail.
+        if (active) requestAnimationFrame(() => btn.scrollIntoView({ inline: 'center', block: 'nearest' }));
       });
       wrap.appendChild(top);
       const sub = renderSubRow();
