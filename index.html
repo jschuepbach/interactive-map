@@ -52,6 +52,11 @@
     --c-drinks: #8f86e0;
     --c-other: #c2727f;
     --c-quick: #5b93d6;
+
+    /* The wall Jan is standing against, so the note panel and the photograph
+       are one object rather than two. */
+    --forest: #1d3a28;
+    --forest-ink: #8fb8a0;
   }
 
   * { box-sizing: border-box; }
@@ -74,8 +79,8 @@
   #topbar { display: grid; grid-template-columns: minmax(0, 1fr) minmax(220px, 460px) auto;
     align-items: center; gap: 20px; padding: 12px 20px;
     border-bottom: 1px solid var(--hairline); background: var(--ground); }
+  .brand { display: flex; align-items: center; }
   .brand h1 { font-size: 16px; font-weight: 600; margin: 0; }
-  .brand .sub { color: var(--muted-text); font-size: 13px; margin: 2px 0 0; }
   .searchwrap { display: flex; }
   /* The signature search bar: full pill, hairline plus a soft drop, and it owns
      the middle of the bar the way Where/When/Who does. */
@@ -95,9 +100,9 @@
     display: flex; flex-direction: column; min-height: 0; }
   .sheet-handle { display: none; }
   .side-header { padding: 14px 20px 2px; cursor: default; }
-  .intro-head { padding: 18px 20px 6px; max-width: 62ch; }
+  .intro-head { padding: 18px 20px 4px; max-width: 62ch; }
   .intro-head h2 { font-size: 22px; font-weight: 600; line-height: 1.18;
-    letter-spacing: -0.44px; margin: 0 0 6px; }
+    letter-spacing: -0.44px; margin: 0; }
   .intro-head p { font-size: 14px; color: var(--muted-text); line-height: 1.43; margin: 0; }
 
 
@@ -108,6 +113,29 @@
   .list-empty button { background: none; border: 0; padding: 0; font: inherit;
     color: var(--text); font-weight: 600; cursor: pointer; text-decoration: underline;
     text-underline-offset: 3px; }
+
+  /* ---------- Who picked these ----------
+     Two panels of equal height inside the About panel: the note on the wall's
+     own green, the portrait beside it. The note's text sets the height; the
+     photograph fills whatever that turns out to be. This is the panel's whole
+     framing, which is why there is no separate standfirst above it. */
+  .maker { margin: 2px 0 22px; }
+  .maker-panels { display: grid; grid-template-columns: 1.15fr 1fr; gap: 10px;
+    align-items: stretch; }
+  .maker-note { background: var(--forest); border-radius: 14px;
+    padding: clamp(18px, 2.2vw, 28px); display: flex; align-items: flex-start; }
+  .maker-note p { margin: 0; color: #ffffff; text-wrap: pretty;
+    font-size: clamp(15px, 1.3vw, 19px); line-height: 1.36; letter-spacing: -0.2px; }
+  .maker-note .who { color: var(--forest-ink); }
+  .maker-shot { position: relative; border-radius: 14px; overflow: hidden;
+    background: var(--surface); min-height: 240px; }
+  .maker-shot img { position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; object-position: 50% 12%; display: block; }
+  @media (max-width: 900px) {
+    .maker-panels { grid-template-columns: 1fr; }
+    .maker-shot { aspect-ratio: 16 / 10; min-height: 0; }
+    .maker-shot img { object-position: 50% 24%; }
+  }
 
   /* A card, not a row: two or three fit across the column, so a screen shows
      eight places instead of four. */
@@ -261,12 +289,12 @@
     transition: opacity 0.28s ease, visibility 0.28s ease;
   }
   #intro.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
-  .intro-inner { width: 100%; max-width: 560px; margin: auto; }
+  .intro-inner { width: 100%; max-width: 620px; margin: auto; }
   .intro-eyebrow { font-size: 12px; letter-spacing: 0.32px; text-transform: uppercase;
     color: var(--muted-text); margin: 0 0 14px; font-weight: 700; }
   /* Modest display: the system tops out at 28px / 600 and trusts whitespace,
      which is exactly why it never reads as a pitch deck. */
-  #intro h2 { font-size: clamp(24px, 4.2vw, 32px); line-height: 1.18; letter-spacing: -0.44px;
+  #intro h2 { font-size: clamp(19px, 2.4vw, 22px); line-height: 1.22; letter-spacing: -0.3px;
     margin: 0 0 12px; font-weight: 600; }
   .intro-sub { color: var(--body-text); font-size: 16px; line-height: 1.5;
     margin: 0 0 28px; max-width: 46ch; }
@@ -399,7 +427,6 @@
   @media (max-width: 767px) {
     #app { grid-template-rows: auto auto minmax(0, 1fr); overflow: hidden; }
     #topbar { grid-template-columns: 1fr; gap: 10px; padding: 10px 16px; }
-    .brand .sub { display: none; }
     .topbar-actions { display: none; }
     #body { position: relative; display: block; }
     #map-wrap { position: absolute; inset: 0; }
@@ -449,11 +476,22 @@
   <div id="intro" class="hidden" role="dialog" aria-modal="true" aria-labelledby="introTitle">
     <div class="intro-inner">
       <p class="intro-eyebrow">Barcelona</p>
-      <h2 id="introTitle" tabindex="-1"><span id="introTotal">0</span> places I recommend to my friends.</h2>
-      <p class="intro-sub">Coffee, brunch and restaurants, picked by hand.
-        No ratings, no compromises.</p>
 
-      <p class="intro-q">What are you in the mood for?</p>
+      <div class="maker">
+        <div class="maker-panels">
+          <div class="maker-note"><p><span class="who">Jan Schupbach</span> is a
+            product designer living in Barcelona. He started this map as a note to
+            himself after moving here, and it grew every time a friend asked where
+            to eat. It is <span id="introTotal">0</span> places now, with no ratings
+            and no sponsors.</p></div>
+          <div class="maker-shot">
+            <img src="img/jan.jpg" alt="Jan Schupbach" width="751" height="1000"
+              decoding="async">
+          </div>
+        </div>
+      </div>
+
+      <h2 id="introTitle" tabindex="-1">What are you in the mood for?</h2>
       <div class="intro-chips" id="introChips"></div>
 
       <p class="intro-q">Or start from a neighbourhood</p>
@@ -473,7 +511,6 @@
     <header id="topbar">
       <div class="brand">
         <h1>Barcelona</h1>
-        <p class="sub">A hand-picked map of independent spots</p>
       </div>
       <div class="searchwrap">
         <input id="sideSearch" type="search" placeholder="Search name, note or category" autocomplete="off">
@@ -982,8 +1019,7 @@
       } else {
         head.className = 'side-header intro-head';
         head.innerHTML =
-          '<h2>' + DATA.length + ' places I recommend to my friends.</h2>' +
-          '<p>Coffee, brunch and restaurants, picked by hand. No ratings, no compromises.</p>';
+          '<h2>' + DATA.length + ' places I recommend to my friends.</h2>';
       }
       head.style.display = head.innerHTML ? '' : 'none';
       if (!DATA.length) {
