@@ -107,8 +107,17 @@
   .sheet-handle { display: none; }
   .side-header { padding: 14px 20px 2px; cursor: default; }
   .intro-head { padding: 18px 20px 4px; max-width: 62ch; }
-  .intro-head h2 { font-size: 22px; font-weight: 600; line-height: 1.18;
-    letter-spacing: -0.44px; margin: 0; }
+  /* The line was the same weight as a card title one size up, a contrast step
+     of 1.125, which is no step at all: it read as a label rather than as the
+     one claim the column makes. The contrast is inside the line now. The count
+     is the ink and the full weight, the sentence around it steps back into the
+     body colour at a lighter weight, so the figure carries without the line
+     having to shout. */
+  .intro-head h2 { font-size: 27px; font-weight: 450; line-height: 1.14;
+    letter-spacing: -0.5px; margin: 0; color: var(--body-text);
+    text-wrap: balance; }
+  .intro-head h2 .n { color: var(--ink); font-weight: 700;
+    font-variant-numeric: tabular-nums; letter-spacing: -0.9px; }
   .intro-head p { font-size: 14px; color: var(--muted-text); line-height: 1.43; margin: 0; }
 
 
@@ -532,7 +541,8 @@
     /* The column's opening line was still at its desktop size, which on a phone
        ran to two lines and pushed the first place 210px down an 812px screen. */
     .intro-head { padding: 10px 16px 8px; }
-    .intro-head h2 { font-size: 18px; letter-spacing: -0.2px; }
+    .intro-head h2 { font-size: 21px; letter-spacing: -0.35px; }
+    .intro-head h2 .n { letter-spacing: -0.6px; }
     .result-line { padding: 0 16px; }
     .filters { padding: 8px 0; }
     .btn.btn-icon { display: inline-flex; }
@@ -1531,7 +1541,8 @@
       } else {
         head.className = 'side-header intro-head';
         head.innerHTML =
-          '<h2>' + DATA.length + ' places I recommend to my friends.</h2>';
+          '<h2><span class="n">' + DATA.length +
+          '</span> places I recommend to my friends.</h2>';
       }
       head.style.display = head.innerHTML ? '' : 'none';
 
