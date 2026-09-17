@@ -2308,11 +2308,8 @@
 
     function linksHtml(p, cls) {
       const c = cls ? ' class="' + cls + '"' : '';
-      const link = (href, label) =>
-        '<a' + c + ' href="' + escapeAttr(href) + '" target="_blank" rel="noopener">' + label + '</a>';
-      return (p.url ? link(p.url, 'Visit →') : '') +
-        (p.instagram ? link(p.instagram, 'Instagram →') : '') +
-        link(mapsUrl(p), MAPS_LABEL);
+      return '<a' + c + ' href="' + escapeAttr(mapsUrl(p)) +
+        '" target="_blank" rel="noopener">' + MAPS_LABEL + '</a>';
     }
 
     // "@nomadcoffee", "nomadcoffee" or a full profile URL — all end up as one.
