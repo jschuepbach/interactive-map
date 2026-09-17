@@ -1146,17 +1146,9 @@
       const rail = document.createElement('div');
       rail.className = 'filter-row';
 
-      // The way back to the whole family. Without it the only exit from a picked
-      // tag is Clear filters, which also throws the family away.
-      const family = FAMILIES.find((f) => activeFamilies.has(f.id));
-      if (family) {
-        const fire = () => { activeGroups.clear(); applyFilters(); };
-        rail.appendChild(chip({
-          label: 'All ' + family.label.toLowerCase(), count: familyCount(family.id),
-          color: family.color, active: activeGroups.size === 0, dot: false,
-          cls: cls || 'filter-btn sub', onClick: wrapClick ? wrapClick(fire) : fire
-        }));
-      }
+      // No "All <family>" chip here: Clear filters sits one line below and a
+      // picked tag switches itself off when tapped again, so a third way back
+      // was one control too many.
 
       let any = false;
       activeFamilyGroups().forEach((g) => {
