@@ -6,16 +6,34 @@
 <title>Specialty Coffee · Barcelona</title>
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" />
 <style>
+  /* ---------- Uber's black-and-white duet ----------
+     One grayscale system, two polarities. The light side is Uber's own web
+     palette; the dark side is the same ladder inverted, which is what the map
+     needs under a dark basemap. Category hue survives in exactly one place —
+     pins and the dot on a chip — because that is data, not chrome. */
   :root {
-    /* Change this single variable to re-theme accents everywhere. */
-    --accent: #ff7a59;
+    color-scheme: light dark;
 
-    --bg: #0a0c10;
-    --panel: #0f1218;
-    --panel-2: #161a22;
-    --text: #e6e8ec;
-    --muted: #8a93a3;
-    --border: #1f2530;
+    --canvas: #ffffff;
+    --canvas-soft: #efefef;
+    --canvas-softer: #f3f3f3;
+    --pressed: #e2e2e2;
+    --ink: #000000;
+    --body: #5e5e5e;
+    --mute: #afafaf;
+    --hairline: #e2e2e2;
+    --primary: #000000;
+    --on-primary: #ffffff;
+    --scrim: 255, 255, 255;
+
+    /* The names the app already speaks, pointed at the duet. */
+    --accent: var(--ink);
+    --bg: var(--canvas);
+    --panel: var(--canvas);
+    --panel-2: var(--canvas-soft);
+    --text: var(--ink);
+    --muted: var(--body);
+    --border: var(--hairline);
 
     /* Category colors — used for markers, sidebar labels, popups, filters. */
     --c-sweet: #c68a4e;
@@ -28,10 +46,39 @@
     --c-brunch: #5b8def;
   }
 
+  :root[data-theme="dark"] {
+    --canvas: #000000;
+    --canvas-soft: #282828;
+    --canvas-softer: #1c1c1c;
+    --pressed: #3a3a3a;
+    --ink: #ffffff;
+    --body: #afafaf;
+    --mute: #5e5e5e;
+    --hairline: #333333;
+    --primary: #ffffff;
+    --on-primary: #000000;
+    --scrim: 0, 0, 0;
+    --ctrl-icon-filter: invert(1);
+  }
+
+  /* Category hue is tuned for the dark map; on white it needs to come down a
+     step or the pins glow. */
+  :root:not([data-theme="dark"]) {
+    --c-sweet: #9a6321;
+    --c-local: #d64a22;
+    --c-asia: #10707f;
+    --c-americas: #3d7c2c;
+    --c-europe: #ad2f65;
+    --c-drinks: #5a48a8;
+    --c-other: #8e2c49;
+    --c-brunch: #2a5fc4;
+  }
+
   * { box-sizing: border-box; }
   html, body { height: 100%; margin: 0; background: var(--bg); color: var(--text);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif;
-    -webkit-font-smoothing: antialiased; }
+    /* UberMove is licensed, so this is the fallback the brand itself ships with. */
+    font-family: system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+    font-size: 16px; -webkit-font-smoothing: antialiased; }
 
   #app { display: grid; grid-template-columns: 340px 1fr; height: 100vh; height: 100dvh; }
 
@@ -40,15 +87,16 @@
     display: flex; flex-direction: column; min-height: 0; }
   .sheet-handle { display: none; }
   .side-header { padding: 18px 18px 14px; border-bottom: 1px solid var(--border); cursor: default; }
-  .side-header h1 { font-size: 15px; margin: 0 0 4px; letter-spacing: -0.01em; font-weight: 600; }
-  .side-header .sub { color: var(--muted); font-size: 12px; line-height: 1.5; }
+  .side-header h1 { font-size: 20px; line-height: 28px; margin: 0 0 4px; font-weight: 700; }
+  .side-header .sub { color: var(--muted); font-size: 14px; line-height: 20px; }
   /* The search field lives with the results, not behind a button: on the map
      screen it is the fastest way through 227 places. */
-  #sideSearch { width: 100%; margin-top: 12px; background: var(--panel-2);
-    border: 1px solid var(--border); border-radius: 8px; color: var(--text);
-    font-family: inherit; font-size: 13px; padding: 9px 12px; }
-  #sideSearch::placeholder { color: var(--muted); }
-  #sideSearch:focus { outline: none; border-color: var(--accent); }
+  /* Uber's inputs are the one square thing in a world of pills. */
+  #sideSearch { width: 100%; margin-top: 16px; background: var(--canvas-soft);
+    border: 1px solid transparent; border-radius: 0; color: var(--text);
+    font-family: inherit; font-size: 16px; line-height: 24px; padding: 14px 16px; }
+  #sideSearch::placeholder { color: var(--body); }
+  #sideSearch:focus { outline: none; border-color: var(--ink); }
 
   .list-empty { padding: 22px 18px; color: var(--muted); font-size: 13px; line-height: 1.6; }
   .list-empty button { background: none; border: none; padding: 0; font: inherit;
@@ -65,55 +113,60 @@
   .filter-row { display: flex; gap: 6px; flex-wrap: wrap; }
   .filter-sub { display: flex; flex-direction: column; gap: 6px;
     padding: 10px 0 2px; border-top: 1px solid var(--border); }
-  .filter-sub-label { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--muted); margin: 0; }
+  .filter-sub-label { font-size: 13px; font-weight: 500; color: var(--muted); margin: 0; }
   /* Quieter than the family above it: this row is an option, not the main choice. */
-  .filter-btn.sub { padding: 5px 10px; font-size: 10.5px; font-weight: 500; }
+  .filter-btn.sub { padding: 6px 14px; font-size: 13px; font-weight: 400;
+    background: transparent; border-color: var(--hairline); }
+  .filter-btn.sub:hover { background: var(--canvas-soft); }
+  .filter-btn.sub.active { background: var(--primary); color: var(--on-primary); }
+  /* The pill is the signature: every interactive thing here is 999px. The chip
+     itself stays grayscale and the family's colour rides on the dot, so a row of
+     chips reads as one control instead of eight competing accents. */
   .filter-btn {
-    background: var(--panel-2); color: var(--muted); border: 1px solid var(--border);
-    padding: 6px 12px; font-size: 11px; font-weight: 600; border-radius: 999px;
-    cursor: pointer; font-family: inherit; letter-spacing: 0.02em;
-    transition: background 0.15s, color 0.15s, border-color 0.15s;
+    background: var(--canvas-soft); color: var(--ink); border: 1px solid transparent;
+    padding: 8px 16px; font-size: 14px; font-weight: 500; border-radius: 999px;
+    cursor: pointer; font-family: inherit;
+    transition: background 0.15s, color 0.15s;
   }
-  .filter-btn:hover { color: var(--text); border-color: var(--muted); }
-  .filter-btn.active { background: var(--accent); color: #0a0c10; border-color: var(--accent); }
-  .filter-dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%;
-    margin-right: 5px; vertical-align: middle; background: currentColor; }
+  .filter-btn:hover { background: var(--pressed); }
+  .filter-btn.active { background: var(--primary); color: var(--on-primary); border-color: var(--primary); }
+  .filter-dot { display: inline-block; width: 8px; height: 8px; border-radius: 999px;
+    margin-right: 7px; vertical-align: middle; background: currentColor; }
 
   /* Active neighbourhood, shown outside the intro so the filter is never invisible */
   .hood-pill { flex-basis: 100%; display: flex; align-items: center; gap: 8px;
     background: none; border: 0; padding: 0 0 2px; margin: 0; cursor: pointer;
-    font-family: inherit; font-size: 11px; font-weight: 600; color: var(--accent);
-    letter-spacing: 0.02em; }
+    font-family: inherit; font-size: 14px; font-weight: 500; color: var(--ink); }
   .hood-pill span.x { color: var(--muted); font-weight: 400; }
   .hood-pill:hover span.x { color: var(--text); }
 
   /* A different axis from the category chips, so a different shape. */
   .note-pill { flex-basis: 100%; text-align: left; background: none; border: 0;
     padding: 0 0 2px; margin: 0 0 2px; cursor: pointer; font-family: inherit;
-    font-size: 11px; font-weight: 600; letter-spacing: 0.02em; color: var(--muted); }
-  .note-pill:hover { color: var(--text); }
-  .note-pill.on { color: var(--accent); }
+    font-size: 14px; font-weight: 500; color: var(--muted);
+    text-decoration: underline; text-underline-offset: 3px; }
+  .note-pill:hover, .note-pill.on { color: var(--ink); }
 
   .list { flex: 1; overflow-y: auto; padding-top: 12px; }
-  .row { padding: 12px 18px 14px; border-bottom: 1px solid var(--border);
+  .row { padding: 16px 18px 18px; border-bottom: 1px solid var(--border);
     cursor: pointer; transition: background 0.15s; border-left: 3px solid transparent; }
-  .row:hover { background: var(--panel-2); }
-  .row.active { background: var(--panel-2); border-left-color: var(--accent); }
-  .cat-sep { color: var(--border); }
-  .row .cat { font-size: 10px; color: var(--marker-color, var(--accent)); text-transform: uppercase;
-    letter-spacing: 0.08em; margin: 0 0 4px; font-weight: 600; }
-  .row .name { font-size: 14px; font-weight: 600; margin: 0 0 5px; }
+  .row:hover { background: var(--canvas-softer); }
+  .row.active { background: var(--canvas-soft); border-left-color: var(--ink); }
+  .cat-sep { color: var(--mute); }
+  /* The one uppercase line the system allows itself: an eyebrow tag, not a headline. */
+  .row .cat { font-size: 11px; color: var(--marker-color, var(--ink)); text-transform: uppercase;
+    letter-spacing: 0.06em; margin: 0 0 6px; font-weight: 500; }
+  .row .name { font-size: 18px; line-height: 24px; font-weight: 700; margin: 0 0 6px; }
   /* Jan's own words are the point of this map, so they read as text, not as
      metadata. The scraped address gets the small quiet line underneath. */
-  .row .note { font-size: 13px; color: var(--text); opacity: 0.82; margin: 0 0 7px;
-    line-height: 1.5; }
-  .row .addr { font-size: 11px; color: var(--muted); margin: 0 0 6px; line-height: 1.4; }
+  .row .note { font-size: 16px; color: var(--ink); margin: 0 0 8px; line-height: 24px; }
+  .row .addr { font-size: 14px; color: var(--muted); margin: 0 0 8px; line-height: 20px; }
   /* What to order, in Jan's words. Sits under the note and reads as an aside. */
-  .row .tip { font-size: 12px; color: var(--muted); margin: 0 0 7px; line-height: 1.45; }
-  .row .tip b, .popup-tip b, .lv-tip b { color: var(--accent); font-weight: 600; }
+  .row .tip { font-size: 14px; color: var(--muted); margin: 0 0 8px; line-height: 20px; }
+  .row .tip b, .popup-tip b, .lv-tip b { color: var(--ink); font-weight: 500; }
   .links { display: flex; gap: 14px; flex-wrap: wrap; }
-  .row a { color: var(--accent); font-size: 11px; text-decoration: none; font-weight: 600; }
+  .row a { color: var(--ink); font-size: 14px; text-decoration: underline;
+    text-underline-offset: 3px; font-weight: 500; }
   .row a:hover { text-decoration: underline; }
 
   /* ---------- Map ---------- */
@@ -121,14 +174,15 @@
   #map { position: absolute; inset: 0; }
 
   .controls { position: absolute; top: 12px; left: 12px; z-index: 5; display: flex; gap: 8px; }
+  /* Floating pills over the map, the one place the system allows a shadow. */
   .btn {
-    background: var(--panel); color: var(--text); border: 1px solid var(--border);
-    padding: 8px 14px; font-size: 12px; font-weight: 700; border-radius: 8px;
-    cursor: pointer; font-family: inherit; letter-spacing: 0.04em;
-    backdrop-filter: blur(6px);
+    background: var(--canvas); color: var(--ink); border: 0;
+    padding: 10px 18px; font-size: 14px; font-weight: 500; border-radius: 999px;
+    cursor: pointer; font-family: inherit;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.18);
   }
-  .btn:hover { border-color: var(--accent); color: var(--accent); }
-  .btn.active { background: var(--accent); color: #0a0c10; border-color: var(--accent); }
+  .btn:hover { background: var(--canvas-soft); }
+  .btn.active { background: var(--primary); color: var(--on-primary); }
 
   /* ---------- Markers ----------
      CRITICAL: .marker (the element passed to new maplibregl.Marker({element}))
@@ -142,8 +196,8 @@
     margin-left: -11px; margin-top: -11px;
     border-radius: 50%;
     background: var(--marker-color, var(--accent));
-    border: 2px solid #0a0c10;
-    box-shadow: 0 0 0 1px var(--marker-color, var(--accent)), 0 4px 12px rgba(0,0,0,0.6);
+    border: 2px solid var(--canvas);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.35);
     cursor: pointer;
     transition: transform 0.15s ease, box-shadow 0.15s ease;
     pointer-events: auto;
@@ -151,29 +205,28 @@
   .marker-inner:hover { transform: scale(1.25); }
   .marker-inner.active {
     transform: scale(1.4);
-    box-shadow: 0 0 0 4px rgba(255,255,255,0.3),
-                0 0 0 1px var(--marker-color, var(--accent)),
-                0 4px 14px rgba(0,0,0,0.7);
+    box-shadow: 0 0 0 3px var(--ink), 0 2px 10px rgba(0,0,0,0.4);
   }
 
   /* ---------- Popup ---------- */
   .maplibregl-popup-content {
-    background: var(--panel) !important; color: var(--text);
-    border: 1px solid var(--border); border-radius: 8px;
-    padding: 12px 14px; font-family: inherit; box-shadow: 0 12px 32px rgba(0,0,0,0.5);
+    background: var(--canvas) !important; color: var(--ink);
+    border: 0; border-radius: 16px;
+    padding: 20px 22px; font-family: inherit; box-shadow: 0 8px 28px rgba(0,0,0,0.22);
   }
-  .maplibregl-popup-tip { border-top-color: var(--panel) !important;
-    border-bottom-color: var(--panel) !important; }
-  .popup-cat { color: var(--marker-color, var(--accent)); font-size: 10px; text-transform: uppercase;
-    letter-spacing: 0.08em; margin: 0 0 4px; font-weight: 600; }
-  .popup-name { font-weight: 600; font-size: 13px; margin: 0 0 4px; }
-  .popup-note { color: var(--muted); font-size: 12px; margin: 0 0 8px;
-    line-height: 1.45; max-width: 240px; }
-  .popup-addr { color: var(--muted); font-size: 11px; margin: 0 0 8px; line-height: 1.4;
-    max-width: 240px; }
-  .popup-tip { color: var(--muted); font-size: 11px; margin: 0 0 8px; line-height: 1.45;
-    max-width: 240px; }
-  .popup-link { color: var(--accent); font-size: 11px; text-decoration: none; font-weight: 600; }
+  .maplibregl-popup-tip { border-top-color: var(--canvas) !important;
+    border-bottom-color: var(--canvas) !important; }
+  .popup-cat { color: var(--marker-color, var(--ink)); font-size: 11px; text-transform: uppercase;
+    letter-spacing: 0.06em; margin: 0 0 6px; font-weight: 500; }
+  .popup-name { font-weight: 700; font-size: 18px; line-height: 24px; margin: 0 0 6px; }
+  .popup-note { color: var(--ink); font-size: 15px; margin: 0 0 10px;
+    line-height: 22px; max-width: 250px; }
+  .popup-addr { color: var(--muted); font-size: 14px; margin: 0 0 10px; line-height: 20px;
+    max-width: 250px; }
+  .popup-tip { color: var(--muted); font-size: 14px; margin: 0 0 10px; line-height: 20px;
+    max-width: 250px; }
+  .popup-link { color: var(--ink); font-size: 14px; text-decoration: underline;
+    text-underline-offset: 3px; font-weight: 500; }
   .popup-link:hover { text-decoration: underline; }
 
   /* ---------- Intro overlay (landing) ----------
@@ -186,7 +239,7 @@
     padding-left: max(24px, env(safe-area-inset-left));
     padding-right: max(24px, env(safe-area-inset-right));
     background: linear-gradient(180deg,
-      rgba(10,12,16,0.96) 0%, rgba(10,12,16,0.9) 50%, rgba(10,12,16,0.74) 100%);
+      rgba(var(--scrim), 0.97) 0%, rgba(var(--scrim), 0.93) 50%, rgba(var(--scrim), 0.8) 100%);
     overflow-y: auto;
     transition: opacity 0.28s ease, visibility 0.28s ease;
   }
@@ -232,12 +285,14 @@
 
   .intro-actions { display: flex; align-items: center; gap: 18px; flex-wrap: wrap;
     margin-bottom: 22px; }
+  /* The one black pill in the viewport: the brand's whole conversion story. */
   .intro-cta {
-    background: var(--accent); color: #0a0c10; border: 1px solid var(--accent);
-    padding: 13px 22px; font-size: 14px; font-weight: 700; border-radius: 10px;
-    cursor: pointer; font-family: inherit; letter-spacing: 0.01em;
+    background: var(--primary); color: var(--on-primary); border: 0;
+    padding: 14px 24px; font-size: 16px; font-weight: 500; border-radius: 999px;
+    cursor: pointer; font-family: inherit;
   }
-  .intro-cta:hover { filter: brightness(1.08); }
+  .intro-cta:hover { background: var(--canvas-soft); color: var(--ink);
+    box-shadow: inset 0 0 0 1px var(--ink); }
   .intro-skip { background: none; border: 0; color: var(--muted); font: inherit; font-size: 13px;
     cursor: pointer; padding: 4px 0; text-decoration: underline; text-underline-offset: 3px; }
   .intro-skip:hover { color: var(--text); }
@@ -295,10 +350,14 @@
     padding-bottom: 2px; scrollbar-width: none; flex-wrap: nowrap; }
   .lv-filters .filter-row::-webkit-scrollbar { display: none; }
   .lv-chip.sub { padding: 5px 11px; font-size: 11px; font-weight: 500; }
-  .lv-chip { flex: 0 0 auto; background: var(--panel-2); border: 1px solid var(--border);
-    border-radius: 999px; padding: 7px 13px; font: 600 12px inherit; font-family: inherit;
-    cursor: pointer; letter-spacing: 0.02em; }
-  .lv-chip .filter-dot { width: 7px; height: 7px; }
+  .lv-chip { flex: 0 0 auto; background: var(--canvas-soft); border: 1px solid transparent;
+    border-radius: 999px; padding: 9px 16px; font-size: 14px; font-weight: 500;
+    font-family: inherit; color: var(--ink); cursor: pointer; }
+  .lv-chip:hover { background: var(--pressed); }
+  .lv-chip.active { background: var(--primary); color: var(--on-primary); }
+  .lv-chip.sub { background: transparent; border-color: var(--hairline); font-weight: 400; }
+  .lv-chip.sub.active { background: var(--primary); color: var(--on-primary); }
+  .lv-chip .filter-dot { width: 8px; height: 8px; }
   .lv-active { color: var(--muted); font-size: 12px; margin: 10px auto 0; }
   .lv-active button { background: none; border: 0; color: var(--accent); font: 600 12px inherit;
     font-family: inherit; cursor: pointer; padding: 0; text-decoration: underline;
@@ -353,22 +412,25 @@
   /* ---------- Footer ---------- */
   footer {
     position: absolute; bottom: 0; left: 0; right: 0; z-index: 4;
-    padding: 6px 12px; background: rgba(10,12,16,0.85);
+    padding: 6px 12px; background: rgba(var(--scrim), 0.88);
     color: var(--muted); font-size: 10px; text-align: right;
     border-top: 1px solid var(--border); pointer-events: auto;
   }
   footer a { color: var(--muted); text-decoration: none; }
-  footer a:hover { color: var(--accent); }
+  footer a:hover { color: var(--ink); }
 
   /* ---------- MapLibre control overrides ---------- */
   .maplibregl-ctrl-group {
-    background: var(--panel) !important;
-    border: 1px solid var(--border) !important;
+    background: var(--canvas) !important;
+    border: 0 !important;
+    border-radius: 999px !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.18) !important;
+    overflow: hidden;
   }
-  .maplibregl-ctrl-group button { background-color: var(--panel) !important; }
-  .maplibregl-ctrl-group button:hover { background-color: var(--panel-2) !important; }
-  .maplibregl-ctrl-group button span { filter: invert(1) brightness(0.85); }
-  .maplibregl-ctrl-attrib { background: rgba(10,12,16,0.7) !important; color: var(--muted) !important; }
+  .maplibregl-ctrl-group button { background-color: var(--canvas) !important; }
+  .maplibregl-ctrl-group button:hover { background-color: var(--canvas-soft) !important; }
+  .maplibregl-ctrl-group button span { filter: var(--ctrl-icon-filter, none); }
+  .maplibregl-ctrl-attrib { background: rgba(var(--scrim), 0.75) !important; color: var(--muted) !important; }
   .maplibregl-ctrl-attrib a { color: var(--muted) !important; }
 
   /* ---------- Coarse pointer (touch): bigger targets, no reliance on hover ---------- */
@@ -472,6 +534,7 @@
         <button id="toggle3d" class="btn" type="button">3D</button>
         <button id="listBtn" class="btn" type="button" title="Browse all places as a list">List</button>
         <button id="introBtn" class="btn" type="button" title="About this map">About</button>
+        <button id="themeBtn" class="btn" type="button" title="Switch between the light and the dark map" aria-pressed="false">Light</button>
       </div>
       <div id="map"></div>
       <footer>
@@ -511,38 +574,60 @@
     // dark, keyless, and split into a label-free base and a separate reference
     // layer for the labels.
     const ESRI = 'https://services.arcgisonline.com/ArcGIS/rest/services/Canvas/';
-    const BASEMAP = {
-      version: 8,
-      sources: {
-        base: {
-          type: 'raster',
-          tiles: [ESRI + 'World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}'],
-          tileSize: 256,
-          maxzoom: 16,
-          attribution: 'Esri, HERE, Garmin, &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        },
-        labels: {
-          type: 'raster',
-          tiles: [ESRI + 'World_Dark_Gray_Reference/MapServer/tile/{z}/{y}/{x}'],
-          tileSize: 256,
-          maxzoom: 16
-        }
-      },
-      layers: [
-        { id: 'background', type: 'background', paint: { 'background-color': '#0a0c10' } },
-        // Esri's dark grey is a medium grey, too pale to sit under orange pins.
-        // Pulling brightness down against the near-black background gets back
-        // the contrast the old hand-rolled palette had.
-        { id: 'base', type: 'raster', source: 'base',
-          paint: { 'raster-brightness-max': 0.45, 'raster-saturation': -0.25, 'raster-contrast': 0.1 } },
-        { id: 'labels', type: 'raster', source: 'labels',
-          paint: { 'raster-brightness-max': 0.8, 'raster-opacity': 0.75 } }
-      ]
+
+    // Esri ships the same canvas in both polarities, base and labels split, which
+    // is what lets the map follow the theme instead of being one fixed mood.
+    const TILES = {
+      dark:  { base: 'World_Dark_Gray_Base',  labels: 'World_Dark_Gray_Reference', ground: '#000000',
+               basePaint: { 'raster-brightness-max': 0.45, 'raster-saturation': -0.25, 'raster-contrast': 0.1 },
+               labelPaint: { 'raster-brightness-max': 0.8, 'raster-opacity': 0.75 } },
+      light: { base: 'World_Light_Gray_Base', labels: 'World_Light_Gray_Reference', ground: '#ffffff',
+               basePaint: { 'raster-saturation': -1, 'raster-contrast': -0.05, 'raster-opacity': 0.9 },
+               labelPaint: { 'raster-saturation': -1, 'raster-opacity': 0.8 } }
     };
+
+    function basemap(theme) {
+      const t = TILES[theme] || TILES.dark;
+      return {
+        version: 8,
+        sources: {
+          base: {
+            type: 'raster',
+            tiles: [ESRI + t.base + '/MapServer/tile/{z}/{y}/{x}'],
+            tileSize: 256,
+            maxzoom: 16,
+            attribution: 'Esri, HERE, Garmin, &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          },
+          labels: {
+            type: 'raster',
+            tiles: [ESRI + t.labels + '/MapServer/tile/{z}/{y}/{x}'],
+            tileSize: 256,
+            maxzoom: 16
+          }
+        },
+        layers: [
+          { id: 'background', type: 'background', paint: { 'background-color': t.ground } },
+          { id: 'base', type: 'raster', source: 'base', paint: t.basePaint },
+          { id: 'labels', type: 'raster', source: 'labels', paint: t.labelPaint }
+        ]
+      };
+    }
+
+    // The theme is picked before the map is built, so the first tiles that load
+    // are already the right polarity: no white flash on a dark map.
+    const THEME_KEY = 'bcn-map-theme';
+    let theme = (function () {
+      try {
+        const saved = localStorage.getItem(THEME_KEY);
+        if (saved === 'light' || saved === 'dark') return saved;
+      } catch (_) {}
+      return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    })();
+    document.documentElement.setAttribute('data-theme', theme);
 
     const map = new maplibregl.Map({
       container: 'map',
-      style: BASEMAP,
+      style: basemap(theme),
       center: CENTER,
       zoom: 13,
       pitch: 0,
@@ -1007,13 +1092,12 @@
       btn.type = 'button';
       btn.className = o.cls + (o.active ? ' active' : '');
       btn.setAttribute('aria-pressed', String(o.active));
-      btn.style.color = o.active ? '#0a0c10' : o.color;
-      btn.style.borderColor = o.color;
-      btn.style.background = o.active ? o.color : 'var(--panel-2)';
+      // The chip is grayscale; only the dot carries the family's colour, and on a
+      // picked chip even that gives way to the inverted fill.
       if (o.dot) {
         const dot = document.createElement('span');
         dot.className = 'filter-dot';
-        dot.style.background = o.active ? '#0a0c10' : o.color;
+        dot.style.background = o.active ? 'var(--on-primary)' : o.color;
         btn.appendChild(dot);
       }
       btn.appendChild(document.createTextNode(o.label + ' (' + o.count + ')'));
@@ -1413,6 +1497,25 @@
     introCta.addEventListener('click', closeIntro);
     document.getElementById('introSkip').addEventListener('click', closeIntro);
     document.getElementById('introBtn').addEventListener('click', openIntro);
+
+    // ----- Light / dark -----
+    // The chrome is one grayscale system in two polarities, so switching is a
+    // token swap plus the matching Esri canvas. Markers are DOM elements and
+    // survive setStyle, so nothing has to be rebuilt.
+    const themeBtn = document.getElementById('themeBtn');
+    function paintThemeButton() {
+      themeBtn.textContent = theme === 'dark' ? 'Light' : 'Dark';
+      themeBtn.title = theme === 'dark' ? 'Switch to the light map' : 'Switch to the dark map';
+      themeBtn.setAttribute('aria-pressed', String(theme === 'light'));
+    }
+    paintThemeButton();
+    themeBtn.addEventListener('click', () => {
+      theme = theme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', theme);
+      try { localStorage.setItem(THEME_KEY, theme); } catch (_) {}
+      map.setStyle(basemap(theme));
+      paintThemeButton();
+    });
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && !introEl.classList.contains('hidden')) closeIntro();
     });
