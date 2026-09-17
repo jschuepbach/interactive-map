@@ -405,9 +405,12 @@
        viewport is the spotlight card further down. */
     background: rgba(18, 18, 18, 0.97);
     overflow-y: auto;
-    transition: opacity 0.28s ease, visibility 0.28s ease;
+    transition: opacity 0.28s ease, visibility 0s linear 0s;
   }
-  #intro.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+  /* Same rule as the search field: the panel has to be visible before the
+     heading inside it can take focus. */
+  #intro.hidden { opacity: 0; visibility: hidden; pointer-events: none;
+    transition: opacity 0.28s ease, visibility 0s linear 0.28s; }
   /* Nothing in here but the person. The filters live in the rail behind this
      overlay, so repeating them was asking the reader to choose a cuisine in the
      middle of an introduction. */
@@ -535,10 +538,14 @@
       padding: 8px 14px; padding-top: max(8px, env(safe-area-inset-top));
       background: var(--ground);
       opacity: 0; visibility: hidden; transform: translateY(-6px);
-      transition: opacity 0.16s ease, visibility 0.2s,
-        transform 0.24s cubic-bezier(0.22, 1, 0.36, 1);
+      transition: opacity 0.16s ease, transform 0.24s cubic-bezier(0.22, 1, 0.36, 1),
+        visibility 0s linear 0.2s;
     }
-    body.search-open .searchwrap { opacity: 1; visibility: visible; transform: none; }
+    body.search-open .searchwrap {
+      opacity: 1; visibility: visible; transform: none;
+      transition: opacity 0.16s ease, transform 0.24s cubic-bezier(0.22, 1, 0.36, 1),
+        visibility 0s linear 0s;
+    }
     .brand, .topbar-actions { transition: opacity 0.16s ease; }
     body.search-open .brand, body.search-open .topbar-actions { opacity: 0; }
     .search-cancel { display: inline-flex; }
