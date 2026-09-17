@@ -81,9 +81,9 @@
   .brand h1 { font-size: 16px; font-weight: 600; margin: 0; }
   .searchwrap { display: flex; align-items: center; gap: 10px; }
   /* Phone only: the field is a control you open, not a row the map pays for. */
-  .btn-icon { display: none; width: 44px; padding: 0; align-items: center;
+  .btn.btn-icon { display: none; width: 44px; padding: 0; align-items: center;
     justify-content: center; }
-  .btn-icon svg { width: 19px; height: 19px; display: block; }
+  .btn.btn-icon svg { width: 23px; height: 23px; flex: none; display: block; }
   .search-cancel { display: none; background: none; border: 0; padding: 0 2px;
     font: inherit; font-size: 14px; font-weight: 500; color: var(--ink);
     cursor: pointer; white-space: nowrap; }
@@ -113,7 +113,7 @@
 
 
   .list { flex: 1; overflow-y: auto; padding: 12px 20px 24px;
-    display: grid; grid-template-columns: repeat(auto-fill, minmax(258px, 1fr));
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 258px), 1fr));
     gap: 12px; align-content: start; }
   .list-empty { grid-column: 1 / -1; padding: 28px 2px; color: var(--muted-text); font-size: 14px; }
   .list-empty button { background: none; border: 0; padding: 0; font: inherit;
@@ -524,22 +524,27 @@
     .intro-head h2 { font-size: 18px; letter-spacing: -0.2px; }
     .result-line { padding: 0 16px; }
     .filters { padding: 8px 0; }
-    .btn-icon { display: inline-flex; }
+    .btn.btn-icon { display: inline-flex; }
 
-    /* Closed: wordmark and controls. Open: the field takes the whole bar and
-       everything else steps aside, which is the only way a 375px row can hold
-       a search field and still be a search field. */
-    #topbar { grid-template-columns: minmax(0, 1fr) auto; }
-    .searchwrap { display: none; }
-    body.search-open #topbar { grid-template-columns: minmax(0, 1fr); }
-    body.search-open .brand, body.search-open .topbar-actions { display: none; }
-    body.search-open .searchwrap { display: flex; }
-    .search-cancel { display: none; }
-    body.search-open .search-cancel { display: inline-flex; }
+    /* Closed: wordmark and controls. Open: the field covers the bar. It is an
+       overlay rather than a column swap, so opening it moves nothing else and
+       both states can actually be animated. */
+    #topbar { position: relative; grid-template-columns: minmax(0, 1fr) auto; }
+    .searchwrap {
+      position: absolute; inset: 0; z-index: 2;
+      padding: 8px 14px; padding-top: max(8px, env(safe-area-inset-top));
+      background: var(--ground);
+      opacity: 0; visibility: hidden; transform: translateY(-6px);
+      transition: opacity 0.16s ease, visibility 0.2s,
+        transform 0.24s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    body.search-open .searchwrap { opacity: 1; visibility: visible; transform: none; }
+    .brand, .topbar-actions { transition: opacity 0.16s ease; }
+    body.search-open .brand, body.search-open .topbar-actions { opacity: 0; }
+    .search-cancel { display: inline-flex; }
     /* Tilting a map with one thumb while walking is not a thing anyone does. */
     #toggle3d { display: none; }
     #introBtn { padding: 0 14px; }
-    .list { grid-template-columns: 1fr; }
     #body { position: relative; display: block; }
     #map-wrap { position: absolute; inset: 0; }
     .filter-row, .filter-head, .filter-sub-label { padding-inline: 16px; }
@@ -627,6 +632,29 @@
        bar to reclaim space for the bottom sheet peek. */
     footer { display: none; }
   }
+  /* A phone on its side: 375px of height, of which the bar, the rail and the
+     opening line were taking 161. The line is the product's voice and it goes
+     first, because in landscape it costs a third of the visible list to say
+     something the reader has already read once. */
+  @media (max-width: 900px) and (max-height: 460px) {
+    #topbar { padding-block: 4px; padding-top: max(4px, env(safe-area-inset-top)); }
+    .brand h1 { font-size: 14px; }
+    #sideSearch { height: 36px; }
+    .btn, .btn.btn-icon { height: 38px; }
+    .filters { padding: 5px 0; }
+    .filter-btn { height: 34px; }
+    .filter-btn.sub { height: 30px; }
+    /* The tags are visibly a second row of a different weight; the label above
+       them is 20px of a 375px screen spent restating that. */
+    .filter-sub-label { display: none; }
+    .filter-sub { padding-top: 6px; }
+    .intro-head { display: none; }
+    .list { padding-top: 8px; }
+    .mode-toggle { height: 38px; bottom: calc(10px + env(safe-area-inset-bottom)); }
+    .place-card { bottom: calc(56px + env(safe-area-inset-bottom)); padding: 11px 14px 9px; }
+    .locate { bottom: calc(58px + env(safe-area-inset-bottom)); width: 40px; height: 40px; }
+  }
+
 </style>
 </head>
 <body>
@@ -679,8 +707,8 @@
       <div class="topbar-actions">
         <button id="searchBtn" class="btn btn-icon" type="button" aria-label="Search places">
           <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false">
-            <circle cx="9" cy="9" r="5.4" fill="none" stroke="currentColor" stroke-width="1.8"/>
-            <path d="M13.2 13.2 17 17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            <circle cx="8.8" cy="8.8" r="5.6" fill="none" stroke="currentColor" stroke-width="2"/>
+            <path d="M12.9 12.9 17.4 17.4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
           </svg>
         </button>
         <button id="toggle3d" class="btn" type="button">3D</button>
@@ -1811,8 +1839,7 @@
         document.body.classList.add('search-open');
         // Results are a list, so searching from the map lands on the list.
         if (mapMode) setMode(false);
-        field.focus();
-        field.select();
+        requestAnimationFrame(() => { field.focus(); field.select(); });
       }
 
       function closeSearch() {
