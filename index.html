@@ -217,6 +217,49 @@
   .hood-pill span.x { color: var(--faint); }
   .hood-pill:hover span.x { color: var(--text); }
 
+  /* ---------- Near me ----------
+     The one question this map exists to answer on a street corner. It is off
+     until asked for: no location is read, and nothing about the map changes,
+     until the button is pressed. */
+  .locate {
+    position: absolute; z-index: 5;
+    right: 16px; bottom: 34px;
+    width: 46px; height: 46px; border-radius: 999px;
+    background: var(--surface); border: 1px solid var(--hairline); color: var(--ink);
+    cursor: pointer; font-family: inherit;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.5);
+    transition: background 0.15s, border-color 0.15s, color 0.15s;
+  }
+  .locate svg { width: 21px; height: 21px; display: block; }
+  .locate:hover { border-color: var(--faint); }
+  .locate[aria-pressed="true"] { background: var(--rausch); border-color: var(--rausch);
+    color: #ffffff; }
+  .locate.working svg { animation: locating 1.1s linear infinite; }
+  @keyframes locating { to { transform: rotate(360deg); } }
+
+  .geo-note {
+    position: absolute; z-index: 6;
+    right: 16px; bottom: 90px; max-width: min(300px, calc(100% - 32px));
+    margin: 0; padding: 11px 13px;
+    background: var(--surface-strong); border: 1px solid var(--hairline);
+    border-radius: 10px; box-shadow: 0 6px 20px rgba(0,0,0,0.55);
+    font-size: 13px; line-height: 1.45; color: var(--body-text);
+  }
+  .geo-note[hidden] { display: none; }
+
+  /* Not a category pin and never mistakable for one: no hue from the ramp, a
+     ring instead of a fill, and a halo that says "roughly here". */
+  .me-dot {
+    width: 16px; height: 16px; margin-left: -8px; margin-top: -8px;
+    border-radius: 50%; background: #3b82f6; border: 2.5px solid #ffffff;
+    box-shadow: 0 0 0 6px rgba(59, 130, 246, 0.22), 0 1px 6px rgba(0,0,0,0.6);
+  }
+
+  .dist { color: var(--muted-text); font-variant-numeric: tabular-nums; }
+  /* The separator belongs to the distance, not to the slot that waits for one. */
+  .dist:not(:empty)::before { content: ' · '; color: var(--faint); }
+
   /* ---------- Filtering, made visible ----------
      Picking a chip used to be an instant swap: 228 cards and 228 pins were
      destroyed and 22 of each appeared. Nothing showed that the 22 came out of
@@ -537,6 +580,12 @@
 
     /* The selected place. Bottom-docked so the map keeps its top two thirds and
        you can still see where the place actually is. */
+    /* Clear of the centred mode pill and of the docked card. */
+    .locate { right: 12px; bottom: calc(76px + env(safe-area-inset-bottom)); }
+    body.card-open .locate { display: none; }
+    .geo-note { right: 12px; left: 12px; max-width: none;
+      bottom: calc(130px + env(safe-area-inset-bottom)); }
+
     .place-card {
       display: block;
       position: absolute; z-index: 20;
@@ -635,6 +684,17 @@
 
     <div id="map-wrap">
       <div id="map"></div>
+
+      <button id="locateBtn" class="locate" type="button"
+        aria-pressed="false" aria-label="Sort by how close places are to me">
+        <svg viewBox="0 0 22 22" aria-hidden="true" focusable="false">
+          <circle cx="11" cy="11" r="4.2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+          <circle cx="11" cy="11" r="1.5" fill="currentColor"/>
+          <path d="M11 1.6v3M11 17.4v3M1.6 11h3M17.4 11h3" stroke="currentColor"
+            stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <p id="geoNote" class="geo-note" role="status" hidden></p>
 
       <!-- Phone only: the selected place, as the same object the list uses,
            docked over the map instead of tethered to the pin. -->
@@ -828,6 +888,11 @@
     let ALL_DATA = [];   // everything loaded from data.json
     let DATA = [];        // currently visible (post-filter) subset
     let markers = [];
+    // Near me. Nothing here is read or requested until the button is pressed.
+    let userPos = null;      // {lat, lng} of the last fix
+    let nearMe = false;      // is the column sorted by distance
+    let geoWatch = null;     // watchPosition handle
+    let meMarker = null;
     let activeIdx = -1;
     let currentPopup = null;
     let is3D = false;
@@ -1066,6 +1131,102 @@
       if (!isMobile() && mapMode) setMode(false, true);
     });
 
+    // ----- Near me -----
+    // The product brief says this map is for finding a place near you in
+    // Barcelona, and until now there was no way to ask that. The rule
+    // throughout: if the answer is no, the map is exactly what it was.
+    (function nearMeControl() {
+      const btn = document.getElementById('locateBtn');
+      const note = document.getElementById('geoNote');
+      let noteTimer = null;
+
+      function say(text) {
+        note.textContent = text;
+        note.hidden = false;
+        clearTimeout(noteTimer);
+        noteTimer = setTimeout(() => { note.hidden = true; }, 7000);
+      }
+
+      function inBarcelona(pos) {
+        return pos.lat >= BBOX.minLat && pos.lat <= BBOX.maxLat
+          && pos.lng >= BBOX.minLng && pos.lng <= BBOX.maxLng;
+      }
+
+      function drawMe() {
+        if (!userPos) return;
+        if (!meMarker) {
+          const el = document.createElement('div');
+          el.className = 'marker';
+          const dot = document.createElement('div');
+          dot.className = 'me-dot';
+          dot.setAttribute('aria-label', 'Your position');
+          el.appendChild(dot);
+          meMarker = new maplibregl.Marker({ element: el });
+        }
+        meMarker.setLngLat([userPos.lng, userPos.lat]).addTo(map);
+      }
+
+      function stop() {
+        nearMe = false;
+        userPos = null;
+        if (geoWatch != null) { navigator.geolocation.clearWatch(geoWatch); geoWatch = null; }
+        if (meMarker) { meMarker.remove(); meMarker = null; }
+        btn.setAttribute('aria-pressed', 'false');
+        btn.classList.remove('working');
+        btn.setAttribute('aria-label', 'Sort by how close places are to me');
+        applyFilters();
+      }
+
+      function onFix(pos) {
+        const first = !userPos;
+        userPos = { lat: pos.coords.latitude, lng: pos.coords.longitude };
+        btn.classList.remove('working');
+        btn.setAttribute('aria-pressed', 'true');
+        btn.setAttribute('aria-label', 'Stop sorting by distance');
+        drawMe();
+
+        if (first) {
+          nearMe = true;
+          applyFilters();          // sorts once, on the press
+          if (inBarcelona(userPos)) {
+            map.easeTo({ center: [userPos.lng, userPos.lat], zoom: 15, duration: 900 });
+            if (isMobile() && !mapMode) setMode(true);
+          } else {
+            // Somewhere else entirely. The distances are still true, so they
+            // stay; moving the map off Barcelona would only lose the map.
+            say('You are not in Barcelona right now, so the map stays where it is. '
+              + 'The list is sorted by distance anyway.');
+          }
+        } else {
+          renderDistances();       // walking updates the numbers, not the order
+        }
+      }
+
+      function onFail(err) {
+        btn.classList.remove('working');
+        btn.setAttribute('aria-pressed', 'false');
+        say(err && err.code === 1
+          ? 'Location is blocked for this page. Your browser settings can turn it '
+            + 'back on; everything else on the map works without it.'
+          : 'Could not get a location fix. Everything else on the map works without it.');
+      }
+
+      btn.addEventListener('click', () => {
+        if (nearMe) { note.hidden = true; stop(); return; }
+        if (!navigator.geolocation) {
+          say('This browser does not offer a location, so distances are not available here.');
+          return;
+        }
+        btn.classList.add('working');
+        // watchPosition rather than a single fix: the point of this is walking.
+        geoWatch = navigator.geolocation.watchPosition(onFix, onFail, {
+          enableHighAccuracy: true,
+          timeout: 10000,
+          maximumAge: 30000
+        });
+      });
+    })();
+
     // ----- Phone: the selected place -----
     // A MapLibre popup is a tooltip tethered to its pin, which on a phone means
     // it covers the thing it points at. This is the list card, docked at the
@@ -1084,14 +1245,19 @@
                        : pendingHtml(p, 'pending')) +
         tipHtml(p, 'tip') +
         '<div class="links">' + linksHtml(p, 'popup-link') + '</div>';
-      placeOf.textContent = (i + 1) + ' of ' + DATA.length;
+      const d = distanceTo(p);
+      placeOf.textContent = (d == null ? '' : formatDistance(d) + ' away · ') +
+        (i + 1) + ' of ' + DATA.length;
       placeCard.style.transform = '';
       placeCard.hidden = false;
+      // The locate button sits exactly where the card lands.
+      document.body.classList.add('card-open');
     }
 
     function hidePlaceCard() {
       placeCard.hidden = true;
       placeCard.style.transform = '';
+      document.body.classList.remove('card-open');
     }
 
     document.getElementById('placeClose').addEventListener('click', () => {
@@ -1290,6 +1456,20 @@
 
       // A shorter list under an old scroll offset opens halfway down itself.
       list.scrollTop = 0;
+      renderDistances();
+    }
+
+    // Written into the existing cards rather than through a re-render, so a new
+    // fix while walking updates the numbers and moves nothing.
+    function renderDistances() {
+      rowByKey.forEach((row) => {
+        const slot = row.querySelector('[data-dist]');
+        if (!slot) return;
+        const i = Number(row.dataset.idx);
+        const p = DATA[i];
+        const d = p ? distanceTo(p) : null;
+        slot.textContent = d == null ? '' : formatDistance(d);
+      });
     }
 
     function resetFilters() {
@@ -1573,6 +1753,13 @@
 
     function applyFilters() {
       DATA = ALL_DATA.filter(matchesFilter);
+      // Sorting happens on a press, not on every fix: reordering the column
+      // under someone who is reading it is worse than a slightly stale order.
+      if (nearMe && userPos) {
+        DATA = DATA.map((p) => [distanceTo(p), p])
+          .sort((a, b) => a[0] - b[0])
+          .map((pair) => pair[1]);
+      }
       activeIdx = -1;
       if (currentPopup) { currentPopup.remove(); currentPopup = null; }
       renderFilters();
@@ -1876,11 +2063,18 @@
     // iOS only — on every other platform (Mac included) Google Maps is the
     // safer bet for a link that gets shared around.
     const IS_APPLE = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    // Coordinates alone open Google Maps on a pin labelled 41°23'21.7\"N, which
+    // tells the reader nothing and offers no hours, photos or reviews. The
+    // scraped address resolves to the business itself; the @lat,lng suffix keeps
+    // the search anchored to the right corner of the city, so a common name
+    // cannot land on a branch across town.
     function mapsUrl(p) {
       const ll = p.lat + ',' + p.lng;
+      const q = (p.address || '').trim() || (p.name + ', Barcelona');
       return IS_APPLE
         ? 'https://maps.apple.com/?ll=' + ll + '&q=' + encodeURIComponent(p.name)
-        : 'https://www.google.com/maps/search/?api=1&query=' + ll;
+        : 'https://www.google.com/maps/search/' + encodeURIComponent(q) +
+          '/@' + ll + ',17z';
     }
     const MAPS_LABEL = IS_APPLE ? 'Maps →' : 'Google Maps →';
 
@@ -1888,7 +2082,27 @@
     // Instagram, Maps — waits in the pin's own card, one click away.
     function cardFootHtml(p) {
       const hood = hoodLabel(p.hood);
-      return hood ? '<div class="links"><span class="hood-tag">' + escapeHtml(hood) + '</span></div>' : '';
+      if (!hood) return '';
+      return '<div class="links"><span class="hood-tag">' + escapeHtml(hood) +
+        '<span class="dist" data-dist></span></span></div>';
+    }
+
+    // Metres under a kilometre, one decimal above it. Nobody standing on a
+    // street corner wants to read 1247 m.
+    function formatDistance(m) {
+      if (m < 950) return Math.round(m / 10) * 10 + ' m';
+      return (m / 1000).toFixed(m < 9500 ? 1 : 0) + ' km';
+    }
+
+    function distanceTo(p) {
+      if (!userPos) return null;
+      const R = 6371000;
+      const toRad = (d) => (d * Math.PI) / 180;
+      const dLat = toRad(p.lat - userPos.lat);
+      const dLng = toRad(p.lng - userPos.lng);
+      const a = Math.sin(dLat / 2) ** 2 +
+        Math.cos(toRad(userPos.lat)) * Math.cos(toRad(p.lat)) * Math.sin(dLng / 2) ** 2;
+      return 2 * R * Math.asin(Math.sqrt(a));
     }
 
     function linksHtml(p, cls) {
