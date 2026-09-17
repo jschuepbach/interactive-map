@@ -712,6 +712,13 @@
       return f ? f.color : 'var(--accent)';
     }
     function familyById(id) { return FAMILIES.find((f) => f.id === id); }
+    // A place belongs to the family of its FIRST tag, not of any tag it carries.
+    // Membership by any tag put 90 of 227 places in two families at once, which
+    // is how a gluten-free brunch cafe turned up under Dinner. The primary tag is
+    // the one that colours the pin and leads the row, so it decides the family
+    // too: the eight counts now add up to 227 instead of overlapping.
+    function familyOf(p) { return FAMILY_OF[(p.groups || [])[0]] || null; }
+    function inFamily(p, id) { const f = familyOf(p); return !!f && f.id === id; }
     // Every tag of every picked family, which is both what the second row shows
     // and what an unnarrowed family match tests against.
     function activeFamilyGroups() {
@@ -1024,12 +1031,9 @@
     }
 
     function familyCount(id) {
-      const f = familyById(id);
-      if (!f) return 0;
       const q = query.trim().toLowerCase();
       return ALL_DATA.filter((p) => matchesQuery(p, q) &&
-        (!activeHood || p.hood === activeHood) &&
-        f.groups.some((g) => hasGroup(p, g))).length;
+        (!activeHood || p.hood === activeHood) && inFamily(p, id)).length;
     }
 
     // Counts always reflect the other axis of the filter: with a neighbourhood
@@ -1038,7 +1042,10 @@
       const q = query.trim().toLowerCase();
       const pool = ALL_DATA.filter((p) => matchesQuery(p, q) &&
         (!activeHood || p.hood === activeHood));
-      return group === 'All' ? pool.length : pool.filter((p) => hasGroup(p, group)).length;
+      if (group === 'All') return pool.length;
+      const home = FAMILY_OF[group];
+      return pool.filter((p) => hasGroup(p, group) &&
+        (!home || inFamily(p, home.id))).length;
     }
 
     function hoodCount(id) {
@@ -1047,11 +1054,13 @@
         matchesCategory(p)).length;
     }
 
-    // Tags win when they are set, otherwise the family stands for all of its tags.
+    // The family decides who is in the room; a picked tag narrows inside it.
     function matchesCategory(p) {
-      if (activeGroups.size) return Array.from(activeGroups).some((g) => hasGroup(p, g));
-      if (activeFamilies.size) return activeFamilyGroups().some((g) => hasGroup(p, g));
-      return true;
+      const open = FAMILIES.find((f) => activeFamilies.has(f.id));
+      if (!open) return true;
+      if (!inFamily(p, open.id)) return false;
+      if (!activeGroups.size) return true;
+      return Array.from(activeGroups).some((g) => hasGroup(p, g));
     }
 
     function renderFilters() {
