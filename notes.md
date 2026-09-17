@@ -725,7 +725,7 @@ A rooftop bar atop the Sir Victor hotel regularly named among Barcelona's best, 
 My favourite Mexican in the city. Order tacos, then order more tacos.
 
 ## LABALABUSTA
-<!-- Wine, Middle-Eastern -->
+<!-- Wine, Middle-Eastern, Mediterranean -->
 Israeli cooking you keep picking at long after you are full. We always end up ordering another round of the bread.
 
 ## Yakumanka amb Gastón Acurio
@@ -800,3 +800,7 @@ Beautiful place for even better wine, wow!!
 ## ÖSS Kaffe Barcelona
 <!-- Coffee, Pastry -->
 Scandinavian-sounding name, often signals light roasts and a filter-coffee focus.
+
+## Lukumas
+<!-- Pastry, Coffee -->
+Greek doughnuts made with a family recipe in a beautifully designed shop.

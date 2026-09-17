@@ -888,7 +888,8 @@
   "bucket": false,
   "cuisine": [
    "Wine",
-   "Middle-Eastern"
+   "Middle-Eastern",
+   "Mediterranean"
   ],
   "tip": "Get to taste their bread - wow!!",
   "why": "Israeli cooking you keep picking at long after you are full. We always end up ordering another round of the bread."
@@ -1119,6 +1120,15 @@
   ],
   "tip": "Stick to the classic flavors like pistachio or hazelnut, that's where gelato places usually show their real quality.",
   "why": "An Italian gelato spot regularly called out as one of the best places for gelato in the city, simple and consistently good."
+ },
+ "Lukumas": {
+  "bucket": false,
+  "cuisine": [
+   "Pastry",
+   "Coffee"
+  ],
+  "tip": "Go for the Greek doughnut with green cream.",
+  "why": "Greek doughnuts made with a family recipe in a beautifully designed shop."
  },
  "MAISON CARNE": {
   "bucket": true,
