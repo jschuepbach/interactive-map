@@ -139,24 +139,26 @@
     transition: border-color 0.15s, background 0.15s; }
   .row:hover { background: var(--surface-strong); border-color: var(--hairline); }
   .row.active { border-color: var(--rausch); }
-  .row .cat { font-size: 11px; color: var(--marker-color, var(--muted-text));
+  .row .cat, .place-body .cat { font-size: 11px; color: var(--marker-color, var(--muted-text));
     text-transform: uppercase; letter-spacing: 0.32px; margin: 0 0 7px; font-weight: 600;
     opacity: 0.9; }
   .cat-sep { color: var(--faint); }
-  .row .name { font-size: 16px; font-weight: 600; margin: 0 0 6px; line-height: 1.25; }
-  .row .note { font-size: 14px; color: var(--body-text); margin: 0 0 8px; line-height: 1.43; }
-  .row .pending { font-size: 13px; color: var(--muted-text); margin: 0 0 8px;
-    line-height: 1.43; font-style: italic; }
-  .row .tip { font-size: 13px; color: var(--muted-text); margin: 0 0 10px; line-height: 1.4;
-    padding-left: 11px; border-left: 2px solid var(--rausch); }
-  .row .tip b { color: var(--ink); font-weight: 600; }
+  .row .name, .place-body .name { font-size: 16px; font-weight: 600; margin: 0 0 6px;
+    line-height: 1.25; }
+  .row .note, .place-body .note { font-size: 14px; color: var(--body-text); margin: 0 0 8px;
+    line-height: 1.43; }
+  .row .pending, .place-body .pending { font-size: 13px; color: var(--muted-text);
+    margin: 0 0 8px; line-height: 1.43; font-style: italic; }
+  .row .tip, .place-body .tip { font-size: 13px; color: var(--muted-text); margin: 0 0 10px;
+    line-height: 1.4; padding-left: 11px; border-left: 2px solid var(--rausch); }
+  .row .tip b, .place-body .tip b { color: var(--ink); font-weight: 600; }
   .links { display: flex; gap: 14px; flex-wrap: wrap; align-items: baseline;
     margin-top: auto; padding-top: 2px; }
   /* Where it is, in the neutral ladder: the pins carry hue, this does not. */
   .hood-tag { font-size: 13px; color: var(--muted-text); }
-  .row a { color: var(--ink); font-size: 13px; text-decoration: underline;
+  .row a, .place-body a { color: var(--ink); font-size: 13px; text-decoration: underline;
     text-underline-offset: 3px; font-weight: 500; }
-  .row a:hover { color: var(--rausch); }
+  .row a:hover, .place-body a:hover { color: var(--rausch); }
 
   /* ---------- Filter rail ---------- */
   .filters { display: flex; flex-direction: column; gap: 8px;
@@ -210,6 +212,9 @@
   #map { position: absolute; inset: 0; }
 
   .controls { position: absolute; top: 12px; left: 12px; z-index: 5; display: flex; gap: 8px; }
+  /* Phone only: on a desktop both surfaces are already on screen. */
+  .mode-toggle { display: none; }
+  .place-card { display: none; }
   /* Floating pills over the map, the one place the system allows a shadow. */
   .btn {
     background: var(--surface); color: var(--ink); border: 1px solid var(--hairline);
@@ -364,7 +369,12 @@
 
   /* ---------- Mobile: map fills the screen, sidebar becomes a bottom sheet ---------- */
   @media (max-width: 767px) {
-    #app { grid-template-rows: auto auto minmax(0, 1fr); overflow: hidden; }
+    #app { grid-template-rows: auto auto minmax(0, 1fr); overflow: hidden;
+      position: relative; }
+    /* Taking the rail out of the flow costs it its grid row, so the row list
+       loses one too: otherwise #body auto-places into the collapsed row and
+       the map is handed zero height. */
+    body.mode-map #app { grid-template-rows: auto minmax(0, 1fr); }
     /* One row, not three stacked. Wordmark, search, About: 56px of chrome
        instead of 102px, which is most of a place card handed back to the map. */
     #topbar { grid-template-columns: auto minmax(0, 1fr) auto; gap: 10px;
@@ -380,39 +390,77 @@
     #map-wrap { position: absolute; inset: 0; }
     .filter-row, .filter-head, .filter-sub-label { padding-inline: 16px; }
 
+    /* ---------- Two modes, not one sheet ----------
+       A sheet parked over the map leaves neither surface whole: the map is a
+       letterbox and the list is a keyhole. So the phone gets a mode instead.
+       The list is the whole screen, the map is the whole screen, and the pill
+       at the bottom is the only thing that moves between them. The desktop
+       two-column layout is untouched. */
     #sidebar {
-      position: absolute; left: 0; right: 0; bottom: 0; z-index: 10;
-      height: 78%; max-height: 78%;
-      border-right: none; border-radius: 16px 16px 0 0;
-      box-shadow: 0 -12px 32px rgba(0,0,0,0.5);
-      padding-bottom: env(safe-area-inset-bottom);
-      transform: translateY(calc(100% - var(--peek, 104px)));
-      transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
-      will-change: transform;
+      position: absolute; inset: 0; z-index: 10;
+      border-right: none;
+      padding-bottom: calc(76px + env(safe-area-inset-bottom));
     }
-    #sidebar.open { transform: translateY(0); }
-    /* While a finger is on it the sheet follows the finger, so the easing that
-       makes the snap feel good would fight the drag. */
-    #sidebar.dragging { transition: none; }
+    body.mode-map #sidebar { display: none; }
+    .sheet-handle { display: none; }
 
-    /* The grab area is the handle plus the line of text beside it: a 4px bar is
-       not something you catch while walking. */
-    .sheet-handle {
-      display: flex; align-items: center; justify-content: center;
-      padding: 12px 0 6px; cursor: grab; touch-action: none;
+    /* In map mode the filter rail comes out of the flow and rides on the map,
+       so the map runs the full height of the screen behind it. */
+    body.mode-map .filters {
+      position: absolute; top: var(--topbar-h, 56px); left: 0; right: 0; z-index: 6;
+      background: transparent; border-bottom: 0; padding: 10px 0;
+      pointer-events: none;
     }
-    .sheet-handle::before {
-      content: ''; width: 40px; height: 4px; border-radius: 999px;
-      background: var(--border);
+    body.mode-map .filter-row { pointer-events: auto; }
+    body.mode-map .filter-btn { box-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+    /* The tag row and its label need reading room, which the map does not have. */
+    body.mode-map .filter-sub { display: none; }
+
+    .mode-toggle {
+      display: inline-flex;
+      position: absolute; left: 50%; z-index: 30;
+      bottom: calc(18px + env(safe-area-inset-bottom));
+      transform: translateX(-50%);
+      display: inline-flex; align-items: center; gap: 8px;
+      height: 44px; padding: 0 20px; border: 0; border-radius: 9999px;
+      background: var(--ink); color: var(--ground);
+      font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.55);
     }
-    #sidebar.dragging .sheet-handle { cursor: grabbing; }
+    .mode-toggle::after {
+      content: ''; width: 13px; height: 13px; border-radius: 3px;
+      border: 2px solid currentColor; opacity: 0.85;
+    }
+    body.mode-map .mode-toggle::after {
+      border-radius: 2px; border-width: 0 0 2px 0; height: 9px;
+      box-shadow: 0 -5px 0 -2px currentColor, 0 5px 0 -2px currentColor;
+      opacity: 0.85;
+    }
+    body.intro-open .mode-toggle { display: none; }
 
-    .side-header { cursor: pointer; touch-action: none; }
-    .intro-head { padding: 6px 16px 10px; }
-    .intro-head h2 { font-size: 17px; letter-spacing: -0.2px; }
-    .result-line { padding: 0 16px; }
-
-
+    /* The selected place. Bottom-docked so the map keeps its top two thirds and
+       you can still see where the place actually is. */
+    .place-card {
+      display: block;
+      position: absolute; z-index: 20;
+      left: 12px; right: 12px; bottom: calc(74px + env(safe-area-inset-bottom));
+      background: var(--surface); border: 1px solid var(--hairline);
+      border-radius: 14px; padding: 14px 16px 12px;
+      box-shadow: 0 8px 28px rgba(0,0,0,0.55);
+      touch-action: pan-y;
+    }
+    .place-card[hidden] { display: none; }
+    .place-card.swiping { transition: none; }
+    .place-close {
+      position: absolute; top: 6px; right: 8px; z-index: 1;
+      width: 34px; height: 34px; border: 0; border-radius: 999px;
+      background: none; color: var(--muted-text);
+      font-size: 22px; line-height: 1; cursor: pointer; font-family: inherit;
+    }
+    .place-close:hover { color: var(--ink); }
+    .place-body .cat { padding-right: 30px; }
+    .place-of { margin: 8px 0 0; font-size: 12px; color: var(--faint);
+      font-variant-numeric: tabular-nums; }
 
     /* Our own footer duplicates the compact MapLibre attribution control
        (top-right) which stays visible regardless of breakpoint — hide the
@@ -477,14 +525,20 @@
 
     <div id="body">
     <aside id="sidebar">
-      <div class="sheet-handle" id="sheetHandle" role="button" tabindex="0"
-        aria-controls="list" aria-expanded="false" aria-label="Show the list of places"></div>
       <div class="side-header" id="sideHeader"></div>
       <div class="list" id="list"></div>
     </aside>
 
     <div id="map-wrap">
       <div id="map"></div>
+
+      <!-- Phone only: the selected place, as the same object the list uses,
+           docked over the map instead of tethered to the pin. -->
+      <div id="placeCard" class="place-card" hidden aria-live="polite">
+        <button id="placeClose" class="place-close" type="button" aria-label="Close this place">&times;</button>
+        <div id="placeBody" class="place-body"></div>
+        <p class="place-of" id="placeOf"></p>
+      </div>
       <footer>
         Tiles © <a href="https://www.esri.com" target="_blank" rel="noopener">Esri</a>, HERE, Garmin ·
         Data © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors ·
@@ -492,6 +546,11 @@
       </footer>
     </div>
     </div>
+
+    <!-- Phone only: one control, thumb height, that owns which surface is whole. -->
+    <button id="modeToggle" class="mode-toggle" type="button" aria-pressed="false">
+      <span class="mode-label">Map</span>
+    </button>
   </div>
 
   <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
@@ -868,103 +927,116 @@
 
     document.getElementById('toggle3d').addEventListener('click', toggle3D);
 
-    // ----- Mobile bottom sheet -----
-    // On narrow screens the sidebar becomes a fixed bottom sheet (see CSS).
-    // It has two states: "peek" (header + filters visible, list hidden below
-    // the fold) and "open" (full list visible). We measure the peek content's
-    // real height so header/filter wrapping never gets clipped.
+    // ----- Phone: two modes -----
+    // The sheet is gone. A sheet parked over the map leaves neither surface
+    // whole, which is how Airbnb, Places and corner all avoid solving it: they
+    // switch modes instead. The list owns the screen or the map does, and one
+    // pill at thumb height moves between them. Desktop keeps both columns.
     const isMobile = () => window.matchMedia('(max-width: 767px)').matches;
     const sidebarEl = document.getElementById('sidebar');
-    const sheetHandle = document.getElementById('sheetHandle');
-    const sideHeader = document.getElementById('sideHeader');
+    const modeToggle = document.getElementById('modeToggle');
+    const modeLabel = modeToggle.querySelector('.mode-label');
+    let mapMode = false;
 
-    // The peek used to reserve room for the filter rail, which is not in the
-    // sheet at all: it sits above #body. So the sheet rested on a headline and
-    // a sliver of nothing, and there was no sign a list was down there. It now
-    // rests on the first place card, cut off, which is the only honest way to
-    // say "there is more of this below".
-    function measurePeek() {
-      if (!isMobile()) return;
-      const firstRow = sidebarEl.querySelector('.row');
-      const card = firstRow ? Math.min(firstRow.offsetHeight, 150) : 110;
-      const h = sheetHandle.offsetHeight + sideHeader.offsetHeight + card;
-      sidebarEl.style.setProperty('--peek', Math.round(h) + 'px');
+    function setTopbarVar() {
+      document.documentElement.style.setProperty('--topbar-h',
+        document.getElementById('topbar').offsetHeight + 'px');
     }
 
-    function setSheetOpen(open) {
-      sidebarEl.classList.toggle('open', open);
-      sheetHandle.setAttribute('aria-expanded', String(open));
-      sheetHandle.setAttribute('aria-label',
-        open ? 'Hide the list of places' : 'Show the list of places');
+    function setMode(toMap, silent) {
+      mapMode = !!toMap;
+      document.body.classList.toggle('mode-map', mapMode);
+      modeToggle.setAttribute('aria-pressed', String(mapMode));
+      modeLabel.textContent = mapMode ? 'List' : 'Map';
+      modeToggle.setAttribute('aria-label', mapMode ? 'Show the list' : 'Show the map');
+      if (!mapMode) hidePlaceCard();
+      // The map was sized while it sat behind the list; it needs to be told.
+      if (mapMode) requestAnimationFrame(() => map.resize());
+      if (!silent) syncUrl();
     }
 
-    function toggleSheet() {
-      if (!isMobile()) return;
-      setSheetOpen(!sidebarEl.classList.contains('open'));
-    }
+    modeToggle.addEventListener('click', () => setMode(!mapMode));
 
-    // Drag the sheet. A two-state tap target is fine with a mouse; a thumb
-    // expects the sheet to follow it and to keep going when flicked, so the
-    // gesture reads position for the live transform and velocity for the snap.
-    (function sheetDrag() {
-      const TAP = 6;           // px of travel still counted as a tap
-      const FLICK = 0.45;      // px/ms that decides the snap regardless of travel
-      let startY = 0, lastY = 0, lastT = 0, vel = 0, span = 0, base = 0, live = false;
-
-      function peekPx() {
-        const v = getComputedStyle(sidebarEl).getPropertyValue('--peek');
-        return parseFloat(v) || 104;
-      }
-
-      function down(e) {
-        if (!isMobile() || e.button) return;
-        span = sidebarEl.offsetHeight - peekPx();   // travel between the two states
-        if (span <= 0) return;
-        base = sidebarEl.classList.contains('open') ? 0 : span;
-        startY = lastY = e.clientY;
-        lastT = e.timeStamp;
-        vel = 0;
-        live = true;
-        sidebarEl.classList.add('dragging');
-        e.currentTarget.setPointerCapture(e.pointerId);
-      }
-
-      function move(e) {
-        if (!live) return;
-        const y = Math.min(span, Math.max(0, base + (e.clientY - startY)));
-        sidebarEl.style.transform = 'translateY(' + y + 'px)';
-        const dt = e.timeStamp - lastT;
-        if (dt > 0) vel = (e.clientY - lastY) / dt;
-        lastY = e.clientY;
-        lastT = e.timeStamp;
-      }
-
-      function up(e) {
-        if (!live) return;
-        live = false;
-        sidebarEl.classList.remove('dragging');
-        sidebarEl.style.transform = '';
-        const travel = e.clientY - startY;
-        if (Math.abs(travel) < TAP) { toggleSheet(); return; }
-        if (Math.abs(vel) > FLICK) setSheetOpen(vel < 0);
-        else setSheetOpen(base + travel < span / 2);
-      }
-
-      [sheetHandle, sideHeader].forEach((el) => {
-        el.addEventListener('pointerdown', down);
-        el.addEventListener('pointermove', move);
-        el.addEventListener('pointerup', up);
-        el.addEventListener('pointercancel', up);
-      });
-    })();
-
-    // Keyboard and mouse still get the plain toggle; the drag handler calls it
-    // itself when the pointer barely moved.
-    sheetHandle.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleSheet(); }
+    window.addEventListener('resize', () => {
+      setTopbarVar();
+      if (!isMobile() && mapMode) setMode(false, true);
     });
 
-    window.addEventListener('resize', measurePeek);
+    // ----- Phone: the selected place -----
+    // A MapLibre popup is a tooltip tethered to its pin, which on a phone means
+    // it covers the thing it points at. This is the list card, docked at the
+    // bottom, so the map keeps its top two thirds.
+    const placeCard = document.getElementById('placeCard');
+    const placeBody = document.getElementById('placeBody');
+    const placeOf = document.getElementById('placeOf');
+
+    function showPlaceCard(i) {
+      const p = DATA[i];
+      if (!p) return;
+      placeBody.innerHTML =
+        '<div class="cat">' + catLabelHtml(p) + '</div>' +
+        '<div class="name">' + escapeHtml(p.name) + '</div>' +
+        (hasOwnNote(p) ? '<div class="note">' + escapeHtml(p.note) + '</div>'
+                       : pendingHtml(p, 'pending')) +
+        tipHtml(p, 'tip') +
+        '<div class="links">' + linksHtml(p, 'popup-link') + '</div>';
+      placeOf.textContent = (i + 1) + ' of ' + DATA.length;
+      placeCard.style.transform = '';
+      placeCard.hidden = false;
+    }
+
+    function hidePlaceCard() {
+      placeCard.hidden = true;
+      placeCard.style.transform = '';
+    }
+
+    document.getElementById('placeClose').addEventListener('click', () => {
+      hidePlaceCard();
+      setActive(-1);
+    });
+
+    // Swipe the card sideways to walk the filtered set without going back to
+    // the list. Vertical drags are left to the page, so a scroll never steals
+    // into a place change.
+    (function placeSwipe() {
+      const THRESHOLD = 56;
+      let x0 = 0, y0 = 0, dx = 0, live = false, axis = '';
+
+      placeCard.addEventListener('pointerdown', (e) => {
+        if (e.button || e.target.closest('a, button')) return;
+        x0 = e.clientX; y0 = e.clientY; dx = 0; axis = ''; live = true;
+        placeCard.classList.add('swiping');
+      });
+
+      placeCard.addEventListener('pointermove', (e) => {
+        if (!live) return;
+        const mx = e.clientX - x0, my = e.clientY - y0;
+        if (!axis) {
+          if (Math.abs(mx) < 6 && Math.abs(my) < 6) return;
+          axis = Math.abs(mx) > Math.abs(my) ? 'x' : 'y';
+          if (axis === 'x') placeCard.setPointerCapture(e.pointerId);
+        }
+        if (axis !== 'x') return;
+        dx = mx;
+        placeCard.style.transform = 'translateX(' + dx + 'px)';
+        placeCard.style.opacity = String(Math.max(0.35, 1 - Math.abs(dx) / 420));
+      });
+
+      function release() {
+        if (!live) return;
+        live = false;
+        placeCard.classList.remove('swiping');
+        placeCard.style.opacity = '';
+        const step = Math.abs(dx) > THRESHOLD ? (dx < 0 ? 1 : -1) : 0;
+        placeCard.style.transform = '';
+        if (!step || DATA.length < 2) return;
+        const next = (activeIdx + step + DATA.length) % DATA.length;
+        focusPoint(next);
+      }
+
+      placeCard.addEventListener('pointerup', release);
+      placeCard.addEventListener('pointercancel', release);
+    })();
 
     // ----- notes.md -----
     // "## Name" starts a place, everything until the next heading is its note.
@@ -1112,9 +1184,13 @@
         zoom: Math.max(map.getZoom(), 15.5),
         duration: 900
       });
-      openPopup(i);
-      // On mobile, collapse the sheet to peek so the pin + popup are visible.
-      if (isMobile()) setSheetOpen(false);
+      if (isMobile()) {
+        // Choosing a place is a reason to be on the map, wherever you chose it.
+        if (!mapMode) setMode(true);
+        showPlaceCard(i);
+      } else {
+        openPopup(i);
+      }
     }
 
     // ----- Filters -----
@@ -1317,7 +1393,6 @@
       renderSidebar();
       clearMarkers();
       addMarkers();
-      measurePeek();
       syncUrl();
     }
 
@@ -1363,6 +1438,7 @@
       if (q) params.set('q', q); else params.delete('q');
       const openFamily = FAMILIES.find((f) => activeFamilies.has(f.id));
       if (openFamily) params.set('f', openFamily.id); else params.delete('f');
+      if (mapMode) params.set('v', 'map'); else params.delete('v');
       const qs = params.toString();
       history.replaceState(null, '', window.location.pathname + (qs ? '?' + qs : ''));
     }
@@ -1614,6 +1690,11 @@
         searchFields.forEach((el) => { if (el) el.value = query; });
         applyFilters();
         renderIntroTotal();
+        setTopbarVar();
+        // A link sent from the map opens on the map.
+        if (isMobile() && new URLSearchParams(window.location.search).get('v') === 'map') {
+          setMode(true, true);
+        }
 
         loadCount.data(ALL_DATA.length);
 
@@ -1636,13 +1717,12 @@
     map.on('error', (e) => console.warn('map error:', e && e.error ? e.error.message : e));
     boot();
 
-    // Close popup + clear active when clicking empty map (also collapses the
-    // mobile sheet — marker click handlers stop propagation, so a real map
-    // click here means the user tapped empty space).
-    map.on('click', (e) => {
+    // Tapping empty map clears the selection. Marker handlers stop propagation,
+    // so anything that reaches here was a tap on the map itself.
+    map.on('click', () => {
       if (currentPopup) currentPopup.remove();
       setActive(-1);
-      if (isMobile()) setSheetOpen(false);
+      hidePlaceCard();
     });
   })();
   </script>
