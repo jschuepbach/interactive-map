@@ -156,8 +156,12 @@
     margin-right: 7px; background: currentColor; }
 
   /* The result line: what the filter did, and the way back out of it. */
-  /* What the filter did, and the way out of it — the pair Uber and Airbnb both
-     put directly above the results. */
+  .clear-inline { background: none; border: 0; padding: 0 2px 0 10px; font: inherit;
+    font-size: 13px; color: var(--muted-text); cursor: pointer; text-decoration: underline;
+    text-underline-offset: 3px; align-self: center; white-space: nowrap; }
+  .clear-inline:hover { color: var(--rausch); }
+
+  /* What the filter did, where no chip can say it. */
   .result-line { display: flex; align-items: baseline; gap: 12px; padding: 0 20px;
     font-size: 14px; color: var(--muted-text); }
   .result-line .n { color: var(--ink); font-weight: 600; }
@@ -927,19 +931,17 @@
       const list = document.getElementById('list');
       list.innerHTML = '';
 
-      // Count on the left, and — only while something is filtering — the way
-      // back out on the right. With no filter on, a Clear is a dead control.
+      // A chip already carries the count of whatever it filters, so repeating it
+      // here would be the same number twice. The line only speaks where no chip
+      // can: an unfiltered map, and a search.
       const head = document.getElementById('sideHeader');
-      const filtering = activeFamilies.size || activeGroups.size || activeHood || query.trim();
-      head.innerHTML = '<span><span class="n">' + DATA.length + '</span> ' +
-        (DATA.length === 1 ? 'place' : 'places') + (filtering ? '' : ', hand-picked') + '</span>';
-      if (filtering) {
-        const clear = document.createElement('button');
-        clear.type = 'button';
-        clear.textContent = 'Clear filters';
-        clear.addEventListener('click', resetFilters);
-        head.appendChild(clear);
-      }
+      const searching = !!query.trim();
+      const filtering = activeFamilies.size || activeGroups.size || activeHood;
+      head.innerHTML = searching
+        ? '<span><span class="n">' + DATA.length + '</span> ' +
+          (DATA.length === 1 ? 'match' : 'matches') + ' for &ldquo;' + escapeHtml(query.trim()) + '&rdquo;</span>'
+        : (filtering ? '' : '<span><span class="n">' + DATA.length + '</span> places, hand-picked</span>');
+      head.style.display = head.innerHTML ? '' : 'none';
       if (!DATA.length) {
         list.innerHTML = '<p class="list-empty">Nothing matches. ' +
           '<button type="button" id="listReset">Start over</button></p>';
@@ -1160,6 +1162,20 @@
           dot: false, cls: cls || 'filter-btn sub', onClick: wrapClick ? wrapClick(fire) : fire }));
       });
       if (!any) return null;   // a family whose tags are all empty under the query
+
+      // The way out sits at the end of the row it undoes, and only once a tag is
+      // actually narrowing something. A family on its own is switched off by its
+      // own chip.
+      if (activeGroups.size) {
+        const clear = document.createElement('button');
+        clear.type = 'button';
+        clear.className = 'clear-inline';
+        clear.textContent = 'Clear filters';
+        const fire = () => resetFilters();
+        clear.addEventListener('click', wrapClick ? wrapClick(fire) : fire);
+        rail.appendChild(clear);
+      }
+
       row.appendChild(rail);
       return row;
     }
