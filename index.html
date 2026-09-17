@@ -72,7 +72,15 @@
     border-bottom: 1px solid var(--hairline); background: var(--ground); }
   .brand { display: flex; align-items: center; }
   .brand h1 { font-size: 16px; font-weight: 600; margin: 0; }
-  .searchwrap { display: flex; }
+  .searchwrap { display: flex; align-items: center; gap: 10px; }
+  /* Phone only: the field is a control you open, not a row the map pays for. */
+  .btn-icon { display: none; width: 44px; padding: 0; align-items: center;
+    justify-content: center; }
+  .btn-icon svg { width: 19px; height: 19px; display: block; }
+  .search-cancel { display: none; background: none; border: 0; padding: 0 2px;
+    font: inherit; font-size: 14px; font-weight: 500; color: var(--ink);
+    cursor: pointer; white-space: nowrap; }
+  .search-cancel:hover { color: var(--rausch); }
   /* The signature search bar: full pill, hairline plus a soft drop, and it owns
      the middle of the bar the way Where/When/Who does. */
   #sideSearch { width: 100%; height: 48px; background: var(--surface);
@@ -234,7 +242,7 @@
     from { opacity: 0; transform: translateY(-5px); }
     to { opacity: 1; transform: none; }
   }
-  .filter-sub { animation: sub-in 240ms cubic-bezier(0.22, 1, 0.36, 1); }
+  .filter-sub.sub-enter { animation: sub-in 240ms cubic-bezier(0.22, 1, 0.36, 1); }
 
   /* ---------- Map ---------- */
   #map-wrap { position: relative; }
@@ -276,10 +284,40 @@
      never move, which is what makes the narrowing readable. */
   .marker-inner.enter, .marker-inner.leaving { transform: scale(0.1); opacity: 0; }
   .marker-inner:hover { transform: scale(1.25); }
+  /* Selected. Bigger, ringed in white, and named: three channels, none of
+     them hue. Category on the map is otherwise carried by colour alone, which
+     the September audit flagged; the label and the title attribute are the way
+     out that does not repaint 228 pins. */
   .marker-inner.active {
-    transform: scale(1.4);
-    box-shadow: 0 0 0 3px var(--rausch), 0 2px 10px rgba(0,0,0,0.5);
+    transform: scale(1.5);
+    box-shadow: 0 0 0 3px #ffffff, 0 0 0 6px var(--rausch), 0 2px 12px rgba(0,0,0,0.6);
   }
+  .marker-inner:focus-visible {
+    outline: 2px solid #ffffff; outline-offset: 3px;
+  }
+  /* Phone only: on a desktop the popup is anchored to the pin and already
+     names the place and its category, so a label beside it would say the same
+     thing twice, 40px apart. The phone has no popup. */
+  .marker-label {
+    display: none;
+    position: absolute; left: 16px; top: -12px; z-index: 1;
+    max-width: 168px; padding: 4px 9px; border-radius: 8px;
+    background: var(--surface); border: 1px solid var(--hairline);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.55);
+    font-size: 12px; font-weight: 600; color: var(--ink);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    pointer-events: none;
+    opacity: 0; transform: translateX(-4px);
+    transition: opacity 0.18s ease, transform 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .marker-label .cat {
+    display: block; font-size: 10px; font-weight: 600; letter-spacing: 0.3px;
+    text-transform: uppercase; color: var(--marker-color, var(--muted-text));
+  }
+  .marker.selected .marker-label { opacity: 1; transform: none; }
+  /* Near the right edge the label would run off the map, so it flips sides. */
+  .marker.flip .marker-label { left: auto; right: 16px; transform: translateX(4px); }
+  .marker.flip.selected .marker-label { transform: none; }
 
   /* ---------- Popup ---------- */
   .maplibregl-popup-content {
@@ -352,7 +390,7 @@
   @media (prefers-reduced-motion: reduce) {
     #intro { transition: none; }
     .filter-btn, .filter-btn:active { transition: none; transform: none; }
-    .filter-btn.pop, .row.entering, .filter-sub { animation: none; }
+    .filter-btn.pop, .row.entering, .filter-sub.sub-enter { animation: none; }
     .marker-inner { transition: none; }
     .marker-inner.enter, .marker-inner.leaving { transform: none; opacity: 1; }
   }
@@ -427,6 +465,20 @@
     .brand h1 { font-size: 15px; }
     #sideSearch { height: 40px; padding: 0 14px; font-size: 16px; }
     .topbar-actions { display: flex; }
+    /* Same breakpoint that swaps the popup for the docked card. */
+    .marker-label { display: block; }
+    .btn-icon { display: inline-flex; }
+
+    /* Closed: wordmark and controls. Open: the field takes the whole bar and
+       everything else steps aside, which is the only way a 375px row can hold
+       a search field and still be a search field. */
+    #topbar { grid-template-columns: minmax(0, 1fr) auto; }
+    .searchwrap { display: none; }
+    body.search-open #topbar { grid-template-columns: minmax(0, 1fr); }
+    body.search-open .brand, body.search-open .topbar-actions { display: none; }
+    body.search-open .searchwrap { display: flex; }
+    .search-cancel { display: none; }
+    body.search-open .search-cancel { display: inline-flex; }
     /* Tilting a map with one thumb while walking is not a thing anyone does. */
     #toggle3d { display: none; }
     #introBtn { padding: 0 14px; }
@@ -559,8 +611,15 @@
       </div>
       <div class="searchwrap">
         <input id="sideSearch" type="search" placeholder="Search name, note or category" autocomplete="off">
+        <button id="searchCancel" class="search-cancel" type="button">Cancel</button>
       </div>
       <div class="topbar-actions">
+        <button id="searchBtn" class="btn btn-icon" type="button" aria-label="Search places">
+          <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+            <circle cx="9" cy="9" r="5.4" fill="none" stroke="currentColor" stroke-width="1.8"/>
+            <path d="M13.2 13.2 17 17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </button>
         <button id="toggle3d" class="btn" type="button">3D</button>
         <button id="introBtn" class="btn" type="button" title="About this map">About</button>
       </div>
@@ -1134,11 +1193,33 @@
     }
 
     // ----- Sidebar -----
+    // The column is keyed by place, like the pins. Rebuilding it wholesale
+    // meant every card that survived the filter was destroyed and re-created,
+    // so the whole screen flashed on every chip press and the only thing the
+    // motion communicated was that something had been recomputed. Survivors are
+    // now left in the DOM untouched and only genuinely new cards animate.
+    const rowByKey = new Map();
+
+    function buildRow(p) {
+      const row = document.createElement('div');
+      row.className = 'row';
+      row.innerHTML =
+        '<div class="cat">' + catLabelHtml(p) + '</div>' +
+        '<div class="name">' + escapeHtml(p.name) + '</div>' +
+        noteHtml(p, 'note') + pendingHtml(p, 'pending') + tipHtml(p, 'tip') +
+        cardFootHtml(p);
+      // The index into DATA changes with every filter, so it is read at click
+      // time rather than closed over.
+      row.addEventListener('click', (e) => {
+        if (e.target && e.target.tagName === 'A') return;
+        const i = DATA.indexOf(p);
+        if (i >= 0) focusPoint(i);
+      });
+      return row;
+    }
+
     function renderSidebar() {
       const list = document.getElementById('list');
-      list.innerHTML = '';
-      // A shorter list under an old scroll offset opens halfway down itself.
-      list.scrollTop = 0;
 
       // Unfiltered, the column opens with what this is and who picked it: the
       // one thing the old landing screen was actually good for. Filter or search
@@ -1161,30 +1242,54 @@
           '<h2>' + DATA.length + ' places I recommend to my friends.</h2>';
       }
       head.style.display = head.innerHTML ? '' : 'none';
+
       if (!DATA.length) {
+        rowByKey.clear();
         list.innerHTML = '<p class="list-empty">Nothing matches. ' +
           '<button type="button" id="listReset">Start over</button></p>';
         document.getElementById('listReset').addEventListener('click', resetFilters);
         return;
       }
+
+      const empty = list.querySelector('.list-empty');
+      if (empty) empty.remove();
+
+      const wanted = new Set(DATA.map(placeKey));
+      rowByKey.forEach((row, key) => {
+        if (wanted.has(key)) return;
+        row.remove();
+        rowByKey.delete(key);
+      });
+
       // Only what can actually be seen gets a delay; past that the wave would
       // be animating cards nobody has scrolled to yet.
+      let entered = 0;
+      let prev = null;
       DATA.forEach((p, i) => {
-        const row = document.createElement('div');
-        row.className = 'row' + (i < 12 ? ' entering' : '');
-        if (i < 12) row.style.animationDelay = (i * 26) + 'ms';
+        const key = placeKey(p);
+        let row = rowByKey.get(key);
+        if (!row) {
+          row = buildRow(p);
+          rowByKey.set(key, row);
+          if (entered < 12) {
+            row.className = 'row entering';
+            row.style.animationDelay = (entered * 26) + 'ms';
+            entered++;
+          }
+        } else {
+          row.classList.remove('entering');
+          row.style.animationDelay = '';
+        }
         row.dataset.idx = String(i);
-        row.innerHTML =
-          '<div class="cat">' + catLabelHtml(p) + '</div>' +
-          '<div class="name">' + escapeHtml(p.name) + '</div>' +
-          noteHtml(p, 'note') + pendingHtml(p, 'pending') + tipHtml(p, 'tip') +
-          cardFootHtml(p);
-        row.addEventListener('click', (e) => {
-          if (e.target && e.target.tagName === 'A') return;
-          focusPoint(i);
-        });
-        list.appendChild(row);
+        // Move it only when it is not already where it belongs: re-inserting a
+        // node that is already in place would restart its animations.
+        const shouldFollow = prev ? prev.nextSibling : list.firstChild;
+        if (row !== shouldFollow) list.insertBefore(row, shouldFollow);
+        prev = row;
       });
+
+      // A shorter list under an old scroll offset opens halfway down itself.
+      list.scrollTop = 0;
     }
 
     function resetFilters() {
@@ -1200,8 +1305,18 @@
         r.classList.toggle('active', idx === i);
       });
       markers.forEach((m, idx) => {
-        const inner = m.getElement().querySelector('.marker-inner');
-        if (inner) inner.classList.toggle('active', idx === i);
+        const root = m.getElement();
+        const inner = root.querySelector('.marker-inner');
+        const on = idx === i;
+        if (inner) inner.classList.toggle('active', on);
+        root.classList.toggle('selected', on);
+        if (on) {
+          // A label pinned to the right of a pin near the right edge would run
+          // off the map, so it flips to the other side there.
+          const box = map.getContainer().getBoundingClientRect();
+          const at = root.getBoundingClientRect();
+          root.classList.toggle('flip', at.left + 190 > box.right);
+        }
       });
       if (i >= 0) {
         const row = document.querySelector('.row[data-idx="' + i + '"]');
@@ -1295,8 +1410,13 @@
       return Array.from(activeGroups).some((g) => hasGroup(p, g));
     }
 
+    let lastOpenFamily = null;
+
     function renderFilters() {
       const wrap = document.getElementById('filters');
+      // Rebuilding the rail throws away where it was scrolled to, which on a
+      // phone means a tag you just pressed can jump off screen.
+      const wasScrolled = Array.from(wrap.querySelectorAll('.filter-row')).map((r) => r.scrollLeft);
       wrap.innerHTML = '';
       const head = document.createElement('div');
       head.className = 'filter-head';
@@ -1334,8 +1454,18 @@
         if (active) requestAnimationFrame(() => btn.scrollIntoView({ inline: 'center', block: 'nearest' }));
       });
       wrap.appendChild(top);
+      const openNow = (FAMILIES.find((f) => activeFamilies.has(f.id)) || {}).id || null;
       const sub = renderSubRow();
-      if (sub) wrap.appendChild(sub);
+      if (sub) {
+        // The row animates in when it arrives or changes family, not every time
+        // a tag inside it is pressed.
+        if (openNow !== lastOpenFamily) sub.classList.add('sub-enter');
+        wrap.appendChild(sub);
+      }
+      lastOpenFamily = openNow;
+      wrap.querySelectorAll('.filter-row').forEach((r, i) => {
+        if (wasScrolled[i]) r.scrollLeft = wasScrolled[i];
+      });
       poppedChip = null;
     }
 
@@ -1467,6 +1597,41 @@
     searchFields.forEach((el) => {
       if (el) el.addEventListener('input', (e) => setQuery(e.target.value));
     });
+
+    // On a phone the field is opened, not parked. It cost the map a permanent
+    // row for a control used far less often than the map itself, so it is a
+    // magnifier until it is needed and the whole bar once it is.
+    (function phoneSearch() {
+      const field = document.getElementById('sideSearch');
+      const openBtn = document.getElementById('searchBtn');
+      const cancelBtn = document.getElementById('searchCancel');
+
+      function openSearch() {
+        document.body.classList.add('search-open');
+        // Results are a list, so searching from the map lands on the list.
+        if (mapMode) setMode(false);
+        field.focus();
+        field.select();
+      }
+
+      function closeSearch() {
+        document.body.classList.remove('search-open');
+        field.blur();
+        if (query) setQuery('', true);
+      }
+
+      openBtn.addEventListener('click', openSearch);
+      cancelBtn.addEventListener('click', closeSearch);
+      field.addEventListener('keydown', (e) => {
+        // Escape leaves; Enter just dismisses the keyboard, since the list has
+        // been filtering the whole time it was being typed into.
+        if (e.key === 'Escape') closeSearch();
+        if (e.key === 'Enter') field.blur();
+      });
+
+      // A query that arrives in the link has to open the bar with it.
+      if (isMobile() && query.trim()) document.body.classList.add('search-open');
+    })();
     // ----- Intro overlay -----
     // The landing is a layer over the running map, not a separate page: chips
     // write into activeGroups, so what you pick here is already applied when
@@ -1579,16 +1744,31 @@
       const inner = document.createElement('div');
       inner.className = 'marker-inner';
       inner.style.setProperty('--marker-color', groupColor(p.group));
-      inner.setAttribute('aria-label', p.name);
-      inner.title = p.name;
+      // A pin is a control: reachable by tab, named for a screen reader, and
+      // carrying its category as text rather than only as a colour.
+      inner.tabIndex = 0;
+      inner.setAttribute('role', 'button');
+      const cat = (p.groups && p.groups.length ? p.groups : [p.group]).join(' · ');
+      inner.setAttribute('aria-label', p.name + ', ' + cat);
+      inner.title = p.name + ' · ' + cat;
       el.appendChild(inner);
+
+      const label = document.createElement('div');
+      label.className = 'marker-label';
+      label.innerHTML = '<span class="cat">' + escapeHtml(cat) + '</span>' + escapeHtml(p.name);
+      label.style.setProperty('--marker-color', groupColor(p.group));
+      el.appendChild(label);
 
       // The index into DATA changes with every filter, so the handler asks for
       // it at click time instead of closing over a stale one.
-      inner.addEventListener('click', (ev) => {
+      const pick = (ev) => {
         ev.stopPropagation();
         const i = DATA.indexOf(p);
         if (i >= 0) focusPoint(i);
+      };
+      inner.addEventListener('click', pick);
+      inner.addEventListener('keydown', (ev) => {
+        if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); pick(ev); }
       });
 
       const marker = new maplibregl.Marker({ element: el })
