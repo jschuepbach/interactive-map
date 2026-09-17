@@ -51,6 +51,7 @@
     --c-europe: #cf6f9b;
     --c-drinks: #8f86e0;
     --c-other: #c2727f;
+    --c-quick: #5b93d6;
   }
 
   * { box-sizing: border-box; }
@@ -696,8 +697,12 @@
       { id: 'latin',   label: 'Latin America',   color: 'var(--c-americas)',
         groups: ['Peruvian', 'Mexican', 'Brazilian', 'Colombian', 'Ecuatorian'] },
       { id: 'dinner',  label: 'Dinner',          color: 'var(--c-europe)',
-        groups: ['Fine-dining', 'Grill', 'Seafood', 'Italian', 'Mediterranean', 'Middle-Eastern',
-                 'Burger', 'Sandwich', 'Fusion', 'Vegan', 'Gluten-free'] },
+        groups: ['Fine-dining', 'Grill', 'Seafood', 'Italian', 'Mediterranean',
+                 'Fusion', 'Gluten-free'] },
+      // Somewhere you eat standing up or in half an hour, which is a different
+      // question from where you book a table.
+      { id: 'quick',   label: 'Quick bite',      color: 'var(--c-quick)',
+        groups: ['Burger', 'Sandwich', 'Vegan', 'Middle-Eastern'] },
       { id: 'wine',    label: 'Wine',            color: 'var(--c-drinks)',
         groups: ['Wine', 'Cheese'] },
       // Drinks means the Drinks tag: cocktail bars, not every tapas place that
