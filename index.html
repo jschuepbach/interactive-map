@@ -11,167 +11,164 @@
      sub-default weights (460 / 540 / 600) are the whole point of using a variable face. -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&display=swap" />
 <style>
-  /* ---------- The Framer register ----------
-     A near-black artboard. Hierarchy comes from surface lift (canvas → 1 → 2),
-     never from fading white type. The one chromatic accent is the blue, and it
-     only ever signals: links, focus, selection. Colour as atmosphere arrives as
-     a gradient spotlight card, and the spec is strict that there is at most one
-     or two of those in a viewport. */
+  /* ---------- Airbnb, in the dark ----------
+     The system is a white marketplace; this is the same system with the neutral
+     ladder inverted and everything else kept: Rausch as the single voltage, the
+     pill search bar, 14px card corners, 8px buttons, modest type weights. Rausch
+     stays scarce — the primary action, the picked chip, the selected pin — and
+     the rest of the screen is grey so the pins can carry category. */
   :root {
     color-scheme: dark;
 
-    --canvas: #090909;
-    --surface-1: #141414;
-    --surface-2: #1c1c1c;
-    --hairline: #262626;
-    --hairline-soft: #1a1a1a;
-    --ink: #ffffff;
-    --ink-muted: #999999;
-    --accent-blue: #0099ff;
-
-    --grad-violet: #6a4cf5;
-    --grad-magenta: #d44df0;
-    --grad-orange: #ff7a3d;
-    --grad-coral: #ff5577;
+    --rausch: #ff385c;
+    --rausch-active: #e00b41;
+    --ground: #121212;
+    --surface: #1c1c1c;
+    --surface-strong: #242424;
+    --hairline: #2f2f2f;
+    --hairline-soft: #242424;
+    --ink: #ededed;
+    --body-text: #c8c8c8;
+    --muted-text: #9a9a9a;
+    --faint: #757575;
 
     /* The names the app already speaks. */
-    --accent: var(--ink);
-    --bg: var(--canvas);
-    --panel: var(--canvas);
-    --panel-2: var(--surface-1);
+    --accent: var(--rausch);
+    --bg: var(--ground);
+    --panel: var(--ground);
+    --panel-2: var(--surface);
     --text: var(--ink);
-    --muted: var(--ink-muted);
+    --muted: var(--muted-text);
     --border: var(--hairline);
 
-    /* Category colours for pins and dots. The documented gradient family covers
-       four of the eight; the rest are tints inside the same family rather than
-       new hues, since the spec allows exactly one accent beyond it. */
-    --c-sweet: #ff7a3d;
-    --c-brunch: #ffb454;
-    --c-local: #ff5577;
-    --c-asia: #2fd4c4;
-    --c-americas: #35d07f;
-    --c-europe: #d44df0;
-    --c-drinks: #6a4cf5;
-    --c-other: #9d7bff;
+    /* Category hue for pins and chip dots, one step down in saturation so eight
+       of them can sit on one map without shouting over each other or over Rausch. */
+    --c-sweet: #d98f4e;
+    --c-brunch: #e0b755;
+    --c-local: #e8705a;
+    --c-asia: #48b3bd;
+    --c-americas: #6bb069;
+    --c-europe: #cf6f9b;
+    --c-drinks: #8f86e0;
+    --c-other: #c2727f;
   }
 
   * { box-sizing: border-box; }
   /* Inter Variable with the character variants the brand voice depends on:
      switching them off visibly changes the body. Display sizes substitute for
      GT Walsheim at 600 with the tracking pulled tight, per the spec's note. */
+  /* Cereal is licensed; the spec's own fallback chain is Circular then system. */
   html, body { height: 100%; margin: 0; background: var(--bg); color: var(--text);
-    font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    font-size: 15px; font-weight: 400; line-height: 1.3; letter-spacing: -0.15px;
-    font-feature-settings: 'cv01', 'cv05', 'cv09', 'cv11', 'ss03', 'ss07';
+    font-family: Circular, -apple-system, system-ui, Roboto, 'Helvetica Neue', sans-serif;
+    font-size: 14px; font-weight: 400; line-height: 1.43;
     -webkit-font-smoothing: antialiased; }
-  .display { font-weight: 600; letter-spacing: -0.03em; line-height: 1.05; }
 
-  #app { display: grid; grid-template-columns: 340px 1fr; height: 100vh; height: 100dvh; }
+  /* ---------- Shell ----------
+     Airbnb's web pattern: one bar across the top that owns the search, a rail of
+     categories under it, then results left and a sticky map right. The map never
+     scrolls away, the results never stop being the main column. */
+  #app { display: grid; grid-template-rows: auto auto minmax(0, 1fr);
+    height: 100vh; height: 100dvh; }
 
-  /* ---------- Sidebar ---------- */
-  #sidebar { background: var(--panel); border-right: 1px solid var(--border);
+  #topbar { display: grid; grid-template-columns: minmax(0, 1fr) minmax(220px, 460px) auto;
+    align-items: center; gap: 20px; padding: 12px 20px;
+    border-bottom: 1px solid var(--hairline); background: var(--ground); }
+  .brand h1 { font-size: 16px; font-weight: 600; margin: 0; }
+  .brand .sub { color: var(--muted-text); font-size: 13px; margin: 2px 0 0; }
+  .searchwrap { display: flex; }
+  /* The signature search bar: full pill, hairline plus a soft drop, and it owns
+     the middle of the bar the way Where/When/Who does. */
+  #sideSearch { width: 100%; height: 48px; background: var(--surface);
+    border: 1px solid var(--hairline); border-radius: 9999px; color: var(--text);
+    font-family: inherit; font-size: 14px; padding: 0 20px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.3); }
+  #sideSearch::placeholder { color: var(--muted-text); }
+  #sideSearch:focus { outline: none; border-color: var(--faint);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.45); }
+  .topbar-actions { display: flex; gap: 8px; }
+
+  /* ---------- Results column ---------- */
+  #body { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    min-height: 0; }
+  #sidebar { background: var(--ground); border-right: 1px solid var(--hairline);
     display: flex; flex-direction: column; min-height: 0; }
   .sheet-handle { display: none; }
-  .side-header { padding: 18px 18px 14px; border-bottom: 1px solid var(--border); cursor: default; }
-  .side-header h1 { font-size: 26px; line-height: 1.05; letter-spacing: -1px;
-    margin: 0 0 8px; font-weight: 600; }
-  .side-header .sub { color: var(--ink-muted); font-size: 14px; line-height: 1.4;
-    letter-spacing: -0.14px; font-weight: 500; }
-  /* The search field lives with the results, not behind a button: on the map
-     screen it is the fastest way through 227 places. */
-  /* Uber's inputs are the one square thing in a world of pills. */
-  #sideSearch { width: 100%; margin-top: 16px; background: var(--surface-1);
-    border: 1px solid transparent; border-radius: 10px; color: var(--text);
-    font-family: inherit; font-size: 15px; padding: 10px 14px; }
-  #sideSearch::placeholder { color: var(--ink-muted); }
-  /* The only chromatic depth signal in the system: a blue-tinted focus ring. */
-  #sideSearch:focus { outline: none; box-shadow: 0 0 0 1px rgba(0,153,255,0.6),
-    0 0 0 4px rgba(0,153,255,0.15); }
+  .side-header { padding: 14px 20px 2px; cursor: default; }
 
-  .list-empty { padding: 22px 18px; color: var(--muted); font-size: 13px; line-height: 1.6; }
-  .list-empty button { background: none; border: none; padding: 0; font: inherit;
-    color: var(--accent); font-weight: 600; cursor: pointer; text-decoration: underline; }
+  .list { flex: 1; overflow-y: auto; padding: 12px 20px 24px;
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(258px, 1fr));
+    gap: 12px; align-content: start; }
+  .list-empty { grid-column: 1 / -1; padding: 28px 2px; color: var(--muted-text); font-size: 14px; }
+  .list-empty button { background: none; border: 0; padding: 0; font: inherit;
+    color: var(--text); font-weight: 600; cursor: pointer; text-decoration: underline;
+    text-underline-offset: 3px; }
 
-  .count { display: inline-block; padding: 2px 8px; border-radius: 999px;
-    background: var(--panel-2); color: var(--accent); font-size: 11px; font-weight: 600;
-    margin-left: 6px; vertical-align: middle; }
+  /* A card, not a row: two or three fit across the column, so a screen shows
+     eight places instead of four. */
+  /* The property card, minus the photograph: 14px corners, a title line, then
+     four lines of meta in descending weight. */
+  .row { background: var(--surface); border: 1px solid var(--hairline-soft); border-radius: 14px;
+    padding: 14px 16px 13px; cursor: pointer; display: flex; flex-direction: column;
+    transition: border-color 0.15s, background 0.15s; }
+  .row:hover { background: var(--surface-strong); border-color: var(--hairline); }
+  .row.active { border-color: var(--rausch); }
+  .row .cat { font-size: 11px; color: var(--marker-color, var(--muted-text));
+    text-transform: uppercase; letter-spacing: 0.32px; margin: 0 0 7px; font-weight: 600;
+    opacity: 0.9; }
+  .cat-sep { color: var(--faint); }
+  .row .name { font-size: 16px; font-weight: 600; margin: 0 0 6px; line-height: 1.25; }
+  .row .note { font-size: 14px; color: var(--body-text); margin: 0 0 8px; line-height: 1.43; }
+  .row .addr { font-size: 13px; color: var(--muted-text); margin: 0 0 8px; line-height: 1.23; }
+  .row .tip { font-size: 13px; color: var(--muted-text); margin: 0 0 10px; line-height: 1.4;
+    padding-left: 11px; border-left: 2px solid var(--rausch); }
+  .row .tip b { color: var(--ink); font-weight: 600; }
+  .links { display: flex; gap: 14px; flex-wrap: wrap; margin-top: auto; padding-top: 2px; }
+  .row a { color: var(--ink); font-size: 13px; text-decoration: underline;
+    text-underline-offset: 3px; font-weight: 500; }
+  .row a:hover { color: var(--rausch); }
 
-  /* 39 tags would push the list off the screen, so the block scrolls on its own. */
-  /* Two levels: the family row, and the tags of an open family under it. */
-  .filters { display: flex; flex-direction: column; gap: 10px; padding: 12px 0 0; }
-  /* One line that scrolls, not three that wrap: wrapping pushed the first place
-     below the fold, which on a phone is the whole screen. The chip cut off at the
-     right edge is the affordance, so the row keeps its padding inside the scroller. */
+  /* ---------- Filter rail ---------- */
+  .filters { display: flex; flex-direction: column; gap: 8px;
+    padding: 10px 0 10px; border-bottom: 1px solid var(--hairline); background: var(--ground); }
   .filter-row { display: flex; gap: 6px; flex-wrap: nowrap; overflow-x: auto;
-    padding: 0 18px 2px; scrollbar-width: none; -ms-overflow-style: none;
-    scroll-padding-inline: 18px; }
+    padding: 0 20px 2px; scrollbar-width: none; -ms-overflow-style: none;
+    scroll-padding-inline: 20px; }
   .filter-row::-webkit-scrollbar { display: none; }
   .filter-row > * { flex: 0 0 auto; }
-  /* The two text toggles are lines of their own, above the rails. */
-  .filter-head { display: flex; flex-direction: column; align-items: flex-start;
-    gap: 2px; padding: 0 18px; }
-  .filter-sub { display: flex; flex-direction: column; gap: 6px;
-    padding: 10px 0 2px; border-top: 1px solid var(--border); }
-  .filter-sub-label { font-size: 13px; font-weight: 500; letter-spacing: -0.13px;
-    color: var(--ink-muted); margin: 0; padding: 0 18px; }
-  /* Quieter than the family above it: this row is an option, not the main choice. */
-  .filter-btn.sub { padding: 8px 14px; font-size: 13px; letter-spacing: -0.13px;
-    background: var(--canvas); box-shadow: inset 0 0 0 1px var(--hairline); }
-  .filter-btn.sub:hover { background: var(--surface-1); }
-  .filter-btn.sub.active { background: var(--surface-2); color: var(--ink);
-    box-shadow: none; }
-  /* The pill is the signature: every interactive thing here is 999px. The chip
-     itself stays grayscale and the family's colour rides on the dot, so a row of
-     chips reads as one control instead of eight competing accents. */
-  /* Every action is a pill. Unpicked chips lift one surface step off the canvas
-     and speak in muted ink; the picked one is the white pill, which is the whole
-     brand's primary gesture. */
-  .filter-btn {
-    background: var(--surface-1); color: var(--ink-muted); border: 0;
-    padding: 10px 15px; font-size: 14px; font-weight: 500; letter-spacing: -0.14px;
-    border-radius: 100px; cursor: pointer; font-family: inherit;
-    transition: background 0.15s, color 0.15s;
-  }
-  .filter-btn:hover { background: var(--surface-2); color: var(--ink); }
-  .filter-btn.active { background: var(--ink); color: #000000; }
-  .filter-dot { display: inline-block; width: 8px; height: 8px; border-radius: 999px;
-    margin-right: 7px; vertical-align: middle; background: currentColor; }
+  .filter-head { display: flex; align-items: center; gap: 14px; padding: 0 20px; }
+  .filter-sub { display: flex; flex-direction: column; gap: 6px; padding: 8px 0 0;
+    border-top: 1px solid var(--hairline-soft); }
+  .filter-sub-label { font-size: 12px; color: var(--muted-text); margin: 0; padding: 0 20px;
+    font-weight: 700; }
 
-  /* Active neighbourhood, shown outside the intro so the filter is never invisible */
-  .hood-pill { flex-basis: 100%; display: flex; align-items: center; gap: 8px;
-    background: none; border: 0; padding: 0 0 2px; margin: 0; cursor: pointer;
-    font-family: inherit; font-size: 14px; font-weight: 500; color: var(--ink);
-    letter-spacing: -0.14px; }
-  .hood-pill span.x { color: var(--muted); font-weight: 400; }
+  .filter-btn { background: var(--surface); color: var(--ink); border: 1px solid var(--hairline);
+    height: 36px; padding: 0 15px; font-size: 14px; font-weight: 500; border-radius: 9999px;
+    cursor: pointer; font-family: inherit; display: inline-flex; align-items: center;
+    transition: background 0.15s, border-color 0.15s, color 0.15s; }
+  .filter-btn:hover { border-color: var(--faint); }
+  .filter-btn.active { background: var(--rausch); color: #ffffff; border-color: var(--rausch); }
+  .filter-btn.sub { height: 32px; font-size: 13px; font-weight: 400; background: transparent; }
+  .filter-btn.sub:hover { background: var(--surface); }
+  .filter-btn.sub.active { background: var(--rausch); color: #ffffff; border-color: var(--rausch); }
+  .filter-dot { display: inline-block; width: 7px; height: 7px; border-radius: 999px;
+    margin-right: 7px; background: currentColor; }
+
+  /* The result line: what the filter did, and the way back out of it. */
+  /* What the filter did, and the way out of it — the pair Uber and Airbnb both
+     put directly above the results. */
+  .result-line { display: flex; align-items: baseline; gap: 12px; padding: 0 20px;
+    font-size: 14px; color: var(--muted-text); }
+  .result-line .n { color: var(--ink); font-weight: 600; }
+  .result-line button { background: none; border: 0; padding: 0; font: inherit;
+    color: var(--ink); font-weight: 500; cursor: pointer; text-decoration: underline;
+    text-underline-offset: 3px; margin-left: auto; }
+  .result-line button:hover { color: var(--rausch); }
+
+  .hood-pill, .note-pill { background: none; border: 0; padding: 0; margin: 0;
+    cursor: pointer; font-family: inherit; font-size: 14px; color: var(--muted-text); }
+  .hood-pill { display: flex; align-items: center; gap: 6px; color: var(--text); }
+  .hood-pill span.x { color: var(--faint); }
   .hood-pill:hover span.x { color: var(--text); }
-
-
-  .list { flex: 1; overflow-y: auto; padding-top: 12px; }
-  .row { padding: 16px 18px 18px; border-bottom: 1px solid var(--border);
-    cursor: pointer; transition: background 0.15s; border-left: 3px solid transparent; }
-  .row:hover { background: var(--surface-1); }
-  .row.active { background: var(--surface-1); border-left-color: var(--ink); }
-  .cat-sep { color: var(--hairline); }
-  /* The one uppercase line the system allows itself: an eyebrow tag, not a headline. */
-  .row .cat { font-size: 12px; color: var(--marker-color, var(--ink-muted));
-    text-transform: uppercase; letter-spacing: -0.12px; margin: 0 0 6px; font-weight: 500; }
-  .row .name { font-size: 22px; line-height: 1.2; letter-spacing: -0.8px;
-    margin: 0 0 8px; font-weight: 600; }
-  /* Jan's own words are the point of this map, so they read as text, not as
-     metadata. The scraped address gets the small quiet line underneath. */
-  .row .note { font-size: 15px; color: var(--ink); margin: 0 0 10px; line-height: 1.3; }
-  .row .addr { font-size: 13px; color: var(--ink-muted); margin: 0 0 10px; line-height: 1.2; }
-  /* What to order, in Jan's words. Sits under the note and reads as an aside. */
-  /* One surface step up, which is how this system marks anything at all. */
-  .row .tip { font-size: 14px; color: var(--ink-muted); margin: 0 0 10px; line-height: 1.4;
-    background: var(--surface-1); border-radius: 10px; padding: 10px 12px;
-    letter-spacing: -0.14px; }
-  .row .tip b, .popup-tip b, .lv-tip b { color: var(--ink); font-weight: 500; }
-  .links { display: flex; gap: 14px; flex-wrap: wrap; }
-  .row a { color: var(--accent-blue); font-size: 13px; text-decoration: none;
-    font-weight: 500; letter-spacing: -0.13px; }
-  .row a:hover { text-decoration: underline; }
 
   /* ---------- Map ---------- */
   #map-wrap { position: relative; }
@@ -179,14 +176,13 @@
 
   .controls { position: absolute; top: 12px; left: 12px; z-index: 5; display: flex; gap: 8px; }
   /* Floating pills over the map, the one place the system allows a shadow. */
-  /* button-secondary: the charcoal pill. Its picked state is the white pill. */
   .btn {
-    background: var(--surface-1); color: var(--ink); border: 0;
-    padding: 10px 15px; font-size: 14px; font-weight: 500; letter-spacing: -0.14px;
-    border-radius: 100px; cursor: pointer; font-family: inherit;
+    background: var(--surface); color: var(--ink); border: 1px solid var(--hairline);
+    height: 40px; padding: 0 16px; font-size: 14px; font-weight: 500; border-radius: 8px;
+    cursor: pointer; font-family: inherit;
   }
-  .btn:hover { background: var(--surface-2); }
-  .btn.active { background: var(--ink); color: #000000; }
+  .btn:hover { border-color: var(--faint); }
+  .btn.active { background: var(--rausch); color: #ffffff; border-color: var(--rausch); }
 
   /* ---------- Markers ----------
      CRITICAL: .marker (the element passed to new maplibregl.Marker({element}))
@@ -200,8 +196,8 @@
     margin-left: -11px; margin-top: -11px;
     border-radius: 50%;
     background: var(--marker-color, var(--accent));
-    border: 2px solid var(--canvas);
-    box-shadow: 0 0 0 0.5px rgba(255,255,255,0.10), 0 10px 30px rgba(0,0,0,0.25);
+    border: 2px solid var(--ground);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.5);
     cursor: pointer;
     transition: transform 0.15s ease, box-shadow 0.15s ease;
     pointer-events: auto;
@@ -209,30 +205,29 @@
   .marker-inner:hover { transform: scale(1.25); }
   .marker-inner.active {
     transform: scale(1.4);
-    box-shadow: 0 0 0 3px var(--ink), 0 10px 30px rgba(0,0,0,0.4);
+    box-shadow: 0 0 0 3px var(--rausch), 0 2px 10px rgba(0,0,0,0.5);
   }
 
   /* ---------- Popup ---------- */
   .maplibregl-popup-content {
-    background: var(--surface-1) !important; color: var(--ink);
-    border: 0; border-radius: 20px;
-    padding: 20px; font-family: inherit;
-    box-shadow: inset 0 0.5px 0 rgba(255,255,255,0.10), 0 10px 30px rgba(0,0,0,0.25);
+    background: var(--surface) !important; color: var(--ink);
+    border: 1px solid var(--hairline); border-radius: 14px;
+    padding: 16px 18px; font-family: inherit;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.5);
   }
-  .maplibregl-popup-tip { border-top-color: var(--surface-1) !important;
-    border-bottom-color: var(--surface-1) !important; }
-  .popup-cat { color: var(--marker-color, var(--ink-muted)); font-size: 12px;
-    text-transform: uppercase; letter-spacing: -0.12px; margin: 0 0 6px; font-weight: 500; }
-  .popup-name { font-size: 22px; line-height: 1.2; letter-spacing: -0.8px;
-    margin: 0 0 8px; font-weight: 600; }
-  .popup-note { color: var(--ink); font-size: 15px; margin: 0 0 10px;
-    line-height: 1.3; max-width: 250px; }
-  .popup-addr { color: var(--ink-muted); font-size: 13px; margin: 0 0 10px; line-height: 1.2;
+  .maplibregl-popup-tip { border-top-color: var(--surface) !important;
+    border-bottom-color: var(--surface) !important; }
+  .popup-cat { color: var(--marker-color, var(--muted-text)); font-size: 12px;
+    text-transform: uppercase; letter-spacing: 0.32px; margin: 0 0 6px; font-weight: 700; }
+  .popup-name { font-size: 16px; line-height: 1.25; margin: 0 0 6px; font-weight: 600; }
+  .popup-note { color: var(--body-text); font-size: 14px; margin: 0 0 10px;
+    line-height: 1.43; max-width: 250px; }
+  .popup-addr { color: var(--muted-text); font-size: 13px; margin: 0 0 10px; line-height: 1.23;
     max-width: 250px; }
-  .popup-tip { color: var(--ink-muted); font-size: 14px; margin: 0 0 12px; line-height: 1.4;
-    max-width: 250px; background: var(--surface-2); border-radius: 10px; padding: 10px 12px; }
-  .popup-link { color: var(--accent-blue); font-size: 13px; text-decoration: none;
-    font-weight: 500; }
+  .popup-tip { color: var(--muted-text); font-size: 13px; margin: 0 0 10px; line-height: 1.4;
+    max-width: 250px; padding-left: 11px; border-left: 2px solid var(--rausch); }
+  .popup-link { color: var(--ink); font-size: 13px; text-decoration: underline;
+    text-underline-offset: 3px; font-weight: 500; }
   .popup-link:hover { text-decoration: underline; }
 
   /* ---------- Intro overlay (landing) ----------
@@ -247,22 +242,21 @@
     /* The canvas is the atmosphere. Gradients in this system are cards, never
        section grounds, so the hero stays flat black and the one gradient in the
        viewport is the spotlight card further down. */
-    background: rgba(9, 9, 9, 0.97);
+    background: rgba(18, 18, 18, 0.97);
     overflow-y: auto;
     transition: opacity 0.28s ease, visibility 0.28s ease;
   }
   #intro.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
   .intro-inner { width: 100%; max-width: 560px; margin: auto; }
-  .intro-eyebrow { font-size: 13px; letter-spacing: -0.13px; text-transform: uppercase;
-    color: var(--ink-muted); margin: 0 0 18px; font-weight: 500; }
-  /* The poster cadence: size carries it, and the tracking stays at -5% of size
-     the way the spec insists, which is what makes it read as Framer at all. */
-  #intro h2 { font-size: clamp(38px, 8vw, 62px); line-height: 1.0; letter-spacing: -0.05em;
-    margin: 0 0 18px; font-weight: 600; }
-  .intro-sub { color: var(--ink-muted); font-size: 18px; line-height: 1.3;
-    letter-spacing: -0.18px; margin: 0 0 32px; max-width: 42ch; }
-  .intro-q { font-size: 13px; font-weight: 500; letter-spacing: -0.13px;
-    color: var(--ink-muted); margin: 0 0 12px; }
+  .intro-eyebrow { font-size: 12px; letter-spacing: 0.32px; text-transform: uppercase;
+    color: var(--muted-text); margin: 0 0 14px; font-weight: 700; }
+  /* Modest display: the system tops out at 28px / 600 and trusts whitespace,
+     which is exactly why it never reads as a pitch deck. */
+  #intro h2 { font-size: clamp(24px, 4.2vw, 32px); line-height: 1.18; letter-spacing: -0.44px;
+    margin: 0 0 12px; font-weight: 600; }
+  .intro-sub { color: var(--body-text); font-size: 16px; line-height: 1.5;
+    margin: 0 0 28px; max-width: 46ch; }
+  .intro-q { font-size: 16px; font-weight: 600; color: var(--ink); margin: 0 0 12px; }
   .intro-chips { margin: 0 0 26px; }
   /* Chips are split into named bands so 11 categories don't read as one wall. */
   .chip-band { margin-bottom: 14px; }
@@ -271,57 +265,49 @@
     color: var(--muted); margin: 0 0 8px; }
   .chip-row { display: flex; flex-wrap: wrap; gap: 8px; }
   .intro-chip {
-    background: var(--surface-1); border: 0; color: var(--ink-muted);
-    padding: 10px 15px; font-size: 14px; font-weight: 500; letter-spacing: -0.14px;
-    border-radius: 100px; cursor: pointer; font-family: inherit;
-    transition: background 0.15s, color 0.15s;
+    background: var(--surface); border: 1px solid var(--hairline); color: var(--ink);
+    height: 40px; padding: 0 16px; font-size: 14px; font-weight: 500;
+    border-radius: 9999px; cursor: pointer; font-family: inherit;
+    display: inline-flex; align-items: center;
+    transition: background 0.15s, border-color 0.15s;
   }
-  .intro-chip:hover { background: var(--surface-2); color: var(--ink); }
-  .intro-chip.active { background: var(--ink); color: #000000; }
+  .intro-chip:hover { border-color: var(--faint); }
+  .intro-chip.active { background: var(--rausch); color: #ffffff; border-color: var(--rausch); }
   .intro-chip .filter-dot { width: 8px; height: 8px; }
   /* Neighbourhood tiles: one horizontal band, snap-scrolled on touch. */
   .intro-hoods { display: flex; gap: 10px; overflow-x: auto; margin: 0 -24px 28px;
     padding: 2px 24px 8px; scroll-snap-type: x proximity; scrollbar-width: none; }
   .intro-hoods::-webkit-scrollbar { display: none; }
-  /* Template cards: charcoal tiles at 15px, marked by surface lift alone. */
+  /* Cards, 14px corners, the same object as a result card one screen later. */
   .hood-tile {
     flex: 0 0 auto; scroll-snap-align: start; text-align: left;
-    background: var(--surface-1); border: 0; border-radius: 15px;
-    padding: 12px 14px; min-width: 150px; cursor: pointer; font-family: inherit; color: var(--ink);
-    transition: background 0.15s;
+    background: var(--surface); border: 1px solid var(--hairline-soft); border-radius: 14px;
+    padding: 14px 16px; min-width: 156px; cursor: pointer; font-family: inherit; color: var(--ink);
+    transition: background 0.15s, border-color 0.15s;
   }
-  .hood-tile:hover { background: var(--surface-2); }
-  .hood-tile.active { background: var(--ink); color: #000000; }
-  .hood-tile .hood-name { display: block; font-size: 14px; font-weight: 500;
-    letter-spacing: -0.14px; margin-bottom: 3px; }
-  .hood-tile .hood-count { display: block; font-size: 13px; color: var(--ink-muted);
-    letter-spacing: -0.13px; }
-  .hood-tile.active .hood-count { color: rgba(0,0,0,0.6); }
+  .hood-tile:hover { background: var(--surface-strong); border-color: var(--hairline); }
+  .hood-tile.active { border-color: var(--rausch); }
+  .hood-tile .hood-name { display: block; font-size: 16px; font-weight: 600; margin-bottom: 3px; }
+  .hood-tile .hood-count { display: block; font-size: 13px; color: var(--muted-text); }
+  .hood-tile.active .hood-count { color: var(--rausch); }
 
   .intro-actions { display: flex; align-items: center; gap: 18px; flex-wrap: wrap;
     margin-bottom: 22px; }
-  /* The one black pill in the viewport: the brand's whole conversion story. */
-  /* The white pill: the only primary CTA shape in the system. */
+  /* button-primary: Rausch, 8px, 48px tall. The one voltage on the screen. */
   .intro-cta {
-    background: var(--ink); color: #000000; border: 0;
-    padding: 13px 20px; font-size: 15px; font-weight: 500; letter-spacing: -0.15px;
-    border-radius: 100px; cursor: pointer; font-family: inherit;
-    transition: transform 0.12s ease;
+    background: var(--rausch); color: #ffffff; border: 0;
+    height: 48px; padding: 0 24px; font-size: 16px; font-weight: 500;
+    border-radius: 8px; cursor: pointer; font-family: inherit;
   }
-  .intro-cta:active { transform: scale(0.97); }
+  .intro-cta:hover { background: var(--rausch-active); }
 
-  /* The gradient spotlight card. Exactly one in the viewport, which is the spec:
-     two is the ceiling, three reads as a moodboard. */
-  .intro-band { border-radius: 30px; padding: 30px; margin-top: 34px;
-    display: flex; flex-direction: column; gap: 18px;
-    background: linear-gradient(135deg, var(--grad-violet) 0%, var(--grad-magenta) 58%,
-      var(--grad-coral) 100%); }
+  .intro-band { display: flex; flex-direction: column; gap: 14px; margin-top: 28px; }
   .intro-band .intro-actions { margin-bottom: 0; }
-  .intro-band .intro-stats { color: rgba(255,255,255,0.86); font-weight: 500; }
-  .intro-skip { background: none; border: 0; color: var(--muted); font: inherit; font-size: 13px;
-    cursor: pointer; padding: 4px 0; text-decoration: underline; text-underline-offset: 3px; }
-  .intro-skip:hover { color: #ffffff; }
-  .intro-stats { color: var(--muted); font-size: 12px; letter-spacing: 0.02em; margin: 0; }
+  .intro-skip { background: none; border: 0; color: var(--ink); font: inherit; font-size: 14px;
+    font-weight: 500; cursor: pointer; padding: 4px 0; text-decoration: underline;
+    text-underline-offset: 3px; }
+  .intro-skip:hover { color: var(--rausch); }
+  .intro-stats { color: var(--muted-text); font-size: 13px; margin: 0; }
   #intro :focus-visible, .btn:focus-visible, .filter-btn:focus-visible {
     outline: 2px solid var(--accent); outline-offset: 2px; }
 
@@ -376,13 +362,14 @@
     padding-bottom: 2px; scrollbar-width: none; flex-wrap: nowrap; }
   .lv-filters .filter-row::-webkit-scrollbar { display: none; }
   .lv-chip.sub { padding: 5px 11px; font-size: 11px; font-weight: 500; }
-  .lv-chip { flex: 0 0 auto; background: var(--surface-1); border: 0;
-    border-radius: 100px; padding: 10px 15px; font-size: 14px; font-weight: 500;
-    letter-spacing: -0.14px; font-family: inherit; color: var(--ink-muted); cursor: pointer; }
-  .lv-chip:hover { background: var(--surface-2); color: var(--ink); }
-  .lv-chip.active { background: var(--ink); color: #000000; }
-  .lv-chip.sub { background: var(--canvas); box-shadow: inset 0 0 0 1px var(--hairline); }
-  .lv-chip.sub.active { background: var(--surface-2); color: var(--ink); box-shadow: none; }
+  .lv-chip { flex: 0 0 auto; background: var(--surface); border: 1px solid var(--hairline);
+    border-radius: 9999px; height: 36px; padding: 0 15px; font-size: 14px; font-weight: 500;
+    font-family: inherit; color: var(--ink); cursor: pointer; display: inline-flex;
+    align-items: center; }
+  .lv-chip:hover { border-color: var(--faint); }
+  .lv-chip.active { background: var(--rausch); color: #ffffff; border-color: var(--rausch); }
+  .lv-chip.sub { background: transparent; height: 32px; font-weight: 400; }
+  .lv-chip.sub.active { background: var(--rausch); color: #ffffff; border-color: var(--rausch); }
   .lv-chip .filter-dot { width: 8px; height: 8px; }
   .lv-active { color: var(--muted); font-size: 12px; margin: 10px auto 0; }
   .lv-active button { background: none; border: 0; color: var(--accent); font: 600 12px inherit;
@@ -438,25 +425,25 @@
   /* ---------- Footer ---------- */
   footer {
     position: absolute; bottom: 0; left: 0; right: 0; z-index: 4;
-    padding: 6px 12px; background: rgba(9, 9, 9, 0.9);
+    padding: 6px 12px; background: rgba(18, 18, 18, 0.9);
     color: var(--muted); font-size: 10px; text-align: right;
     border-top: 1px solid var(--border); pointer-events: auto;
   }
   footer a { color: var(--muted); text-decoration: none; }
-  footer a:hover { color: var(--accent-blue); }
+  footer a:hover { color: var(--rausch); }
 
   /* ---------- MapLibre control overrides ---------- */
   .maplibregl-ctrl-group {
-    background: var(--surface-1) !important;
-    border: 0 !important;
-    border-radius: 20px !important;
-    box-shadow: inset 0 0.5px 0 rgba(255,255,255,0.10), 0 10px 30px rgba(0,0,0,0.25) !important;
+    background: var(--surface) !important;
+    border: 1px solid var(--hairline) !important;
+    border-radius: 8px !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.4) !important;
     overflow: hidden;
   }
-  .maplibregl-ctrl-group button { background-color: var(--surface-1) !important; }
-  .maplibregl-ctrl-group button:hover { background-color: var(--surface-2) !important; }
+  .maplibregl-ctrl-group button { background-color: var(--surface) !important; }
+  .maplibregl-ctrl-group button:hover { background-color: var(--surface-strong) !important; }
   .maplibregl-ctrl-group button span { filter: invert(1); }
-  .maplibregl-ctrl-attrib { background: rgba(9,9,9,0.8) !important; color: var(--ink-muted) !important; }
+  .maplibregl-ctrl-attrib { background: rgba(18,18,18,0.8) !important; color: var(--muted-text) !important; }
   .maplibregl-ctrl-attrib a { color: var(--muted) !important; }
 
   /* ---------- Coarse pointer (touch): bigger targets, no reliance on hover ---------- */
@@ -464,17 +451,23 @@
     .marker-inner { width: 26px; height: 26px; margin-left: -13px; margin-top: -13px; }
     .filter-btn { padding: 8px 14px; }
     .btn { padding: 10px 16px; min-height: 44px; }
-    .row { padding: 14px 18px 16px; }
+    .row { padding: 15px 16px 14px; }
+    .list { grid-template-columns: 1fr; padding: 10px 16px 24px; }
   }
 
   /* ---------- Mobile: map fills the screen, sidebar becomes a bottom sheet ---------- */
   @media (max-width: 767px) {
-    #app { display: block; position: relative; height: 100vh; height: 100dvh; overflow: hidden; }
+    #app { grid-template-rows: auto auto minmax(0, 1fr); overflow: hidden; }
+    #topbar { grid-template-columns: 1fr; gap: 10px; padding: 10px 16px; }
+    .brand .sub { display: none; }
+    .topbar-actions { display: none; }
+    #body { position: relative; display: block; }
     #map-wrap { position: absolute; inset: 0; }
+    .filter-row, .filter-head, .filter-sub-label { padding-inline: 16px; }
 
     #sidebar {
-      position: fixed; left: 0; right: 0; bottom: 0; z-index: 10;
-      height: 78vh; height: 78dvh; max-height: 78dvh;
+      position: absolute; left: 0; right: 0; bottom: 0; z-index: 10;
+      height: 78%; max-height: 78%;
       border-right: none; border-radius: 16px 16px 0 0;
       box-shadow: 0 -12px 32px rgba(0,0,0,0.5);
       padding-bottom: env(safe-area-inset-bottom);
@@ -495,7 +488,7 @@
 
     .side-header { cursor: pointer; }
 
-    .controls { top: max(12px, env(safe-area-inset-top)); }
+
 
     /* Our own footer duplicates the compact MapLibre attribution control
        (top-right) which stays visible regardless of breakpoint — hide the
@@ -545,29 +538,40 @@
   </div>
 
   <div id="app">
-    <aside id="sidebar">
-      <div class="sheet-handle" id="sheetHandle" aria-hidden="true"></div>
-      <div class="side-header" id="sideHeader">
-        <h1>Barcelona <span class="count" id="count">0 items</span></h1>
-        <div class="sub">A hand-picked map of independent spots — coffee, brunch &amp; restaurants.</div>
+    <header id="topbar">
+      <div class="brand">
+        <h1>Barcelona</h1>
+        <p class="sub">A hand-picked map of independent spots</p>
+      </div>
+      <div class="searchwrap">
         <input id="sideSearch" type="search" placeholder="Search name, note or category" autocomplete="off">
       </div>
-      <div class="filters" id="filters"></div>
-      <div class="list" id="list"></div>
-    </aside>
-
-    <div id="map-wrap">
-      <div class="controls">
+      <div class="topbar-actions">
         <button id="toggle3d" class="btn" type="button">3D</button>
         <button id="listBtn" class="btn" type="button" title="Browse all places as a list">List</button>
         <button id="introBtn" class="btn" type="button" title="About this map">About</button>
       </div>
+    </header>
+
+    <div class="filters" id="filters"></div>
+
+    <div id="body">
+    <aside id="sidebar">
+      <div class="sheet-handle" id="sheetHandle" aria-hidden="true"></div>
+      <div class="side-header result-line" id="sideHeader">
+        <span id="count">0 places</span>
+      </div>
+      <div class="list" id="list"></div>
+    </aside>
+
+    <div id="map-wrap">
       <div id="map"></div>
       <footer>
         Tiles © <a href="https://www.esri.com" target="_blank" rel="noopener">Esri</a>, HERE, Garmin ·
         Data © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors ·
         Rendered with <a href="https://maplibre.org" target="_blank" rel="noopener">MapLibre GL</a>
       </footer>
+    </div>
     </div>
   </div>
 
@@ -907,7 +911,20 @@
     function renderSidebar() {
       const list = document.getElementById('list');
       list.innerHTML = '';
-      document.getElementById('count').textContent = DATA.length + ' items';
+
+      // Count on the left, and — only while something is filtering — the way
+      // back out on the right. With no filter on, a Clear is a dead control.
+      const head = document.getElementById('sideHeader');
+      const filtering = activeFamilies.size || activeGroups.size || activeHood || query.trim();
+      head.innerHTML = '<span><span class="n">' + DATA.length + '</span> ' +
+        (DATA.length === 1 ? 'place' : 'places') + (filtering ? '' : ', hand-picked') + '</span>';
+      if (filtering) {
+        const clear = document.createElement('button');
+        clear.type = 'button';
+        clear.textContent = 'Clear filters';
+        clear.addEventListener('click', resetFilters);
+        head.appendChild(clear);
+      }
       if (!DATA.length) {
         list.innerHTML = '<p class="list-empty">Nothing matches. ' +
           '<button type="button" id="listReset">Start over</button></p>';
