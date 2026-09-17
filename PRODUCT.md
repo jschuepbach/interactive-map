@@ -25,7 +25,7 @@ Generic listing-app UI (Yelp/TripAdvisor card grids, star ratings, review counts
 - Map and list are equally first-class: someone should be able to work entirely from the sidebar list or entirely from the pins.
 - Category color-coding must stay legible and purposeful, not decorative — it's the primary way to scan fast.
 - Personal curation over completeness: quality of note/context per place matters more than exhaustive metadata.
-- Dark throughout, in one register: indigo navy for the app, pale violet as the single accent, a deep-teal band closing the landing screen. No light mode. Category colour appears only on pins and chip dots, never as UI chrome.
+- One register, white canvas: dark ink on white, hairline borders, whitespace as the only atmosphere, and a single near-black call to action per screen. Brand colour arrives as full surfaces (the neighbourhood tiles, the tip callout), and as the colour of a pin. No gradients.
 - Works properly on a phone screen — this is meant to be opened while walking around Barcelona.
 
 ## Accessibility & Inclusion
