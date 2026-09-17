@@ -896,17 +896,18 @@
                              : activeGroups.has(group);
     }
 
-    // Dropping a family takes its tags with it, so the second row can never leave
-    // a tag filtering from behind a chip that is no longer on screen.
+    // One family at a time. "Coffee and Asian" is not a craving anyone has, and
+    // two open families made the second row a pile of unrelated tags. Picking a
+    // new family replaces the old one; picking the open one closes it. Either way
+    // the tags of a family that leaves go with it, so no tag can filter from
+    // behind a chip that is no longer on screen.
     function toggleFamily(id) {
       const f = familyById(id);
       if (!f) return;
-      if (activeFamilies.has(id)) {
-        activeFamilies.delete(id);
-        f.groups.forEach((g) => activeGroups.delete(g));
-      } else {
-        activeFamilies.add(id);
-      }
+      const wasActive = activeFamilies.has(id);
+      activeGroups.clear();
+      activeFamilies.clear();
+      if (!wasActive) activeFamilies.add(id);
       applyFilters();
     }
 
@@ -1344,8 +1345,8 @@
       if (activeHood) params.set('n', activeHood); else params.delete('n');
       const q = query.trim();
       if (q) params.set('q', q); else params.delete('q');
-      if (activeFamilies.size) params.set('f', FAMILIES.filter((f) => activeFamilies.has(f.id))
-        .map((f) => f.id).join(',')); else params.delete('f');
+      const openFamily = FAMILIES.find((f) => activeFamilies.has(f.id));
+      if (openFamily) params.set('f', openFamily.id); else params.delete('f');
       if (notedOnly) params.set('w', '1'); else params.delete('w');
       const qs = params.toString();
       history.replaceState(null, '', window.location.pathname + (qs ? '?' + qs : ''));
@@ -1355,12 +1356,10 @@
       const params = new URLSearchParams(window.location.search);
       let hit = false;
 
-      const fam = params.get('f');
+      const fam = (params.get('f') || '').trim().toLowerCase();
       if (fam) {
-        fam.split(',').forEach((token) => {
-          const f = familyById(token.trim().toLowerCase());
-          if (f) { activeFamilies.add(f.id); hit = true; }
-        });
+        const f = familyById(fam);
+        if (f) { activeFamilies.add(f.id); hit = true; }
       }
 
       const raw = params.get('c');
@@ -1368,12 +1367,14 @@
         const valid = new Map(GROUP_ORDER.map((g) => [g.toLowerCase(), g]));
         raw.split(',').forEach((token) => {
           const group = valid.get(token.trim().toLowerCase());
-          if (group && group !== 'All') {
-            activeGroups.add(group);
-            const f = FAMILY_OF[group];
-            if (f) activeFamilies.add(f.id);
-            hit = true;
-          }
+          if (!group || group === 'All') return;
+          const f = FAMILY_OF[group];
+          // Tags from a second family are dropped rather than silently opening
+          // one the link did not ask for.
+          if (f && activeFamilies.size && !activeFamilies.has(f.id)) return;
+          if (f) activeFamilies.add(f.id);
+          activeGroups.add(group);
+          hit = true;
         });
       }
 
