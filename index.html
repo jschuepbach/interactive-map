@@ -124,7 +124,10 @@
   .row .tip { font-size: 13px; color: var(--muted-text); margin: 0 0 10px; line-height: 1.4;
     padding-left: 11px; border-left: 2px solid var(--rausch); }
   .row .tip b { color: var(--ink); font-weight: 600; }
-  .links { display: flex; gap: 14px; flex-wrap: wrap; margin-top: auto; padding-top: 2px; }
+  .links { display: flex; gap: 14px; flex-wrap: wrap; align-items: baseline;
+    margin-top: auto; padding-top: 2px; }
+  /* Where it is, in the neutral ladder: the pins carry hue, this does not. */
+  .hood-tag { font-size: 13px; color: var(--muted-text); }
   .row a { color: var(--ink); font-size: 13px; text-decoration: underline;
     text-underline-offset: 3px; font-weight: 500; }
   .row a:hover { color: var(--rausch); }
@@ -956,7 +959,7 @@
           '<div class="cat">' + catLabelHtml(p) + '</div>' +
           '<div class="name">' + escapeHtml(p.name) + '</div>' +
           noteHtml(p, 'note') + pendingHtml(p, 'pending') + tipHtml(p, 'tip') +
-          '<div class="links">' + linksHtml(p, '') + '</div>';
+          cardFootHtml(p);
         row.addEventListener('click', (e) => {
           if (e.target && e.target.tagName === 'A') return;
           focusPoint(i);
@@ -1642,6 +1645,17 @@
         : 'https://www.google.com/maps/search/?api=1&query=' + ll;
     }
     const MAPS_LABEL = IS_APPLE ? 'Maps →' : 'Google Maps →';
+
+    // A card ends with where the place is, not with a link to a map the reader is
+    // already looking at. Maps belongs in the pin's own card, one click away.
+    function cardFootHtml(p) {
+      const hood = hoodLabel(p.hood);
+      return '<div class="links">' +
+        (hood ? '<span class="hood-tag">' + escapeHtml(hood) + '</span>' : '') +
+        (p.url ? '<a href="' + escapeAttr(p.url) + '" target="_blank" rel="noopener">Visit →</a>' : '') +
+        (p.instagram ? '<a href="' + escapeAttr(p.instagram) + '" target="_blank" rel="noopener">Instagram →</a>' : '') +
+        '</div>';
+    }
 
     function linksHtml(p, cls) {
       const c = cls ? ' class="' + cls + '"' : '';
