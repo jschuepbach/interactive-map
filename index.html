@@ -113,9 +113,8 @@
      is the ink and the full weight, the sentence around it steps back into the
      body colour at a lighter weight, so the figure carries without the line
      having to shout. */
-  .intro-head h2 { font-size: 27px; font-weight: 450; line-height: 1.14;
-    letter-spacing: -0.5px; margin: 0; color: var(--body-text);
-    text-wrap: balance; }
+  .intro-head h2 { font-size: 27px; font-weight: 450; line-height: 1.16;
+    letter-spacing: -0.5px; margin: 0; color: var(--body-text); }
   .intro-head h2 .n { color: var(--ink); font-weight: 700;
     font-variant-numeric: tabular-nums; letter-spacing: -0.9px; }
   .intro-head p { font-size: 14px; color: var(--muted-text); line-height: 1.43; margin: 0; }
@@ -1541,8 +1540,8 @@
       } else {
         head.className = 'side-header intro-head';
         head.innerHTML =
-          '<h2><span class="n">' + DATA.length +
-          '</span> places I recommend to my friends.</h2>';
+          '<h2><span class="n">' + DATA.length + ' places</span>' +
+          '<br>I recommend to my friends.</h2>';
       }
       head.style.display = head.innerHTML ? '' : 'none';
 
