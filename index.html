@@ -58,8 +58,16 @@
     margin-left: 6px; vertical-align: middle; }
 
   /* 39 tags would push the list off the screen, so the block scrolls on its own. */
-  .filters { display: flex; gap: 6px; padding: 12px 18px 0; flex-wrap: wrap;
-    max-height: 32vh; overflow-y: auto; scrollbar-width: thin; }
+  /* Two levels: the family row, and the tags of an open family under it. */
+  .filters { display: flex; flex-direction: column; gap: 10px; padding: 12px 18px 0;
+    max-height: 42vh; overflow-y: auto; scrollbar-width: thin; }
+  .filter-row { display: flex; gap: 6px; flex-wrap: wrap; }
+  .filter-sub { display: flex; flex-direction: column; gap: 6px;
+    padding: 10px 0 2px; border-top: 1px solid var(--border); }
+  .filter-sub-label { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--muted); margin: 0; }
+  /* Quieter than the family above it: this row is an option, not the main choice. */
+  .filter-btn.sub { padding: 5px 10px; font-size: 10.5px; font-weight: 500; }
   .filter-btn {
     background: var(--panel-2); color: var(--muted); border: 1px solid var(--border);
     padding: 6px 12px; font-size: 11px; font-weight: 600; border-radius: 999px;
@@ -280,9 +288,12 @@
   #lvSearch:focus { outline: none; border-color: var(--accent); }
   /* The sidebar filters sit behind this view, so the list carries its own set —
      on a phone that is the only way to filter without leaving the list. */
-  .lv-filters { display: flex; gap: 7px; overflow-x: auto; margin: 12px auto 0;
-    padding-bottom: 2px; scrollbar-width: none; }
-  .lv-filters::-webkit-scrollbar { display: none; }
+  .lv-filters { display: flex; flex-direction: column; gap: 9px; margin: 12px auto 0;
+    padding-bottom: 2px; }
+  .lv-filters .filter-row { display: flex; gap: 7px; overflow-x: auto;
+    padding-bottom: 2px; scrollbar-width: none; flex-wrap: nowrap; }
+  .lv-filters .filter-row::-webkit-scrollbar { display: none; }
+  .lv-chip.sub { padding: 5px 11px; font-size: 11px; font-weight: 500; }
   .lv-chip { flex: 0 0 auto; background: var(--panel-2); border: 1px solid var(--border);
     border-radius: 999px; padding: 7px 13px; font: 600 12px inherit; font-family: inherit;
     cursor: pointer; letter-spacing: 0.02em; }
@@ -298,7 +309,7 @@
   .lv-top, #lvSearch, .lv-filters, .lv-active, .lv-body > * {
     display: block; max-width: 900px; margin-left: auto; margin-right: auto; }
   .lv-top { display: flex; }
-  .lv-filters { display: flex; }
+  .lv-filters { display: flex; flex-direction: column; }
   .lv-group { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
     color: var(--muted); margin: 26px auto 4px; padding-top: 10px;
     border-top: 1px solid var(--border); }
@@ -553,6 +564,7 @@
     // multiple — same set, so the two can never drift apart.
     const activeGroups = new Set();
     let query = '';          // shared by the sidebar field and the list view field
+    const activeFamilies = new Set();   // the coarse row: Coffee, Asian, Drinks…
     let notedOnly = false;   // only places Jan has actually written about
     let activeHood = null;   // neighbourhood collection, combines with the group filter
     const NOTES = {};        // lowercased place name -> own note from notes.md
@@ -565,35 +577,43 @@
       'Mexican', 'Brazilian', 'Colombian', 'Ecuatorian', 'Italian', 'Middle-Eastern',
       'Wine', 'Beer', 'Drinks', 'Cheese', 'Burger', 'Vegan',
       'Sandwich', 'Fusion', 'Gluten-free'];
-    // One colour per band, not per tag: 39 tags in 39 colours reads as confetti.
-    const GROUP_COLORS = {
-      Coffee: 'var(--c-sweet)', Brunch: 'var(--c-sweet)', Pastry: 'var(--c-sweet)',
-      Bakery: 'var(--c-sweet)', Tea: 'var(--c-sweet)', 'Ice Cream': 'var(--c-sweet)',
-      Catalan: 'var(--c-local)', Tapas: 'var(--c-local)', Seafood: 'var(--c-local)',
-      Grill: 'var(--c-local)', Mediterranean: 'var(--c-local)', 'Fine-dining': 'var(--c-local)',
-      Japanese: 'var(--c-asia)', 'Pan-Asian': 'var(--c-asia)', Korean: 'var(--c-asia)',
-      Vietnamese: 'var(--c-asia)', Chinese: 'var(--c-asia)', Thai: 'var(--c-asia)',
-      Indian: 'var(--c-asia)', Filipino: 'var(--c-asia)',
-      Peruvian: 'var(--c-americas)', Mexican: 'var(--c-americas)', Brazilian: 'var(--c-americas)',
-      Colombian: 'var(--c-americas)', Ecuatorian: 'var(--c-americas)',
-      Italian: 'var(--c-europe)', 'Middle-Eastern': 'var(--c-europe)',
-      Wine: 'var(--c-drinks)', Beer: 'var(--c-drinks)', Drinks: 'var(--c-drinks)',
-      Cheese: 'var(--c-drinks)',
-      Burger: 'var(--c-other)', Vegan: 'var(--c-other)', Sandwich: 'var(--c-other)',
-      Fusion: 'var(--c-other)', 'Gluten-free': 'var(--c-other)'
-    };
-    function groupColor(group) { return GROUP_COLORS[group] || 'var(--accent)'; }
-
-    // Chip bands — presentation only, the filter state stays flat.
-    const CHIP_BANDS = [
-      { label: 'Coffee & sweet',  groups: ['Coffee', 'Brunch', 'Pastry', 'Bakery', 'Tea', 'Ice Cream'] },
-      { label: 'Catalan & tapas', groups: ['Catalan', 'Tapas', 'Seafood', 'Grill', 'Mediterranean', 'Fine-dining'] },
-      { label: 'Asia',            groups: ['Japanese', 'Pan-Asian', 'Korean', 'Vietnamese', 'Chinese', 'Thai', 'Indian', 'Filipino'] },
-      { label: 'Americas',        groups: ['Peruvian', 'Mexican', 'Brazilian', 'Colombian', 'Ecuatorian'] },
-      { label: 'Europe & Levante', groups: ['Italian', 'Middle-Eastern'] },
-      { label: 'Drinks',          groups: ['Wine', 'Beer', 'Drinks', 'Cheese'] },
-      { label: 'Everything else', groups: ['Burger', 'Vegan', 'Sandwich', 'Fusion', 'Gluten-free'] }
+    // ----- Two levels of filter -----
+    // 36 tags in one row is a wall. The seven families below are what someone
+    // actually arrives with ("I want coffee", "I want something Asian"); the tags
+    // inside a family only appear once that family is picked, for the rare visitor
+    // who wants to go finer. A family also owns the colour of its tags, so the
+    // chip, the tag on the row and the pin on the map are the same hue.
+    const FAMILIES = [
+      { id: 'coffee',  label: 'Coffee & pastry', color: 'var(--c-sweet)',
+        groups: ['Coffee', 'Pastry', 'Bakery', 'Tea', 'Ice Cream'] },
+      { id: 'brunch',  label: 'Brunch',          color: 'var(--c-other)',
+        groups: ['Brunch'] },
+      { id: 'tapas',   label: 'Tapas & Catalan', color: 'var(--c-local)',
+        groups: ['Tapas', 'Catalan'] },
+      { id: 'asian',   label: 'Asian',           color: 'var(--c-asia)',
+        groups: ['Japanese', 'Pan-Asian', 'Korean', 'Vietnamese', 'Chinese', 'Thai', 'Indian', 'Filipino'] },
+      { id: 'latin',   label: 'Latin America',   color: 'var(--c-americas)',
+        groups: ['Peruvian', 'Mexican', 'Brazilian', 'Colombian', 'Ecuatorian'] },
+      { id: 'dinner',  label: 'Dinner',          color: 'var(--c-europe)',
+        groups: ['Fine-dining', 'Grill', 'Seafood', 'Italian', 'Mediterranean', 'Middle-Eastern',
+                 'Burger', 'Sandwich', 'Fusion', 'Vegan', 'Gluten-free'] },
+      { id: 'drinks',  label: 'Drinks',          color: 'var(--c-drinks)',
+        groups: ['Wine', 'Beer', 'Drinks', 'Cheese'] }
     ];
+    const FAMILY_OF = {};
+    FAMILIES.forEach((f) => f.groups.forEach((g) => { FAMILY_OF[g] = f; }));
+    function groupColor(group) {
+      const f = FAMILY_OF[group];
+      return f ? f.color : 'var(--accent)';
+    }
+    function familyById(id) { return FAMILIES.find((f) => f.id === id); }
+    // Every tag of every picked family, which is both what the second row shows
+    // and what an unnarrowed family match tests against.
+    function activeFamilyGroups() {
+      const out = [];
+      FAMILIES.forEach((f) => { if (activeFamilies.has(f.id)) out.push.apply(out, f.groups); });
+      return out;
+    }
 
     // ----- Neighbourhoods -----
     // Derived from the postcode in the scraped address (226 of 227 carry one);
@@ -814,6 +834,7 @@
 
     function resetFilters() {
       activeGroups.clear();
+      activeFamilies.clear();
       activeHood = null;
       notedOnly = false;
       setQuery('', true);
@@ -866,7 +887,31 @@
 
     // ----- Filters -----
     function isGroupActive(group) {
-      return group === 'All' ? activeGroups.size === 0 : activeGroups.has(group);
+      return group === 'All' ? (activeGroups.size === 0 && activeFamilies.size === 0)
+                             : activeGroups.has(group);
+    }
+
+    // Dropping a family takes its tags with it, so the second row can never leave
+    // a tag filtering from behind a chip that is no longer on screen.
+    function toggleFamily(id) {
+      const f = familyById(id);
+      if (!f) return;
+      if (activeFamilies.has(id)) {
+        activeFamilies.delete(id);
+        f.groups.forEach((g) => activeGroups.delete(g));
+      } else {
+        activeFamilies.add(id);
+      }
+      applyFilters();
+    }
+
+    function familyCount(id) {
+      const f = familyById(id);
+      if (!f) return 0;
+      const q = query.trim().toLowerCase();
+      return ALL_DATA.filter((p) => matchesQuery(p, q) &&
+        (!notedOnly || hasOwnNote(p)) && (!activeHood || p.hood === activeHood) &&
+        f.groups.some((g) => hasGroup(p, g))).length;
     }
 
     // Counts always reflect the other axis of the filter: with a neighbourhood
@@ -882,12 +927,22 @@
       const q = query.trim().toLowerCase();
       return ALL_DATA.filter((p) => p.hood === id && matchesQuery(p, q) &&
         (!notedOnly || hasOwnNote(p)) &&
-        (activeGroups.size === 0 || Array.from(activeGroups).some((g) => hasGroup(p, g)))).length;
+        matchesCategory(p)).length;
+    }
+
+    // Tags win when they are set, otherwise the family stands for all of its tags.
+    function matchesCategory(p) {
+      if (activeGroups.size) return Array.from(activeGroups).some((g) => hasGroup(p, g));
+      if (activeFamilies.size) return activeFamilyGroups().some((g) => hasGroup(p, g));
+      return true;
     }
 
     function renderFilters() {
       const wrap = document.getElementById('filters');
       wrap.innerHTML = '';
+      const head = document.createElement('div');
+      head.className = 'filter-row';
+      wrap.appendChild(head);
 
       // Neighbourhood is set in the intro, so it needs a visible, clearable
       // representation in the sidebar too.
@@ -897,7 +952,7 @@
         pill.className = 'hood-pill';
         pill.innerHTML = escapeHtml(hoodLabel(activeHood)) + ' <span class="x">clear ×</span>';
         pill.addEventListener('click', () => { activeHood = null; applyFilters(); });
-        wrap.appendChild(pill);
+        head.appendChild(pill);
       }
 
       // How many of the current selection carry a note of Jan's. Counted against
@@ -917,40 +972,82 @@
           if (notedOnly) lvMissingOnly = false;   // the two would cancel out
           applyFilters();
         });
-        wrap.appendChild(note);
+        head.appendChild(note);
       }
+      if (!head.childNodes.length) wrap.removeChild(head);
 
-      GROUP_ORDER.forEach((group) => {
-        const active = isGroupActive(group);
-        // A search that leaves a category empty removes its chip: a row of
-        // "(0)" pills is noise. A picked chip stays so it can be unpicked.
-        if (!groupCount(group) && !active) return;
-        const btn = document.createElement('button');
-        btn.type = 'button';
-        btn.className = 'filter-btn' + (active ? ' active' : '');
-        btn.setAttribute('aria-pressed', String(active));
-        const n = groupCount(group);
-        const color = groupColor(group);
-        btn.style.color = active ? '#0a0c10' : color;
-        btn.style.borderColor = color;
-        btn.style.background = active ? color : 'var(--panel-2)';
-        if (group !== 'All') {
-          const dot = document.createElement('span');
-          dot.className = 'filter-dot';
-          dot.style.background = active ? '#0a0c10' : color;
-          btn.appendChild(dot);
-        }
-        btn.appendChild(document.createTextNode(group + ' (' + n + ')'));
-        btn.addEventListener('click', () => toggleGroup(group));
-        wrap.appendChild(btn);
+      const top = document.createElement('div');
+      top.className = 'filter-row';
+      top.appendChild(chip({ label: 'All', count: groupCount('All'), color: 'var(--accent)',
+        active: isGroupActive('All'), dot: false, cls: 'filter-btn',
+        onClick: () => toggleGroup('All') }));
+      FAMILIES.forEach((f) => {
+        const n = familyCount(f.id);
+        const active = activeFamilies.has(f.id);
+        // A family that a search or a barrio has emptied is dropped, unless it is
+        // the one currently picked: a chip you cannot switch off again is a trap.
+        if (!n && !active) return;
+        top.appendChild(chip({ label: f.label, count: n, color: f.color, active: active,
+          dot: true, cls: 'filter-btn', onClick: () => toggleFamily(f.id) }));
       });
+      wrap.appendChild(top);
+      const sub = renderSubRow();
+      if (sub) wrap.appendChild(sub);
+    }
+
+    // One chip, four surfaces. Colour comes from the family, so a chip, the tag
+    // on a list row and the pin on the map are never three different hues.
+    function chip(o) {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = o.cls + (o.active ? ' active' : '');
+      btn.setAttribute('aria-pressed', String(o.active));
+      btn.style.color = o.active ? '#0a0c10' : o.color;
+      btn.style.borderColor = o.color;
+      btn.style.background = o.active ? o.color : 'var(--panel-2)';
+      if (o.dot) {
+        const dot = document.createElement('span');
+        dot.className = 'filter-dot';
+        dot.style.background = o.active ? '#0a0c10' : o.color;
+        btn.appendChild(dot);
+      }
+      btn.appendChild(document.createTextNode(o.label + ' (' + o.count + ')'));
+      btn.addEventListener('click', o.onClick);
+      return btn;
+    }
+
+    // The second level. It exists only while a family is open, and it holds that
+    // family's own tags: 36 tags in one row was the thing worth fixing.
+    function renderSubRow(cls, wrapClick) {
+      if (!activeFamilies.size) return null;
+      const row = document.createElement('div');
+      row.className = 'filter-sub';
+      const label = document.createElement('p');
+      label.className = 'filter-sub-label';
+      label.textContent = 'Narrow it down';
+      row.appendChild(label);
+      const rail = document.createElement('div');
+      rail.className = 'filter-row';
+      let any = false;
+      activeFamilyGroups().forEach((g) => {
+        const n = groupCount(g);
+        const active = activeGroups.has(g);
+        if (!n && !active) return;
+        any = true;
+        const fire = () => toggleGroup(g);
+        rail.appendChild(chip({ label: g, count: n, color: groupColor(g), active: active,
+          dot: false, cls: cls || 'filter-btn sub', onClick: wrapClick ? wrapClick(fire) : fire }));
+      });
+      if (!any) return null;
+      row.appendChild(rail);
+      return row;
     }
 
     // One rule for every filter surface: sidebar, intro chips and list chips all
     // toggle the same set, so a category picked in one place can be switched off
     // in another. "All" is not a group, it is the clear button.
     function toggleGroup(group) {
-      if (group === 'All') activeGroups.clear();
+      if (group === 'All') { activeGroups.clear(); activeFamilies.clear(); }
       else if (activeGroups.has(group)) activeGroups.delete(group);
       else activeGroups.add(group);
       applyFilters();
@@ -971,9 +1068,7 @@
       if (notedOnly && !hasOwnNote(p)) return false;
       if (!matchesQuery(p, query.trim().toLowerCase())) return false;
       if (activeHood && p.hood !== activeHood) return false;
-      if (activeGroups.size === 0) return true;
-      for (const g of activeGroups) { if (hasGroup(p, g)) return true; }
-      return false;
+      return matchesCategory(p);
     }
 
     function filteredCount() {
@@ -1092,36 +1187,32 @@
       const wrap = document.getElementById('lvFilters');
       if (!wrap) return;
       wrap.innerHTML = '';
-      GROUP_ORDER.forEach((group) => {
-        const n = groupCount(group);
-        if (!n && !isGroupActive(group)) return;
-        const active = isGroupActive(group);
-        const color = groupColor(group);
-        const btn = document.createElement('button');
-        btn.type = 'button';
-        btn.className = 'lv-chip';
-        btn.setAttribute('aria-pressed', String(active));
-        btn.style.color = active ? '#0a0c10' : color;
-        btn.style.borderColor = color;
-        btn.style.background = active ? color : 'var(--panel-2)';
-        if (group !== 'All') {
-          const dot = document.createElement('span');
-          dot.className = 'filter-dot';
-          dot.style.background = active ? '#0a0c10' : color;
-          btn.appendChild(dot);
-        }
-        btn.appendChild(document.createTextNode(group + ' (' + n + ')'));
-        btn.addEventListener('click', () => {
-          toggleGroup(group);
-          document.getElementById('lvBody').scrollTop = 0;
-        });
-        wrap.appendChild(btn);
-        // On a phone the row is wider than the screen — keep the chip you just
-        // tapped in sight instead of leaving it scrolled off to the right.
-        if (active && group !== 'All') {
-          requestAnimationFrame(() => btn.scrollIntoView({ inline: 'center', block: 'nearest' }));
-        }
+
+      // Tapping a chip re-sorts the whole list, so send the reader back to the top
+      // of it, and keep the chip they just tapped on screen on a narrow phone.
+      const pick = (fn) => () => { fn(); document.getElementById('lvBody').scrollTop = 0; };
+      const keepInView = (btn, active) => {
+        if (active) requestAnimationFrame(() => btn.scrollIntoView({ inline: 'center', block: 'nearest' }));
+      };
+
+      const top = document.createElement('div');
+      top.className = 'filter-row';
+      top.appendChild(chip({ label: 'All', count: groupCount('All'), color: 'var(--accent)',
+        active: isGroupActive('All'), dot: false, cls: 'lv-chip',
+        onClick: pick(() => toggleGroup('All')) }));
+      FAMILIES.forEach((f) => {
+        const n = familyCount(f.id);
+        const active = activeFamilies.has(f.id);
+        if (!n && !active) return;
+        const btn = chip({ label: f.label, count: n, color: f.color, active: active,
+          dot: true, cls: 'lv-chip', onClick: pick(() => toggleFamily(f.id)) });
+        top.appendChild(btn);
+        keepInView(btn, active);
       });
+      wrap.appendChild(top);
+
+      const subRow = renderSubRow('lv-chip sub', pick);
+      if (subRow) wrap.appendChild(subRow);
     }
 
     function openListView() {
@@ -1172,46 +1263,22 @@
       try { return fn(); } catch (_) { return fallback; } // Safari private mode
     }
 
-    function makeChip(group) {
-      const n = groupCount(group);
-      const active = activeGroups.has(group);
-      const color = groupColor(group);
-      const btn = document.createElement('button');
-      btn.type = 'button';
-      btn.className = 'intro-chip';
-      btn.setAttribute('aria-pressed', String(active));
-      btn.style.color = active ? '#0a0c10' : color;
-      btn.style.borderColor = color;
-      btn.style.background = active ? color : 'var(--panel-2)';
-      const dot = document.createElement('span');
-      dot.className = 'filter-dot';
-      dot.style.background = active ? '#0a0c10' : color;
-      btn.appendChild(dot);
-      btn.appendChild(document.createTextNode(group + ' (' + n + ')'));
-      btn.addEventListener('click', () => toggleGroup(group));
-      return btn;
-    }
 
     function renderIntroChips() {
       if (!introChipsEl) return;
       introChipsEl.innerHTML = '';
-      CHIP_BANDS.forEach((band) => {
-        // A band whose groups are all empty in the current neighbourhood is dropped,
-        // but a selected chip always stays visible so it can be switched off again.
-        const groups = band.groups.filter((g) => groupCount(g) > 0 || activeGroups.has(g));
-        if (!groups.length) return;
-        const wrap = document.createElement('div');
-        wrap.className = 'chip-band';
-        const label = document.createElement('p');
-        label.className = 'chip-band-label';
-        label.textContent = band.label;
-        wrap.appendChild(label);
-        const row = document.createElement('div');
-        row.className = 'chip-row';
-        groups.forEach((g) => row.appendChild(makeChip(g)));
-        wrap.appendChild(row);
-        introChipsEl.appendChild(wrap);
+      // The landing shows the seven families and nothing finer. Someone arriving
+      // for the first time is choosing a mood, not a cuisine tag.
+      const row = document.createElement('div');
+      row.className = 'chip-row';
+      FAMILIES.forEach((f) => {
+        const n = familyCount(f.id);
+        const active = activeFamilies.has(f.id);
+        if (!n && !active) return;
+        row.appendChild(chip({ label: f.label, count: n, color: f.color, active: active,
+          dot: true, cls: 'intro-chip', onClick: () => toggleFamily(f.id) }));
       });
+      introChipsEl.appendChild(row);
       renderHoodTiles();
       updateIntroCta();
     }
@@ -1253,10 +1320,14 @@
     function renderIntroStats() {
       const el = document.getElementById('introStats');
       if (!el) return;
-      const coffee = ALL_DATA.filter((p) => p.group === 'Coffee').length;
-      const brunch = ALL_DATA.filter((p) => p.group === 'Brunch').length;
-      const food = ALL_DATA.length - coffee - brunch;
-      el.textContent = coffee + ' coffee · ' + brunch + ' brunch · ' + food + ' restaurants';
+      // Three families, counted by tag. Not a partition — a place can be two of
+      // them — so the line names them instead of implying the numbers add up.
+      const count = (id) => {
+        const f = familyById(id);
+        return ALL_DATA.filter((p) => f.groups.some((g) => hasGroup(p, g))).length;
+      };
+      el.textContent = count('coffee') + ' coffee & pastry · ' + count('brunch') + ' brunch · ' +
+        count('tapas') + ' tapas & catalan';
       document.getElementById('introTotal').textContent = String(ALL_DATA.length);
     }
 
@@ -1268,6 +1339,8 @@
       if (activeHood) params.set('n', activeHood); else params.delete('n');
       const q = query.trim();
       if (q) params.set('q', q); else params.delete('q');
+      if (activeFamilies.size) params.set('f', FAMILIES.filter((f) => activeFamilies.has(f.id))
+        .map((f) => f.id).join(',')); else params.delete('f');
       if (notedOnly) params.set('w', '1'); else params.delete('w');
       const qs = params.toString();
       history.replaceState(null, '', window.location.pathname + (qs ? '?' + qs : ''));
@@ -1277,12 +1350,25 @@
       const params = new URLSearchParams(window.location.search);
       let hit = false;
 
+      const fam = params.get('f');
+      if (fam) {
+        fam.split(',').forEach((token) => {
+          const f = familyById(token.trim().toLowerCase());
+          if (f) { activeFamilies.add(f.id); hit = true; }
+        });
+      }
+
       const raw = params.get('c');
       if (raw) {
         const valid = new Map(GROUP_ORDER.map((g) => [g.toLowerCase(), g]));
         raw.split(',').forEach((token) => {
           const group = valid.get(token.trim().toLowerCase());
-          if (group && group !== 'All') { activeGroups.add(group); hit = true; }
+          if (group && group !== 'All') {
+            activeGroups.add(group);
+            const f = FAMILY_OF[group];
+            if (f) activeFamilies.add(f.id);
+            hit = true;
+          }
         });
       }
 
