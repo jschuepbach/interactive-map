@@ -42,7 +42,7 @@
   .side-header h1 { font-size: 15px; margin: 0 0 4px; letter-spacing: -0.01em; font-weight: 600; }
   .side-header .sub { color: var(--muted); font-size: 12px; line-height: 1.5; }
   /* The search field lives with the results, not behind a button: on the map
-     screen it is the fastest way through 322 places. */
+     screen it is the fastest way through 227 places. */
   #sideSearch { width: 100%; margin-top: 12px; background: var(--panel-2);
     border: 1px solid var(--border); border-radius: 8px; color: var(--text);
     font-family: inherit; font-size: 13px; padding: 9px 12px; }
@@ -100,6 +100,12 @@
   .row .note { font-size: 13px; color: var(--text); opacity: 0.82; margin: 0 0 7px;
     line-height: 1.5; }
   .row .addr { font-size: 11px; color: var(--muted); margin: 0 0 6px; line-height: 1.4; }
+  /* What to order, in Jan's words. Sits under the note and reads as an aside. */
+  .row .tip { font-size: 12px; color: var(--muted); margin: 0 0 7px; line-height: 1.45; }
+  .row .tip b, .popup-tip b, .lv-tip b { color: var(--accent); font-weight: 600; }
+  /* Not been there yet. Said once, quietly, instead of leaving the row bare. */
+  .row .bucket { font-size: 12px; color: var(--muted); font-style: italic;
+    margin: 0 0 6px; line-height: 1.45; }
   .links { display: flex; gap: 14px; flex-wrap: wrap; }
   .row a { color: var(--accent); font-size: 11px; text-decoration: none; font-weight: 600; }
   .row a:hover { text-decoration: underline; }
@@ -159,6 +165,9 @@
     line-height: 1.45; max-width: 240px; }
   .popup-addr { color: var(--muted); font-size: 11px; margin: 0 0 8px; line-height: 1.4;
     max-width: 240px; }
+  .popup-tip { color: var(--muted); font-size: 11px; margin: 0 0 8px; line-height: 1.45;
+    max-width: 240px; }
+  .popup-bucket { color: var(--muted); font-size: 11px; font-style: italic; margin: 0 0 8px; }
   .popup-link { color: var(--accent); font-size: 11px; text-decoration: none; font-weight: 600; }
   .popup-link:hover { text-decoration: underline; }
 
@@ -288,7 +297,7 @@
     text-underline-offset: 3px; }
   .lv-body { flex: 1; overflow-y: auto; padding: 0 24px 60px;
     padding-bottom: max(60px, env(safe-area-inset-bottom)); }
-  /* One centred column — 322 entries across a wide screen read badly, and the
+  /* One centred column — 227 entries across a wide screen read badly, and the
      links would end up an arm's length from the name they belong to. */
   .lv-top, #lvSearch, .lv-filters, .lv-active, .lv-body > * {
     display: block; max-width: 900px; margin-left: auto; margin-right: auto; }
@@ -304,6 +313,8 @@
   .lv-tags { font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
     font-weight: 600; margin: 0 0 4px; color: var(--muted); }
   .lv-note { color: var(--muted); font-size: 12px; margin: 0; line-height: 1.45; }
+  .lv-tip { color: var(--muted); font-size: 12px; margin: 4px 0 0; line-height: 1.45; }
+  .lv-bucket { color: var(--muted); font-size: 12px; font-style: italic; margin: 0; }
   .lv-meta { text-align: right; white-space: nowrap; }
   .lv-hood { display: block; color: var(--muted); font-size: 11px; margin-bottom: 5px; }
   .lv-meta a { color: var(--accent); font-size: 11px; font-weight: 600; text-decoration: none;
@@ -548,6 +559,7 @@
     const activeGroups = new Set();
     let query = '';          // shared by the sidebar field and the list view field
     let notedOnly = false;   // only places Jan has actually written about
+    let bucketOnly = false;  // only places still on the bucket list
     let activeHood = null;   // neighbourhood collection, combines with the group filter
     const NOTES = {};        // lowercased place name -> own note from notes.md
     const LINKS = {};        // lowercased place name -> { url, instagram } from links.json
@@ -590,8 +602,9 @@
     ];
 
     // ----- Neighbourhoods -----
-    // Derived from the postcode in the note (305 of 322 carry one); the rest are
-    // assigned to the nearest neighbourhood centroid, so every spot gets a home.
+    // Derived from the postcode in the scraped address (226 of 227 carry one);
+    // the rest are assigned to the nearest neighbourhood centroid, so every spot
+    // gets a home.
     const HOODS = [
       { id: 'ciutat-vella', label: 'Ciutat Vella',    codes: ['08001', '08002', '08003', '08039'] },
       { id: 'eixample',     label: 'Eixample',        codes: ['08007', '08008', '08009', '08010', '08011', '08013', '08036', '08037'] },
@@ -611,7 +624,7 @@
 
       const pending = [];
       for (const p of points) {
-        const m = /\b(08\d{3})\b/.exec(p.note || '');
+        const m = /\b(08\d{3})\b/.exec(p.address || '');
         const id = m ? byCode.get(m[1]) : undefined;
         if (id) p.hood = id; else pending.push(p);
       }
@@ -795,7 +808,7 @@
         row.innerHTML =
           '<div class="cat">' + catLabelHtml(p) + '</div>' +
           '<div class="name">' + escapeHtml(p.name) + '</div>' +
-          noteHtml(p, 'note') + addrHtml(p) +
+          noteHtml(p, 'note') + bucketHtml(p, 'bucket') + tipHtml(p, 'tip') + addrHtml(p) +
           '<div class="links">' + linksHtml(p, '') + '</div>';
         row.addEventListener('click', (e) => {
           if (e.target && e.target.tagName === 'A') return;
@@ -809,6 +822,7 @@
       activeGroups.clear();
       activeHood = null;
       notedOnly = false;
+      bucketOnly = false;
       setQuery('', true);
     }
 
@@ -834,7 +848,8 @@
         '<div class="popup-cat">' + catLabelHtml(p) + '</div>' +
         '<div class="popup-name">' + escapeHtml(p.name) + '</div>' +
         (hasOwnNote(p) ? '<div class="popup-note">' + escapeHtml(p.note) + '</div>'
-                       : addrHtml(p, 'popup-addr')) +
+                       : bucketHtml(p, 'popup-bucket') + addrHtml(p, 'popup-addr')) +
+        tipHtml(p, 'popup-tip') +
         '<div class="links">' + linksHtml(p, 'popup-link') + '</div>';
       currentPopup = new maplibregl.Popup({ offset: 20, closeButton: false, maxWidth: '260px' })
         .setLngLat([p.lng, p.lat])
@@ -906,10 +921,30 @@
                                      : 'Only the ones I have written about (' + written + ')';
         note.addEventListener('click', () => {
           notedOnly = !notedOnly;
-          if (notedOnly) lvMissingOnly = false;   // the two would cancel out
+          if (notedOnly) { bucketOnly = false; lvMissingOnly = false; }  // these cancel out
           applyFilters();
         });
         wrap.appendChild(note);
+      }
+
+      // The other half of the same question: where has he not been yet. Counted
+      // the same way, against everything but this filter.
+      const bucket = ALL_DATA.filter((p) => p.bucket && matchesQuery(p, query.trim().toLowerCase()) &&
+        (!activeHood || p.hood === activeHood) &&
+        (activeGroups.size === 0 || Array.from(activeGroups).some((g) => hasGroup(p, g)))).length;
+      if (bucket || bucketOnly) {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'note-pill' + (bucketOnly ? ' on' : '');
+        btn.setAttribute('aria-pressed', String(bucketOnly));
+        btn.textContent = bucketOnly ? '\u2713 Still on my bucket list'
+                                     : 'Still on my bucket list (' + bucket + ')';
+        btn.addEventListener('click', () => {
+          bucketOnly = !bucketOnly;
+          if (bucketOnly) notedOnly = false;      // a bucket place has no note
+          applyFilters();
+        });
+        wrap.appendChild(btn);
       }
 
       GROUP_ORDER.forEach((group) => {
@@ -950,8 +985,8 @@
 
     function matchesQuery(p, q) {
       if (!q) return true;
-      const hay = (p.name + ' ' + (p.note || '') + ' ' +
-        (p.groups || [p.group]).join(' ')).toLowerCase();
+      const hay = (p.name + ' ' + (p.note || '') + ' ' + (p.address || '') + ' ' +
+        (p.tip || '') + ' ' + (p.groups || [p.group]).join(' ')).toLowerCase();
       return hay.indexOf(q) > -1;
     }
 
@@ -961,6 +996,7 @@
 
     function matchesFilter(p) {
       if (notedOnly && !hasOwnNote(p)) return false;
+      if (bucketOnly && !p.bucket) return false;
       if (!matchesQuery(p, query.trim().toLowerCase())) return false;
       if (activeHood && p.hood !== activeHood) return false;
       if (activeGroups.size === 0) return true;
@@ -1061,7 +1097,7 @@
             (extra.length ? '<p class="lv-tags">also ' + extra.map((g) =>
               '<span style="color:' + groupColor(g) + '">' + escapeHtml(g) + '</span>').join(', ') + '</p>' : '') +
             '<p class="lv-name">' + escapeHtml(p.name) + '</p>' +
-            noteHtml(p, 'lv-note') +
+            noteHtml(p, 'lv-note') + bucketHtml(p, 'lv-bucket') + tipHtml(p, 'lv-tip') +
           '</div>' +
           '<div class="lv-meta">' +
             '<span class="lv-hood">' + escapeHtml(hoodLabel(p.hood)) + '</span>' +
@@ -1129,7 +1165,7 @@
 
     document.getElementById('listBtn').addEventListener('click', openListView);
     document.getElementById('lvClose').addEventListener('click', closeListView);
-    // Both fields write the same query. Re-drawing 322 markers on every
+    // Both fields write the same query. Re-drawing 227 markers on every
     // keystroke is wasted work, so the map follows a beat behind the typing.
     const searchFields = [document.getElementById('sideSearch'),
                           document.getElementById('lvSearch')];
@@ -1261,6 +1297,7 @@
       const q = query.trim();
       if (q) params.set('q', q); else params.delete('q');
       if (notedOnly) params.set('w', '1'); else params.delete('w');
+      if (bucketOnly) params.set('b', '1'); else params.delete('b');
       const qs = params.toString();
       history.replaceState(null, '', window.location.pathname + (qs ? '?' + qs : ''));
     }
@@ -1285,6 +1322,7 @@
       if (q) { query = q; hit = true; }
 
       if (params.get('w') === '1') { notedOnly = true; hit = true; }
+      if (params.get('b') === '1') { bucketOnly = true; notedOnly = false; hit = true; }
 
       return hit;
     }
@@ -1363,31 +1401,33 @@
     }
     function escapeAttr(s) { return escapeHtml(s); }
 
-    // Most notes are the Google Maps address the data was scraped from, which
-    // the neighbourhood line and the maps link already cover. Only the
-    // hand-written ones say anything, so the rest is dropped from the lists.
-    function isAddressNote(note) {
-      const n = (note || '').trim();
-      if (n.length < 15) return true;                              // "Barcelona"
-      if (/\b08\d{3}\b/.test(n)) return true;                      // postcode
-      return /,\s*(barcelona|spain|espanya)\.?$/i.test(n);
-    }
     function hasOwnNote(p) {
-      return !!(p.note && !isAddressNote(p.note));
+      return !!p.note;
     }
     function noteHtml(p, cls) {
-      return isAddressNote(p.note) ? '' :
-        '<p class="' + cls + '">' + escapeHtml(p.note) + '</p>';
+      return p.note ? '<p class="' + cls + '">' + escapeHtml(p.note) + '</p>' : '';
     }
 
     // Shown only where there is no note to lead with, so the row is never bare.
     function addrHtml(p, cls) {
-      if (!isAddressNote(p.note)) return '';
-      const street = String(p.note)
+      if (p.note || !p.address) return '';
+      const street = String(p.address)
         .replace(/^[^,]+,\s*/, '')            // the name, repeated
         .replace(/,\s*Barcelona\s*$/i, '')   // the city, on a map of the city
         .replace(/,\s*0?8\d{3}\s*$/, '');    // the postcode, once the city is gone
       return '<p class="' + (cls || 'addr') + '">' + escapeHtml(street) + '</p>';
+    }
+
+    // The Notion column "My suggestion": what to order once you are there.
+    function tipHtml(p, cls) {
+      if (!p.tip) return '';
+      return '<p class="' + cls + '"><b>Tip</b> ' + escapeHtml(p.tip) + '</p>';
+    }
+
+    // Places Jan has not been to yet carry no note. Rather than show the bare
+    // address, the row says so, which is also what the bucket-list filter counts.
+    function bucketHtml(p, cls) {
+      return p.bucket ? '<p class="' + cls + '">Still on my bucket list</p>' : '';
     }
 
     // "WINE · TAPAS" — primary in its colour, the rest muted, so a place that
@@ -1469,8 +1509,11 @@
             console.warn('[coord-guard] Skipping "' + (p.name || '?') + '" — outside region (' + p.lat + ', ' + p.lng + ')');
             continue;
           }
-          const own = NOTES[(p.name || '').toLowerCase()];
-          if (own) p.note = own;
+          // data.json ships the scraped Google Maps address in "note". It stays
+          // as the address, because the postcode in it is what places the spot in
+          // a neighbourhood. The note is Jan's own text, or nothing.
+          p.address = p.note || '';
+          p.note = NOTES[(p.name || '').toLowerCase()] || '';
 
           const own_links = LINKS[(p.name || '').toLowerCase()] || {};
           if (own_links.url) p.url = own_links.url;

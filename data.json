@@ -12,18 +12,6 @@
     ]
   },
   {
-    "name": "Nømad Coffee Productions",
-    "lat": 41.38932,
-    "lng": 2.1789,
-    "category": "Roastery",
-    "note": "Nømad Coffee Productions, Plaça de Sant Pere, 13, 08003, Barcelona",
-    "url": "https://nomadcoffee.es",
-    "group": "Coffee",
-    "groups": [
-      "Coffee"
-    ]
-  },
-  {
     "name": "SlowMov",
     "lat": 41.3981094,
     "lng": 2.1545583,
@@ -73,7 +61,8 @@
     "groups": [
       "Coffee",
       "Tea"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Skye Coffee Co.",
@@ -98,7 +87,8 @@
     "groups": [
       "Coffee",
       "Pastry"
-    ]
+    ],
+    "tip": "Ask what's freshly roasted that week, that's usually the best cup on the menu."
   },
   {
     "name": "CAUA CACAO ROASTERS",
@@ -111,7 +101,8 @@
     "groups": [
       "Coffee",
       "Pastry"
-    ]
+    ],
+    "tip": "If they roast their own cacao, try that instead of coffee."
   },
   {
     "name": "Trópico Brunch Barcelona",
@@ -138,7 +129,8 @@
       "Brunch",
       "Coffee",
       "Gluten-free"
-    ]
+    ],
+    "tip": "Good option if you need strictly gluten-free, try the cinnamon cookie."
   },
   {
     "name": "Mosquito",
@@ -150,7 +142,8 @@
     "url": "",
     "groups": [
       "Pan-Asian"
-    ]
+    ],
+    "tip": "Order several small dishes to share, that's the format the whole menu is built around."
   },
   {
     "name": "Restaurante Casa Luz",
@@ -163,7 +156,8 @@
     "groups": [
       "Tapas",
       "Wine"
-    ]
+    ],
+    "tip": "Check their current menu online before going, it's the kind of place worth confirming what's on offer that week."
   },
   {
     "name": "Espai Puntal",
@@ -176,7 +170,8 @@
     "groups": [
       "Grill",
       "Wine"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "NUDES",
@@ -188,7 +183,8 @@
     "url": "",
     "groups": [
       "Coffee"
-    ]
+    ],
+    "tip": "Good spot for photos and quiet coffee."
   },
   {
     "name": "Departure Coffee Co.",
@@ -201,7 +197,8 @@
     "groups": [
       "Coffee",
       "Pastry"
-    ]
+    ],
+    "tip": "Ask for the current single origin."
   },
   {
     "name": "Casa Colomina",
@@ -213,7 +210,8 @@
     "url": "",
     "groups": [
       "Pastry"
-    ]
+    ],
+    "tip": "Get the traditional, plain Turron!"
   },
   {
     "name": "Bun Bo Barcelona",
@@ -225,10 +223,11 @@
     "url": "",
     "groups": [
       "Vietnamese"
-    ]
+    ],
+    "tip": "Summer rolls with shrimp, then a pho."
   },
   {
-    "name": "el SET",
+    "name": "El Set",
     "lat": 41.384284,
     "lng": 2.183094,
     "category": "Restaurant",
@@ -253,7 +252,8 @@
     "groups": [
       "Brunch",
       "Coffee"
-    ]
+    ],
+    "tip": "Good for a coffee break between the beach and the old town, it's a convenient stop rather than a destination in itself."
   },
   {
     "name": "Maresme Brewery Taproom",
@@ -265,7 +265,8 @@
     "url": "",
     "groups": [
       "Beer"
-    ]
+    ],
+    "tip": "Ask for a flight if you want to try several of their own brews before committing to a pint."
   },
   {
     "name": "TWO SCHMUCKS",
@@ -277,7 +278,8 @@
     "url": "",
     "groups": [
       "Drinks"
-    ]
+    ],
+    "tip": "Go for cocktails first, that's what earned this place its reputation."
   },
   {
     "name": "Kasarap Barcelona",
@@ -289,7 +291,8 @@
     "url": "",
     "groups": [
       "Filipino"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Pueblo Libre",
@@ -308,13 +311,16 @@
     "lat": 41.382502,
     "lng": 2.173379,
     "category": "Restaurant",
-    "group": "Middle-Eastern",
+    "group": "Wine",
     "note": "Espai Quera Llibres i platillos, Carrer de Petritxol, 2, 08002, Barcelona",
     "url": "",
     "groups": [
-      "Middle-Eastern",
-      "Wine"
-    ]
+      "Wine",
+      "Catalan",
+      "Tapas",
+      "Cheese"
+    ],
+    "tip": "Go for cheese from the Pyrenees and wine."
   },
   {
     "name": "Bistrot Levante",
@@ -326,7 +332,8 @@
     "url": "",
     "groups": [
       "Tapas"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Le Bouchon",
@@ -340,7 +347,8 @@
       "Catalan",
       "Tapas",
       "Wine"
-    ]
+    ],
+    "tip": "Good pick for a special dinner, it has hotel-restaurant polish without feeling stiff."
   },
   {
     "name": "Carlos and Matilda",
@@ -366,7 +374,8 @@
     "groups": [
       "Brunch",
       "Coffee"
-    ]
+    ],
+    "tip": "Go for brunch rather than just coffee, the food gets as much praise as the coffee here."
   },
   {
     "name": "Petit Tapas",
@@ -379,7 +388,8 @@
     "groups": [
       "Tapas",
       "Wine"
-    ]
+    ],
+    "tip": "Go with a few people so you can order a wide spread of tapas rather than just one or two dishes."
   },
   {
     "name": "The Coffee",
@@ -392,7 +402,8 @@
     "groups": [
       "Coffee",
       "Pastry"
-    ]
+    ],
+    "tip": "Buy a bag of their own-roast beans to take home."
   },
   {
     "name": "Bar Manifest",
@@ -405,7 +416,8 @@
     "groups": [
       "Tapas",
       "Wine"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Federal Café Gotic",
@@ -444,7 +456,8 @@
     "url": "",
     "groups": [
       "Pan-Asian"
-    ]
+    ],
+    "tip": "Order the miso ramen with a side of gyoza."
   },
   {
     "name": "Salts - Terrassa Bar Montjuïc",
@@ -468,7 +481,8 @@
     "url": "",
     "groups": [
       "Vietnamese"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Vibliteca bar de vins i formatges",
@@ -494,7 +508,8 @@
     "groups": [
       "Coffee",
       "Pastry"
-    ]
+    ],
+    "tip": "Espresso to go, don't linger."
   },
   {
     "name": "Usagui cafe",
@@ -521,7 +536,8 @@
     "groups": [
       "Brunch",
       "Coffee"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "La Vietnamita",
@@ -533,7 +549,8 @@
     "url": "",
     "groups": [
       "Vietnamese"
-    ]
+    ],
+    "tip": "Try the fresh spring rolls and a pho, it's a solid baseline test for how good a Vietnamese kitchen is."
   },
   {
     "name": "Balzac Café",
@@ -546,7 +563,8 @@
     "groups": [
       "Coffee",
       "Pastry"
-    ]
+    ],
+    "tip": "Filter coffee, and stay for the outdoor seating."
   },
   {
     "name": "Tropicalissima",
@@ -558,7 +576,8 @@
     "url": "",
     "groups": [
       "Colombian"
-    ]
+    ],
+    "tip": "Ask for a Colombian specialty rather than the Spanish side of the menu, that's what sets this place apart."
   },
   {
     "name": "Morrow Coffee",
@@ -571,7 +590,8 @@
     "groups": [
       "Coffee",
       "Pastry"
-    ]
+    ],
+    "tip": "Get the filter, not the standard espresso."
   },
   {
     "name": "NORI MATCHA",
@@ -584,7 +604,8 @@
     "groups": [
       "Coffee",
       "Tea"
-    ]
+    ],
+    "tip": "Matcha latte instead of a cortado."
   },
   {
     "name": "Maramaia",
@@ -596,7 +617,8 @@
     "url": "",
     "groups": [
       "Italian"
-    ]
+    ],
+    "tip": "Fine for a casual weeknight pizza, don't expect anything fancier than that."
   },
   {
     "name": "DosManos",
@@ -622,7 +644,8 @@
       "Catalan",
       "Tapas",
       "Wine"
-    ]
+    ],
+    "tip": "Expect a wait on weekend evenings, they don't take reservations for small groups."
   },
   {
     "name": "Billy Brunch",
@@ -635,7 +658,8 @@
     "groups": [
       "Brunch",
       "Coffee"
-    ]
+    ],
+    "tip": "Eggs benedict and a pancake stack to share."
   },
   {
     "name": "Modu korean bowl",
@@ -647,7 +671,8 @@
     "url": "",
     "groups": [
       "Korean"
-    ]
+    ],
+    "tip": "Order the bibimbap, it's the dish the place is built around."
   },
   {
     "name": "SUN TAKA",
@@ -659,7 +684,8 @@
     "url": "",
     "groups": [
       "Japanese"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Lato Café Breakfast Brunch y Ceviches",
@@ -672,7 +698,8 @@
     "groups": [
       "Brunch",
       "Coffee"
-    ]
+    ],
+    "tip": "Go for brunch and try a ceviche alongside it, that pairing is the place's signature move."
   },
   {
     "name": "Brabo",
@@ -697,7 +724,8 @@
     "url": "",
     "groups": [
       "Japanese"
-    ]
+    ],
+    "tip": "Ask about Kyoto-style specialties beyond sushi, that regional focus is what sets it apart."
   },
   {
     "name": "LA PAPA",
@@ -711,7 +739,8 @@
       "Brunch",
       "Coffee",
       "Pastry"
-    ]
+    ],
+    "tip": "Good for a laptop-friendly breakfast, it's calmer than most brunch spots nearby."
   },
   {
     "name": "Boca Grande",
@@ -723,7 +752,8 @@
     "url": "",
     "groups": [
       "Drinks"
-    ]
+    ],
+    "tip": "Oysters and the burrata with Iberian ham."
   },
   {
     "name": "Pizza Natura",
@@ -735,7 +765,8 @@
     "url": "",
     "groups": [
       "Italian"
-    ]
+    ],
+    "tip": "Great pick if anyone in your group is celiac, you won't need to double-check every ingredient."
   },
   {
     "name": "Chinese Tofu Magician",
@@ -760,7 +791,8 @@
     "groups": [
       "Brunch",
       "Coffee"
-    ]
+    ],
+    "tip": "Order the Nata Vendrell, it's the dish this place is actually known for."
   },
   {
     "name": "LADY BABKA",
@@ -773,7 +805,8 @@
     "groups": [
       "Coffee",
       "Pastry"
-    ]
+    ],
+    "tip": "Order the babka, coffee alongside."
   },
   {
     "name": "Hanoi Umami",
@@ -785,7 +818,8 @@
     "url": "",
     "groups": [
       "Vietnamese"
-    ]
+    ],
+    "tip": "Start with the pho, it's the dish the place is named and known for."
   },
   {
     "name": "Tonkotsu",
@@ -797,7 +831,8 @@
     "url": "",
     "groups": [
       "Japanese"
-    ]
+    ],
+    "tip": "Pair the ramen with one of their street food starters, that combination is what the menu is built around."
   },
   {
     "name": "LOT ROASTERS",
@@ -809,7 +844,8 @@
     "url": "",
     "groups": [
       "Coffee"
-    ]
+    ],
+    "tip": "Buy a bag of beans to take home."
   },
   {
     "name": "Brew Coffee",
@@ -822,7 +858,8 @@
     "groups": [
       "Coffee",
       "Pastry"
-    ]
+    ],
+    "tip": "Ask for the filter of the day."
   },
   {
     "name": "La Flauta Rambla",
@@ -835,7 +872,8 @@
     "groups": [
       "Catalan",
       "Wine"
-    ]
+    ],
+    "tip": "Order the flautas, the stuffed baguette sandwiches are the house specialty."
   },
   {
     "name": "HANA Grill & Bowl",
@@ -884,7 +922,8 @@
     "groups": [
       "Coffee",
       "Pastry"
-    ]
+    ],
+    "tip": "Good spot for a work meeting over coffee."
   },
   {
     "name": "La Selva",
@@ -921,7 +960,8 @@
     "url": "",
     "groups": [
       "Fine-dining"
-    ]
+    ],
+    "tip": "Book well in advance and let the staff guide the order of dishes, it's designed as a full sequence, not a pick-and-choose menu."
   },
   {
     "name": "La Textil",
@@ -933,7 +973,8 @@
     "url": "",
     "groups": [
       "Beer"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Granja Petitbo",
@@ -946,7 +987,8 @@
     "groups": [
       "Brunch",
       "Coffee"
-    ]
+    ],
+    "tip": "Go early on a weekend, they don't take reservations and it fills up fast."
   },
   {
     "name": "Vinitus",
@@ -960,7 +1002,8 @@
       "Catalan",
       "Tapas",
       "Wine"
-    ]
+    ],
+    "tip": "Pair your tapas with a glass from their wine list, it's built as a tapas-and-vino combination, not just food."
   },
   {
     "name": "Bonsai Coffee & Matcha",
@@ -973,7 +1016,8 @@
     "groups": [
       "Coffee",
       "Tea"
-    ]
+    ],
+    "tip": "If you like matcha, get that instead of coffee."
   },
   {
     "name": "FUGAZ",
@@ -998,7 +1042,8 @@
     "url": "",
     "groups": [
       "Pan-Asian"
-    ]
+    ],
+    "tip": "The seabass bao and a few starters to share, skip the mains."
   },
   {
     "name": "Lucciano's",
@@ -1010,7 +1055,8 @@
     "url": "",
     "groups": [
       "Ice Cream"
-    ]
+    ],
+    "tip": "Stick to the classic flavors like pistachio or hazelnut, that's where gelato places usually show their real quality."
   },
   {
     "name": "Alice Secret Garden",
@@ -1023,10 +1069,11 @@
     "groups": [
       "Wine",
       "Tapas"
-    ]
+    ],
+    "tip": "Go for cocktails and the courtyard vibe rather than the food."
   },
   {
-    "name": "bohl",
+    "name": "Bohl",
     "lat": 41.3905527,
     "lng": 2.1782284,
     "category": "Restaurant",
@@ -1065,7 +1112,8 @@
     "groups": [
       "Coffee",
       "Pastry"
-    ]
+    ],
+    "tip": "Ask which roasters are currently on the menu."
   },
   {
     "name": "Mono Café Poblenou",
@@ -1078,7 +1126,8 @@
     "groups": [
       "Coffee",
       "Pastry"
-    ]
+    ],
+    "tip": "Good for a quiet morning in the area."
   },
   {
     "name": "CASA TAOS",
@@ -1091,7 +1140,8 @@
     "groups": [
       "Coffee",
       "Pastry"
-    ]
+    ],
+    "tip": "Order a coffee, then browse the shop, it's part of the point."
   },
   {
     "name": "Itnig Café",
@@ -1103,7 +1153,8 @@
     "url": "",
     "groups": [
       "Coffee"
-    ]
+    ],
+    "tip": "Good for a business meeting, not a coffee destination."
   },
   {
     "name": "Orient Express Cocktail Bar",
@@ -1115,7 +1166,8 @@
     "url": "",
     "groups": [
       "Drinks"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Bodega Borràs Restaurant",
@@ -1129,7 +1181,8 @@
       "Catalan",
       "Tapas",
       "Wine"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "The Lobster Roll Barcelona",
@@ -1142,7 +1195,8 @@
     "groups": [
       "Seafood",
       "Sandwich"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Els 4 Gats",
@@ -1156,7 +1210,8 @@
       "Catalan",
       "Wine",
       "Tapas"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Koy Shunka",
@@ -1168,7 +1223,8 @@
     "url": "",
     "groups": [
       "Japanese"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Bar Pimentel",
@@ -1182,7 +1238,8 @@
       "Catalan",
       "Tapas",
       "Seafood"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Cremat 11",
@@ -1195,7 +1252,8 @@
     "groups": [
       "Brunch",
       "Coffee"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Xino Mandarino",
@@ -1207,7 +1265,8 @@
     "url": "",
     "groups": [
       "Chinese"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "El Noa Noa",
@@ -1220,7 +1279,8 @@
     "groups": [
       "Coffee",
       "Pastry"
-    ]
+    ],
+    "tip": "Get a cortado and take time to browse the books."
   },
   {
     "name": "Lodetto Café",
@@ -1234,7 +1294,8 @@
       "Coffee",
       "Tea",
       "Pastry"
-    ]
+    ],
+    "tip": "Flat white with a chocolate croissant."
   },
   {
     "name": "Dos Palillos",
@@ -1246,10 +1307,11 @@
     "url": "",
     "groups": [
       "Pan-Asian"
-    ]
+    ],
+    "bucket": true
   },
   {
-    "name": "Bar Lobo",
+    "name": "BAR LOBO",
     "lat": 41.383261,
     "lng": 2.170504,
     "category": "Restaurant",
@@ -1259,7 +1321,8 @@
     "groups": [
       "Tapas",
       "Wine"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "La Cua Curta",
@@ -1272,7 +1335,8 @@
     "groups": [
       "Wine",
       "Cheese"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "La Colmena",
@@ -1284,7 +1348,9 @@
     "url": "",
     "groups": [
       "Pastry"
-    ]
+    ],
+    "tip": "I’m into croissants filled with cream!",
+    "bucket": true
   },
   {
     "name": "Estimar",
@@ -1296,7 +1362,8 @@
     "url": "",
     "groups": [
       "Fine-dining"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Carlota Akaneya",
@@ -1308,7 +1375,8 @@
     "url": "",
     "groups": [
       "Japanese"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Granja M. Viader",
@@ -1321,7 +1389,8 @@
     "groups": [
       "Coffee",
       "Pastry"
-    ]
+    ],
+    "tip": "Go for the history, not the coffee."
   },
   {
     "name": "Brugarol Barcelona",
@@ -1333,7 +1402,8 @@
     "url": "",
     "groups": [
       "Fine-dining"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Monk Barcelona",
@@ -1357,7 +1427,8 @@
     "url": "",
     "groups": [
       "Fine-dining"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "DR.BEER & MR.FRIED",
@@ -1369,7 +1440,8 @@
     "url": "",
     "groups": [
       "Burger"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Bacaro",
@@ -1382,7 +1454,8 @@
     "groups": [
       "Italian",
       "Wine"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Sensi Tapas",
@@ -1395,7 +1468,8 @@
     "groups": [
       "Tapas",
       "Wine"
-    ]
+    ],
+    "tip": "Go for their tasting-style tapas menu rather than picking dishes individually, it's built to showcase the range."
   },
   {
     "name": "vitrina café",
@@ -1408,7 +1482,8 @@
     "groups": [
       "Coffee",
       "Pastry"
-    ]
+    ],
+    "tip": "Matcha or coffee with a homemade pastry."
   },
   {
     "name": "Bar Cañete",
@@ -1423,7 +1498,8 @@
       "Tapas",
       "Seafood",
       "Wine"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Viana Barcelona",
@@ -1437,7 +1513,8 @@
       "Tapas",
       "Fusion",
       "Wine"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Garage Bar",
@@ -1449,7 +1526,8 @@
     "url": "",
     "groups": [
       "Beer"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Origo",
@@ -1463,7 +1541,8 @@
       "Bakery",
       "Coffee",
       "Pastry"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Suculent",
@@ -1477,7 +1556,8 @@
       "Catalan",
       "Tapas",
       "Wine"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Bar Marsella",
@@ -1490,7 +1570,8 @@
     "groups": [
       "Catalan",
       "Tapas"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Doppietta",
@@ -1502,7 +1583,8 @@
     "url": "",
     "groups": [
       "Italian"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Cafè Cometa",
@@ -1516,7 +1598,8 @@
       "Brunch",
       "Coffee",
       "Pastry"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Norai Raval Maritim Museum Restaurant",
@@ -1528,7 +1611,8 @@
     "url": "",
     "groups": [
       "Tapas"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Quimet & Quimet",
@@ -1540,7 +1624,8 @@
     "url": "",
     "groups": [
       "Catalan"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Margarit restaurante",
@@ -1553,7 +1638,8 @@
     "groups": [
       "Mediterranean",
       "Wine"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "La Greca",
@@ -1566,7 +1652,8 @@
     "groups": [
       "Tapas",
       "Wine"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Yako Coffee",
@@ -1578,7 +1665,8 @@
     "url": "",
     "groups": [
       "Coffee"
-    ]
+    ],
+    "tip": "Try the straight espresso."
   },
   {
     "name": "SEOUL PEOPLE",
@@ -1590,7 +1678,8 @@
     "url": "",
     "groups": [
       "Korean"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Old Fashioned",
@@ -1602,7 +1691,8 @@
     "url": "",
     "groups": [
       "Drinks"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Bar Bocata",
@@ -1615,7 +1705,8 @@
     "groups": [
       "Tapas",
       "Wine"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "La Balmesina",
@@ -1628,7 +1719,8 @@
     "groups": [
       "Italian",
       "Wine"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Shoronpo",
@@ -1640,7 +1732,8 @@
     "url": "",
     "groups": [
       "Japanese"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Berbena",
@@ -1653,7 +1746,8 @@
     "groups": [
       "Tapas",
       "Wine"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Thailandes Restaurant",
@@ -1665,7 +1759,8 @@
     "url": "",
     "groups": [
       "Thai"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "ONIS COFFEE",
@@ -1678,7 +1773,8 @@
     "groups": [
       "Coffee",
       "Pastry"
-    ]
+    ],
+    "tip": "Classic flat white, well made."
   },
   {
     "name": "Bar Cugat",
@@ -1691,7 +1787,8 @@
     "groups": [
       "Tapas",
       "Wine"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Guanabara by El Rodizio",
@@ -1703,7 +1800,8 @@
     "url": "",
     "groups": [
       "Brazilian"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "sato i tanaka",
@@ -1728,7 +1826,8 @@
     "groups": [
       "Coffee",
       "Bakery"
-    ]
+    ],
+    "tip": "Go for the pastries, coffee as a side."
   },
   {
     "name": "Monster Sushi c/ Girona",
@@ -1740,7 +1839,8 @@
     "url": "",
     "groups": [
       "Japanese"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Hotpot de Sichuan",
@@ -1752,7 +1852,8 @@
     "url": "",
     "groups": [
       "Chinese"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "La Dama",
@@ -1764,7 +1865,8 @@
     "url": "",
     "groups": [
       "Fine-dining"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Lasarte",
@@ -1776,7 +1878,8 @@
     "url": "",
     "groups": [
       "Fine-dining"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Babula Bar 1937",
@@ -1790,7 +1893,8 @@
       "Tapas",
       "Wine",
       "Seafood"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Café Turó",
@@ -1804,7 +1908,8 @@
       "Tapas",
       "Seafood",
       "Wine"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Ceviche 103",
@@ -1816,7 +1921,8 @@
     "url": "",
     "groups": [
       "Peruvian"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Bar El Velódromo",
@@ -1829,7 +1935,8 @@
     "groups": [
       "Catalan",
       "Tapas"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Melo-Jia",
@@ -1841,7 +1948,8 @@
     "url": "",
     "groups": [
       "Chinese"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Restaurante Solomillo",
@@ -1854,7 +1962,8 @@
     "groups": [
       "Grill",
       "Wine"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Focacha",
@@ -1866,7 +1975,8 @@
     "url": "",
     "groups": [
       "Drinks"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "MIKAN",
@@ -1880,7 +1990,8 @@
       "Tapas",
       "Pan-Asian",
       "Wine"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "RoofTop Garden El Palace Barcelona",
@@ -1893,7 +2004,8 @@
     "groups": [
       "Tapas",
       "Drinks"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Pirineu En Boca",
@@ -1907,7 +2019,8 @@
       "Catalan",
       "Tapas",
       "Wine"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "concepto nonna",
@@ -1920,7 +2033,8 @@
     "groups": [
       "Italian",
       "Wine"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Gresca",
@@ -1934,7 +2048,8 @@
       "Catalan",
       "Wine",
       "Tapas"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Quevieres Serra",
@@ -1947,7 +2062,8 @@
     "groups": [
       "Tapas",
       "Wine"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Yashima",
@@ -1959,7 +2075,8 @@
     "url": "",
     "groups": [
       "Japanese"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Albé Barcelona",
@@ -1971,7 +2088,8 @@
     "url": "",
     "groups": [
       "Fine-dining"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "MAISON CARNE",
@@ -1984,7 +2102,8 @@
     "groups": [
       "Grill",
       "Wine"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Taco Alto",
@@ -1996,7 +2115,8 @@
     "url": "",
     "groups": [
       "Mexican"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "PÖTSTOT",
@@ -2009,7 +2129,8 @@
     "groups": [
       "Tapas",
       "Gluten-free"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "La Cabrera Casa de Carnes",
@@ -2034,7 +2155,8 @@
     "url": "",
     "groups": [
       "Coffee"
-    ]
+    ],
+    "tip": "Ask about the current week's roast profile."
   },
   {
     "name": "Nikkei 103",
@@ -2047,7 +2169,8 @@
     "groups": [
       "Peruvian",
       "Japanese"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Jon Cake",
@@ -2073,7 +2196,8 @@
       "Catalan",
       "Tapas",
       "Wine"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Hideout Burger",
@@ -2085,7 +2209,8 @@
     "url": "",
     "groups": [
       "Burger"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "IKOYA Izakaya",
@@ -2097,7 +2222,8 @@
     "url": "",
     "groups": [
       "Japanese"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Capet Restaurant",
@@ -2111,7 +2237,8 @@
       "Tapas",
       "Catalan",
       "Wine"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "SENSATO Restaurant",
@@ -2123,7 +2250,8 @@
     "url": "",
     "groups": [
       "Japanese"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "San Kil",
@@ -2135,7 +2263,8 @@
     "url": "",
     "groups": [
       "Korean"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Morreig",
@@ -2159,7 +2288,8 @@
     "url": "",
     "groups": [
       "Wine"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Zed",
@@ -2170,9 +2300,9 @@
     "note": "Zed, Carrer de València, 399, 08013, Barcelona",
     "url": "",
     "groups": [
-      "Mediterranean",
-      "Wine"
-    ]
+      "Mediterranean"
+    ],
+    "tip": "Good pick if you're visiting Sagrada Familia and want a real meal nearby instead of a tourist menu."
   },
   {
     "name": "Extra Bar",
@@ -2185,7 +2315,8 @@
     "groups": [
       "Tapas",
       "Wine"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Restaurant Salero",
@@ -2198,7 +2329,8 @@
     "groups": [
       "Pan-Asian",
       "Wine"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "El Manaba",
@@ -2210,7 +2342,8 @@
     "url": "",
     "groups": [
       "Ecuatorian"
-    ]
+    ],
+    "tip": "Go for any Ceviche!"
   },
   {
     "name": "La Punta Callao Cevichería",
@@ -2222,7 +2355,8 @@
     "url": "",
     "groups": [
       "Peruvian"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Green & Berry",
@@ -2234,7 +2368,8 @@
     "url": "",
     "groups": [
       "Vegan"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Marta's Lemon Pie",
@@ -2246,7 +2381,8 @@
     "url": "",
     "groups": [
       "Pastry"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Pinga Boteco",
@@ -2258,7 +2394,8 @@
     "url": "",
     "groups": [
       "Brazilian"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "KEMAKO JAPANESE BURGERS",
@@ -2271,7 +2408,8 @@
     "groups": [
       "Japanese",
       "Burger"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "La Peruana Pollastres a la Brasa",
@@ -2284,7 +2422,8 @@
     "groups": [
       "Peruvian",
       "Grill"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Dreamboat Bar & Deli",
@@ -2296,7 +2435,8 @@
     "url": "",
     "groups": [
       "Drinks"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Osom Nou",
@@ -2309,7 +2449,8 @@
     "groups": [
       "Brunch",
       "Coffee"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Noru Bar",
@@ -2323,7 +2464,8 @@
       "Pan-Asian",
       "Catalan",
       "Pastry"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Masa Vins Barcelona",
@@ -2335,7 +2477,8 @@
     "url": "",
     "groups": [
       "Wine"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Achaar bar",
@@ -2347,7 +2490,8 @@
     "url": "",
     "groups": [
       "Indian"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Sartoria Panatieri",
@@ -2373,7 +2517,8 @@
       "Tapas",
       "Catalan",
       "Wine"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Gabby's Brunch",
@@ -2386,7 +2531,8 @@
     "groups": [
       "Brunch",
       "Coffee"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Café Menssana",
@@ -2400,7 +2546,8 @@
       "Coffee",
       "Mexican",
       "Brunch"
-    ]
+    ],
+    "tip": "Good solo work coffee."
   },
   {
     "name": "Farola Cocktail Bar Barcelona",
@@ -2412,7 +2559,8 @@
     "url": "",
     "groups": [
       "Drinks"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Can Paixano",
@@ -2426,7 +2574,8 @@
       "Catalan",
       "Tapas",
       "Wine"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Bar Electricitat",
@@ -2439,7 +2588,8 @@
     "groups": [
       "Catalan",
       "Tapas"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Anís Cafe",
@@ -2451,7 +2601,8 @@
     "url": "",
     "groups": [
       "Middle-Eastern"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Restaurante Can Ramonet",
@@ -2464,7 +2615,8 @@
     "groups": [
       "Catalan",
       "Tapas"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "La Bombeta",
@@ -2478,7 +2630,8 @@
       "Catalan",
       "Seafood",
       "Tapas"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "MUYSCA",
@@ -2490,7 +2643,8 @@
     "url": "",
     "groups": [
       "Colombian"
-    ]
+    ],
+    "tip": "Ask what the daily special is, that's usually the most authentic option on the menu."
   },
   {
     "name": "Lola Divine",
@@ -2503,7 +2657,8 @@
     "groups": [
       "Grill",
       "Wine"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "T.44 TAULAT 44",
@@ -2516,7 +2671,8 @@
     "groups": [
       "Coffee",
       "Pastry"
-    ]
+    ],
+    "tip": "Go for brunch, not just a quick coffee."
   },
   {
     "name": "Orval Studio",
@@ -2529,7 +2685,8 @@
     "groups": [
       "Coffee",
       "Pastry"
-    ]
+    ],
+    "tip": "Filter coffee with breakfast on the terrace."
   },
   {
     "name": "Rasoi Ghar Restaurant Indian",
@@ -2541,7 +2698,8 @@
     "url": "",
     "groups": [
       "Indian"
-    ]
+    ],
+    "tip": "Ask for their spice level to be adjusted if you're not used to it, they'll happily tone it up or down."
   },
   {
     "name": "Morning Glory Coffee & Brunch",
@@ -2554,7 +2712,8 @@
     "groups": [
       "Brunch",
       "Coffee"
-    ]
+    ],
+    "tip": "Go on a weekday morning if you can, Raval brunch spots get busy fast on weekends."
   },
   {
     "name": "The Miners Coffee Via Augusta",
@@ -2580,7 +2739,8 @@
     "groups": [
       "Coffee",
       "Pastry"
-    ]
+    ],
+    "tip": "Ask for the current origin coffee."
   },
   {
     "name": "Jaç Hi-fi Cafe",
@@ -2606,7 +2766,8 @@
     "url": "",
     "groups": [
       "Wine"
-    ]
+    ],
+    "tip": "Go around sunset and book ahead, rooftop bars like this fill up fast in the evening."
   },
   {
     "name": "Cresta Colorada Rosticeria Mexicana",
@@ -2631,7 +2792,8 @@
     "groups": [
       "Wine",
       "Middle-Eastern"
-    ]
+    ],
+    "tip": "Get to taste their bread - wow!!"
   },
   {
     "name": "Yakumanka amb Gastón Acurio",
@@ -2643,18 +2805,6 @@
     "url": "",
     "groups": [
       "Peruvian"
-    ]
-  },
-  {
-    "name": "Nomad Coffee Lab & Shop",
-    "lat": 41.388911,
-    "lng": 2.177173,
-    "category": "Coffee",
-    "group": "Coffee",
-    "note": "Nomad Coffee Lab & Shop, Carrer de Sant Pere Més Alt, 51, 08003, Barcelona",
-    "url": "",
-    "groups": [
-      "Coffee"
     ]
   },
   {
@@ -2681,7 +2831,8 @@
     "groups": [
       "Mexican",
       "Drinks"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Kiosco de Ideas Libreria y Cafe",
@@ -2693,7 +2844,8 @@
     "url": "",
     "groups": [
       "Coffee"
-    ]
+    ],
+    "tip": "Go to browse and stay, not for a quick coffee."
   },
   {
     "name": "Restaurant Candela en Rama",
@@ -2707,7 +2859,8 @@
       "Grill",
       "Seafood",
       "Wine"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Mercado Central Taberna Cevichera",
@@ -2719,7 +2872,8 @@
     "url": "",
     "groups": [
       "Peruvian"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Santamadre Carn peix i marisc",
@@ -2733,7 +2887,8 @@
       "Seafood",
       "Grill",
       "Wine"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "The Sopa Boba Restaurant Tapes",
@@ -2746,7 +2901,8 @@
     "groups": [
       "Tapas",
       "Wine"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Tragaluz",
@@ -2759,7 +2915,8 @@
     "groups": [
       "Tapas",
       "Wine"
-    ]
+    ],
+    "tip": "Good for a special occasion dinner, it has the polish for it without being stiff."
   },
   {
     "name": "IKENOCHA Matcha Tea House",
@@ -2772,7 +2929,8 @@
     "groups": [
       "Japanese",
       "Tea"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "KOH-NDAL THAI BISTRO",
@@ -2784,7 +2942,8 @@
     "url": "",
     "groups": [
       "Thai"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "LAMAI THAI TAPAS",
@@ -2796,7 +2955,8 @@
     "url": "",
     "groups": [
       "Thai"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Coco Social House Barceloneta",
@@ -2808,7 +2968,8 @@
     "url": "",
     "groups": [
       "Brunch"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Amauta Coffee Bar",
@@ -2820,7 +2981,8 @@
     "url": "",
     "groups": [
       "Coffee"
-    ]
+    ],
+    "tip": "Ask for something from their Reserve line."
   },
   {
     "name": "Akiro Hand Roll Bar",
@@ -2870,7 +3032,8 @@
     "groups": [
       "Catalan",
       "Wine"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Fauna Restaurant by Casa de Vivi",
@@ -2883,7 +3046,8 @@
       "Seafood",
       "Tapas",
       "Wine"
-    ]
+    ],
+    "bucket": true
   },
   {
     "name": "Monvinic",
@@ -2907,6 +3071,7 @@
     "groups": [
       "Coffee",
       "Pastry"
-    ]
+    ],
+    "tip": "Filter coffee instead of espresso."
   }
 ]
