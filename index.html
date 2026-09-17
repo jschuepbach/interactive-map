@@ -1275,7 +1275,12 @@
 
     window.addEventListener('resize', () => {
       setTopbarVar();
-      if (!isMobile() && mapMode) setMode(false, true);
+      if (isMobile()) {
+        if (currentPopup) { currentPopup.remove(); currentPopup = null; }
+      } else {
+        if (mapMode) setMode(false, true);
+        hidePlaceCard();
+      }
     });
 
     // ----- Near me -----
@@ -1714,8 +1719,10 @@
       if (isMobile()) {
         // Choosing a place is a reason to be on the map, wherever you chose it.
         if (!mapMode) setMode(true);
+        if (currentPopup) { currentPopup.remove(); currentPopup = null; }
         showPlaceCard(i);
       } else {
+        hidePlaceCard();
         openPopup(i);
       }
     }
