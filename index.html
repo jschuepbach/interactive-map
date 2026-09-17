@@ -281,6 +281,13 @@
   }
   .filter-btn.pop { animation: chip-pop 280ms cubic-bezier(0.22, 1, 0.36, 1); }
 
+  /* The rail's own arrival, used once when the loader lifts. */
+  @keyframes chip-arrive {
+    from { opacity: 0; transform: translateY(7px); }
+    to { opacity: 1; transform: none; }
+  }
+  .filter-btn.arriving { animation: chip-arrive 260ms cubic-bezier(0.22, 1, 0.36, 1) backwards; }
+
   @keyframes row-in {
     from { opacity: 0; transform: translateY(9px); }
     to { opacity: 1; transform: none; }
@@ -443,7 +450,8 @@
   @media (prefers-reduced-motion: reduce) {
     #intro { transition: none; }
     .filter-btn, .filter-btn:active { transition: none; transform: none; }
-    .filter-btn.pop, .row.entering, .filter-sub.sub-enter { animation: none; }
+    .filter-btn.pop, .filter-btn.arriving, .row.entering,
+    .filter-sub.sub-enter { animation: none; }
     .marker-inner { transition: none; }
     .marker-inner.enter, .marker-inner.leaving { transform: none; opacity: 1; }
   }
@@ -593,15 +601,30 @@
       font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer;
       box-shadow: 0 4px 16px rgba(0,0,0,0.55);
     }
-    .mode-toggle::after {
-      content: ''; width: 13px; height: 13px; border-radius: 3px;
-      border: 2px solid currentColor; opacity: 0.85;
+    /* The two states are one control changing its mind, not two controls
+       swapping places: the glyphs cross over each other and the word fades
+       through a box wide enough for both, so the pill never resizes. */
+    .mode-ico { position: relative; width: 19px; height: 19px; flex: none; }
+    .mode-ico .ico {
+      position: absolute; inset: 0; width: 19px; height: 19px;
+      fill: none; stroke: currentColor; stroke-width: 1.7;
+      stroke-linecap: round; stroke-linejoin: round;
+      transition: opacity 0.2s ease, transform 0.34s cubic-bezier(0.22, 1, 0.36, 1);
     }
-    body.mode-map .mode-toggle::after {
-      border-radius: 2px; border-width: 0 0 2px 0; height: 9px;
-      box-shadow: 0 -5px 0 -2px currentColor, 0 5px 0 -2px currentColor;
-      opacity: 0.85;
+    .ico-list { opacity: 0; transform: scale(0.6) rotate(-35deg); }
+    .ico-map { opacity: 1; transform: none; }
+    body.mode-map .ico-map { opacity: 0; transform: scale(0.6) rotate(35deg); }
+    body.mode-map .ico-list { opacity: 1; transform: none; }
+
+    .mode-label { position: relative; display: block; width: 34px; height: 17px; }
+    .mode-label .w {
+      position: absolute; inset: 0; display: flex; align-items: center;
+      justify-content: center;
+      transition: opacity 0.18s ease, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
     }
+    .w-list { opacity: 0; transform: translateY(6px); }
+    body.mode-map .w-map { opacity: 0; transform: translateY(-6px); }
+    body.mode-map .w-list { opacity: 1; transform: none; }
     body.intro-open .mode-toggle { display: none; }
 
     /* The selected place. Bottom-docked so the map keeps its top two thirds and
@@ -762,7 +785,20 @@
 
     <!-- Phone only: one control, thumb height, that owns which surface is whole. -->
     <button id="modeToggle" class="mode-toggle" type="button" aria-pressed="false">
-      <span class="mode-label">Map</span>
+      <span class="mode-ico" aria-hidden="true">
+        <svg class="ico ico-map" viewBox="0 0 20 20">
+          <path d="M2.4 5.2 7.3 3.2v11.6L2.4 16.8z" />
+          <path d="M7.3 3.2 12.7 5.2v11.6L7.3 14.8z" />
+          <path d="M12.7 5.2 17.6 3.2v11.6l-4.9 2z" />
+        </svg>
+        <svg class="ico ico-list" viewBox="0 0 20 20">
+          <path d="M3.1 5.2h13.8M3.1 10h13.8M3.1 14.8h13.8" />
+        </svg>
+      </span>
+      <span class="mode-label" aria-hidden="true">
+        <span class="w w-map">Map</span>
+        <span class="w w-list">List</span>
+      </span>
     </button>
   </div>
 
@@ -818,6 +854,19 @@
         return 1;
       }
 
+      // The list and the pins are already rendered under the loader, so lifting
+      // it alone put a finished screen in front of the reader with no sign that
+      // anything had just arrived. Whoever hides the cover asks for the reveal.
+      let revealed = false;
+      function lift(delay) {
+        setTimeout(() => {
+          loaderEl.classList.add('hidden');
+          if (revealed) return;
+          revealed = true;
+          if (typeof window.__reveal === 'function') window.__reveal();
+        }, delay || 0);
+      }
+
       function done() {
         if (finished) return;
         finished = true;
@@ -825,7 +874,7 @@
         if (total) loadNum.textContent = total;
         loadRule.style.width = '100%';
         safeStorage(() => sessionStorage.setItem(SESSION_KEY, '1'));
-        setTimeout(() => loaderEl.classList.add('hidden'), 220);
+        lift(220);
       }
 
       function frame(now) {
@@ -851,17 +900,17 @@
           total = n;
           dataReady = true;
           safeStorage(() => localStorage.setItem(COUNT_KEY, String(n)));
-          if (seenThisSession) { loaderEl.classList.add('hidden'); return; }
+          if (seenThisSession) { lift(0); return; }
           if (prefersReduced) {
             loadNum.textContent = n;
             loadRule.style.width = '100%';
-            setTimeout(() => loaderEl.classList.add('hidden'), 200);
+            lift(200);
             safeStorage(() => sessionStorage.setItem(SESSION_KEY, '1'));
             return;
           }
           if (!started) { started = performance.now(); raf = requestAnimationFrame(frame); }
         },
-        fail() { loaderEl.classList.add('hidden'); }
+        fail() { lift(0); }
       };
     })();
     loadCount.start();
@@ -1153,7 +1202,6 @@
     const isMobile = () => window.matchMedia('(max-width: 767px)').matches;
     const sidebarEl = document.getElementById('sidebar');
     const modeToggle = document.getElementById('modeToggle');
-    const modeLabel = modeToggle.querySelector('.mode-label');
     let mapMode = false;
 
     function setTopbarVar() {
@@ -1165,7 +1213,6 @@
       mapMode = !!toMap;
       document.body.classList.toggle('mode-map', mapMode);
       modeToggle.setAttribute('aria-pressed', String(mapMode));
-      modeLabel.textContent = mapMode ? 'List' : 'Map';
       modeToggle.setAttribute('aria-label', mapMode ? 'Show the list' : 'Show the map');
       if (!mapMode) hidePlaceCard();
       // The map was sized while it sat behind the list; it needs to be told.
@@ -2282,6 +2329,30 @@
         applyFilters();
         renderIntroTotal();
         setTopbarVar();
+
+        // Played the moment the loader lifts, not while it is still covering
+        // the screen. Short on purpose: the point is that the reader catches
+        // the arrival, not that they wait through it.
+        window.__reveal = function () {
+          if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+          const bump = (el, i, step, cls) => {
+            el.classList.remove(cls);
+            el.style.animationDelay = (i * step) + 'ms';
+            void el.offsetWidth;          // restart the animation from the top
+            el.classList.add(cls);
+          };
+          Array.from(document.querySelectorAll('.filter-row .filter-btn'))
+            .slice(0, 10)
+            .forEach((el, i) => bump(el, i, 22, 'arriving'));
+          Array.from(document.querySelectorAll('.list .row'))
+            .slice(0, 10)
+            .forEach((el, i) => bump(el, i, 34, 'entering'));
+          // The pins land with them, capped so a full map still settles fast.
+          Array.from(document.querySelectorAll('.marker-inner')).forEach((el, i) => {
+            el.classList.add('enter');
+            setTimeout(() => el.classList.remove('enter'), Math.min(i * 3, 260));
+          });
+        };
         // A link sent from the map opens on the map.
         if (isMobile() && new URLSearchParams(window.location.search).get('v') === 'map') {
           setMode(true, true);
