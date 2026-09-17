@@ -5,80 +5,58 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 <title>Specialty Coffee · Barcelona</title>
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<!-- Super Sans VF is licensed; Inter Variable is the documented substitute, and the
+     sub-default weights (460 / 540 / 600) are the whole point of using a variable face. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&display=swap" />
 <style>
-  /* ---------- Uber's black-and-white duet ----------
-     One grayscale system, two polarities. The light side is Uber's own web
-     palette; the dark side is the same ladder inverted, which is what the map
-     needs under a dark basemap. Category hue survives in exactly one place —
-     pins and the dot on a chip — because that is data, not chrome. */
+  /* ---------- The Superhuman register, dark only ----------
+     Three canvases in the original: indigo navy, white body, deep teal closing
+     band. A map has no page to scroll, so the rhythm becomes spatial instead of
+     vertical: indigo is the app, the teal band closes the landing screen, and
+     pale violet is the one accent that lands on top of both. */
   :root {
-    color-scheme: light dark;
+    color-scheme: dark;
 
-    --canvas: #ffffff;
-    --canvas-soft: #efefef;
-    --canvas-softer: #f3f3f3;
-    --pressed: #e2e2e2;
-    --ink: #000000;
-    --body: #5e5e5e;
-    --mute: #afafaf;
-    --hairline: #e2e2e2;
-    --primary: #000000;
-    --on-primary: #ffffff;
-    --scrim: 255, 255, 255;
+    --indigo: #1b1938;
+    --indigo-deep: #0e0c1f;
+    --indigo-raised: #262246;
+    --violet: #c9b4fa;
+    --teal-deep: #0e3030;
+    --teal-mid: #155555;
+    --hairline-dark: #3f3a52;
+    --on-dark: #ffffff;
+    --on-dark-mute: #bcbac9;
+    --on-dark-faint: #5a5772;
 
-    /* The names the app already speaks, pointed at the duet. */
-    --accent: var(--ink);
-    --bg: var(--canvas);
-    --panel: var(--canvas);
-    --panel-2: var(--canvas-soft);
-    --text: var(--ink);
-    --muted: var(--body);
-    --border: var(--hairline);
+    /* The names the app already speaks. */
+    --accent: var(--violet);
+    --bg: var(--indigo-deep);
+    --panel: var(--indigo);
+    --panel-2: var(--indigo-raised);
+    --text: var(--on-dark);
+    --muted: var(--on-dark-mute);
+    --border: var(--hairline-dark);
 
-    /* Category colors — used for markers, sidebar labels, popups, filters. */
-    --c-sweet: #c68a4e;
-    --c-local: #ff7a59;
-    --c-asia: #3fb6c9;
-    --c-americas: #6cae5b;
-    --c-europe: #d6598f;
-    --c-drinks: #8f7fd6;
-    --c-other: #b4536e;
-    --c-brunch: #5b8def;
-  }
-
-  :root[data-theme="dark"] {
-    --canvas: #000000;
-    --canvas-soft: #282828;
-    --canvas-softer: #1c1c1c;
-    --pressed: #3a3a3a;
-    --ink: #ffffff;
-    --body: #afafaf;
-    --mute: #5e5e5e;
-    --hairline: #333333;
-    --primary: #ffffff;
-    --on-primary: #000000;
-    --scrim: 0, 0, 0;
-    --ctrl-icon-filter: invert(1);
-  }
-
-  /* Category hue is tuned for the dark map; on white it needs to come down a
-     step or the pins glow. */
-  :root:not([data-theme="dark"]) {
-    --c-sweet: #9a6321;
-    --c-local: #d64a22;
-    --c-asia: #10707f;
-    --c-americas: #3d7c2c;
-    --c-europe: #ad2f65;
-    --c-drinks: #5a48a8;
-    --c-other: #8e2c49;
-    --c-brunch: #2a5fc4;
+    /* Category colors — markers, row labels, chip dots. Data, not chrome. */
+    --c-sweet: #e0a95f;
+    --c-local: #ff8a6a;
+    --c-asia: #56c6d8;
+    --c-americas: #86c96f;
+    --c-europe: #e4749f;
+    --c-drinks: #b9a5f7;
+    --c-other: #d3708c;
+    --c-brunch: #7fa6f5;
   }
 
   * { box-sizing: border-box; }
   html, body { height: 100%; margin: 0; background: var(--bg); color: var(--text);
-    /* UberMove is licensed, so this is the fallback the brand itself ships with. */
-    font-family: system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
-    font-size: 16px; -webkit-font-smoothing: antialiased; }
+    font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    font-size: 16px; font-variation-settings: 'wght' 460;
+    -webkit-font-smoothing: antialiased; }
+  /* Sub-default weights are the signature: 460 body, 540 display, 600 buttons. */
+  .w-display { font-variation-settings: 'wght' 540; }
 
   #app { display: grid; grid-template-columns: 340px 1fr; height: 100vh; height: 100dvh; }
 
@@ -87,16 +65,17 @@
     display: flex; flex-direction: column; min-height: 0; }
   .sheet-handle { display: none; }
   .side-header { padding: 18px 18px 14px; border-bottom: 1px solid var(--border); cursor: default; }
-  .side-header h1 { font-size: 20px; line-height: 28px; margin: 0 0 4px; font-weight: 700; }
-  .side-header .sub { color: var(--muted); font-size: 14px; line-height: 20px; }
+  .side-header h1 { font-size: 22px; line-height: 1.1; letter-spacing: -0.315px;
+    margin: 0 0 6px; font-weight: 400; font-variation-settings: 'wght' 540; }
+  .side-header .sub { color: var(--muted); font-size: 14px; line-height: 1.4; }
   /* The search field lives with the results, not behind a button: on the map
      screen it is the fastest way through 227 places. */
   /* Uber's inputs are the one square thing in a world of pills. */
-  #sideSearch { width: 100%; margin-top: 16px; background: var(--canvas-soft);
-    border: 1px solid transparent; border-radius: 0; color: var(--text);
-    font-family: inherit; font-size: 16px; line-height: 24px; padding: 14px 16px; }
-  #sideSearch::placeholder { color: var(--body); }
-  #sideSearch:focus { outline: none; border-color: var(--ink); }
+  #sideSearch { width: 100%; margin-top: 16px; background: var(--indigo-deep);
+    border: 1px solid var(--hairline-dark); border-radius: 6px; color: var(--text);
+    font-family: inherit; font-size: 16px; line-height: 1.5; padding: 11px 12px; }
+  #sideSearch::placeholder { color: var(--on-dark-faint); }
+  #sideSearch:focus { outline: none; border-color: var(--violet); }
 
   .list-empty { padding: 22px 18px; color: var(--muted); font-size: 13px; line-height: 1.6; }
   .list-empty button { background: none; border: none; padding: 0; font: inherit;
@@ -122,61 +101,60 @@
     gap: 2px; padding: 0 18px; }
   .filter-sub { display: flex; flex-direction: column; gap: 6px;
     padding: 10px 0 2px; border-top: 1px solid var(--border); }
-  .filter-sub-label { font-size: 13px; font-weight: 500; color: var(--muted);
-    margin: 0; padding: 0 18px; }
+  .filter-sub-label { font-size: 12px; font-variation-settings: 'wght' 540;
+    color: var(--on-dark-faint); margin: 0; padding: 0 18px; }
   /* Quieter than the family above it: this row is an option, not the main choice. */
-  .filter-btn.sub { padding: 6px 14px; font-size: 13px; font-weight: 400;
-    background: transparent; border-color: var(--hairline); }
-  .filter-btn.sub:hover { background: var(--canvas-soft); }
-  .filter-btn.sub.active { background: var(--primary); color: var(--on-primary); }
+  .filter-btn.sub { padding: 6px 14px; font-size: 13px; font-variation-settings: 'wght' 460;
+    background: transparent; border-color: var(--hairline-dark); }
+  .filter-btn.sub:hover { background: var(--indigo-raised); }
+  .filter-btn.sub.active { background: var(--violet); color: var(--indigo); }
   /* The pill is the signature: every interactive thing here is 999px. The chip
      itself stays grayscale and the family's colour rides on the dot, so a row of
      chips reads as one control instead of eight competing accents. */
+  /* pill-tab, the one pill the system allows outside the hero. */
   .filter-btn {
-    background: var(--canvas-soft); color: var(--ink); border: 1px solid transparent;
-    padding: 8px 16px; font-size: 14px; font-weight: 500; border-radius: 999px;
+    background: var(--indigo-raised); color: var(--text); border: 1px solid transparent;
+    padding: 8px 16px; font-size: 14px; border-radius: 9999px;
+    font-variation-settings: 'wght' 600;
     cursor: pointer; font-family: inherit;
     transition: background 0.15s, color 0.15s;
   }
-  .filter-btn:hover { background: var(--pressed); }
-  .filter-btn.active { background: var(--primary); color: var(--on-primary); border-color: var(--primary); }
+  .filter-btn:hover { background: #2f2b56; }
+  .filter-btn.active { background: var(--violet); color: var(--indigo); border-color: var(--violet); }
   .filter-dot { display: inline-block; width: 8px; height: 8px; border-radius: 999px;
     margin-right: 7px; vertical-align: middle; background: currentColor; }
 
   /* Active neighbourhood, shown outside the intro so the filter is never invisible */
   .hood-pill { flex-basis: 100%; display: flex; align-items: center; gap: 8px;
     background: none; border: 0; padding: 0 0 2px; margin: 0; cursor: pointer;
-    font-family: inherit; font-size: 14px; font-weight: 500; color: var(--ink); }
+    font-family: inherit; font-size: 14px; font-variation-settings: 'wght' 540;
+    color: var(--text); }
   .hood-pill span.x { color: var(--muted); font-weight: 400; }
   .hood-pill:hover span.x { color: var(--text); }
 
-  /* A different axis from the category chips, so a different shape. */
-  .note-pill { flex-basis: 100%; text-align: left; background: none; border: 0;
-    padding: 0 0 2px; margin: 0 0 2px; cursor: pointer; font-family: inherit;
-    font-size: 14px; font-weight: 500; color: var(--muted);
-    text-decoration: underline; text-underline-offset: 3px; }
-  .note-pill:hover, .note-pill.on { color: var(--ink); }
 
   .list { flex: 1; overflow-y: auto; padding-top: 12px; }
   .row { padding: 16px 18px 18px; border-bottom: 1px solid var(--border);
     cursor: pointer; transition: background 0.15s; border-left: 3px solid transparent; }
-  .row:hover { background: var(--canvas-softer); }
-  .row.active { background: var(--canvas-soft); border-left-color: var(--ink); }
-  .cat-sep { color: var(--mute); }
+  .row:hover { background: var(--indigo); }
+  .row.active { background: var(--indigo); border-left-color: var(--violet); }
+  .cat-sep { color: var(--on-dark-faint); }
   /* The one uppercase line the system allows itself: an eyebrow tag, not a headline. */
-  .row .cat { font-size: 11px; color: var(--marker-color, var(--ink)); text-transform: uppercase;
-    letter-spacing: 0.06em; margin: 0 0 6px; font-weight: 500; }
-  .row .name { font-size: 18px; line-height: 24px; font-weight: 700; margin: 0 0 6px; }
+  .row .cat { font-size: 12px; color: var(--marker-color, var(--violet)); text-transform: uppercase;
+    letter-spacing: 0.06em; margin: 0 0 6px; font-variation-settings: 'wght' 540; }
+  .row .name { font-size: 20px; line-height: 1.2; letter-spacing: -0.4px; margin: 0 0 6px;
+    font-variation-settings: 'wght' 540; }
   /* Jan's own words are the point of this map, so they read as text, not as
      metadata. The scraped address gets the small quiet line underneath. */
-  .row .note { font-size: 16px; color: var(--ink); margin: 0 0 8px; line-height: 24px; }
-  .row .addr { font-size: 14px; color: var(--muted); margin: 0 0 8px; line-height: 20px; }
+  .row .note { font-size: 16px; color: var(--text); margin: 0 0 8px; line-height: 1.5; }
+  .row .addr { font-size: 14px; color: var(--on-dark-faint); margin: 0 0 8px; line-height: 1.4; }
   /* What to order, in Jan's words. Sits under the note and reads as an aside. */
-  .row .tip { font-size: 14px; color: var(--muted); margin: 0 0 8px; line-height: 20px; }
-  .row .tip b, .popup-tip b, .lv-tip b { color: var(--ink); font-weight: 500; }
+  .row .tip { font-size: 14px; color: var(--muted); margin: 0 0 8px; line-height: 1.4; }
+  .row .tip b, .popup-tip b, .lv-tip b { color: var(--violet);
+    font-variation-settings: 'wght' 600; font-weight: 400; }
   .links { display: flex; gap: 14px; flex-wrap: wrap; }
-  .row a { color: var(--ink); font-size: 14px; text-decoration: underline;
-    text-underline-offset: 3px; font-weight: 500; }
+  .row a { color: var(--text); font-size: 14px; text-decoration: underline;
+    text-underline-offset: 3px; font-variation-settings: 'wght' 600; }
   .row a:hover { text-decoration: underline; }
 
   /* ---------- Map ---------- */
@@ -185,14 +163,16 @@
 
   .controls { position: absolute; top: 12px; left: 12px; z-index: 5; display: flex; gap: 8px; }
   /* Floating pills over the map, the one place the system allows a shadow. */
+  /* Rounded rectangle at 8px: the brand's button shape everywhere but the hero. */
   .btn {
-    background: var(--canvas); color: var(--ink); border: 0;
-    padding: 10px 18px; font-size: 14px; font-weight: 500; border-radius: 999px;
+    background: var(--indigo); color: var(--text); border: 1px solid var(--hairline-dark);
+    padding: 10px 16px; font-size: 14px; border-radius: 8px;
+    font-variation-settings: 'wght' 600;
     cursor: pointer; font-family: inherit;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.25);
   }
-  .btn:hover { background: var(--canvas-soft); }
-  .btn.active { background: var(--primary); color: var(--on-primary); }
+  .btn:hover { background: var(--indigo-raised); }
+  .btn.active { background: var(--violet); color: var(--indigo); border-color: var(--violet); }
 
   /* ---------- Markers ----------
      CRITICAL: .marker (the element passed to new maplibregl.Marker({element}))
@@ -206,8 +186,8 @@
     margin-left: -11px; margin-top: -11px;
     border-radius: 50%;
     background: var(--marker-color, var(--accent));
-    border: 2px solid var(--canvas);
-    box-shadow: 0 1px 4px rgba(0,0,0,0.35);
+    border: 2px solid var(--indigo-deep);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.5);
     cursor: pointer;
     transition: transform 0.15s ease, box-shadow 0.15s ease;
     pointer-events: auto;
@@ -215,28 +195,29 @@
   .marker-inner:hover { transform: scale(1.25); }
   .marker-inner.active {
     transform: scale(1.4);
-    box-shadow: 0 0 0 3px var(--ink), 0 2px 10px rgba(0,0,0,0.4);
+    box-shadow: 0 0 0 3px var(--violet), 0 8px 24px rgba(0,0,0,0.4);
   }
 
   /* ---------- Popup ---------- */
   .maplibregl-popup-content {
-    background: var(--canvas) !important; color: var(--ink);
-    border: 0; border-radius: 16px;
-    padding: 20px 22px; font-family: inherit; box-shadow: 0 8px 28px rgba(0,0,0,0.22);
+    background: var(--indigo) !important; color: var(--text);
+    border: 1px solid var(--hairline-dark); border-radius: 12px;
+    padding: 20px 22px; font-family: inherit; box-shadow: 0 8px 24px rgba(0,0,0,0.45);
   }
-  .maplibregl-popup-tip { border-top-color: var(--canvas) !important;
-    border-bottom-color: var(--canvas) !important; }
-  .popup-cat { color: var(--marker-color, var(--ink)); font-size: 11px; text-transform: uppercase;
-    letter-spacing: 0.06em; margin: 0 0 6px; font-weight: 500; }
-  .popup-name { font-weight: 700; font-size: 18px; line-height: 24px; margin: 0 0 6px; }
-  .popup-note { color: var(--ink); font-size: 15px; margin: 0 0 10px;
-    line-height: 22px; max-width: 250px; }
-  .popup-addr { color: var(--muted); font-size: 14px; margin: 0 0 10px; line-height: 20px;
+  .maplibregl-popup-tip { border-top-color: var(--indigo) !important;
+    border-bottom-color: var(--indigo) !important; }
+  .popup-cat { color: var(--marker-color, var(--violet)); font-size: 12px; text-transform: uppercase;
+    letter-spacing: 0.06em; margin: 0 0 6px; font-variation-settings: 'wght' 540; }
+  .popup-name { font-size: 20px; line-height: 1.2; letter-spacing: -0.4px; margin: 0 0 6px;
+    font-variation-settings: 'wght' 540; }
+  .popup-note { color: var(--text); font-size: 15px; margin: 0 0 10px;
+    line-height: 1.5; max-width: 250px; }
+  .popup-addr { color: var(--on-dark-faint); font-size: 14px; margin: 0 0 10px; line-height: 1.4;
     max-width: 250px; }
-  .popup-tip { color: var(--muted); font-size: 14px; margin: 0 0 10px; line-height: 20px;
+  .popup-tip { color: var(--muted); font-size: 14px; margin: 0 0 10px; line-height: 1.4;
     max-width: 250px; }
-  .popup-link { color: var(--ink); font-size: 14px; text-decoration: underline;
-    text-underline-offset: 3px; font-weight: 500; }
+  .popup-link { color: var(--text); font-size: 14px; text-decoration: underline;
+    text-underline-offset: 3px; font-variation-settings: 'wght' 600; }
   .popup-link:hover { text-decoration: underline; }
 
   /* ---------- Intro overlay (landing) ----------
@@ -248,8 +229,13 @@
     padding: 40px 24px 32px;
     padding-left: max(24px, env(safe-area-inset-left));
     padding-right: max(24px, env(safe-area-inset-right));
-    background: linear-gradient(180deg,
-      rgba(var(--scrim), 0.97) 0%, rgba(var(--scrim), 0.93) 50%, rgba(var(--scrim), 0.8) 100%);
+    /* The atmospheric backdrop: indigo ground with a violet-to-sky wash drifting
+       off the upper right, which is the brand's depth medium. No portrait — we
+       have no photography, and faking one would be worse than leaving it out. */
+    background:
+      radial-gradient(120% 90% at 78% 8%, rgba(201, 180, 250, 0.22) 0%, rgba(201, 180, 250, 0) 55%),
+      radial-gradient(90% 70% at 92% 34%, rgba(126, 178, 240, 0.16) 0%, rgba(126, 178, 240, 0) 60%),
+      linear-gradient(180deg, rgba(27, 25, 56, 0.97) 0%, rgba(14, 12, 31, 0.97) 100%);
     overflow-y: auto;
     transition: opacity 0.28s ease, visibility 0.28s ease;
   }
@@ -296,16 +282,24 @@
   .intro-actions { display: flex; align-items: center; gap: 18px; flex-wrap: wrap;
     margin-bottom: 22px; }
   /* The one black pill in the viewport: the brand's whole conversion story. */
+  /* The hero is the one place the pill is allowed, in pale violet. */
   .intro-cta {
-    background: var(--primary); color: var(--on-primary); border: 0;
-    padding: 14px 24px; font-size: 16px; font-weight: 500; border-radius: 999px;
+    background: var(--violet); color: var(--indigo); border: 0;
+    padding: 12px 20px; font-size: 16px; border-radius: 9999px;
+    font-variation-settings: 'wght' 700;
     cursor: pointer; font-family: inherit;
   }
-  .intro-cta:hover { background: var(--canvas-soft); color: var(--ink);
-    box-shadow: inset 0 0 0 1px var(--ink); }
+  .intro-cta:hover { background: #d8c7fb; }
+
+  /* Every page closes on the teal band; here it closes the landing screen. */
+  .intro-band { background: var(--teal-deep); border-radius: 12px;
+    padding: 28px 28px 24px; margin-top: 30px;
+    display: flex; flex-direction: column; gap: 16px; }
+  .intro-band .intro-actions { margin-bottom: 0; }
+  .intro-band .intro-stats { color: var(--on-dark-mute); }
   .intro-skip { background: none; border: 0; color: var(--muted); font: inherit; font-size: 13px;
     cursor: pointer; padding: 4px 0; text-decoration: underline; text-underline-offset: 3px; }
-  .intro-skip:hover { color: var(--text); }
+  .intro-skip:hover { color: var(--violet); }
   .intro-stats { color: var(--muted); font-size: 12px; letter-spacing: 0.02em; margin: 0; }
   #intro :focus-visible, .btn:focus-visible, .filter-btn:focus-visible {
     outline: 2px solid var(--accent); outline-offset: 2px; }
@@ -317,9 +311,10 @@
        would otherwise read through the action bar. */
     .intro-inner { display: flex; flex-direction: column; }
     .intro-stats { margin-bottom: 10px; }
-    .intro-actions { order: 1; position: sticky; bottom: 0; margin: 0 -24px; padding: 16px 24px;
+    .intro-band { order: 1; margin: 10px -24px 0; border-radius: 0; padding: 16px 24px;
       padding-bottom: max(16px, env(safe-area-inset-bottom));
-      background: var(--bg); border-top: 1px solid var(--border); }
+      position: sticky; bottom: 0; gap: 10px; }
+    .intro-band .intro-stats { order: -1; }
     .intro-cta { flex: 1; }
     /* Hide the bottom sheet while the landing is up */
     body.intro-open #sidebar { visibility: hidden; }
@@ -360,13 +355,15 @@
     padding-bottom: 2px; scrollbar-width: none; flex-wrap: nowrap; }
   .lv-filters .filter-row::-webkit-scrollbar { display: none; }
   .lv-chip.sub { padding: 5px 11px; font-size: 11px; font-weight: 500; }
-  .lv-chip { flex: 0 0 auto; background: var(--canvas-soft); border: 1px solid transparent;
-    border-radius: 999px; padding: 9px 16px; font-size: 14px; font-weight: 500;
-    font-family: inherit; color: var(--ink); cursor: pointer; }
-  .lv-chip:hover { background: var(--pressed); }
-  .lv-chip.active { background: var(--primary); color: var(--on-primary); }
-  .lv-chip.sub { background: transparent; border-color: var(--hairline); font-weight: 400; }
-  .lv-chip.sub.active { background: var(--primary); color: var(--on-primary); }
+  .lv-chip { flex: 0 0 auto; background: var(--indigo-raised); border: 1px solid transparent;
+    border-radius: 9999px; padding: 9px 16px; font-size: 14px;
+    font-variation-settings: 'wght' 600;
+    font-family: inherit; color: var(--text); cursor: pointer; }
+  .lv-chip:hover { background: #2f2b56; }
+  .lv-chip.active { background: var(--violet); color: var(--indigo); }
+  .lv-chip.sub { background: transparent; border-color: var(--hairline-dark);
+    font-variation-settings: 'wght' 460; }
+  .lv-chip.sub.active { background: var(--violet); color: var(--indigo); }
   .lv-chip .filter-dot { width: 8px; height: 8px; }
   .lv-active { color: var(--muted); font-size: 12px; margin: 10px auto 0; }
   .lv-active button { background: none; border: 0; color: var(--accent); font: 600 12px inherit;
@@ -422,25 +419,25 @@
   /* ---------- Footer ---------- */
   footer {
     position: absolute; bottom: 0; left: 0; right: 0; z-index: 4;
-    padding: 6px 12px; background: rgba(var(--scrim), 0.88);
+    padding: 6px 12px; background: rgba(14, 12, 31, 0.88);
     color: var(--muted); font-size: 10px; text-align: right;
     border-top: 1px solid var(--border); pointer-events: auto;
   }
   footer a { color: var(--muted); text-decoration: none; }
-  footer a:hover { color: var(--ink); }
+  footer a:hover { color: var(--violet); }
 
   /* ---------- MapLibre control overrides ---------- */
   .maplibregl-ctrl-group {
-    background: var(--canvas) !important;
-    border: 0 !important;
-    border-radius: 999px !important;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.18) !important;
+    background: var(--indigo) !important;
+    border: 1px solid var(--hairline-dark) !important;
+    border-radius: 8px !important;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3) !important;
     overflow: hidden;
   }
-  .maplibregl-ctrl-group button { background-color: var(--canvas) !important; }
-  .maplibregl-ctrl-group button:hover { background-color: var(--canvas-soft) !important; }
-  .maplibregl-ctrl-group button span { filter: var(--ctrl-icon-filter, none); }
-  .maplibregl-ctrl-attrib { background: rgba(var(--scrim), 0.75) !important; color: var(--muted) !important; }
+  .maplibregl-ctrl-group button { background-color: var(--indigo) !important; }
+  .maplibregl-ctrl-group button:hover { background-color: var(--indigo-raised) !important; }
+  .maplibregl-ctrl-group button span { filter: invert(1) brightness(0.9); }
+  .maplibregl-ctrl-attrib { background: rgba(14, 12, 31, 0.75) !important; color: var(--muted) !important; }
   .maplibregl-ctrl-attrib a { color: var(--muted) !important; }
 
   /* ---------- Coarse pointer (touch): bigger targets, no reliance on hover ---------- */
@@ -504,12 +501,13 @@
       <p class="intro-q">Or start from a neighbourhood</p>
       <div class="intro-hoods" id="introHoods"></div>
 
-      <div class="intro-actions">
-        <button id="introCta" class="intro-cta" type="button">Show all places</button>
-        <button id="introSkip" class="intro-skip" type="button">Skip to the map</button>
+      <div class="intro-band">
+        <div class="intro-actions">
+          <button id="introCta" class="intro-cta" type="button">Show all places</button>
+          <button id="introSkip" class="intro-skip" type="button">Skip to the map</button>
+        </div>
+        <p class="intro-stats" id="introStats"></p>
       </div>
-
-      <p class="intro-stats" id="introStats"></p>
     </div>
   </div>
 
@@ -544,7 +542,6 @@
         <button id="toggle3d" class="btn" type="button">3D</button>
         <button id="listBtn" class="btn" type="button" title="Browse all places as a list">List</button>
         <button id="introBtn" class="btn" type="button" title="About this map">About</button>
-        <button id="themeBtn" class="btn" type="button" title="Switch between the light and the dark map" aria-pressed="false">Light</button>
       </div>
       <div id="map"></div>
       <footer>
@@ -585,59 +582,42 @@
     // layer for the labels.
     const ESRI = 'https://services.arcgisonline.com/ArcGIS/rest/services/Canvas/';
 
-    // Esri ships the same canvas in both polarities, base and labels split, which
-    // is what lets the map follow the theme instead of being one fixed mood.
-    const TILES = {
-      dark:  { base: 'World_Dark_Gray_Base',  labels: 'World_Dark_Gray_Reference', ground: '#000000',
-               basePaint: { 'raster-brightness-max': 0.45, 'raster-saturation': -0.25, 'raster-contrast': 0.1 },
-               labelPaint: { 'raster-brightness-max': 0.8, 'raster-opacity': 0.75 } },
-      light: { base: 'World_Light_Gray_Base', labels: 'World_Light_Gray_Reference', ground: '#ffffff',
-               basePaint: { 'raster-saturation': -1, 'raster-contrast': -0.05, 'raster-opacity': 0.9 },
-               labelPaint: { 'raster-saturation': -1, 'raster-opacity': 0.8 } }
-    };
-
-    function basemap(theme) {
-      const t = TILES[theme] || TILES.dark;
-      return {
-        version: 8,
-        sources: {
-          base: {
-            type: 'raster',
-            tiles: [ESRI + t.base + '/MapServer/tile/{z}/{y}/{x}'],
-            tileSize: 256,
-            maxzoom: 16,
-            attribution: 'Esri, HERE, Garmin, &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          },
-          labels: {
-            type: 'raster',
-            tiles: [ESRI + t.labels + '/MapServer/tile/{z}/{y}/{x}'],
-            tileSize: 256,
-            maxzoom: 16
-          }
+    // Raster, not vector: a vector style needs about 18 seconds before the first
+    // pixel, because nothing paints until the whole style is parsed, while raster
+    // squares appear one by one after 4. Esri's Dark Gray Canvas is keyless and
+    // splits into a label-free base and a separate reference layer for labels.
+    const BASEMAP = {
+      version: 8,
+      sources: {
+        base: {
+          type: 'raster',
+          tiles: [ESRI + 'World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}'],
+          tileSize: 256,
+          maxzoom: 16,
+          attribution: 'Esri, HERE, Garmin, &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         },
-        layers: [
-          { id: 'background', type: 'background', paint: { 'background-color': t.ground } },
-          { id: 'base', type: 'raster', source: 'base', paint: t.basePaint },
-          { id: 'labels', type: 'raster', source: 'labels', paint: t.labelPaint }
-        ]
-      };
-    }
-
-    // The theme is picked before the map is built, so the first tiles that load
-    // are already the right polarity: no white flash on a dark map.
-    const THEME_KEY = 'bcn-map-theme';
-    let theme = (function () {
-      try {
-        const saved = localStorage.getItem(THEME_KEY);
-        if (saved === 'light' || saved === 'dark') return saved;
-      } catch (_) {}
-      return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-    })();
-    document.documentElement.setAttribute('data-theme', theme);
+        labels: {
+          type: 'raster',
+          tiles: [ESRI + 'World_Dark_Gray_Reference/MapServer/tile/{z}/{y}/{x}'],
+          tileSize: 256,
+          maxzoom: 16
+        }
+      },
+      layers: [
+        // The ground is the brand's indigo, and the grey tiles are pulled down and
+        // tinted towards it, so the city sits inside the indigo instead of on top.
+        { id: 'background', type: 'background', paint: { 'background-color': '#0e0c1f' } },
+        { id: 'base', type: 'raster', source: 'base',
+          paint: { 'raster-brightness-max': 0.42, 'raster-saturation': -0.4,
+                   'raster-hue-rotate': 220, 'raster-contrast': 0.12, 'raster-opacity': 0.92 } },
+        { id: 'labels', type: 'raster', source: 'labels',
+          paint: { 'raster-brightness-max': 0.82, 'raster-opacity': 0.7 } }
+      ]
+    };
 
     const map = new maplibregl.Map({
       container: 'map',
-      style: basemap(theme),
+      style: BASEMAP,
       center: CENTER,
       zoom: 13,
       pitch: 0,
@@ -661,7 +641,6 @@
     const activeGroups = new Set();
     let query = '';          // shared by the sidebar field and the list view field
     const activeFamilies = new Set();   // the coarse row: Coffee, Asian, Drinks…
-    let notedOnly = false;   // only places Jan has actually written about
     let activeHood = null;   // neighbourhood collection, combines with the group filter
     const NOTES = {};        // lowercased place name -> own note from notes.md
     const LINKS = {};        // lowercased place name -> { url, instagram } from links.json
@@ -936,7 +915,6 @@
       activeGroups.clear();
       activeFamilies.clear();
       activeHood = null;
-      notedOnly = false;
       setQuery('', true);
     }
 
@@ -1010,7 +988,7 @@
       if (!f) return 0;
       const q = query.trim().toLowerCase();
       return ALL_DATA.filter((p) => matchesQuery(p, q) &&
-        (!notedOnly || hasOwnNote(p)) && (!activeHood || p.hood === activeHood) &&
+        (!activeHood || p.hood === activeHood) &&
         f.groups.some((g) => hasGroup(p, g))).length;
     }
 
@@ -1019,14 +997,13 @@
     function groupCount(group) {
       const q = query.trim().toLowerCase();
       const pool = ALL_DATA.filter((p) => matchesQuery(p, q) &&
-        (!notedOnly || hasOwnNote(p)) && (!activeHood || p.hood === activeHood));
+        (!activeHood || p.hood === activeHood));
       return group === 'All' ? pool.length : pool.filter((p) => hasGroup(p, group)).length;
     }
 
     function hoodCount(id) {
       const q = query.trim().toLowerCase();
       return ALL_DATA.filter((p) => p.hood === id && matchesQuery(p, q) &&
-        (!notedOnly || hasOwnNote(p)) &&
         matchesCategory(p)).length;
     }
 
@@ -1055,25 +1032,6 @@
         head.appendChild(pill);
       }
 
-      // How many of the current selection carry a note of Jan's. Counted against
-      // everything but this filter, so the number does not collapse to itself.
-      const written = ALL_DATA.filter((p) => hasOwnNote(p) && matchesQuery(p, query.trim().toLowerCase()) &&
-        (!activeHood || p.hood === activeHood) &&
-        (activeGroups.size === 0 || Array.from(activeGroups).some((g) => hasGroup(p, g)))).length;
-      if (written || notedOnly) {
-        const note = document.createElement('button');
-        note.type = 'button';
-        note.className = 'note-pill' + (notedOnly ? ' on' : '');
-        note.setAttribute('aria-pressed', String(notedOnly));
-        note.textContent = notedOnly ? '\u2713 Only the ones I have written about'
-                                     : 'Only the ones I have written about (' + written + ')';
-        note.addEventListener('click', () => {
-          notedOnly = !notedOnly;
-          if (notedOnly) lvMissingOnly = false;   // the two would cancel out
-          applyFilters();
-        });
-        head.appendChild(note);
-      }
       if (!head.childNodes.length) wrap.removeChild(head);
 
       const top = document.createElement('div');
@@ -1110,7 +1068,7 @@
       if (o.dot) {
         const dot = document.createElement('span');
         dot.className = 'filter-dot';
-        dot.style.background = o.active ? 'var(--on-primary)' : o.color;
+        dot.style.background = o.active ? 'var(--indigo)' : o.color;
         btn.appendChild(dot);
       }
       btn.appendChild(document.createTextNode(o.label + ' (' + o.count + ')'));
@@ -1167,7 +1125,6 @@
     }
 
     function matchesFilter(p) {
-      if (notedOnly && !hasOwnNote(p)) return false;
       if (!matchesQuery(p, query.trim().toLowerCase())) return false;
       if (activeHood && p.hood !== activeHood) return false;
       return matchesCategory(p);
@@ -1234,7 +1191,6 @@
       if (clear) clear.addEventListener('click', resetFilters);
       document.getElementById('lvMissing').addEventListener('click', () => {
         lvMissingOnly = !lvMissingOnly;
-        if (lvMissingOnly && notedOnly) { notedOnly = false; applyFilters(); }
         renderListView();
         document.getElementById('lvBody').scrollTop = 0;
       });
@@ -1443,7 +1399,6 @@
       if (q) params.set('q', q); else params.delete('q');
       if (activeFamilies.size) params.set('f', FAMILIES.filter((f) => activeFamilies.has(f.id))
         .map((f) => f.id).join(',')); else params.delete('f');
-      if (notedOnly) params.set('w', '1'); else params.delete('w');
       const qs = params.toString();
       history.replaceState(null, '', window.location.pathname + (qs ? '?' + qs : ''));
     }
@@ -1480,7 +1435,6 @@
       const q = (params.get('q') || '').trim();
       if (q) { query = q; hit = true; }
 
-      if (params.get('w') === '1') { notedOnly = true; hit = true; }
 
       return hit;
     }
@@ -1511,24 +1465,6 @@
     document.getElementById('introSkip').addEventListener('click', closeIntro);
     document.getElementById('introBtn').addEventListener('click', openIntro);
 
-    // ----- Light / dark -----
-    // The chrome is one grayscale system in two polarities, so switching is a
-    // token swap plus the matching Esri canvas. Markers are DOM elements and
-    // survive setStyle, so nothing has to be rebuilt.
-    const themeBtn = document.getElementById('themeBtn');
-    function paintThemeButton() {
-      themeBtn.textContent = theme === 'dark' ? 'Light' : 'Dark';
-      themeBtn.title = theme === 'dark' ? 'Switch to the light map' : 'Switch to the dark map';
-      themeBtn.setAttribute('aria-pressed', String(theme === 'light'));
-    }
-    paintThemeButton();
-    themeBtn.addEventListener('click', () => {
-      theme = theme === 'dark' ? 'light' : 'dark';
-      document.documentElement.setAttribute('data-theme', theme);
-      try { localStorage.setItem(THEME_KEY, theme); } catch (_) {}
-      map.setStyle(basemap(theme));
-      paintThemeButton();
-    });
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && !introEl.classList.contains('hidden')) closeIntro();
     });
