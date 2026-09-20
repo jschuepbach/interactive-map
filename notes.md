@@ -6,11 +6,11 @@
 
 ## Nømad Coffee Lab
 <!-- Coffee -->
-The flagship lab of Nømad — bright, acid-driven filters and a rotating single-origin espresso. Tiny, intense, no laptops.
+The flagship lab of Nømad: bright, acid-driven filters and a rotating single-origin espresso. Tiny, intense, no laptops.
 
 ## SlowMov
 <!-- Coffee, Pastry -->
-Pioneer roaster in Vila de Gràcia. Honest, clean coffees and warm pastries on a quiet corner — locals' favourite.
+Pioneer roaster in Vila de Gràcia. Honest, clean coffees and warm pastries on a quiet corner, a locals' favourite.
 
 ## Right Side Coffee Bar
 <!-- Coffee, Brunch -->
@@ -18,7 +18,7 @@ Tucked into the Gothic Quarter inside Hotel Casa Bonay. Reliable flat whites and
 
 ## Three Marks Coffee
 <!-- Coffee, Pastry -->
-Modern espresso bar in Eixample. Light roasts, multi-roaster guest beans, attentive baristas — a serious cup.
+Modern espresso bar in Eixample. Light roasts, multi-roaster guest beans, attentive baristas. A serious cup.
 
 ## Onna Coffee
 <!-- Coffee, Tea -->

@@ -540,6 +540,15 @@
   .maplibregl-ctrl-group button span { filter: invert(1); }
   .maplibregl-ctrl-attrib { background: rgba(18,18,18,0.8) !important; color: var(--muted-text) !important; }
   .maplibregl-ctrl-attrib a { color: var(--muted) !important; }
+  /* On a phone the mode pill owns the bottom centre of the map, which is
+     exactly where MapLibre parks the open credit line. Closed it is the (i) in
+     the corner and clears everything; opened it lifts above the pill. */
+  @media (max-width: 767px) {
+    body.mode-map .maplibregl-ctrl-attrib.maplibregl-compact-show {
+      margin-bottom: 72px !important;  /* above the mode pill */
+      margin-right: 72px !important;   /* and left of the locate button */
+    }
+  }
 
   /* ---------- Coarse pointer (touch): bigger targets, no reliance on hover ---------- */
   /* Touch sizing. The old rule here set vertical padding on a control with a
@@ -1056,6 +1065,25 @@
     });
 
     map.addControl(new maplibregl.AttributionControl({ compact: true }));
+    // MapLibre opens the compact credit on load and reopens it on every
+    // resize, and switching modes resizes the map, so it kept landing under
+    // the mode pill. Keep it closed on a phone until someone taps the (i);
+    // after that it is theirs and we stop touching it.
+    (function keepCreditClosed() {
+      const phone = window.matchMedia('(max-width: 767px)');
+      let opened = false;
+      map.getContainer().addEventListener('click', (e) => {
+        if (e.target.closest('.maplibregl-ctrl-attrib-button')) opened = !opened;
+      });
+      const close = () => {
+        if (opened || !phone.matches) return;
+        const el = map.getContainer().querySelector('.maplibregl-ctrl-attrib');
+        if (el) el.classList.remove('maplibregl-compact-show');
+      };
+      map.on('load', close);
+      map.on('resize', close);
+      map.on('idle', close);
+    })();
     map.addControl(new maplibregl.NavigationControl({ showCompass: true, visualizePitch: true }), 'top-right');
 
     // ----- State -----
@@ -2469,7 +2497,7 @@
         const filtered = [];
         for (const p of raw) {
           if (!inBox(p)) {
-            console.warn('[coord-guard] Skipping "' + (p.name || '?') + '" — outside region (' + p.lat + ', ' + p.lng + ')');
+            console.warn('[coord-guard] Skipping "' + (p.name || '?') + '": outside the region (' + p.lat + ', ' + p.lng + ')');
             continue;
           }
           // data.json ships the scraped Google Maps address in "note". It stays
@@ -2534,7 +2562,7 @@
         console.error('Failed to load data.json:', e);
         document.getElementById('loader').innerHTML =
           '<div style="color:var(--accent);font-family:inherit;font-size:13px">' +
-          'Failed to load data.json — are you serving over http://?</div>';
+          'Failed to load data.json. Are you serving over http://?</div>';
       }
     }
 
