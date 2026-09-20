@@ -5,6 +5,25 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 <title>Barcelona · a hand-picked map</title>
 <meta name="description" content="228 places in Barcelona, picked by hand. No ratings, no sponsors." />
+
+<!-- The link preview WhatsApp, iMessage, Slack and the rest draw. The image
+     URL has to be absolute, and every scraper caches it per URL for weeks, so
+     bump ?v= whenever img/og.png is regenerated (node scripts/make-og.mjs). -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Barcelona · a hand-picked map" />
+<meta property="og:url" content="https://interactive-map-wine.vercel.app/" />
+<meta property="og:title" content="Barcelona · a hand-picked map" />
+<meta property="og:description" content="228 places I recommend to my friends. No ratings, no sponsors." />
+<meta property="og:image" content="https://interactive-map-wine.vercel.app/img/og.png?v=1" />
+<meta property="og:image:type" content="image/png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Every place on the map, plotted as coloured dots over the words: 228 places I recommend to my friends." />
+<meta property="og:locale" content="en_GB" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Barcelona · a hand-picked map" />
+<meta name="twitter:description" content="228 places I recommend to my friends. No ratings, no sponsors." />
+<meta name="twitter:image" content="https://interactive-map-wine.vercel.app/img/og.png?v=1" />
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" />
 <style>
   /* ---------- Airbnb, in the dark ----------

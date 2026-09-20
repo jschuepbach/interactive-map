@@ -8,8 +8,10 @@ runtime. No build step, no `node_modules`, no framework. A push is a deploy.
 This was reconsidered on 2026-09-17 and kept. The triggers that would change the
 answer, none of which apply yet:
 
-- **Per-place pages** with their own link previews and OG images. Today a place
-  is shareable as `?q=<name>`, which has no preview card in a messenger.
+- **Per-place pages** with their own link previews and OG images. The root URL
+  has a preview card (see below); a single place shared as `?q=<name>` still
+  shows the same generic one, because a query string cannot change meta tags on
+  a static file.
 - **Photos per place.** The moment images arrive, an image pipeline earns its
   keep.
 - **Size.** Around 2200 lines today. Past roughly twice that, splitting is worth
@@ -48,3 +50,25 @@ is what filled the gap:
       "target": "production",
       "gitSource": { "type": "github", "org": "jschuepbach",
                      "repo": "interactive-map", "ref": "master" } }
+
+## The link preview
+
+`img/og.png` is what WhatsApp, iMessage, Slack and Telegram draw when the link
+is pasted. It is generated, not hand-made:
+
+    node scripts/make-og.mjs
+
+The script reads `data.json`, projects every place, colours it by the same
+families the app uses, and renders the card through headless Chrome (the only
+HTML-to-PNG renderer on this machine: no ImageMagick, no rsvg). The count in
+the headline is the length of `data.json`, so it follows the list on its own.
+
+Two things that bite:
+
+- **The URL in the meta tags must be absolute.** Scrapers do not resolve
+  relative paths. It points at `interactive-map-wine.vercel.app`, the public
+  host; the `-jandimitrischuepbach-...` host would 401 the scraper.
+- **Every scraper caches the preview per URL, for weeks.** After regenerating
+  the image, bump `?v=` on `og:image` and `twitter:image` in `index.html`, or
+  nobody sees the new one. Facebook's debugger can force a re-scrape for
+  WhatsApp: <https://developers.facebook.com/tools/debug/>
