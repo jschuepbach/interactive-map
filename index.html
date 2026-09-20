@@ -147,11 +147,7 @@
 
   .list { flex: 1; overflow-y: auto; padding: 12px 20px 24px;
     display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 258px), 1fr));
-    gap: 12px; align-content: start; position: relative; }
-  /* A card on its way out is pulled out of the grid and pinned to the spot it
-     just held, so the cards that stay close the gap at once instead of waiting
-     for the fade. Geometry is written inline at the moment it leaves. */
-  .row.leaving { position: absolute; margin: 0; pointer-events: none; }
+    gap: 12px; align-content: start; }
   .list-empty { grid-column: 1 / -1; padding: 28px 2px; color: var(--muted-text); font-size: 14px; }
   .list-empty button { background: none; border: 0; padding: 0; font: inherit;
     color: var(--text); font-weight: 600; cursor: pointer; text-decoration: underline;
@@ -887,7 +883,6 @@
   </div>
 
   <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
-  <script src="https://unpkg.com/gsap@3.13.0/dist/gsap.min.js"></script>
   <script>
   (function () {
     'use strict';
@@ -1623,62 +1618,8 @@
       return row;
     }
 
-    // The arrival wave used to be twelve CSS delays, one per new card. A
-    // second chip press mid-wave had nothing to interrupt: the old delays kept
-    // running while the new ones started. One GSAP tween owns the whole wave,
-    // so the next press can land the cards in flight and begin its own.
-    let enterTween = null;
-
-    function canTween() {
-      return !!window.gsap &&
-        !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    }
-
-    // The filter's other half. A card that no longer matches used to vanish
-    // between two frames; now it is lifted out of the grid, so the survivors
-    // close the gap immediately, and fades on the spot it held. Shorter and
-    // flatter than the arrival: leaving is the part the reader already knows
-    // about, having just pressed the chip.
-    function fadeOutRows(rows) {
-      const list = document.getElementById('list');
-      // Every measurement first: reading a card's box after the one above it
-      // has left the flow would read the box it is moving to, not the one it
-      // is in.
-      const boxes = rows.map(function (row) {
-        return { row: row, top: row.offsetTop, left: row.offsetLeft,
-                 w: row.offsetWidth, h: row.offsetHeight };
-      });
-      boxes.forEach(function (b) {
-        const s = b.row.style;
-        s.top = b.top + 'px'; s.left = b.left + 'px';
-        s.width = b.w + 'px'; s.height = b.h + 'px';
-        b.row.classList.add('leaving');
-        // Out of the sibling order too, so the insert pass below never has to
-        // step over a card that is only still here to finish fading.
-        list.appendChild(b.row);
-      });
-      window.gsap.to(rows, {
-        opacity: 0, y: -6, scale: 0.985, duration: 0.22,
-        ease: 'power2.in', stagger: 0.014,
-        onComplete: function () {
-          rows.forEach(function (row) { row.remove(); });
-        }
-      });
-    }
-
-    // Put every in-flight card at rest, instantly, and hand the inline styles
-    // back so hover and the docked card behave as they do at rest.
-    function settleEnterTween() {
-      if (!enterTween) return;
-      const rows = enterTween.targets();
-      enterTween.kill();
-      enterTween = null;
-      window.gsap.set(rows, { clearProps: 'opacity,transform' });
-    }
-
     function renderSidebar() {
       const list = document.getElementById('list');
-      settleEnterTween();
 
       // Unfiltered, the column opens with what this is and who picked it: the
       // one thing the old landing screen was actually good for. Filter or search
@@ -1715,26 +1656,15 @@
       if (empty) empty.remove();
 
       const wanted = new Set(DATA.map(placeKey));
-      // Only a card the reader can actually see is worth fading, and only
-      // while the column is at the top: further down, the list is about to
-      // scroll back up and the fade would play somewhere off screen.
-      const atTop = list.scrollTop === 0;
-      const leaving = [];
       rowByKey.forEach((row, key) => {
         if (wanted.has(key)) return;
+        row.remove();
         rowByKey.delete(key);
-        if (canTween() && atTop && leaving.length < 12 &&
-            row.offsetTop < list.clientHeight) {
-          leaving.push(row);
-        } else {
-          row.remove();
-        }
       });
-      if (leaving.length) fadeOutRows(leaving);
 
       // Only what can actually be seen gets a delay; past that the wave would
       // be animating cards nobody has scrolled to yet.
-      const fresh = [];
+      let entered = 0;
       let prev = null;
       DATA.forEach((p, i) => {
         const key = placeKey(p);
@@ -1742,7 +1672,11 @@
         if (!row) {
           row = buildRow(p);
           rowByKey.set(key, row);
-          if (fresh.length < 12) fresh.push(row);
+          if (entered < 12) {
+            row.className = 'row entering';
+            row.style.animationDelay = (entered * 26) + 'ms';
+            entered++;
+          }
         } else {
           row.classList.remove('entering');
           row.style.animationDelay = '';
@@ -1754,21 +1688,6 @@
         if (row !== shouldFollow) list.insertBefore(row, shouldFollow);
         prev = row;
       });
-
-      if (fresh.length && canTween()) {
-        enterTween = window.gsap.from(fresh, {
-          opacity: 0, y: 9, duration: 0.3, ease: 'power3.out',
-          stagger: 0.026, clearProps: 'opacity,transform',
-          onComplete: function () { enterTween = null; }
-        });
-      } else if (fresh.length && !window.gsap) {
-        // The CDN is the only thing that can take GSAP away; the keyframes it
-        // replaced are still there, so a card still arrives without it.
-        fresh.forEach(function (row, j) {
-          row.classList.add('entering');
-          row.style.animationDelay = (j * 26) + 'ms';
-        });
-      }
 
       // A shorter list under an old scroll offset opens halfway down itself.
       list.scrollTop = 0;
